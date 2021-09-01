@@ -5,11 +5,17 @@ import java.util.Arrays;
 /**
  * sout - принтлн
  * psvm - главный метод
- * shift + f10 - запуск выбранной конфигурации (точка входа psvm)
- * cntr + space - подсказка по методам после точки
+ * shift + F10 - запуск выбранной конфигурации (точка входа psvm)
+ * cntl + space - подсказка по методам после точки
+ * alt + enter - вывод контекстного меню по исправлению ошибки
  */
 public class App
 {
+    /*
+        задача
+        создать int массив и отсортировать его любым алгоритмом
+        +вывод в консоль до и после сортивки
+     */
 
     public static void main(String[] args)
     {
@@ -49,7 +55,7 @@ public class App
         System.out.println(s1.endsWith("f54"));*/
 
         //int[] iArr; //null
-        int[] iArr = new int[10];
+        //int[] iArr = new int[10];
 
         /*int[] iArr1 = { 1, 2, 3, 4, 5, 6, 7};
 
@@ -61,21 +67,21 @@ public class App
 
         //System.out.println(Arrays.toString(iArr1));
 
-        String[] sArr = new String[10];
+        /*String[] sArr = new String[10];
         sArr[4] = "123123213213";
 
         System.out.println(Arrays.toString(sArr));
 
         for(String s3 : sArr) {
             System.out.println(s3);
-        }
+        }*/
 
         /*у всех примитивов есть глобальные ссылочные типы данных
           у примитивов есть дефотные значения
           у глобальных типов, как и всех ссылочных типов данных по умолчанию null
         */
-        
-        Integer integer; //null
+
+        /*Integer integer; //null
         Float float1;
         Double double1;
         Boolean boolean1 = null;
@@ -85,6 +91,22 @@ public class App
         Integer i5 = 3423;
         if(boolean1 == null) {
             System.out.println("null 123");
+        }*/
+
+        int[] arr = {3, 6, 8, 4, -1, 6, 1, 9};
+
+        System.out.println(Arrays.toString(arr));
+
+        for(int i=0; i<arr.length-1; i++) {
+            for(int j=i; j<arr.length; j++) {
+                if(arr[i] > arr[j]) {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
         }
+
+        System.out.println(Arrays.toString(arr));
     }
 }
