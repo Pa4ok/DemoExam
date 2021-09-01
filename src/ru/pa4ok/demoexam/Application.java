@@ -101,10 +101,20 @@ public class Application
         test(i);
         System.out.println(i);*/
 
-        Random rand = new Random();
+        /*Random rand = new Random();
         int i = rand.nextInt();
         int j = rand.nextInt(1000);
         System.out.println(i + " " + j);
+*/
+        int[] arr = new int[10];
+        randomArrFill(arr);
+        arr[3] = -55325;
+        arr[7] = -44;
+        printArr(arr);
+        arrNegativeToZero(arr);
+        printArr(arr);
+        sortArray(arr);
+        printArr(arr);
 
         /*
             реализовать и протестировать
@@ -136,6 +146,22 @@ public class Application
                     arr[i] = arr[j];
                     arr[j] = temp;
                 }
+            }
+        }
+    }
+
+    public static void randomArrFill(int[] arr)
+    {
+        Random rand = new Random();
+        for(int i=0; i<arr.length; i++) {
+            arr[i] = rand.nextInt();
+        }
+    }
+
+    public static void arrNegativeToZero(int arr[]) {
+        for(int i=0; i<arr.length; i++) {
+            if(arr[i] < 0) {
+                arr[i] = 0;
             }
         }
     }
