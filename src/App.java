@@ -38,8 +38,8 @@ public class App
         //String s1; //null
         //int[] arr; //null
 
-        int[] arr1 = new int[10];
-        int[] arr2 = {1, 2, 3, 4, 5, 6, 7};
+        /*int[] arr1 = new int[10];
+        int[] arr2 = {1, 2, 3, 4, 5, 6, 7};*/
 
         /*for(int i=0; i<arr1.length; i++) {
             System.out.printf(arr1[i] + " ");
@@ -51,11 +51,11 @@ public class App
         /*String str = Arrays.toString(arr2);
         System.out.println(str);*/
 
-        for(int i : arr2) {
+       /* for(int i : arr2) {
             if(i % 2 == 0) {
                 System.out.println(i);
             }
-        }
+        }*/
 
         /*
             создать int массив, заполнить его элементами
@@ -63,5 +63,39 @@ public class App
             после этого каждый третий элемент массив умножить на 4
             +вывести массив после заполнения и его изменений
          */
+
+        int[] arr = new int[20];
+        for(int i=0; i<arr.length; i++) {
+            arr[i] = 2 * i;
+        }
+
+        /*System.out.println(Arrays.toString(arr));
+        for(int i=0; i<arr.length; i++) {
+            if(i % 3 == 0) {
+                arr[i] *= 4;
+            }
+        }
+        System.out.println(Arrays.toString(arr));*/
+
+        System.out.println(Arrays.toString(arr));
+        incrementArray(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    /*
+        создать int массив заполнить его значению (вручную)
+        передать в функцию sortArray и отсортировать в ней
+        +вывод в консоль до и после сортировки
+     */
+    public static void sortArray(int[] arr)
+    {
+        //...
+    }
+
+    public static void incrementArray(int[] arr)
+    {
+        for(int i=0; i<arr.length; i++) {
+            arr[i]++;
+        }
     }
 }
