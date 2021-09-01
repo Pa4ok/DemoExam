@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * shift + F10 - запуск последней конфигурации
@@ -9,8 +10,10 @@ import java.util.Arrays;
 public class App
 {
     /*
-        реализовать и протестировать функцию сортировки int массива
-        +вывод до и после сортировки в консоль
+        реализовать фунцию, создающую и возаращающую массив определенной длины (отправляет в аргументах функции)
+        реализовать фунцию, заменяющую в массиве все отрицательные элементы на 0
+        отсортирлвать массив функцией из предыдущего задания
+        и вывести
      */
 
     public static void main(String[] args)
@@ -52,8 +55,8 @@ public class App
         System.out.println(i % 2 == 0 ? "a" : "b");*/
 
         //int[] arr; //null
-        int[] arr1 = new int[10];
-        int[] arr2 = {1, 2, 3, 4, 5, 6, 7};
+        /*int[] arr1 = new int[10];
+        int[] arr2 = {154, -3, 5, 4, 6, 84, -5};*/
 
         //printArray(arr2);
         /*System.out.println(Arrays.toString(arr2));
@@ -64,9 +67,34 @@ public class App
         test(test);
         System.out.println(test);*/
 
-        for(int i : arr2) {
+        /*for(int i : arr2) {
             System.out.println(i);
+        }*/
+
+        /*System.out.println(Arrays.toString(arr2));
+        sortArray(arr2);
+        System.out.println(Arrays.toString(arr2));*/
+
+        //int[][] arr; //null
+        //arr = new int[3][]; // [null,null,null]
+        //for...
+
+        int[] arr1 = getArray(10);
+        int[][] arr = new int[3][3];
+
+        Random rand = new Random();
+        int i1 = rand.nextInt();
+        int i2 = rand.nextInt(1000);
+        System.out.println(i1 + " " + i2);
+    }
+
+    public static int[] getArray(int size)
+    {
+        int[] arr = new int[size];
+        for(int i=0; i<arr.length; i++) {
+            arr[i] = i;
         }
+        return arr;
     }
 
     public static void printArray(int[] arr)
@@ -87,5 +115,18 @@ public class App
     public static void test(int i)
     {
         i++;
+    }
+
+    public static void sortArray(int[] arr)
+    {
+        for(int i=0; i<arr.length-1; i++) {
+            for (int j = i; j < arr.length ; j++) {
+                if(arr[i] > arr[j]) {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
     }
 }
