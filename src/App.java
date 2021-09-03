@@ -6,19 +6,6 @@ public class App
 {
     public static void main(String[] args)
     {
-       /* Book book = new Book();
-        System.out.println(book);*/
-        /*System.out.println(book.title);
-        System.out.println(book.pages);*/
-
-        /*book.print();
-        book.title = "wef[oewf";
-        book.pages = 123;
-        book.print();*/
-
-        Book book = new Book("fewfew4", 1222);
-        book.print();
-
         /*
             class House +конструктор со всеми полями
             - String address
@@ -32,28 +19,42 @@ public class App
             создать в главном классе 2 функции: addHuman(House house) и removeHuman(House house)
             увеличивать или уменьшать количество людей в объекте house из аргументов на 1
          */
+
+        House h = new House("dfjq2wf", 5, 15);
+        h.print();
+        for(int i=0; i<10; i++) {
+            addHuman(h);
+        }
+        h.print();
+    }
+
+    public static void addHuman(House h)
+    {
+        h.humanCount++;
+    }
+
+    public static void removeHuman(House h)
+    {
+        if(h.humanCount > 0) {
+            h.humanCount--;
+        }
     }
 }
 
-class Book
+class House
 {
-    String title;
-    int pages;
+    String address;
+    int floorCount;
+    int humanCount;
 
-    public Book(String title, int pagesIn)
-    {
-        this.title = title;
-        pages = pagesIn;
-    }
-
-    public Book(String titleIn)
-    {
-        title = titleIn;
-        pages = 100;
+    public House(String address, int floorCount, int humanCount) {
+        this.address = address;
+        this.floorCount = floorCount;
+        this.humanCount = humanCount;
     }
 
     public void print()
     {
-        System.out.println("MyBook: " + title + " " + pages);
+        System.out.println("MyHouse: " + this.address + " " + this.floorCount + " " + humanCount);
     }
 }
