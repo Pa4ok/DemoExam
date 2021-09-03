@@ -1,68 +1,49 @@
 package ru.pa4ok.demoexam;
 
+import ru.pa4ok.test.House;
+
 /**
  * shift + F10 - запуск последней конфигурации
  * alt + enter - вызов контекстного меню по исправлению ошибки
  * cntl + space - вызов контекстного меню с доступными методами и полями объекта (после точки)
  */
 
-public class Application
-{
-    public static void main(String[] args)
-    {
-        Book book = new Book("my title 1", 321);
+public class Application {
+    public static void main(String[] args) {
+        House house = new House("adkqwpjdfo0qwd", 4, 14);
+        house.print();
+        for(int i=0; i<10; i++) {
+            addHuman(house);
+        }
+        house.print();
 
-        /*System.out.println(book);
-        book.print();
-
-        Book book1 = new Book("second book");
-        book1.print();*/
-
-        book.print();
-        test(book);
-        book.print();
+        //int[] arr = {1, 2, 3};
+        //System.out.println(Arrays.toString(arr));
 
         /*
-            class House + конструктор со всеми полями
-            - String address
-            - int floors
-            - int humanCount
-            - public void print() выводит все 3 поля объекта
+            пока что во всех наших классах все поля будут приватными
+            +должны быть публичные геттеры и сеттеры для взаимодействия с ними
 
-            в main функции нужно создать объет класса House
+            Car
+            - String type
+            - int mileage
+            - public void print()
 
-            в главном классе нужно разместить 2 функции: addHuman, removeHuman
-            они будут принимать в аргументах объект класса House и увеличивать/уменьшать количество людей на 1
+            создать объект класа с приватными полями, публичными геттерами и сеттарми
+            на сеттере для mileage необходимо реализовать проверку на то что новое значение не должно быть меньше старого
+            если же оно меньше выводить информацию об этом в консоль
          */
     }
 
-    public static void test(Book book)
+    public static void addHuman(House house)
     {
-        book.pages = 222;
+        //house.humanCount++;
+        house.setHumanCount(house.getHumanCount() + 1);
     }
 
-    //public static тип_возращемого_значения назнвание_функции(аргументы)
-}
-
-class Book
-{
-    String title;
-    int pages;
-
-    public Book(String title, int pages)
+    public static void removeHuman(House house)
     {
-        this.title = title;
-        this.pages = pages;
-    }
-
-    public Book(String title)
-    {
-        this.title = title;
-        pages = 100;
-    }
-
-    public void print()
-    {
-        System.out.println("MyBook: " + title + " " + pages);
+        //house.humanCount--;
+        house.setHumanCount(house.getHumanCount() - 1);
     }
 }
