@@ -1,8 +1,5 @@
 package ru.pa4ok.demoexam;
 
-import java.util.Arrays;
-import java.util.Random;
-
 /**
  * sout - принтлн
  * psvm - главный метод
@@ -14,59 +11,47 @@ public class App
 {
     public static void main(String[] args)
     {
+        Book book = new Book("ewfoiwefowe", 222);
+        /*System.out.println(book);
+        System.out.println(book.title + " " + book.pagesCount);*/
+        book.test();
+
         /*
-            сделать функцию которая создает и возращает int[]
-            в аргументы принимает размерность массива
+            class Book +конструктор со всеми полями
+            - String title
+            - String author
+            - int pages
 
-            2 функция принимает массив и заполняет его рандомными значениями
+            создать объект класса Book
 
-            3 функция принимает массив и сортирует его любым алгоритмом
-          */
+            создать статичную функцию в главном классе
+            которая будет принимать книгу и рандомно менять в ней количество страниц
 
-        int[] arr = createArray(10);
-        System.out.println(Arrays.toString(arr));
-        randArray(arr);
-        System.out.println(Arrays.toString(arr));
-        sortArray(arr);
-        System.out.println(Arrays.toString(arr));
-        test(arr);
-        System.out.println(Arrays.toString(arr));
+            +вывод полей книги до и после
+         */
     }
 
-    public static int[] createArray(int length)
-    {
-        /*int[] arr = new int[length];
-        return arr;*/
-
-        return new int[length];
-    }
-
-    public static void randArray(int[] arr)
-    {
-        Random rand = new Random();
-        for(int i=0; i<arr.length; i++) {
-            arr[i] = rand.nextInt(1000);
-        }
-    }
-
-    public static void sortArray(int[] arr)
-    {
-        for(int i=0; i<arr.length-1; i++) {
-            for(int j=i; j<arr.length; j++) {
-                if(arr[i] > arr[j]) {
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                }
-            }
-        }
-    }
-
-    public static void test(int[] arr)
-    {
-        for(int i : arr) {
-            i = 10;
-        }
-    }
+    //public static void test(Book book) {}
 }
 
+class Book
+{
+    String title;
+    int pagesCount;
+
+    public Book(String titleIn, int pagesCountIn)
+    {
+        title = titleIn;
+        pagesCount = pagesCountIn;
+    }
+
+    public Book(String titleIn)
+    {
+        title = titleIn;
+    }
+
+    public void test()
+    {
+        System.out.println("my book: " + title + " " + pagesCount);
+    }
+}
