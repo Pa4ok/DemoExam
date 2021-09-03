@@ -1,6 +1,7 @@
 package ru.pa4ok.demoexam;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * sout - принтлн
@@ -19,7 +20,7 @@ public class App
 
     public static void main(String[] args)
     {
-        int i1 = 2_100_000_000;
+        /*int i1 = 2_100_000_000;
         float f = 2.4F;
         double d = 3.5534D;
         long l = 10_000_000_000_000L;
@@ -33,7 +34,7 @@ public class App
                 pewfjpoiwefjep
                 pewhjfiwefewf
                 oiwefhoiwef
-                """;
+                """;*/
 
         /*for(int i=0; i<15; i++)
         {
@@ -93,7 +94,7 @@ public class App
             System.out.println("null 123");
         }*/
 
-        int[] arr = {3, 6, 8, 4, -1, 6, 1, 9};
+        /*int[] arr = {3, 6, 8, 4, -1, 6, 1, 9};
 
         System.out.println(Arrays.toString(arr));
 
@@ -107,6 +108,48 @@ public class App
             }
         }
 
+        System.out.println(Arrays.toString(arr));*/
+
+        //int[] arr; //null
+        /*int[] arr = new int[10];
+        for(int i=0; i<arr.length; i++) {
+            arr[i] = i * 2;
+        }
         System.out.println(Arrays.toString(arr));
+        incrementArray(arr);
+        System.out.println(Arrays.toString(arr));*/
+
+        /*int i = 10;
+        System.out.println(i);
+        test(i);
+        System.out.println(i);*/
+
+        Random rand = new Random();
+        int i1 = rand.nextInt();
+        int i2 = rand.nextInt(1000);
+        System.out.println(i1 + " " + i2);
+
+        /*
+            сделать функцию которая создает и возращает int[]
+            в аргументы принимает размерность массива
+
+            2 функция принимает массив и заполняет его рандомными значениями
+
+            3 функция принимает массив и сортирует его любым алгоритмом
+          */
+    }
+
+    //public static int[] createArray(int length) {}
+
+    public static void incrementArray(int[] arr)
+    {
+        for(int i=0; i<arr.length; i++) {
+            arr[i]++;
+        }
+    }
+
+    public static void test(int i)
+    {
+        i++;
     }
 }
