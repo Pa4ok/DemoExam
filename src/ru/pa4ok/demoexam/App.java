@@ -1,5 +1,7 @@
 package ru.pa4ok.demoexam;
 
+import java.util.Random;
+
 /**
  * sout - принтлн
  * psvm - главный метод
@@ -11,11 +13,6 @@ public class App
 {
     public static void main(String[] args)
     {
-        Book book = new Book("ewfoiwefowe", 222);
-        /*System.out.println(book);
-        System.out.println(book.title + " " + book.pagesCount);*/
-        book.test();
-
         /*
             class Book +конструктор со всеми полями
             - String title
@@ -29,29 +26,34 @@ public class App
 
             +вывод полей книги до и после
          */
+        Book book = new Book("ewfoiwefowe", "ewfewffewwef", 222);
+        book.print();
+        randPagesCount(book);
+        book.print();
     }
 
-    //public static void test(Book book) {}
+    public static void randPagesCount(Book book)
+    {
+        Random rand = new Random();
+        book.pages = rand.nextInt(1000);
+    }
 }
 
 class Book
 {
     String title;
-    int pagesCount;
+    String author;
+    int pages;
 
-    public Book(String titleIn, int pagesCountIn)
+    public Book(String title, String author, int pages)
     {
-        title = titleIn;
-        pagesCount = pagesCountIn;
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
     }
 
-    public Book(String titleIn)
+    public void print()
     {
-        title = titleIn;
-    }
-
-    public void test()
-    {
-        System.out.println("my book: " + title + " " + pagesCount);
+        System.out.println("MyBook: " + title + " " + author + " " + pages);
     }
 }
