@@ -1,6 +1,3 @@
-import java.util.Arrays;
-import java.util.Random;
-
 /**
  * shift + F10 - запуск последней конфигурации
  */
@@ -9,134 +6,54 @@ public class App
 {
     public static void main(String[] args)
     {
-        /*int i = 2_000_000_000;
-        float f = 23234.4F;
-        double d = 34234.3424D;
-        boolean b = true;
-        char c = 'Ы';
-        long l = 1_000_000_000_000_000_000L;*/
+       /* Book book = new Book();
+        System.out.println(book);*/
+        /*System.out.println(book.title);
+        System.out.println(book.pages);*/
 
-        //int[] arr1; //null
-        /*int intValue = 10;
-        int[] arr1 = new int[10];
-        int[] arr2 = {1, 2, 3, 4, 5, 6, 7};
+        /*book.print();
+        book.title = "wef[oewf";
+        book.pages = 123;
+        book.print();*/
 
-        //System.out.println(arr1);
-        System.out.println(intValue);
-        for(int i=0; i<arr1.length; i++) {
-            System.out.printf(arr1[i] + " ");
-        }
-        System.out.println();
-
-        test(arr1);
-        test1(intValue);
-        System.out.println();
-
-        System.out.println(intValue);
-        for(int i=0; i<arr1.length; i++) {
-            System.out.printf(arr1[i] + " ");
-        }
-        System.out.println();*/
+        Book book = new Book("fewfew4", 1222);
+        book.print();
 
         /*
-            создать массив int
-            сделать функцию которая будет заполнять его какими-то значениями
-            сделать функцию которая будет сортировать этот массив
-            сделать функцию которая будет выводить массив в консоль 1 строчкой
+            class House +конструктор со всеми полями
+            - String address
+            - ing floorCount
+            - int humanCount
+            - public void print()
+
+            Main/App/главный класс
+            создать в main методе объект House
+
+            создать в главном классе 2 функции: addHuman(House house) и removeHuman(House house)
+            увеличивать или уменьшать количество людей в объекте house из аргументов на 1
          */
+    }
+}
 
-        int[] arr = new int[10];
-        /*printArray(arr);
-        fillArray(arr);
-        printArray(arr);
-        sortArray(arr);
-        printArray(arr);
-        */
+class Book
+{
+    String title;
+    int pages;
 
-        /*fillArray(arr);
-        for(int i : arr) {
-            System.out.println(i);
-        }*/
-
-        /*String s = "32432o4h2hEFEWF32f";
-        System.out.println(s.substring(3, 8));
-        System.out.println(s.length());
-        System.out.println(s.toLowerCase());
-        System.out.println(s.toUpperCase());
-        System.out.println(s.endsWith("32f"));
-        System.out.println(s.charAt(8));
-
-        s += "eflmewfew";
-        s += '%';
-
-        System.out.println(s);*/
-
-        //java 15+
-        String textBlock = """
-                <html>
-                    ...
-                </html>
-                """;
-
-        /*int[][] arr1 = new int[10][10];
-        System.out.println(Arrays.toString(arr1));*/
-
-        String[] sArr = new String[10];
-        System.out.println(Arrays.toString(sArr));
-        testError(sArr);
+    public Book(String title, int pagesIn)
+    {
+        this.title = title;
+        pages = pagesIn;
     }
 
-    public static int[] createRandArray(int bound)
+    public Book(String titleIn)
     {
-        Random rand = new Random();
-        int[] arr = new int[rand.nextInt(bound) + 1];
-        fillArray(arr);
-        return arr;
+        title = titleIn;
+        pages = 100;
     }
 
-    public static void fillArray(int[] arr)
+    public void print()
     {
-        Random rand = new Random();
-        for(int i=0; i<arr.length; i++) {
-            arr[i] = rand.nextInt(1000);
-        }
-    }
-
-    public static void printArray(int[] arr)
-    {
-        for(int i=0; i<arr.length; i++) {
-            System.out.printf(arr[i] + " ");
-        }
-        System.out.println();
-    }
-
-    public static void sortArray(int[] arr)
-    {
-        for(int i=0; i<arr.length-1; i++) {
-            for(int j=i; j<arr.length; j++) {
-                if(arr[i] > arr[j]) {
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                }
-            }
-        }
-    }
-
-    public static void test(int[] arr)
-    {
-        for(int i=0; i<arr.length; i++) {
-            arr[i]++;
-        }
-    }
-
-    public static void test1(int i)
-    {
-        i++;
-    }
-
-    public static void testError(String[] sArr)
-    {
-        System.out.println(sArr[5].length());
+        System.out.println("MyBook: " + title + " " + pages);
     }
 }
