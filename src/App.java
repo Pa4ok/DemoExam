@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -76,6 +77,21 @@ public class App
                     ...
                 </html>
                 """;
+
+        /*int[][] arr1 = new int[10][10];
+        System.out.println(Arrays.toString(arr1));*/
+
+        String[] sArr = new String[10];
+        System.out.println(Arrays.toString(sArr));
+        testError(sArr);
+    }
+
+    public static int[] createRandArray(int bound)
+    {
+        Random rand = new Random();
+        int[] arr = new int[rand.nextInt(bound) + 1];
+        fillArray(arr);
+        return arr;
     }
 
     public static void fillArray(int[] arr)
@@ -117,5 +133,10 @@ public class App
     public static void test1(int i)
     {
         i++;
+    }
+
+    public static void testError(String[] sArr)
+    {
+        System.out.println(sArr[5].length());
     }
 }
