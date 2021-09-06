@@ -18,13 +18,26 @@ public class App
         */
 
         Random rand = new Random();
-        System.out.println(rand.nextInt());
-        System.out.println(rand.nextInt(1000));
-        //String s = Arrays.toString(arr);
+        int[] arr = new int[10];
+        for(int i=0; i<arr.length; i++) {
+            arr[i] = rand.nextInt(1000);
+        }
+
+        System.out.println(Arrays.toString(arr));
+        sortArray(arr);
+        System.out.println(Arrays.toString(arr));
     }
 
     public static void sortArray(int[] arr)
     {
-        //...
+        for(int i=0; i<arr.length-1; i++) {
+            for(int j=i; j<arr.length; j++) {
+                if(arr[i] > arr[j]) {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
     }
 }
