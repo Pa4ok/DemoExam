@@ -1,6 +1,9 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.test.Book;
+import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
+import java.util.Arrays;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
 
 /**
  * shift + F10 - запуск последней конфигурации
@@ -10,31 +13,78 @@ import ru.pa4ok.test.Book;
 
 public class App
 {
-    public static void main(String[] args)
-    {
-        Book b = new Book("reighreg", 123);
-        //System.out.println(book);
-        /*b.print();
-        b.title = "1234234";
-        b.pages = 123;*/
-        b.print();
-        System.out.println("test: " + b.getTitle() + " " + b.getPages());
-    }
-
     /*
         все поля в классах приватные + геттеры и сеттеры
-        +конструктор на все поля
+        +конструктор на все поля и переопределенный вывод (toString)
 
-        class House
+        class Book
+        - String title
+        - String author
+        - int pages
+
+
+        class Library
         - String address
-        - int floorCount
-        - int humanCount
-        - public void print()
-        - public void addHuman() ++
-        - public void removeHuman() -- //+ повесить проверку на то что итоговое значение >= 0
+        - Book[] books
 
-        создать объект House и поиграться с методами
+        - public boolean addBook(Book book)
+        - public boolean removeBook(String title)
+        //при добавлении вы ищите null элемент в массиве books
+        //если такой элемент имеется, то ставите книгу на его место
+        //если получилось добавить - возвращаете true, если нет - false
+        //при удалении ищете книгу с таким же названием, если нашли то заменили на null
+        //если получилось удалить - возвращаете true, если нет - false
 
      */
+
+    public static void main(String[] args)
+    {
+        /*House[] houses = new House[10];
+        System.out.println(Arrays.toString(houses));
+
+        House[] houses1 = new House[] {
+                new House("wqdwqdwq", 2 ,2),
+                new House("wqdwqdwq", 2 ,2),
+                new House("wqdwqdwq", 2 ,2),
+                new House("wqdwqdwq", 2 ,2)
+        };*/
+
+        /*House h1 = new House("wqdwqdwq", 2 ,2);
+        House h2 = new House("wqdwqdwq", 2 ,2);
+        System.out.println(h1 == h2);*/
+
+        String s1 = "123321";
+
+        Scanner scanner = new Scanner(System.in);
+        String s2 = "123" + scanner.nextLine();
+
+        System.out.println(s1 + " " + s2);
+        System.out.println(s1 == s2);
+        System.out.println(s1.equals(s2));
+        System.out.println(s1.equalsIgnoreCase(s2));
+    }
 }
 
+class Test
+{
+    //1
+    //public House[] houses = new House[10];
+
+    public House[] houses;
+
+    //2
+    public Test(House[] houses)
+    {
+       this.houses = houses;
+    }
+
+    public Test(int length)
+    {
+        this.houses = new House[length];
+    }
+
+    public Test()
+    {
+        this(10);
+    }
+}
