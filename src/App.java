@@ -8,15 +8,6 @@ public class App
 {
     public static void main(String[] args)
     {
-        Book b = new Book("some title", 123);
-        //System.out.println(b);
-        //System.out.println(b.title + " " + b.pages);
-        /*b.title = "some title";
-        b.pages = 123;
-        System.out.println(b.title + " " + b.pages);*/
-        //b.test();
-        b.print();
-
         /*
             class House
             - String address
@@ -34,42 +25,46 @@ public class App
             создать объект House
             и потестить функции
          */
+
+        House h = new House("dwqpdjqid", 12, 10);
+        h.print();
+        addHuman(h);
+        h.print();
+        for(int i=0; i<20; i++) {
+            removeHuman(h);
+        }
+        h.print();
+    }
+
+    public static void addHuman(House house)
+    {
+        house.humanCount++;
+    }
+
+    public static void removeHuman(House house)
+    {
+        if(house.humanCount > 0) {
+            house.humanCount--;
+        }
     }
 }
 
-class Book
+class House
 {
-    String title;
-    int pages;
+    String address;
+    int floorCount;
+    int humanCount;
 
-    //constructor(String,int)
-    public Book(String title, int pagesIn)
+    public House(String address, int floorCount, int humanCount)
     {
-        this.title = title;
-        if(this.title.startsWith("123")) {
-            this.title = this.title.replace("123", "321");
-        }
-
-        pages = pagesIn;
-    }
-
-    //constructor(String)
-    /*public Book(String title)
-    {
-        this.title = title;
-    }*/
-
-    public Book(String title)
-    {
-        this(title, 0);
+        this.address = address;
+        this.floorCount = floorCount;
+        this.humanCount = humanCount;
     }
 
     public void print()
     {
-        System.out.println("MyBook: " + title + " " + this.pages);
-    }
-
-    public void test() {
-        System.out.println("test");
+        System.out.println("MyHouse: " + address + " " + floorCount + " " + humanCount);
     }
 }
+
