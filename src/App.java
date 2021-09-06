@@ -10,109 +10,65 @@ public class App
 {
     public static void main(String[] args)
     {
-        /*int i = 2_000_000_000;
-        float f = 34343.5F;
-        double d = 43434.444D;
-        boolean b = true;
-        char c = 'Ы';
-        long l = 1_000_000_000_000_000_000L;*/
+        /*Book b = new Book();
+        //System.out.println(b);
+        System.out.println(b.title + " " + b.pages);
+        b.title = "peojfp[owefe";
+        b.pages = 314;
+        System.out.println(b.title + " " + b.pages);*/
 
-        //int[] arr; //null
-        //int[] arr1 = new int[10];
-        //int[] arr = {1,2,3,4,5,6,7};
-        //int i = 5;
-
-        /*for(int i=0; i<arr1.length; i++) {
-            System.out.printf(arr1[i] + " ");
-        }
-        System.out.println();*/
-
-        /*System.out.println(Arrays.toString(arr1));
-        System.out.println(i);
-
-        increment(i);
-        incrementArray(arr1);
-
-        System.out.println(Arrays.toString(arr1));
-        System.out.println(i);
-        */
-
-        /*for(int i : arr) {
-            System.out.println(i);
-        }*/
-
-        /*String s = "342423423rtegergerjIOEH";
-        System.out.println(s.length());
-        System.out.println(s.toLowerCase());
-        System.out.println(s.toUpperCase());
-        System.out.println(s.substring(3, 8));
-        System.out.println(s.startsWith("123"));
-        System.out.println(s.endsWith("OEH"));\
-        */
-
-        /*int[] arr1 = new int[10];
-        String[] arr2 = new String[10];
-        System.out.println(Arrays.toString(arr1));
-        System.out.println(Arrays.toString(arr2));*/
+        Book b = new Book("2;fewpowfe", 23);
+        //System.out.println(b.title + " " + b.pages);
+        //b.print();
+        System.out.println(b);
 
         /*
-        Random rand = new Random();
-        int i1 = rand.nextInt();
-        int i2 = rand.nextInt(1000);
-        System.out.println(i1 + " " + i2);*/
+            class House
+            - String address
+            - int floorCount
+            - int humanCount
+            - public void addHuman() ++
+            - public void removeHuman() --
 
-        /*
-            создать int массив
-            сделать функцию которая принимает массив и заполняет его рандомными числами
-            сделать функцию которая принимает массив и сортирует его любым алгоритмом
-            протестить все это дело
+            написать класс, с конструктором, переопределенным выводом (toString)
+            на метод removeHuman необходимо повесить проверку, чтобы число humanCount не стало < 0
          */
-
-        int[] arr = new int[10];
-        System.out.println(Arrays.toString(arr));
-        randArray(arr);
-        System.out.println(Arrays.toString(arr));
-        sortArray(arr);
-        System.out.println(Arrays.toString(arr));
     }
+}
 
-    public static void randArray(int[] arr)
+class Book
+{
+    String title;
+    int pages;
+
+    //constructor(String,int)
+    public Book(String title, int pagesIn)
     {
-        Random rand = new Random();
-        for(int i=0; i<arr.length; i++) {
-            arr[i] = rand.nextInt(1000);
+        if(title.startsWith("123")) {
+            title = title.replace("123", "321");
         }
+        this.title = title;
+
+        pages = pagesIn;
     }
 
-    public static void sortArray(int[] arr)
+    //constructor(String)
+    /*public Book(String title)
     {
-        for(int i=0; i<arr.length-1; i++) {
-            for(int j=i; j<arr.length; j++) {
-                if(arr[i] > arr[j]) {
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                }
-            }
-        }
-    }
+        this.title = title;
+    }*/
 
-    public static void increment(int i)
+    public Book(String title)
     {
-        i++;
+        this(title, 0);
     }
 
-    public static void incrementArray(int[] arr)
+    public void print()
     {
-        for(int i=0; i<arr.length; i++) {
-            arr[i]++;
-        }
+        System.out.println("MyBook: " + this.title + " " + pages);
     }
 
-    public static void test1(int[][][][] arr) {
-    }
-
-    public static int[][][][] test2() {
-        return null;
+    public String toString() {
+        return "MyBook: " + this.title + " " + pages;
     }
 }
