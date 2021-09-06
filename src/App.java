@@ -55,10 +55,11 @@ public class App
         System.out.println(Arrays.toString(arr1));
         System.out.println(Arrays.toString(arr2));*/
 
+        /*
         Random rand = new Random();
         int i1 = rand.nextInt();
         int i2 = rand.nextInt(1000);
-        System.out.println(i1 + " " + i2);
+        System.out.println(i1 + " " + i2);*/
 
         /*
             создать int массив
@@ -66,6 +67,34 @@ public class App
             сделать функцию которая принимает массив и сортирует его любым алгоритмом
             протестить все это дело
          */
+
+        int[] arr = new int[10];
+        System.out.println(Arrays.toString(arr));
+        randArray(arr);
+        System.out.println(Arrays.toString(arr));
+        sortArray(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void randArray(int[] arr)
+    {
+        Random rand = new Random();
+        for(int i=0; i<arr.length; i++) {
+            arr[i] = rand.nextInt(1000);
+        }
+    }
+
+    public static void sortArray(int[] arr)
+    {
+        for(int i=0; i<arr.length-1; i++) {
+            for(int j=i; j<arr.length; j++) {
+                if(arr[i] > arr[j]) {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
     }
 
     public static void increment(int i)
