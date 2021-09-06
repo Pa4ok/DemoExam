@@ -10,39 +10,66 @@ public class App
 {
     public static void main(String[] args)
     {
+        /*Book b = new Book();
+        //System.out.println(b);
+        System.out.println("MyBook: " + b.title + " " + b.pages);
+        b.title = "[fkp2o3f2";
+        b.pages = 123;
+        System.out.println("MyBook: " + b.title + " " + b.pages);*/
+
+        //Book b = new Book("fkgpr3e3", 123);
+        //System.out.println("MyBook: " + b.title + " " + b.pages);
+        //b.print();
+        //System.out.println(b);
+
         /*
-            создать int массив
-            создать функцию, которая принимает массив и заполняет его рандомными значениями
-            создать функцию, которая принимает массив и сортирует его любым алгоримтмом
-        */
+            class House
+            - String address
+            - int floorCount
+            - int humanCount
+            - public void addHuman() ++
+            - public void removeHuman() --
+            
+            написать класс, с конструктором, переопределенным выводом (toString)
+            на метод removeHuman необходимо повесить проверку, чтобы число humanCount не стало < 0
+         */
+    }
+}
 
-        int[] arr = new int[10];
-        System.out.println(Arrays.toString(arr));
-        randArray(arr);
-        System.out.println(Arrays.toString(arr));
-        sortArray(arr);
-        System.out.println(Arrays.toString(arr));
+class Book
+{
+    String title;
+    int pages;
+
+    //constructor(String,int)
+    public Book(String title, int pagesIn)
+    {
+        if(title.startsWith("123")) {
+            title = title.replace("123", "321");
+        }
+        this.title = title;
+        pages = pagesIn;
     }
 
-    public static void randArray(int[] arr)
+    //constructor(String)
+    /*public Book(String title)
     {
-        Random rand = new Random();
-        for(int i=0; i<arr.length; i++) {
-            arr[i] = rand.nextInt(1000);
-        }
+        this.title = title;
+    }*/
+
+    public Book(String title)
+    {
+        this(title, 0);
     }
 
-    public static void sortArray(int[] arr)
+    public String toString()
     {
-        for(int i=0; i<arr.length-1; i++) {
-            for(int j=i+1; j<arr.length; j++) {
-                if(arr[i] > arr[j]) {
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                }
-            }
-        }
+        return "MyBook: " + this.title + " " + pages;
+    }
+
+    public void print()
+    {
+        System.out.println("MyBook: " + this.title + " " + pages);
     }
 }
 
