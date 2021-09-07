@@ -10,18 +10,6 @@ public class App
 {
     public static void main(String[] args)
     {
-        /*Book b = new Book();
-        //System.out.println(b);
-        System.out.println("MyBook: " + b.title + " " + b.pages);
-        b.title = "[fkp2o3f2";
-        b.pages = 123;
-        System.out.println("MyBook: " + b.title + " " + b.pages);*/
-
-        //Book b = new Book("fkgpr3e3", 123);
-        //System.out.println("MyBook: " + b.title + " " + b.pages);
-        //b.print();
-        //System.out.println(b);
-
         /*
             class House
             - String address
@@ -33,43 +21,45 @@ public class App
             написать класс, с конструктором, переопределенным выводом (toString)
             на метод removeHuman необходимо повесить проверку, чтобы число humanCount не стало < 0
          */
+
+        House h = new House("efewffewfwe", 5, 20);
+        System.out.println(h);
+        h.addHuman();
+        System.out.println(h);
+        for(int i=0; i<30; i++) {
+            h.removeHuman();
+        }
+        System.out.println(h);
     }
 }
 
-class Book
+class House
 {
-    String title;
-    int pages;
+    String address;
+    int floorCount;
+    int humanCount;
 
-    //constructor(String,int)
-    public Book(String title, int pagesIn)
+    public House(String address, int floorCount, int humanCount)
     {
-        if(title.startsWith("123")) {
-            title = title.replace("123", "321");
-        }
-        this.title = title;
-        pages = pagesIn;
+        this.address = address;
+        this.floorCount = floorCount;
+        this.humanCount = humanCount;
     }
 
-    //constructor(String)
-    /*public Book(String title)
-    {
-        this.title = title;
-    }*/
+    public void addHuman() {
+        this.humanCount++;
+    }
 
-    public Book(String title)
-    {
-        this(title, 0);
+    public void removeHuman() {
+        if(this.humanCount > 0) {
+            this.humanCount--;
+        }
     }
 
     public String toString()
     {
-        return "MyBook: " + this.title + " " + pages;
-    }
-
-    public void print()
-    {
-        System.out.println("MyBook: " + this.title + " " + pages);
+        return "MyHouse: " + this.address + " " + this.floorCount + " " + this.humanCount;
     }
 }
+
 
