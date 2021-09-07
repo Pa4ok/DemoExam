@@ -11,61 +11,45 @@ public class App
 {
     public static void main(String[] args)
     {
-        /*Book b = new Book();
-        System.out.println(b);
-        System.out.println(b.title + " " + b.pages);
-        b.title = "324o3j34ogj";
-        b.pages = 123;
-        System.out.println(b.title + " " + b.pages);*/
-
-        Book b = new Book("324234432reg'reihg", 123);
-        //System.out.println(b.title + " " + b.pages);
-        //b.print();
-        System.out.println(b);
-
         /*
             констуктор + переопределнный вывод (toString)
 
-            class Car
-            - String type
-            - int mileage
-            - public void addMileage() ++
+            class House
+            - String address
+            - int floorCount
+            - int humanCount
+            - public void addHuman() ++ для humanCount
+            - public void removeHuman() -- для humanCount
+
+            для метода removeHuman необходимо сделать проверку
+            чтобы нельзя было сделать отрицательное количество человек
          */
+
+        Car pizo = new Car("pwoeifwhfwef", 12233);
+        System.out.println(pizo);
+        pizo.addMileage();
+        pizo.addMileage();
+        pizo.addMileage();
+        System.out.println(pizo);
     }
 }
 
-class Book
+class Car
 {
-    String title;
-    int pages;
+    String type;
+    int mileage;
 
-    //constructor(String,int)
-    public Book(String title, int pagesIn)
+    public Car(String type, int mileage)
     {
-        if(title.startsWith("123")) {
-            title = title.replace("123", "321");
-        }
-        this.title = title;
-        pages = pagesIn;
+        this.type = type;
+        this.mileage = mileage;
     }
 
-    //constructor(String)
-    /*public Book(String title)
-    {
-        this.title = title;
-    }*/
-
-    public Book(String title)
-    {
-        this(title, 0);
-        //...
-    }
-
-    public void print() {
-        System.out.println("MyBook: " + this.title + " " + pages);
+    public void addMileage() {
+        mileage++;
     }
 
     public String toString() {
-        return "MyBook: " + this.title + " " + pages;
+        return "MyCar: " + type + " " + mileage;
     }
 }
