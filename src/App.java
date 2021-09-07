@@ -11,38 +11,61 @@ public class App
 {
     public static void main(String[] args)
     {
+        /*Book b = new Book();
+        System.out.println(b);
+        System.out.println(b.title + " " + b.pages);
+        b.title = "324o3j34ogj";
+        b.pages = 123;
+        System.out.println(b.title + " " + b.pages);*/
+
+        Book b = new Book("324234432reg'reihg", 123);
+        //System.out.println(b.title + " " + b.pages);
+        //b.print();
+        System.out.println(b);
+
         /*
-            создать int массив
-            создать функцию randArray которая принимает массив и заполняет его рандомными значениями
-            создать функцию sortArray которая принимает массив и сортирует его любым алгоритмом
+            констуктор + переопределнный вывод (toString)
+
+            class Car
+            - String type
+            - int mileage
+            - public void addMileage() ++
          */
+    }
+}
 
-        int[] arr = new int[10];
-        System.out.println(Arrays.toString(arr));
-        randArray(arr);
-        System.out.println(Arrays.toString(arr));
-        sortArray(arr);
-        System.out.println(Arrays.toString(arr));
+class Book
+{
+    String title;
+    int pages;
+
+    //constructor(String,int)
+    public Book(String title, int pagesIn)
+    {
+        if(title.startsWith("123")) {
+            title = title.replace("123", "321");
+        }
+        this.title = title;
+        pages = pagesIn;
     }
 
-    public static void randArray(int[] arr)
+    //constructor(String)
+    /*public Book(String title)
     {
-        Random rand = new Random();
-        for(int i=0; i<arr.length; i++) {
-            arr[i] = rand.nextInt(1000);
-        }
+        this.title = title;
+    }*/
+
+    public Book(String title)
+    {
+        this(title, 0);
+        //...
     }
 
-    public static void sortArray(int[] arr)
-    {
-        for(int i=0; i<arr.length-1; i++) {
-            for(int j=i+1; j<arr.length; j++) {
-                if(arr[i] > arr[j]) {
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                }
-            }
-        }
+    public void print() {
+        System.out.println("MyBook: " + this.title + " " + pages);
+    }
+
+    public String toString() {
+        return "MyBook: " + this.title + " " + pages;
     }
 }
