@@ -1,7 +1,5 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.test.House;
-
 /**
  * shift + F10 - запуск последней конфигурации
  * alt + enter - контекстное меню по исправлению ошибки
@@ -25,11 +23,15 @@ public class App
         чтобы новое значение не могло быть меньше старого
          */
 
-        House h = new House("dwqpdjqid", 12, 10);
-        //System.out.println(h.address + " " + h.floorCount + " " + h.humanCount);
-        /*System.out.println(h.getAddress() + " " + h.getFloorCount() + " " + h.getHumanCount());
-        h.setHumanCount(-100);
-        System.out.println(h.getAddress() + " " + h.getFloorCount() + " " + h.getHumanCount());*/
-        System.out.println(h);
+        Car car = new Car("wfgwewef", 2222);
+        System.out.println(car);
+        car.addMileage();
+        car.addMileage();
+        car.addMileage();
+        System.out.println(car);
+        car.setMileage(10);
+        System.out.println(car);
+        car.setMileage(10000);
+        System.out.println(car);
     }
 }
