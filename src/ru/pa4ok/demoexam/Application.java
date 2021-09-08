@@ -5,8 +5,9 @@ import java.util.Scanner;
 
 /**
  * shift + F10 - запуск последней конфигурации
- * alt + enter - вызов контекстного меню по исправлению ошибки
- * cntl + space - вызов контекстного меню с доступными методами и полями объекта (после точки)
+ * alt + enter - контекстное меню по исправлению ошибки
+ * ctrl + space - контекстное меню с доступными методами и полями объекта (после точки)
+ * alt + insert - контекстное меню генерации кода (конструкторы, геттеры, сеттеры, toString...)
  */
 
 public class Application
@@ -36,99 +37,31 @@ public class Application
 
     public static void main(String[] args)
     {
-        //Test test = new Test(new TestSmall("34234324", 43424));
-
-        /*TestSmall testSmall = new TestSmall("4323432", 43);
-        Test test = new Test(testSmall);*/
-
-        /*TestWithArray testWithArray = new TestWithArray();
-        System.out.println(Arrays.toString(testWithArray.arr));*/
-
-        /*String[] arr = new String[] {
-            "fg3r3", "htrhrttr", "myjmyuj", "thrthjtrh"
+        Book[] books = new Book[] {
+                new Book("1", "1", 1),
+                null,
+                new Book("2", "2", 2),
+                null,
+                new Book("3", "3", 3),
+                new Book("4", "4", 4)
         };
-        TestWithArray testWithArray = new TestWithArray(arr);*/
 
-        /*TestWithArray testWithArray = new TestWithArray(new String[] {
-                "fg3r3", "htrhrttr", "myjmyuj", "thrthjtrh"
-        });*/
+        Library library = new Library("addrwgihrig", books);
+        System.out.println(library);
 
-        /*TestSmall[] arr = new TestSmall[] {
-                new TestSmall("234234324", 432423),
-                new TestSmall("234234324", 432423),
-                new TestSmall("234234324", 432423),
-                new TestSmall("234234324", 432423)
-        };*/
+        /*System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));
+        System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));
+        System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));*/
 
-
-        //сравнение строк
-        String s1 = "123321";
-        String s2 = "123";
-
-        Scanner scanner = new Scanner(System.in);
-        s2 += scanner.nextLine();
-
-        System.out.println(s1);
-        System.out.println(s2);
-        System.out.println(s1 == s2);
-        System.out.println(s1.equals(s2));
-        System.out.println(s1.equalsIgnoreCase(s2));
-    }
-}
-
-class TestWithArray
-{
-    //public String[] arr; //null
-
-    //1
-    //public String[] arr = new String[10];
-
-    //2
-    public String[] arr;
-
-    public TestWithArray(String[] arr)
-    {
-        this.arr = arr;
-    }
-
-    //3
-    public TestWithArray(int length)
-    {
-        //this.arr = new String[length];
-        this(new String[length]);
-    }
-
-    public TestWithArray()
-    {
-        this(10);
-    }
-}
-
-class TestWithCustomArray
-{
-    public TestSmall[] arr;
-
-    public TestWithCustomArray(TestSmall[] arr) {
-        this.arr = arr;
-    }
-}
-
-class Test
-{
-    public TestSmall testSmall;
-
-    public Test(TestSmall testSmall) {
-        this.testSmall = testSmall;
-    }
-}
-
-class TestSmall
-{
-    public String title;
-    public int value;
-
-    public TestSmall(String title, int value) {
-        this.title = title;
-        this.value = value;
+        System.out.println(library.removeBook("1", "2"));
+        System.out.println(library);
+        System.out.println(library.removeBook("3", "3"));
+        System.out.println(library);
+        System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));
+        System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));
+        System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));
+        System.out.println(library);
+        System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));
+        System.out.println(library);
     }
 }
