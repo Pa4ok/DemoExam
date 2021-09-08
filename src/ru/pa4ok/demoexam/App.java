@@ -1,5 +1,7 @@
 package ru.pa4ok.demoexam;
 
+import java.util.Arrays;
+
 /**
  * shift + F10 - запуск последней конфигурации
  * alt + enter - контекстное меню по исправлению ошибки
@@ -14,24 +16,78 @@ public class App
         конструктор на все поля + toString
         все поля приватные + геттеры и сеттеры
 
-        class Car
-        - String type
-        - int mileage
-        - public void addMileage() +1 к mileage
+        Book
+        - String title
+        - int pages
 
-        на метод установки поля mileage (сеттер) необходимо повесить проверку
-        чтобы новое значение не могло быть меньше старого
+        Library
+        - String address
+        - Book[] books
+        - public void addBook(Book book)
+
+        в методе addBook вы перебираете элементы массива
+        и ищите null элемент, если таковой есть - ставите на его место
+        книгу, которая пришла в аргументах
          */
 
-        Car car = new Car("wfgwewef", 2222);
-        System.out.println(car);
-        car.addMileage();
-        car.addMileage();
-        car.addMileage();
-        System.out.println(car);
-        car.setMileage(10);
-        System.out.println(car);
-        car.setMileage(10000);
-        System.out.println(car);
+        /*Test test = new Test();
+        System.out.println(Arrays.toString(test.arr));
+        test.arr[5] = "23423432";
+        System.out.println(Arrays.toString(test.arr));*/
+
+        /*String[] arr = {
+            "fewfwe", "jytjtn", "dqwefewfg"
+        };
+        Test test = new Test(arr);
+        System.out.println(Arrays.toString(test.arr));*/
+
+        TestSmall[] arr = new TestSmall[] {
+                new TestSmall(1),
+                new TestSmall(2),
+                null,
+                null,
+                new TestSmall(3),
+                new TestSmall(4),
+                null,
+                new TestSmall(5)
+        };
+        Test test = new Test(arr);
+        System.out.println(Arrays.toString(test.arr));
+    }
+}
+
+class Test
+{
+    //public String[] arr; //null
+
+    //1
+    //public String[] arr = new String[10];
+
+    //2
+    public TestSmall[] arr;
+
+    public Test(TestSmall[] arr) {
+        this.arr = arr;
+    }
+
+    public Test(int length) {
+        this(new TestSmall[length]);
+    }
+
+    public Test() {
+        this(10);
+    }
+}
+
+class TestSmall
+{
+    public int value;
+
+    public TestSmall(int value) {
+        this.value = value;
+    }
+
+    public String toString() {
+        return "TestSmall: " + this.value;
     }
 }
