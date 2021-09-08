@@ -9,6 +9,7 @@ import java.util.Scanner;
  * shift + F10 - запуск последней конфигурации
  * alt + enter - контекстное меню по исправлению ошибки
  * ctrl + space - контекстное меню с полями и методами объекта
+ * alt + insert - контекстное меню генерации кода (конструктор, toString, геттеры, сеттеры...)
  */
 
 public class App
@@ -22,13 +23,12 @@ public class App
         - String author
         - int pages
 
-
         class Library
         - String address
         - Book[] books
-
         - public boolean addBook(Book book)
         - public boolean removeBook(String title)
+
         //при добавлении вы ищите null элемент в массиве books
         //если такой элемент имеется, то ставите книгу на его место
         //если получилось добавить - возвращаете true, если нет - false
@@ -39,52 +39,24 @@ public class App
 
     public static void main(String[] args)
     {
-        /*House[] houses = new House[10];
-        System.out.println(Arrays.toString(houses));
+        /*Book book = new Book("2fewfew312", "wefwefewf", 222);
+        System.out.println(book);*/
 
-        House[] houses1 = new House[] {
-                new House("wqdwqdwq", 2 ,2),
-                new House("wqdwqdwq", 2 ,2),
-                new House("wqdwqdwq", 2 ,2),
-                new House("wqdwqdwq", 2 ,2)
-        };*/
+        Book[] books = new Book[] {
+                new Book("2fewfew312", "2efwefewf", 222),
+                null,
+                null
+        };
 
-        /*House h1 = new House("wqdwqdwq", 2 ,2);
-        House h2 = new House("wqdwqdwq", 2 ,2);
-        System.out.println(h1 == h2);*/
+        Library lib = new Library("owefgoifg", books);
+        System.out.println(lib);
 
-        String s1 = "123321";
-
-        Scanner scanner = new Scanner(System.in);
-        String s2 = "123" + scanner.nextLine();
-
-        System.out.println(s1 + " " + s2);
-        System.out.println(s1 == s2);
-        System.out.println(s1.equals(s2));
-        System.out.println(s1.equalsIgnoreCase(s2));
-    }
-}
-
-class Test
-{
-    //1
-    //public House[] houses = new House[10];
-
-    public House[] houses;
-
-    //2
-    public Test(House[] houses)
-    {
-       this.houses = houses;
-    }
-
-    public Test(int length)
-    {
-        this.houses = new House[length];
-    }
-
-    public Test()
-    {
-        this(10);
+        System.out.println(lib.addBook(new Book("1", "2", 3)));
+        System.out.println(lib.addBook(new Book("2", "2", 3)));
+        System.out.println(lib.addBook(new Book("3", "2", 3)));
+        System.out.println(lib);
+        System.out.println(lib.removeBook("3"));
+        System.out.println(lib.removeBook("2"));
+        System.out.println(lib);
     }
 }
