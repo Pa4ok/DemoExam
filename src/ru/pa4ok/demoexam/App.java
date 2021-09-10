@@ -31,60 +31,22 @@ public class App
 
     public static void main(String[] args)
     {
-        //Test test = new Test();
-        //System.out.println(test.arr);
+        /*Book[] arr = new Book[3];
+        arr[1] = new Book("1", "1", 10);
+        */
 
-        /*TestSmall[] arr = new TestSmall[] {
-                new TestSmall(1),
-                new TestSmall(2),
-                new TestSmall(3),
+        Book[] books = new Book[] {
                 null,
-                new TestSmall(5),
+                new Book("1", "1", 10),
+                null
         };
 
-        Test test = new Test(arr);*/
+        Library lib = new Library("wefokewkfopwef", books);
+        System.out.println(lib);
+        lib.addBook(new Book("2", "2", 10));
+        lib.addBook(new Book("3", "3", 10));
+        lib.addBook(new Book("4", "4", 10));
+        System.out.println(lib);
 
-        Test test = new Test(3);
-        test.arr[1] = new TestSmall(123);
-
-        System.out.println(Arrays.toString(test.arr));
-    }
-}
-
-class Test
-{
-    //public TestSmall[] arr; //null
-
-    //1
-    //public TestSmall[] arr = new TestSmall[10];
-
-    //2
-    public TestSmall[] arr;
-
-    public Test(TestSmall[] arr) {
-        this.arr = arr;
-    }
-
-    public Test(int length) {
-        this(new TestSmall[length]);
-    }
-
-    public Test() {
-        this(10);
-    }
-}
-
-class TestSmall
-{
-    public int value;
-
-    public TestSmall(int value) {
-        this.value = value;
-    }
-
-    public String toString() {
-        return "TestSmall{" +
-                "value=" + value +
-                '}';
     }
 }
