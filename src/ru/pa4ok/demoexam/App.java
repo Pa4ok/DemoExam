@@ -35,37 +35,21 @@ public class App
 
     public static void main(String[] args)
     {
-        /*Book[] arr = new Book[3];
-        arr[1] = new Book("1", "1", 10);
-        */
-
-        /*Book[] books = new Book[] {
-                null,
+        Library lib = new Library("dqwdqwdqw", new Book[] {
                 new Book("1", "1", 10),
+                new Book("2", "2", 10),
                 null
-        };
+        });
 
-        Library lib = new Library("wefokewkfopwef", books);
         System.out.println(lib);
-        lib.addBook(new Book("2", "2", 10));
-        lib.addBook(new Book("3", "3", 10));
-        lib.addBook(new Book("4", "4", 10));
-        System.out.println(lib);*/
+        System.out.println(lib.addBook(new Book("3", "3", 10)));
+        System.out.println(lib.addBook(new Book("4", "4", 10)));
+        System.out.println(lib);
+        System.out.println(lib.removeBook("3", "3"));
+        System.out.println(lib.removeBook("4", "4"));
+        System.out.println(lib.removeBook("1", "1"));
+        System.out.println(lib);
 
-        /*String s1 = "123321";
-        String s2 = "123";
 
-        Scanner scanner = new Scanner(System.in);
-        s2 += scanner.nextLine();
-
-        System.out.println(s1);
-        System.out.println(s2);
-        System.out.println(s1 == s2);
-        System.out.println(s1.equals(s2));
-        System.out.println(s1.equalsIgnoreCase(s2));*/
-
-        String[] arr = new String[10];
-        System.out.println(Arrays.toString(arr));
-        System.out.println(arr[0].equals("123321"));
     }
 }
