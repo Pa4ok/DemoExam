@@ -1,5 +1,7 @@
 package ru.pa4ok.demoexam;
 
+import java.util.Arrays;
+
 /**
  * shift + F10 - запуск последней конфигурации
  * alt + enter - контекстное меню по исправлению ошибки
@@ -8,22 +10,81 @@ package ru.pa4ok.demoexam;
 
 public class App
 {
+    /*
+        все поля приватными + геттеры и сеттеры
+        +переопределенный вывод (toString)
+
+        Book
+        - String title
+        - String author
+        - int pages
+
+        Library
+        - String address
+        - Book[] books
+        - public void addBook(Book book)
+
+        при добавлении книги вы ищете первый null элемент в массиве books
+        если такой есть - ставите книгу из аргументов на его место
+        если в массиве нет null элментов, то выводите что нибудь в консоль
+     */
+
     public static void main(String[] args)
     {
-        /*
-            создать пакет для своей приложухи по образу
-            все поля приватные + геттеры и сеттеры к ним + конструктор на все аргументы
+        //Test test = new Test();
+        //System.out.println(test.arr);
 
-            class Car
-            - String type
-            - int mileage
-            - public void print()
+        /*TestSmall[] arr = new TestSmall[] {
+                new TestSmall(1),
+                new TestSmall(2),
+                new TestSmall(3),
+                null,
+                new TestSmall(5),
+        };
 
-            + конструктор только с типом машины (пробег 0)
-            в сеттере на mileage сделать проверку на то что новое значение не меньше старого
-         */
+        Test test = new Test(arr);*/
 
-        Car car = new Car("wdqw'kwqo[pd");
-        System.out.println(car);
+        Test test = new Test(3);
+        test.arr[1] = new TestSmall(123);
+
+        System.out.println(Arrays.toString(test.arr));
+    }
+}
+
+class Test
+{
+    //public TestSmall[] arr; //null
+
+    //1
+    //public TestSmall[] arr = new TestSmall[10];
+
+    //2
+    public TestSmall[] arr;
+
+    public Test(TestSmall[] arr) {
+        this.arr = arr;
+    }
+
+    public Test(int length) {
+        this(new TestSmall[length]);
+    }
+
+    public Test() {
+        this(10);
+    }
+}
+
+class TestSmall
+{
+    public int value;
+
+    public TestSmall(int value) {
+        this.value = value;
+    }
+
+    public String toString() {
+        return "TestSmall{" +
+                "value=" + value +
+                '}';
     }
 }
