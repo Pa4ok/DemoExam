@@ -1,7 +1,10 @@
 package ru.pa4ok.demoexam;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import ru.pa4ok.demoexam.lib.Book;
+import ru.pa4ok.demoexam.lib.Library;
+import ru.pa4ok.demoexam.school.School;
+import ru.pa4ok.demoexam.school.Student;
+import ru.pa4ok.demoexam.school.Teacher;
 
 /**
  * shift + F10 - запуск последней конфигурации
@@ -16,52 +19,70 @@ public class Application
             пока что во всех наших классах все поля будут приватными
             +должны быть публичные геттеры и сеттеры для взаимодействия с ними
 
-            Book
-            - String title
-            - String author
-            - int page
+            Student
+            - String fio
+            - int age
+            - int level //класс
+            - public boolean nextYear()
+                age++ level++
+                возврает true если после увеличения level > 11
 
-            Library
+            Teacher
+            - String fio
+            - int age
+            - String subject
+            - int exp //стаж
+            - public boolean nextYear()
+                age++ exp++
+                возврает true если после увеличения age > 60
+
+            School
             - String address
-            - Book[] books
-            - public boolean addBook(Book book)
-            - public boolean removeBook(String title, String author)
+            - Teacher[] teachers
+            - Student[] students
+            - public int nextYearAll()
 
-            при создании объекта Library в инициализирует массив books с какой-то заданной длиной
-            при попытке доабвления книги вы ищете null элемент в массиве books
-            если такой есть - ставить новую книгу на его месте и возвращаете true, если нет - false
-            при удалении вы ищите не null элемент массива где будут совпадать title и author
-            если такой есть ставите на его место null и возвращаете true, если нет - false
+            метод nextYear обозначет то что в школе прошел 1 год
+            он перебирает всех студентов и преподавателей и вызывает у них методы nextYear
 
+            если вызывнный у стундента или преподавателя метод nextYear возвращает true
+            то студента или преподавателя необходимо выпустили или отправить на пенсию
+
+            возвращаем значением самого метода будет int - количество людей покинувших школу на этом этапе
      */
 
     public static void main(String[] args)
     {
-        Book[] books = new Book[] {
-                new Book("1", "1", 1),
-                null,
-                new Book("2", "2", 2),
-                null,
-                new Book("3", "3", 3),
-                new Book("4", "4", 4)
-        };
+        School school = new School(
+                "woefjifeqeff",
+                new Teacher[] {
+                        new Teacher("t1", 50, "1", 1),
+                        new Teacher("t2", 55, "2", 2),
+                        null,
+                        new Teacher("t3", 59, "3", 3),
+                },
+                new Student[] {
+                        new Student("s1", 1, 5),
+                        new Student("s2", 2, 8),
+                        new Student("s3", 3, 8),
+                        null,
+                        new Student("s4", 4, 1),
+                        new Student("s5", 5, 11)
+                }
+        );
 
-        Library library = new Library("addrwgihrig", books);
-        System.out.println(library);
-
-        /*System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));
-        System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));
-        System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));*/
-
-        System.out.println(library.removeBook("1", "2"));
-        System.out.println(library);
-        System.out.println(library.removeBook("3", "3"));
-        System.out.println(library);
-        System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));
-        System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));
-        System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));
-        System.out.println(library);
-        System.out.println(library.addBook(new Book("ewfgweoif", "ewfwef", 323)));
-        System.out.println(library);
+        System.out.println("==============0");
+        System.out.println(school);
+        school.nextYear();
+        System.out.println("==============1");
+        System.out.println(school);
+        school.nextYear();
+        System.out.println("==============2");
+        System.out.println(school);
+        school.nextYear();
+        school.nextYear();
+        school.nextYear();
+        System.out.println("==============3");
+        System.out.println(school);
     }
 }

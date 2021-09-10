@@ -1,4 +1,4 @@
-package ru.pa4ok.demoexam;
+package ru.pa4ok.demoexam.lib;
 
 import java.util.Arrays;
 

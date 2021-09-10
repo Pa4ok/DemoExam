@@ -1,4 +1,4 @@
-package ru.pa4ok.demoexam;
+package ru.pa4ok.demoexam.lib;
 
 public class Book
 {
@@ -6,8 +6,7 @@ public class Book
     private String author;
     private int pages;
 
-    public Book(String title, String author, int pages)
-    {
+    public Book(String title, String author, int pages) {
         this.title = title;
         this.author = author;
         this.pages = pages;
