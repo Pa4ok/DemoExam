@@ -24,14 +24,6 @@ public class App
          */
 
         Car car = new Car("wdqw'kwqo[pd");
-        car.print();
-        car.setMileage(10);
-        car.print();
-        car.setMileage(20);
-        car.print();
-        car.setMileage(5);
-        car.print();
-        car.setMileage(100);
-        car.print();
+        System.out.println(car);
     }
 }

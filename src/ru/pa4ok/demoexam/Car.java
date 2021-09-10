@@ -1,5 +1,12 @@
 package ru.pa4ok.demoexam;
 
+/**
+ * поля класса
+ * конструторы (от большего к меньшему)
+ * методы класса
+ * переопределение базовых функций (вывод...)
+ * геттеры и сеттеры
+ */
 public class Car
 {
     private String type;
@@ -16,9 +23,9 @@ public class Car
         this(type, 0);
     }
 
-    public void print()
-    {
-        System.out.println("MyCar: " + this.type + " " + this.mileage);
+    //переопределение вывода
+    public String toString() {
+        return "MyCar: " + this.type + " " + this.mileage;
     }
 
     public String getType() {
