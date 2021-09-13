@@ -1,5 +1,7 @@
 package ru.pa4ok.demoexam;
 
+import java.util.Arrays;
+
 /**
  * alt + enter - контекстное меню по исправлению ошибки
  * shift + F10 - запуск последней конфигурации
@@ -13,27 +15,81 @@ public class App
             конструктор, переопределенный вывод (toString)
             все поля приватные + геттеры и сеттеры
 
-            Car
-            - String type
-            - int mileage
-            - public void addMileage() // увиличение mileage на 1
+            Book
+            - String title
+            - int pages
 
-            на сеттере для mileage необходимо реализовать проверку
-            чтобы новое значение не было меньше предыдущего
+            Library
+            - String address
+            - Book[] books
+            - public void addBook(Book book)
+
+            метод addBook() должен перебирать массив с книгами
+            если в нем есть пустой (null) элемент, то он должен на его место поставить книгу
+            если в массиве нет ни 1 такого элемента, то вывести информацию в консоль
          */
 
-        Car car = new Car("wefgwegfewf", 10);
-        System.out.println(car);
-        car.addMileage();
-        car.addMileage();
-        car.addMileage();
-        System.out.println(car);
-        car.setMileage(100);
-        System.out.println(car);
-        car.setMileage(1);
-        System.out.println(car);
-        car.setMileage(1000);
-        System.out.println(car);
+        //Test t = new Test();
+        //System.out.println(t.arr);
+        //System.out.println(Arrays.toString(t.arr));
+
+        /*TestSmall[] arr = new TestSmall[] {
+                new TestSmall(1),
+                new TestSmall(2),
+                new TestSmall(3),
+                null,
+                new TestSmall(5),
+        };
+
+        Test t = new Test(arr);
+        System.out.println(Arrays.toString(t.arr));*/
+
+        Test t = new Test(new TestSmall[] {
+                new TestSmall(1),
+                new TestSmall(2),
+                new TestSmall(3),
+                null,
+                new TestSmall(5),
+        });
+        System.out.println(Arrays.toString(t.arr));
     }
 }
 
+class Test
+{
+    //public TestSmall[] arr; //null
+
+    //1
+    //public TestSmall[] arr = new TestSmall[3];
+
+    //2
+    public TestSmall[] arr;
+
+    public Test(TestSmall[] arr) {
+        this.arr = arr;
+    }
+
+    public Test(int length) {
+        this(new TestSmall[length]);
+    }
+
+    public Test() {
+        this(10);
+    }
+}
+
+class TestSmall
+{
+    public int value;
+
+    public TestSmall(int value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "TestSmall{" +
+                "value=" + value +
+                '}';
+    }
+}
