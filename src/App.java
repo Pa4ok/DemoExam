@@ -10,18 +10,6 @@ public class App
 {
     public static void main(String[] args)
     {
-        /*Book b = new Book();
-        //System.out.println(b);
-        System.out.println(b.title + " " + b.pages);
-        b.title = "peojfp[owefe";
-        b.pages = 314;
-        System.out.println(b.title + " " + b.pages);*/
-
-        Book b = new Book("2;fewpowfe", 23);
-        //System.out.println(b.title + " " + b.pages);
-        //b.print();
-        System.out.println(b);
-
         /*
             class House
             - String address
@@ -33,42 +21,42 @@ public class App
             написать класс, с конструктором, переопределенным выводом (toString)
             на метод removeHuman необходимо повесить проверку, чтобы число humanCount не стало < 0
          */
+
+        House h = new House("wefojjwfiuf", 5, 15);
+        System.out.println(h);
+        h.addHuman();
+        System.out.println(h);
+        for(int i=0; i<100; i++) {
+            h.removeHuman();
+        }
+        System.out.println(h);
     }
 }
 
-class Book
+class House
 {
-    String title;
-    int pages;
+    String address;
+    int floorCount;
+    int humanCount;
 
-    //constructor(String,int)
-    public Book(String title, int pagesIn)
+    public House(String address, int floorCount, int humanCount)
     {
-        if(title.startsWith("123")) {
-            title = title.replace("123", "321");
+        this.address = address;
+        this.floorCount = floorCount;
+        this.humanCount = humanCount;
+    }
+
+    public void addHuman() {
+        humanCount++;
+    }
+
+    public void removeHuman() {
+        if(humanCount > 0) {
+            humanCount--;
         }
-        this.title = title;
-
-        pages = pagesIn;
-    }
-
-    //constructor(String)
-    /*public Book(String title)
-    {
-        this.title = title;
-    }*/
-
-    public Book(String title)
-    {
-        this(title, 0);
-    }
-
-    public void print()
-    {
-        System.out.println("MyBook: " + this.title + " " + pages);
     }
 
     public String toString() {
-        return "MyBook: " + this.title + " " + pages;
+        return "MyHouse: " + this.address + " " + this.floorCount + " " + this.humanCount;
     }
 }
