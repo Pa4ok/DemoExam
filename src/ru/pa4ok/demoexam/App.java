@@ -1,8 +1,6 @@
 package ru.pa4ok.demoexam;
 
-import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
 import java.util.Arrays;
-import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 /**
@@ -18,23 +16,34 @@ public class App
         все поля в классах приватные + геттеры и сеттеры
         +конструктор на все поля и переопределенный вывод (toString)
 
-        class Book
-        - String title
-        - String author
-        - int pages
+        Student
+        - String fio
+        - int age
+        - int level //класс
 
-        class Library
+        Teacher
+        - String fio
+        - int age
+        - String subject
+        - int exp //стаж
+
+        School
         - String address
-        - Book[] books
-        - public boolean addBook(Book book)
-        - public boolean removeBook(String title)
+        - Teacher[] teachers
+        - Student[] students
+        - public void nextYear()
+        
+        метод nextYear() означает то что в школе прошел еще 1 год
 
-        //при добавлении вы ищите null элемент в массиве books
-        //если такой элемент имеется, то ставите книгу на его место
-        //если получилось добавить - возвращаете true, если нет - false
-        //при удалении ищете книгу с таким же названием, если нашли то заменили на null
-        //если получилось удалить - возвращаете true, если нет - false
+        всем студентам и преподаветелям необходимо увеличить возраст на 1
+        студентам также необходимо увеличить класс на 1
+        преподавателям также неонбходимо увеличить стаж на 1
 
+        если после увеличения класса стундента он >11 его необхдимо удалить (заменить на null)
+        и написать в консоль о том что он выпустился
+
+        если после увеличения возраста преподавателя он >60 его необходимо удалить (заменить на null)
+        и написать в консоль о том что он ушел на пенсию
      */
 
     public static void main(String[] args)
