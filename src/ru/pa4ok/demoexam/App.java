@@ -1,8 +1,5 @@
 package ru.pa4ok.demoexam;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
 /**
  * shift + F10 - запуск последней конфигурации
  * alt + enter - контекстное меню по исправлению ошибок
@@ -45,26 +42,33 @@ public class App
 
     public static void main(String[] args)
     {
-        Library lib = new Library("dwqeqwdqwdd", new Book[] {
-                null,
-                new Book("t1", "a1", 1),
-                new Book("t2", "a2", 2),
-                null,
-                new Book("t3", "a3", 3),
-                new Book("t4", "a4", 4),
-                new Book("t5", "a5", 5)
-        });
+        School school = new School(
+                "wdqdqwdwdqwqd",
+                new Teacher[]{
+                        new Teacher("t1", 55, "a", 10),
+                        null,
+                        new Teacher("t2", 58, "a", 10),
+                        new Teacher("t3", 60, "a", 10)
 
-        System.out.println(lib);
-        System.out.println(lib.addBook(new Book("t6", "a6", 6)));
-        System.out.println(lib.addBook(new Book("t7", "a7", 6)));
-        System.out.println(lib.addBook(new Book("t8", "a8", 6)));
-        System.out.println(lib);
-        System.out.println(lib.removeBook("t3"));
-        System.out.println(lib.removeBook("t8"));
-        System.out.println(lib);
+                },
+                new Student[] {
+                        null,
+                        new Student("s1", 15, 11),
+                        new Student("s2", 15, 10),
+                        new Student("s3", 15, 10),
+                        new Student("s4", 15, 7)
+                }
+        );
 
-
+        System.out.println(school);
+        school.nextYear();
+        System.out.println(school);
+        school.nextYear();
+        System.out.println(school);
+        school.nextYear();
+        System.out.println(school);
+        school.nextYear();
+        System.out.println(school);
     }
 }
 
