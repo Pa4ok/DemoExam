@@ -22,10 +22,18 @@ public class App
             чтобы новое значение не было меньше предыдущего
          */
 
-        House h = new House("wefojjwfiuf", 5, 15);
-        System.out.println(h.getAddress() + " " + h.getFloorCount() + " " + h.getHumanCount());
-        h.setHumanCount(-100);
-        System.out.println(h.getAddress() + " " + h.getFloorCount() + " " + h.getHumanCount());
+        Car car = new Car("wefgwegfewf", 10);
+        System.out.println(car);
+        car.addMileage();
+        car.addMileage();
+        car.addMileage();
+        System.out.println(car);
+        car.setMileage(100);
+        System.out.println(car);
+        car.setMileage(1);
+        System.out.println(car);
+        car.setMileage(1000);
+        System.out.println(car);
     }
 }
 
