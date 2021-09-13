@@ -32,7 +32,7 @@ public class App
         - Teacher[] teachers
         - Student[] students
         - public void nextYear()
-        
+
         метод nextYear() означает то что в школе прошел еще 1 год
 
         всем студентам и преподаветелям необходимо увеличить возраст на 1
@@ -48,24 +48,28 @@ public class App
 
     public static void main(String[] args)
     {
-        /*Book book = new Book("2fewfew312", "wefwefewf", 222);
-        System.out.println(book);*/
-
-        Book[] books = new Book[] {
-                new Book("2fewfew312", "2efwefewf", 222),
+        Teacher[] teachers = new Teacher[] {
+                new Teacher("t1", 55, "s1", 10),
                 null,
-                null
+                new Teacher("t2", 58, "s2", 11),
+                new Teacher("t3", 59, "s3", 12)
         };
 
-        Library lib = new Library("owefgoifg", books);
-        System.out.println(lib);
+        Student[] students = new Student[] {
+                new Student("s1", 15, 8),
+                null,
+                new Student("s2", 15, 9),
+                new Student("s3", 15, 9),
+                new Student("s4", 15, 11)
+        };
 
-        System.out.println(lib.addBook(new Book("1", "2", 3)));
-        System.out.println(lib.addBook(new Book("2", "2", 3)));
-        System.out.println(lib.addBook(new Book("3", "2", 3)));
-        System.out.println(lib);
-        System.out.println(lib.removeBook("3"));
-        System.out.println(lib.removeBook("2"));
-        System.out.println(lib);
+        School school = new School("fojweoiwf", teachers, students);
+        System.out.println(school);
+        for(int i=0; i<3; i++) {
+            System.out.println();
+            school.nextYear();
+            System.out.println(school);
+            System.out.println();
+        }
     }
 }
