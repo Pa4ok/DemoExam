@@ -38,35 +38,27 @@ public class App
         если нет - false
          */
 
-        /*Book[] books = new Book[] {
+        Book[] books = new Book[] {
                 null,
-                new Book("1", 1),
+                new Book("1", "1", 1),
                 null,
-                new Book("2", 2),
-                new Book("3", 3)
+                null,
+                null,
+                new Book("2", "2",2),
+                null,
+                null,
+                new Book("3", "3",3)
         };
 
         Library lib = new Library("wqadqw[odiqwd", books);
         System.out.println(lib);
-        lib.addBook(new Book("4", 4));
-        lib.addBook(new Book("5", 5));
-        lib.addBook(new Book("6", 6));
-        System.out.println(lib);*/
-
-        String s1 = "123321";
-        String s2 = "123";
-
-        Scanner scanner = new Scanner(System.in);
-        s2 += scanner.nextLine();
-
-        System.out.println(s1);
-        System.out.println(s2);
-        System.out.println(s1 == s2);
-        System.out.println(s1.equals(s2));
-        System.out.println(s1.equalsIgnoreCase(s2));
-
-        //String[] arr = new String[10];
-        //System.out.println(arr[0].equals("123"));
+        lib.addBook(new Book("4", "4",4));
+        lib.addBook(new Book("5", "5",5));
+        lib.addBook(new Book("6", "6",6));
+        System.out.println(lib);
+        System.out.println(lib.removeBook("5", "5"));
+        System.out.println(lib.removeBook("5", "wefwefewffe"));
+        System.out.println(lib);
     }
 }
 
