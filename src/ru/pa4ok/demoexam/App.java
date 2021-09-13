@@ -30,64 +30,20 @@ public class App
         книгу, которая пришла в аргументах
          */
 
-        /*Test test = new Test();
-        System.out.println(Arrays.toString(test.arr));
-        test.arr[5] = "23423432";
-        System.out.println(Arrays.toString(test.arr));*/
-
-        /*String[] arr = {
-            "fewfwe", "jytjtn", "dqwefewfg"
+        Book[] books = new Book[] {
+                null,
+                new Book("1", 1),
+                null,
+                new Book("2", 2),
+                new Book("3", 3)
         };
-        Test test = new Test(arr);
-        System.out.println(Arrays.toString(test.arr));*/
 
-        TestSmall[] arr = new TestSmall[] {
-                new TestSmall(1),
-                new TestSmall(2),
-                null,
-                null,
-                new TestSmall(3),
-                new TestSmall(4),
-                null,
-                new TestSmall(5)
-        };
-        Test test = new Test(arr);
-        System.out.println(Arrays.toString(test.arr));
+        Library lib = new Library("wqadqw[odiqwd", books);
+        System.out.println(lib);
+        lib.addBook(new Book("4", 4));
+        lib.addBook(new Book("5", 5));
+        lib.addBook(new Book("6", 6));
+        System.out.println(lib);
     }
 }
 
-class Test
-{
-    //public String[] arr; //null
-
-    //1
-    //public String[] arr = new String[10];
-
-    //2
-    public TestSmall[] arr;
-
-    public Test(TestSmall[] arr) {
-        this.arr = arr;
-    }
-
-    public Test(int length) {
-        this(new TestSmall[length]);
-    }
-
-    public Test() {
-        this(10);
-    }
-}
-
-class TestSmall
-{
-    public int value;
-
-    public TestSmall(int value) {
-        this.value = value;
-    }
-
-    public String toString() {
-        return "TestSmall: " + this.value;
-    }
-}
