@@ -29,67 +29,21 @@ public class App
             если в массиве нет ни 1 такого элемента, то вывести информацию в консоль
          */
 
-        //Test t = new Test();
-        //System.out.println(t.arr);
-        //System.out.println(Arrays.toString(t.arr));
-
-        /*TestSmall[] arr = new TestSmall[] {
-                new TestSmall(1),
-                new TestSmall(2),
-                new TestSmall(3),
+        Book[] books = new Book[] {
                 null,
-                new TestSmall(5),
+                new Book("1", 1),
+                new Book("2", 2),
+                null,
+                new Book("3", 3),
+                new Book("4", 4)
         };
 
-        Test t = new Test(arr);
-        System.out.println(Arrays.toString(t.arr));*/
-
-        Test t = new Test(new TestSmall[] {
-                new TestSmall(1),
-                new TestSmall(2),
-                new TestSmall(3),
-                null,
-                new TestSmall(5),
-        });
-        System.out.println(Arrays.toString(t.arr));
+        Library lib = new Library("wdqdqwddwq", books);
+        System.out.println(lib);
+        lib.addBook(new Book("5", 5));
+        lib.addBook(new Book("6", 6));
+        lib.addBook(new Book("7", 7));
+        System.out.println(lib);
     }
 }
 
-class Test
-{
-    //public TestSmall[] arr; //null
-
-    //1
-    //public TestSmall[] arr = new TestSmall[3];
-
-    //2
-    public TestSmall[] arr;
-
-    public Test(TestSmall[] arr) {
-        this.arr = arr;
-    }
-
-    public Test(int length) {
-        this(new TestSmall[length]);
-    }
-
-    public Test() {
-        this(10);
-    }
-}
-
-class TestSmall
-{
-    public int value;
-
-    public TestSmall(int value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return "TestSmall{" +
-                "value=" + value +
-                '}';
-    }
-}
