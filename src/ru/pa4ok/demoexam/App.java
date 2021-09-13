@@ -6,81 +6,65 @@ import java.util.Scanner;
 /**
  * shift + F10 - запуск последней конфигурации
  * alt + enter - контекстное меню по исправлению ошибок
+ * alt + insert - контекстное меню генерации кода (конструкторы, toString, геттеры и сеттеры)
  */
 
 public class App
 {
     /*
-        все поля приватные
-        конструктор на все необходимые поля
-        переопределенный вывод (toString)
-        геттеры и сеттеры
+        все поля приватными + геттеры и сеттеры
+        +переопределенный вывод (toString)
 
-        Book
-        - String title
-        - String author
-        - int pages
+            Student
+            - String fio
+            - int age
+            - int level //класс
 
-        Library
-        - String address
-        - Book[] books
-        - public boolean addBook(Book book)
-        - public boolean removeBook(String title)
+            Teacher
+            - String fio
+            - int age
+            - String subject
+            - int exp //стаж
 
-        у Library будет 2 констора
-        1 - принимает сразу массив книг, 2 - принимает длину и инициализирует массив с этой длиной
-        при добавлении книги, вы перебираете массив и ищете null элемнт
-        если таковой есть - то ставите на его место книгу и возращаете true, если нет - false
-        при удалении вы ищете книгу с таким же названием, если она есть - ставите null в массив
-        и возращаете true, если нет - false
+            School
+            - String address
+            - Teacher[] teachers
+            - Student[] students
+            - public void nextYear()
 
+            метод nextYear обозначет то что в школе прошел 1 год
+            данный метод должен увеличивать возраст всех учителей и студентов на 1
+            также он должен увеличить у них класс и стаж на 1
+
+            если после увеличения класса студента он > 11 то его надо убрать из школы (заменить на null)
+            и вывести информацию в консоль о том что он выпустился
+
+            если после увеличения возраста преподавателя он > 60 то его надо убрать из школы (заменить на null)
+            и вывести информацию в консоль о том что он ушел на пенсию
      */
 
     public static void main(String[] args)
     {
-        //Test test = new Test();
-        //System.out.println(test.arr);
+        Library lib = new Library("dwqeqwdqwdd", new Book[] {
+                null,
+                new Book("t1", "a1", 1),
+                new Book("t2", "a2", 2),
+                null,
+                new Book("t3", "a3", 3),
+                new Book("t4", "a4", 4),
+                new Book("t5", "a5", 5)
+        });
 
-        /*Test test = new Test(new String[] {
-                "WEFWEFWEFEWF",
-                "WEFRFEW3F",
-                "erger"
-        });*/
+        System.out.println(lib);
+        System.out.println(lib.addBook(new Book("t6", "a6", 6)));
+        System.out.println(lib.addBook(new Book("t7", "a7", 6)));
+        System.out.println(lib.addBook(new Book("t8", "a8", 6)));
+        System.out.println(lib);
+        System.out.println(lib.removeBook("t3"));
+        System.out.println(lib.removeBook("t8"));
+        System.out.println(lib);
 
-        //Test test = new Test();
-        //System.out.println(Arrays.toString(test.arr));
 
-        String s1 = "123321";
-        String s2 = "123";
-
-        Scanner scanner = new Scanner(System.in);
-        s2 += scanner.nextLine();
-
-        System.out.println(s1);
-        System.out.println(s2);
-        System.out.println(s1 == s2);
-        System.out.println(s1.equals(s2));
     }
 }
-
-class Test
-{
-    //1
-    //public String[] arr = new String[10];
-
-    public String[] arr;
-
-    //2
-    public Test()
-    {
-        arr = new String[10];
-    }
-
-    //3
-    public Test(String[] arr)
-    {
-        this.arr = arr;
-    }
-}
-
 
