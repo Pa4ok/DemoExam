@@ -16,28 +16,26 @@ public class App
             - String fio
             - int age
             - int level //класс
+            - public boolean nextYear()
 
             Teacher
             - String fio
             - int age
             - String subject
             - int exp //стаж
+            - public boolean nextYear()
 
             School
             - String address
             - Teacher[] teachers
             - Student[] students
-            - public void nextYear()
+            - public int nextYearAll()
 
-            метод nextYear обозначет то что в школе прошел 1 год
-            данный метод должен увеличивать возраст всех учителей и студентов на 1
-            также он должен увеличить у них класс и стаж на 1
+            метод nextYear в Student/Teacher увеличивает необходимые на 1
+            и возврает true если стундент выпустился (level > 11) или преподаватель ушел на пенсию (age > 60)
 
-            если после увеличения класса студента он > 11 то его надо убрать из школы (заменить на null)
-            и вывести информацию в консоль о том что он выпустился
-
-            если после увеличения возраста преподавателя он > 60 то его надо убрать из школы (заменить на null)
-            и вывести информацию в консоль о том что он ушел на пенсию
+            метод nextYearAll в School перебирает всех стундентов и преподавателей и вызывает у них метод nextYear
+            возврает он количество человек покинувших школу за вызов
      */
 
     public static void main(String[] args)
