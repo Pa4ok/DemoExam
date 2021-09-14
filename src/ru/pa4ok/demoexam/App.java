@@ -12,35 +12,18 @@ public class App
         все поля приватными + геттеры и сеттеры
         +переопределенный вывод (toString)
 
-            Student
-            - String fio
-            - int age
-            - int level //класс
-            - public boolean nextYear()
+        EquationUtil
+        - public static double[] solveQuadraticEquation(double a, double b, double c)
 
-            Teacher
-            - String fio
-            - int age
-            - String subject
-            - int exp //стаж
-            - public boolean nextYear()
-
-            School
-            - String address
-            - Teacher[] teachers
-            - Student[] students
-            - public int nextYearAll()
-
-            метод nextYear в Student/Teacher увеличивает необходимые на 1
-            и возврает true если стундент выпустился (level > 11) или преподаватель ушел на пенсию (age > 60)
-
-            метод nextYearAll в School перебирает всех стундентов и преподавателей и вызывает у них метод nextYear
-            возврает он количество человек покинувших школу за вызов
+        метод принимает коэфиценты квадратного ураравнения и возврает масссив с его корнями
+        если корней нет, то можно вернуть массив с длиной 0 (new double[0])
+        математические утилиты обитают в классе Math ввиде статичных функцию
      */
+
 
     public static void main(String[] args)
     {
-        School school = new School(
+        School sc = new School(
                 "wdqdqwdwdqwqd",
                 new Teacher[]{
                         new Teacher("t1", 55, "a", 10),
@@ -58,15 +41,12 @@ public class App
                 }
         );
 
-        System.out.println(school);
-        System.out.println(school.nextYear());
-        System.out.println(school);
-        System.out.println(school.nextYear());
-        System.out.println(school);
-        System.out.println(school.nextYear());
-        System.out.println(school);
-        System.out.println(school.nextYear());
-        System.out.println(school);
+        test(sc);
+    }
+
+    public static void test(School sc)
+    {
+        System.out.println(sc);
     }
 }
 

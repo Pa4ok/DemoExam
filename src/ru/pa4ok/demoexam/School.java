@@ -4,6 +4,14 @@ import java.util.Arrays;
 
 public class School
 {
+    public static long testStatic;
+
+    //статичный блок, выполняется 1 раз при загрузке класса в систему (при 1 обращении к нему)
+    static {
+        testStatic = System.currentTimeMillis();
+        System.out.println(testStatic + "ms");
+    }
+
     private String address;
     private Teacher[] teachers;
     private Student[] students;
@@ -16,6 +24,8 @@ public class School
 
     public int nextYear()
     {
+        System.out.println(testStatic);
+
         int counter = 0;
 
         for(int i=0; i<teachers.length; i++) {
