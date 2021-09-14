@@ -59,13 +59,13 @@ public class App
         );
 
         System.out.println(school);
-        school.nextYear();
+        System.out.println(school.nextYear());
         System.out.println(school);
-        school.nextYear();
+        System.out.println(school.nextYear());
         System.out.println(school);
-        school.nextYear();
+        System.out.println(school.nextYear());
         System.out.println(school);
-        school.nextYear();
+        System.out.println(school.nextYear());
         System.out.println(school);
     }
 }

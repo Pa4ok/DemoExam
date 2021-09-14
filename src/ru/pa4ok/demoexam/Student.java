@@ -12,6 +12,16 @@ public class Student
         this.level = level;
     }
 
+    public boolean nextYear()
+    {
+        age++;
+        level++;
+        if(level > 11) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
