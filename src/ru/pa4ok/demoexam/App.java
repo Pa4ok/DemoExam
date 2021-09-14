@@ -1,5 +1,4 @@
-import java.util.Arrays;
-import java.util.Random;
+package ru.pa4ok.demoexam;
 
 /**
  * alt + enter - контекстное меню исправления ошибки
@@ -12,44 +11,23 @@ public class App
     public static void main(String[] args)
     {
         /*
+            все поля приватные + геттеры и сеттеры
             констуктор + переопределнный вывод (toString)
 
-            class House
+            House
             - String address
             - int floorCount
             - int humanCount
             - public void addHuman() ++ для humanCount
             - public void removeHuman() -- для humanCount
 
-            для метода removeHuman необходимо сделать проверку
+            для методов removeHuman() и setHumanCount() необходимо сделать проверку
             чтобы нельзя было сделать отрицательное количество человек
          */
 
         Car pizo = new Car("pwoeifwhfwef", 12233);
-        System.out.println(pizo);
-        pizo.addMileage();
-        pizo.addMileage();
-        pizo.addMileage();
-        System.out.println(pizo);
-    }
-}
-
-class Car
-{
-    String type;
-    int mileage;
-
-    public Car(String type, int mileage)
-    {
-        this.type = type;
-        this.mileage = mileage;
-    }
-
-    public void addMileage() {
-        mileage++;
-    }
-
-    public String toString() {
-        return "MyCar: " + type + " " + mileage;
+        System.out.println(pizo.getType() + " " + pizo.getMileage());
+        pizo.setMileage(-100);
+        System.out.println(pizo.getType() + " " + pizo.getMileage());
     }
 }
