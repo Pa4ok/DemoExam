@@ -1,5 +1,11 @@
 package ru.pa4ok.demoexam;
 
+import ru.pa4ok.demoexam.school.School;
+import ru.pa4ok.demoexam.school.Student;
+import ru.pa4ok.demoexam.school.Teacher;
+
+import java.util.Arrays;
+
 /**
  * shift + F10 - запуск последней конфигурации
  * alt + enter - контекстное меню по исправлению ошибок
@@ -23,30 +29,7 @@ public class App
 
     public static void main(String[] args)
     {
-        School sc = new School(
-                "wdqdqwdwdqwqd",
-                new Teacher[]{
-                        new Teacher("t1", 55, "a", 10),
-                        null,
-                        new Teacher("t2", 58, "a", 10),
-                        new Teacher("t3", 60, "a", 10)
-
-                },
-                new Student[] {
-                        null,
-                        new Student("s1", 15, 11),
-                        new Student("s2", 15, 10),
-                        new Student("s3", 15, 10),
-                        new Student("s4", 15, 7)
-                }
-        );
-
-        test(sc);
-    }
-
-    public static void test(School sc)
-    {
-        System.out.println(sc);
+        System.out.println(Arrays.toString(EquationUtil.solveQuadraticEquation(3, -14, -5)));
     }
 }
 
