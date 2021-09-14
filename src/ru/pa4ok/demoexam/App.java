@@ -1,5 +1,7 @@
 package ru.pa4ok.demoexam;
 
+import java.util.Arrays;
+
 /**
  * alt + enter - контекстное меню исправления ошибки
  * shift + F10 - запуск последней конфигурации
@@ -8,26 +10,93 @@ package ru.pa4ok.demoexam;
 
 public class App
 {
+    /*
+        все поля приватными + геттеры и сеттеры
+        +переопределенный вывод (toString)
+
+        Book
+        - String title
+        - String author
+        - int pages
+
+        Library
+        - String address
+        - Book[] books
+        - public void addBook(Book b)
+
+        при добавлении книги вы ищете первый null элемент в массиве books
+        если такой есть - ставите книгу из аргументов на его место
+        если в массиве нет null элментов, то выводите что нибудь в консоль
+     */
+    
     public static void main(String[] args)
     {
-        /*
-            все поля приватные + геттеры и сеттеры
-            констуктор + переопределнный вывод (toString)
+        //Test t = new Test();
+        //System.out.println(t.arr);
 
-            House
-            - String address
-            - int floorCount
-            - int humanCount
-            - public void addHuman() ++ для humanCount
-            - public void removeHuman() -- для humanCount
+        /*System.out.println(Arrays.toString(t.arr));
+        t.arr[1] = new TestSmall(1);
+        System.out.println(Arrays.toString(t.arr));*/
 
-            для методов removeHuman() и setHumanCount() необходимо сделать проверку
-            чтобы нельзя было сделать отрицательное количество человек
-         */
+        TestSmall[] testArray = new TestSmall[] {
+                new TestSmall(1),
+                new TestSmall(2),
+                new TestSmall(3),
+                null,
+                new TestSmall(4),
+                new TestSmall(5),
+                null
+        };
 
-        Car pizo = new Car("pwoeifwhfwef", 12233);
-        System.out.println(pizo.getType() + " " + pizo.getMileage());
-        pizo.setMileage(-100);
-        System.out.println(pizo.getType() + " " + pizo.getMileage());
+        /*Test t = new Test(testArray);
+        System.out.println(Arrays.toString(t.arr));*/
+
+        Test t = new Test();
+        t.arr = testArray;
+        System.out.println(Arrays.toString(t.arr));
+
+    }
+}
+
+class Test
+{
+    //public TestSmall[] arr; //null
+
+    //1
+    //public TestSmall[] arr = new TestSmall[3];
+
+    //2
+    /*public TestSmall[] arr;
+
+    public Test(TestSmall[] arr) {
+        this.arr = arr;
+    }
+
+    public Test(int length) {
+        this(new TestSmall[length]);
+    }
+
+    public Test() {
+        this(3);
+    }*/
+
+    public TestSmall[] arr;
+
+    public Test() {
+    }
+}
+
+class TestSmall
+{
+    public int value;
+
+    public TestSmall(int value) {
+        this.value = value;
+    }
+
+    public String toString() {
+        return "TestSmall{" +
+                "value=" + value +
+                '}';
     }
 }
