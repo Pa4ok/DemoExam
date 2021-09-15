@@ -14,29 +14,38 @@ public class App
     public static void main(String[] args)
     {
         /*
-        конструктор на все поля + toString
-        все поля приватные + геттеры и сеттеры
+        все поля в классах приватные + геттеры и сеттеры
+        +конструктор на все поля и переопределенный вывод (toString)
 
-        Book
-        - String title
-        - String author
-        - int pages
+        Student
+        - String fio
+        - int age
+        - int level //класс
 
-        Library
+        Teacher
+        - String fio
+        - int age
+        - String subject
+        - int exp //стаж
+
+        School
         - String address
-        - Book[] books
-        - public boolean addBook(Book book)
-        - public boolean removeBook(String title, String author)
+        - Teacher[] teachers
+        - Student[] students
+        - public void nextYear()
 
-        в методе addBook вы перебираете элементы массива
-        и ищите null элемент, если таковой есть - ставите на его место
-        книгу, которая пришла в аргументах и возраете true, если нет - false
+        метод nextYear() означает то что в школе прошел еще 1 год
 
-        в методе removeBook вы перебираете элементы массива
-        и ищете не null элемент у которого title и author равны тем что пришли в аргументах
-        если такой элемент есть - ставите на его место null и возвращаете true
-        если нет - false
-         */
+        всем студентам и преподаветелям необходимо увеличить возраст на 1
+        студентам также необходимо увеличить класс на 1
+        преподавателям также неонбходимо увеличить стаж на 1
+
+        если после увеличения класса стундента он >11 его необхдимо удалить (заменить на null)
+        и написать в консоль о том что он выпустился
+
+        если после увеличения возраста преподавателя он >60 его необходимо удалить (заменить на null)
+        и написать в консоль о том что он ушел на пенсию
+     */
 
         Book[] books = new Book[] {
                 null,
