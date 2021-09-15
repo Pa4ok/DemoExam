@@ -67,11 +67,11 @@ public class App
 
         School school = new School("fojweoiwf", teachers, students);
         System.out.println(school);
-        for(int i=0; i<3; i++) {
-            System.out.println();
-            school.nextYear();
-            System.out.println(school);
-            System.out.println();
-        }
+        System.out.println(school.nextYearAll());
+        System.out.println(school);
+        System.out.println(school.nextYearAll());
+        System.out.println(school);
+        System.out.println(school.nextYearAll());
+        System.out.println(school);
     }
 }

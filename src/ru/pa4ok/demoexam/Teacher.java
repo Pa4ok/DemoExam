@@ -14,6 +14,13 @@ public class Teacher
         this.exp = exp;
     }
 
+    public boolean nextYear()
+    {
+        age++;
+        exp++;
+        return age > 60;
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +
