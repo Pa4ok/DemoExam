@@ -39,7 +39,7 @@ public class App
 
     public static void main(String[] args)
     {
-        /*Book[] books = new Book[] {
+        Book[] books = new Book[] {
                 new Book("1", "1", 1),
                 null,
                 new Book("2", "2", 2),
@@ -49,12 +49,17 @@ public class App
 
         Library lib = new Library("dpqwoojdqwodj", books);
         System.out.println(lib);
-        lib.addBook(new Book("4", "4", 4));
-        lib.addBook(new Book("5", "5", 5));
-        lib.addBook(new Book("6", "6", 6));
-        System.out.println(lib);*/
+        System.out.println(lib.addBook(new Book("4", "4", 4)));
+        System.out.println(lib.addBook(new Book("5", "5", 5)));
+        System.out.println(lib.addBook(new Book("6", "6", 6)));
+        System.out.println(lib.removeBook("5", "5"));
+        System.out.println(lib.removeBook("233213123", "fewefewf"));
+        System.out.println(lib);
 
-        String s1 = "123321";
+        /**/
+        //System.out.println(lib);
+
+        /*String s1 = "123321";
         String s2 = "123";
 
         Scanner scanner = new Scanner(System.in);
@@ -64,7 +69,7 @@ public class App
         System.out.println(s2);
         System.out.println(s1 == s2);
         System.out.println(s1.equals(s2));
-        System.out.println(s1.equalsIgnoreCase(s2));
+        System.out.println(s1.equalsIgnoreCase(s2));*/
 
         /*String[] arr = new String[10];
         System.out.println(Arrays.toString(arr));

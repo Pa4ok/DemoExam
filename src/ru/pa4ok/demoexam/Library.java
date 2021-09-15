@@ -12,16 +12,26 @@ public class Library
         this.books = books;
     }
 
-    public void addBook(Book book)
+    public boolean addBook(Book book)
     {
         for(int i=0; i<books.length; i++) {
             if(books[i] == null) {
                 books[i] = book;
-                System.out.println("Книга " + book + " установлена на позицию " + i);
-                return;
+                return true;
             }
         }
-        System.out.println("Книге " + book + " не хватило места");
+        return false;
+    }
+
+    public boolean removeBook(String title, String author)
+    {
+        for(int i=0; i<books.length; i++) {
+            if(books[i] != null && books[i].getTitle().equals(title) && books[i].getAuthor().equals(author)) {
+                books[i] = null;
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
