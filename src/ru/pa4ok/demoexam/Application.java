@@ -14,71 +14,26 @@ import ru.pa4ok.demoexam.school.Teacher;
 public class Application
 {
     /*
-            пока что во всех наших классах все поля будут приватными
-            +должны быть публичные геттеры и сеттеры для взаимодействия с ними
+        EquationUtil
+        - public static double[] solveQuadraticEquation(double a, double b, double c)
 
-            Student
-            - String fio
-            - int age
-            - int level //класс
-            - public boolean nextYear()
-                age++ level++
-                возврает true если после увеличения level > 11
-
-            Teacher
-            - String fio
-            - int age
-            - String subject
-            - int exp //стаж
-            - public boolean nextYear()
-                age++ exp++
-                возврает true если после увеличения age > 60
-
-            School
-            - String address
-            - Teacher[] teachers
-            - Student[] students
-            - public int nextYearAll()
-
-            метод nextYear обозначет то что в школе прошел 1 год
-            он перебирает всех студентов и преподавателей и вызывает у них методы nextYear
-
-            если вызывнный у стундента или преподавателя метод nextYear возвращает true
-            то студента или преподавателя необходимо выпустили или отправить на пенсию
-
-            возвращаем значением самого метода будет int - количество людей покинувших школу на этом этапе
+        метод принимает коэфиценты квадратного ураравнения и возврает масссив с его корнями
+        если корней нет, то можно вернуть массив с длиной 0 (new double[0])
+        математические утилиты обитают в классе Math ввиде статичных функцию
      */
 
     public static void main(String[] args)
     {
-        School school = new School(
-                "woefjifeqeff",
-                new Teacher[] {
-                        new Teacher("t1", 50, "1", 1),
-                        new Teacher("t2", 55, "2", 2),
-                        null,
-                        new Teacher("t3", 59, "3", 3),
-                },
-                new Student[] {
-                        new Student("s1", 1, 5),
-                        new Student("s2", 2, 8),
-                        new Student("s3", 3, 8),
-                        null,
-                        new Student("s4", 4, 1),
-                        new Student("s5", 5, 11)
-                }
-        );
+        /*Student s = new Student("112d1d", 123, 123);
+        System.out.println(s.getFio());
+        System.out.println(Student.staticIntField);
+        Student.testStaticMethod();*/
 
-        System.out.println(school);
-        System.out.println(school.nextYearAll());
-        System.out.println(school);
-        System.out.println(school.nextYearAll());
-        System.out.println(school);
-        System.out.println(school.nextYearAll());
-        System.out.println(school);
-        System.out.println(school.nextYearAll());
-        System.out.println(school);
-        System.out.println(school.nextYearAll());
-        System.out.println(school);
+        Student.testStaticMethod();
+        test();
+    }
+
+    public static void test() {
+
     }
 }
