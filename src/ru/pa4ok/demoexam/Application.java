@@ -4,6 +4,8 @@ import ru.pa4ok.demoexam.school.School;
 import ru.pa4ok.demoexam.school.Student;
 import ru.pa4ok.demoexam.school.Teacher;
 
+import java.util.Arrays;
+
 /**
  * shift + F10 - запуск последней конфигурации
  * alt + enter - контекстное меню по исправлению ошибки
@@ -13,6 +15,9 @@ import ru.pa4ok.demoexam.school.Teacher;
 
 public class Application
 {
+    static {
+        System.out.println("class app loaded");
+    }
     /*
         EquationUtil
         - public static double[] solveQuadraticEquation(double a, double b, double c)
@@ -24,16 +29,7 @@ public class Application
 
     public static void main(String[] args)
     {
-        /*Student s = new Student("112d1d", 123, 123);
-        System.out.println(s.getFio());
-        System.out.println(Student.staticIntField);
-        Student.testStaticMethod();*/
-
-        Student.testStaticMethod();
-        test();
-    }
-
-    public static void test() {
-
+        System.out.println("main started");
+        System.out.println(Arrays.toString(EquationUtil.solveQuadraticEquation(1, -6, -7)));
     }
 }

@@ -2,18 +2,6 @@ package ru.pa4ok.demoexam.school;
 
 public class Student
 {
-    //статичный блок
-    //вызывается 1 раз, при 1 обращении к классу
-    static {
-        System.out.println("class student loaded");
-    }
-
-    public static int staticIntField = 5;
-
-    public static void testStaticMethod() {
-        System.out.println("dw;pdhiqwohdowhd");
-    }
-
     private String fio;
     private int age;
     private int level;
