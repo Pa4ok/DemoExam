@@ -1,7 +1,5 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.lib.Book;
-import ru.pa4ok.demoexam.lib.Library;
 import ru.pa4ok.demoexam.school.School;
 import ru.pa4ok.demoexam.school.Student;
 import ru.pa4ok.demoexam.school.Teacher;
@@ -71,18 +69,16 @@ public class Application
                 }
         );
 
-        System.out.println("==============0");
         System.out.println(school);
-        school.nextYear();
-        System.out.println("==============1");
+        System.out.println(school.nextYearAll());
         System.out.println(school);
-        school.nextYear();
-        System.out.println("==============2");
+        System.out.println(school.nextYearAll());
         System.out.println(school);
-        school.nextYear();
-        school.nextYear();
-        school.nextYear();
-        System.out.println("==============3");
+        System.out.println(school.nextYearAll());
+        System.out.println(school);
+        System.out.println(school.nextYearAll());
+        System.out.println(school);
+        System.out.println(school.nextYearAll());
         System.out.println(school);
     }
 }
