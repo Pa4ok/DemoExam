@@ -16,66 +16,36 @@ public class App
         все поля приватными + геттеры и сеттеры
         +переопределенный вывод (toString)
 
-        Book
-        - String title
-        - String author
-        - int pages
+            Student
+            - String fio
+            - int age
+            - int level //класс
 
-        Library
-        - String address
-        - Book[] books
-        - public boolean addBook(Book book)
-        - public boolean removeBook(String title, String author)
+            Teacher
+            - String fio
+            - int age
+            - String subject
+            - int exp //стаж
 
-        при добавлении книги вы ищете первый null элемент в массиве books
-        если такой есть - ставите книгу из аргументов на его место
-        и возвращаете true, если пустого элемента нет - возвращаете false
+            School
+            - String address
+            - Teacher[] teachers
+            - Student[] students
+            - public void nextYear()
 
-        при удалении книги вы ищете не null элемент у коготорого совпадают
-        название и автор с теми что пришли в аргументах
-        если такой элемент есть - ставите на его месте null и возвращете true
-        если нет - false
+            метод nextYear обозначет то что в школе прошел 1 год
+            данный метод должен увеличивать возраст всех учителей и студентов на 1
+            также он должен увеличить у них класс и стаж на 1
+
+            если после увеличения класса студента он > 11 то его надо убрать из школы (заменить на null)
+            и вывести информацию в консоль о том что он выпустился
+
+            если после увеличения возраста преподавателя он > 60 то его надо убрать из школы (заменить на null)
+            и вывести информацию в консоль о том что он ушел на пенсию
      */
 
     public static void main(String[] args)
     {
-        Book[] books = new Book[] {
-                new Book("1", "1", 1),
-                null,
-                new Book("2", "2", 2),
-                null,
-                new Book("3", "3", 3)
-        };
-
-        Library lib = new Library("dpqwoojdqwodj", books);
-        System.out.println(lib);
-        System.out.println(lib.addBook(new Book("4", "4", 4)));
-        System.out.println(lib.addBook(new Book("5", "5", 5)));
-        System.out.println(lib.addBook(new Book("6", "6", 6)));
-        System.out.println(lib.removeBook("5", "5"));
-        System.out.println(lib.removeBook("233213123", "fewefewf"));
-        System.out.println(lib);
-
-        /**/
-        //System.out.println(lib);
-
-        /*String s1 = "123321";
-        String s2 = "123";
-
-        Scanner scanner = new Scanner(System.in);
-        s2 += scanner.nextLine();
-
-        System.out.println(s1);
-        System.out.println(s2);
-        System.out.println(s1 == s2);
-        System.out.println(s1.equals(s2));
-        System.out.println(s1.equalsIgnoreCase(s2));*/
-
-        /*String[] arr = new String[10];
-        System.out.println(Arrays.toString(arr));
-        String s1 = "123";
-        System.out.println(arr[0].equals(s1));*/
-
 
     }
 }
