@@ -46,6 +46,36 @@ public class App
 
     public static void main(String[] args)
     {
+        School sc = new School(
+                "dfqwdqwd",
+                new Teacher[] {
+                        null,
+                        new Teacher("t1", 55, "ewd", 12),
+                        new Teacher("t2", 58, "ewd", 12),
+                        new Teacher("t3", 59, "ewd", 12),
+                        null
+                },
+                new Student[] {
+                        null,
+                        new Student("s1", 15, 7),
+                        null,
+                        new Student("s1", 15, 9),
+                        new Student("s1", 15, 9),
+                        new Student("s1", 15, 10)
+                }
+        );
+
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
 
     }
 }
