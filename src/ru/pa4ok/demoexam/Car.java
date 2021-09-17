@@ -2,30 +2,37 @@ package ru.pa4ok.demoexam;
 
 public class Car
 {
-    static {
-        System.out.println("class Car loaded");
-    }
+    private static int idCounter;
 
-    public static int staticField = 5;
-    public String type;
+    private int id;
+    private String type;
 
     public Car(String type) {
+        this.id = idCounter++;
         this.type = type;
-    }
-
-    public static void staticMethod() {
-        System.out.println(staticField + " 12343fe;pogr");
-
-    }
-
-    public void test() {
-        System.out.println(staticField);
     }
 
     @Override
     public String toString() {
         return "Car{" +
-                "type='" + type + '\'' +
+                "id=" + id +
+                ", type='" + type + '\'' +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

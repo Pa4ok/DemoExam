@@ -1,5 +1,7 @@
 package ru.pa4ok.demoexam;
 
+import java.util.Arrays;
+
 public class App
 {
     /*
@@ -14,23 +16,12 @@ public class App
 
     public static void main(String[] args)
     {
-        /*Car c = new Car("123werffef");
-        System.out.println(c.type);
-        */
+        /*System.out.println(Arrays.toString(EquationUtil.solveQuadraticEquation(1, -6, -7)));*/
 
-        /*System.out.println(Car.staticField);
-        Car.staticMethod();
-        */
-
-        System.out.println(Math.sqrt(16));
-
-        Car c = new Car("123werffef");
-        System.out.println(c.type);
-
-        //double[] d = new double[0];
-
-        double[] d = {
-                1, 2, 3, 4, 5
-        };
+        Car[] arr = new Car[10];
+        for(int i=0; i<arr.length; i++) {
+            arr[i] = new Car("type-123");
+        }
+        System.out.println(Arrays.toString(arr));
     }
 }
