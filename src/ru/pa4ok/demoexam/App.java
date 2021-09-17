@@ -65,15 +65,15 @@ public class App
         );
 
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYear());
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYear());
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYear());
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYear());
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYear());
         System.out.println(sc);
 
     }
