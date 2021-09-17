@@ -15,31 +15,27 @@ public class School
         this.students = students;
     }
 
-    public void nextYear()
+    public int nextYearAll()
     {
+        int count = 0;
+
         for(int i=0; i<teachers.length; i++)
         {
-            if(teachers[i] != null) {
-                teachers[i].setAge(teachers[i].getAge()+1);
-                teachers[i].setExp(teachers[i].getExp()+1);
-                if(teachers[i].getAge() > 60) {
-                    System.out.println("Ушел у на пенсию: " + teachers[i]);
-                    teachers[i] = null;
-                }
+            if(teachers[i] != null && teachers[i].nextYear()) {
+                teachers[i] = null;
+                count++;
             }
         }
 
         for(int i=0; i<students.length; i++)
         {
-            if(students[i] != null) {
-                students[i].setAge(students[i].getAge()+1);
-                students[i].setLevel(students[i].getLevel()+1);
-                if(students[i].getLevel() > 11) {
-                    System.out.println("Выпустился: " + students[i]);
-                    students[i] = null;
-                }
+            if(students[i] != null && students[i].nextYear()) {
+                students[i] = null;
+                count++;
             }
         }
+
+        return count;
     }
 
     @Override
