@@ -1,69 +1,36 @@
 package ru.pa4ok.demoexam;
 
-/**
- * shift + F10 - запуск последней конфигурации
- * alt + enter - контекстное меню по исправлению ошибки
- * ctrl + space - контекстное меню по достпуным методам и полям объекта (после точки)
- * alt + insert - контекстное меню генерации кода (конструкторы, toString, геттеры и сеттеры)
- */
-
 public class App
 {
     /*
-        все поля приватными + геттеры и сеттеры
-        +переопределенный вывод (toString)
+        EquationUtil
+        - public static double[] solveQuadraticEquation(double a, double b, double c)
 
-            Student
-            - String fio
-            - int age
-            - int level //класс
-            - public boolean nextYear() //age++ level++
+        метод принимает коэфиценты квадратного ураравнения и возврает масссив с его корнями
+        если корней нет, то можно вернуть массив с длиной 0 (new double[0])
+        математические утилиты обитают в классе Math ввиде статичных функцию
 
-            Teacher
-            - String fio
-            - int age
-            - String subject
-            - int exp //стаж
-            - public boolean nextYear() //age++ exp++
-
-            School
-            - String address
-            - Teacher[] teachers
-            - Student[] students
-            - public int nextYearAll()
      */
 
     public static void main(String[] args)
     {
-        School sc = new School(
-                "dwdqwdqwqwdqwd",
-                new Teacher[]{
-                        null,
-                        new Teacher("t1", 55, "s1", 10),
-                        null,
-                        new Teacher("t2", 57, "s1", 10),
-                        new Teacher("t3", 59, "s1", 10)
-                },
-                new Student[]{
-                        null,
-                        new Student("s1", 15, 9),
-                        new Student("s2", 15, 9),
-                        new Student("s3", 15, 10),
-                        new Student("s4", 15, 11),
-                        null
-                }
-        );
+        /*Car c = new Car("123werffef");
+        System.out.println(c.type);
+        */
 
-        System.out.println(sc);
-        System.out.println(sc.nextYearAll());
-        System.out.println(sc);
-        System.out.println(sc.nextYearAll());
-        System.out.println(sc);
-        System.out.println(sc.nextYearAll());
-        System.out.println(sc);
-        System.out.println(sc.nextYearAll());
-        System.out.println(sc);
-        System.out.println(sc.nextYearAll());
-        System.out.println(sc);
+        /*System.out.println(Car.staticField);
+        Car.staticMethod();
+        */
+
+        System.out.println(Math.sqrt(16));
+
+        Car c = new Car("123werffef");
+        System.out.println(c.type);
+
+        //double[] d = new double[0];
+
+        double[] d = {
+                1, 2, 3, 4, 5
+        };
     }
 }
