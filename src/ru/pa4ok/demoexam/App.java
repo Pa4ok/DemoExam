@@ -4,6 +4,7 @@ package ru.pa4ok.demoexam;
  * shift + F10 - запуск последней конфигурации
  * alt + enter - контекстное меню по исправлению ошибки
  * ctrl + space - контекстное меню по достпуным методам и полям объекта (после точки)
+ * alt + insert - контекстное меню генерации кода (конструкторы, toString, геттеры и сеттеры)
  */
 
 public class App
@@ -16,32 +17,53 @@ public class App
             - String fio
             - int age
             - int level //класс
+            - public boolean nextYear() //age++ level++
 
             Teacher
             - String fio
             - int age
             - String subject
             - int exp //стаж
+            - public boolean nextYear() //age++ exp++
 
             School
             - String address
             - Teacher[] teachers
             - Student[] students
-            - public void nextYear()
-
-            метод nextYear обозначет то что в школе прошел 1 год
-            данный метод должен увеличивать возраст всех учителей и студентов на 1
-            также он должен увеличить у них класс и стаж на 1
-
-            если после увеличения класса студента он > 11 то его надо убрать из школы (заменить на null)
-            и вывести информацию в консоль о том что он выпустился
-
-            если после увеличения возраста преподавателя он > 60 то его надо убрать из школы (заменить на null)
-            и вывести информацию в консоль о том что он ушел на пенсию
+            - public int nextYearAll()
      */
 
     public static void main(String[] args)
     {
+        School sc = new School(
+                "dwdqwdqwqwdqwd",
+                new Teacher[]{
+                        null,
+                        new Teacher("t1", 55, "s1", 10),
+                        null,
+                        new Teacher("t2", 57, "s1", 10),
+                        new Teacher("t3", 59, "s1", 10)
+                },
+                new Student[]{
+                        null,
+                        new Student("s1", 15, 9),
+                        new Student("s2", 15, 9),
+                        new Student("s3", 15, 10),
+                        new Student("s4", 15, 11),
+                        null
+                }
+        );
 
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
     }
 }
