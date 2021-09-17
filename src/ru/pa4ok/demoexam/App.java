@@ -8,7 +8,8 @@ import java.util.Scanner;
  * psvm - главный метод
  * shift + F10 - запуск выбранной конфигурации (точка входа psvm)
  * ctrl + space - подсказка по методам после точки
- * alt + enter - вывод контекстного меню по исправлению ошибки
+ * alt + enter - контекстное меню по исправлению ошибки
+ * alt + insert - контекстное меню генерации кода (конструкторы, toString, геттеры, сеттеры)
  */
 public class App
 {
@@ -20,28 +21,26 @@ public class App
             - String fio
             - int age
             - int level //класс
+            - public boolean nextYear() //age++ level++
 
             Teacher
             - String fio
             - int age
             - String subject
             - int exp //стаж
+            - public boolean nextYear() //age++ exp++
 
             School
             - String address
             - Teacher[] teachers
             - Student[] students
-            - public void nextYear()
+            - public int nextYearAll()
 
-            метод nextYear обозначет то что в школе прошел 1 год
-            данный метод должен увеличивать возраст всех учителей и студентов на 1
-            также он должен увеличить у них класс и стаж на 1
+            boolean nextYear() в Student и Teacher возвращают true
+            если они должны покинуть школу после увеличения значений
 
-            если после увеличения класса студента он > 11 то его надо убрать из школы (заменить на null)
-            и вывести информацию в консоль о том что он выпустился
-
-            если после увеличения возраста преподавателя он > 60 то его надо убрать из школы (заменить на null)
-            и вывести информацию в консоль о том что он ушел на пенсию
+            int nextYearAll() возвращает общее количество участников
+            которые покинули школу после увеличения на этом вызове метода
      */
 
     public static void main(String[] args)
