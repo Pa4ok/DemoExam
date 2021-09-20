@@ -12,6 +12,9 @@ public class Book
         this.pages = pages;
     }
 
+    public Book() {
+    }
+
     @Override
     public String toString() {
         return "Book{" +
