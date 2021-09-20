@@ -1,5 +1,7 @@
 package ru.pa4ok.demoexam;
 
+import java.util.Arrays;
+
 public class App
 {
     /*
@@ -13,19 +15,6 @@ public class App
 
     public static void main(String[] args)
     {
-        Human h = new Human("wefewfewffe");
-        /*System.out.println(h.fio);
-        h.test();
-
-        System.out.println(Human.staticField);
-        Human.staticTest();*/
-
-        System.out.println(Math.sqrt(16));
-
-        double[] arr = new double[0];
-
-        double[] arr1 = new double[] {
-                1, 2, 4, 5
-        };
+        System.out.println(Arrays.toString(EquationUtil.solveQuadraticEquation(1, 6, -40)));
     }
 }
