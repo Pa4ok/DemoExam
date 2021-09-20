@@ -44,37 +44,28 @@ public class App
 
     public static void main(String[] args)
     {
-        /*Teacher t = new Teacher("fio1", 'м', 50, "s1", 23);
-        System.out.println(t);
-        t.test();*/
+        School sc = new School(
+                "pqwdihqwdhdw", 5,
+                ";rlgekjreijgre",
+                new Human[]{
+                        new Teacher("t1", 'м', 55, "s1", 10),
+                        new Teacher("t2", 'м', 58, "s1", 10),
+                        new Teacher("t3", 'м', 59, "s1", 10),
+                        new Human("h1", 'ж', 10),
+                        new Student("s1", 'ж', 20, 11),
+                        new Student("s2", 'ж', 20, 10)
+                }
+        );
 
-        /*Human h = new Teacher("fio1", 'м', 50, "s1", 23);
-        System.out.println(h);*/
-
-        Human h = new Student("123123sdwds", 'v', 15, 11);
-        System.out.println(h);
-
-        if(h instanceof Teacher) {
-            Teacher t = (Teacher) h;
-            System.out.println(t.getSubject());
-        } else if(h instanceof Student) {
-            Student s = (Student) h;
-            System.out.println(s.getLevel());
-        }
-
-        //java 15+
-        //if(h instanceof Teacher t) {
-        //}
-    }
-
-    public static void addYear(Human h)
-    {
-        h.age++;
-        if(h instanceof Teacher) {
-            ((Teacher)h).exp++;
-        } else if(h instanceof Student) {
-            ((Student)h).level++;
-        }
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
     }
 }
 

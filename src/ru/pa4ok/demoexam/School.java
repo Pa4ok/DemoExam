@@ -2,79 +2,66 @@ package ru.pa4ok.demoexam;
 
 import java.util.Arrays;
 
-public class School
+public class School extends Building
 {
-    public static long testStatic;
+    protected String title;
+    protected Human[] entities;
 
-    //статичный блок, выполняется 1 раз при загрузке класса в систему (при 1 обращении к нему)
-    static {
-        testStatic = System.currentTimeMillis();
-        System.out.println(testStatic + "ms");
+    public School(String address, int floorCount, String title, Human[] entities) {
+        super(address, floorCount);
+        this.title = title;
+        this.entities = entities;
     }
 
-    private String address;
-    private Teacher[] teachers;
-    private Student[] students;
-
-    public School(String address, Teacher[] teachers, Student[] students) {
-        this.address = address;
-        this.teachers = teachers;
-        this.students = students;
-    }
-
-    /*public int nextYear()
+    public void nextYear()
     {
-        System.out.println(testStatic);
-
-        int counter = 0;
-
-        for(int i=0; i<teachers.length; i++) {
-            if(teachers[i] != null && teachers[i].nextYear()) {
-                teachers[i] = null;
-                counter++;
+        for(int i=0; i<entities.length; i++) {
+            if(entities[i] != null) {
+                entities[i].age++;
+                if(entities[i] instanceof Teacher) {
+                    Teacher t = (Teacher) entities[i];
+                    t.exp++;
+                    if(t.age > 60) {
+                        entities[i] = null;
+                    }
+                } else if(entities[i] instanceof Student) {
+                    Student s = (Student) entities[i];
+                    s.level++;
+                    if(s.level > 11) {
+                        entities[i] = null;
+                    }
+                } else {
+                    entities[i] = null;
+                }
             }
         }
-
-        for(int i=0; i<students.length; i++) {
-            if(students[i] != null && students[i].nextYear()) {
-                students[i] = null;
-                counter++;
-            }
-        }
-
-        return counter;
-    }*/
+    }
 
     @Override
     public String toString() {
         return "School{" +
-                "address='" + address + '\'' +
-                ", teachers=" + Arrays.toString(teachers) +
-                ", students=" + Arrays.toString(students) +
+                "address='" + title + '\'' +
+                ", floorCount=" + floorCount +
+                ", address='" + title + '\'' +
+                ", entities=" + Arrays.toString(entities) +
                 '}';
     }
 
-    public String getAddress() {
-        return address;
+    @Override
+    public String getTitle() {
+        return title;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Teacher[] getTeachers() {
-        return teachers;
+    public Human[] getEntities() {
+        return entities;
     }
 
-    public void setTeachers(Teacher[] teachers) {
-        this.teachers = teachers;
-    }
-
-    public Student[] getStudents() {
-        return students;
-    }
-
-    public void setStudents(Student[] students) {
-        this.students = students;
+    public void setEntities(Human[] entities) {
+        this.entities = entities;
     }
 }
