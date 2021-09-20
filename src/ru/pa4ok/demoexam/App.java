@@ -49,7 +49,30 @@ public class App
 
     public static void main(String[] args)
     {
+        School sc = new School(
+                "dqoqoidwqdwqoijd",
+                new Teacher[]{
+                        new Teacher("t1", 55, "qwdwqw", 20),
+                        new Teacher("t2", 58, "qwdwqw", 20),
+                        new Teacher("t3", 60, "qwdwqw", 20),
+                },
+                new Student[]{
+                        new Student("s1", 15, 7),
+                        new Student("s2", 15, 9),
+                        new Student("s3", 15, 9),
+                        new Student("s4", 15, 11)
+                }
+        );
 
+        System.out.println(sc);
+        System.out.println(sc.nextYearAll());
+        System.out.println(sc);
+        System.out.println(sc.nextYearAll());
+        System.out.println(sc);
+        System.out.println(sc.nextYearAll());
+        System.out.println(sc);
+        System.out.println(sc.nextYearAll());
+        System.out.println(sc);
     }
 }
 
