@@ -11,33 +11,24 @@ import java.util.Arrays;
 public class App
 {
     /*
-        Human
-        - String fio
-        - char gender
-        - int age
-        - public boolean nextYear() //age++
+        Point
+        - double x
+        - double z
 
-        Student extends Human
-        - int level
-        - public boolean nextYear() //вызов родительской реализации и level++
-
-        Teacher extends Human
-        - String subject
-        - int exp
-        - public boolean nextYear() //вызов родительской реализации и exp++
-
-        Building
-        - String address
-        - int floorCount
-
-        School extends Building
+        Figure
         - String title
-        - Human[] entities
-        - public void nextYearAll()
+        - Point[] points
+        - public double calculateSquare() //return -1
 
-        метод nextYear() должен перебирать всех обиталей школы и вызывать у них метод nextYear
-        если после вызова у студента level > 11 или у преподавателя age > 60
-        его необходимо выгнать (заменить на null в массиве) и вывести информацию в консоль
+        Triangle
+        - конструктор на 3 точки, передает массив из них в родительский конструкор
+        - public double calculateSquare() //считает уже по формуле для триугольника
+
+        Rectangle
+        - конструктор на 4 точки, передает массив из них в родительский конструкор
+        - public double calculateSquare() //считает уже по формуле для прямоугольника
+
+
 
      */
 
@@ -66,6 +57,17 @@ public class App
         System.out.println(sc);
         System.out.println(sc.nextYearAll());
         System.out.println(sc);
+
     }
 }
 
+//финальный класс нельзя унаследовать
+final class A
+{
+
+}
+
+/*class B extends A
+{
+
+}*/
