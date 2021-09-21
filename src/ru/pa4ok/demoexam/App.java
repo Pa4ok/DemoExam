@@ -1,47 +1,46 @@
 package ru.pa4ok.demoexam;
 
-import java.util.Arrays;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-/**
- * alt + enter - контекстное меню по исправлению ошибки
- * shift + F10 - запуск последней конфигурации
- * alt + insert - контекстное меню по генерации кода (конструторы, toString, геттеры и сеттеры)
- */
+import java.util.Arrays;
+import java.util.Random;
 
 public class App
 {
-    /*
-        все поля приватными + геттеры и сеттеры
-        +переопределенный вывод (toString)
-
-        EquationUtil
-        - public static double[] solveQuadraticEquation(double a, double b, double c)
-
-        метод принимает коэфиценты квадратного ураравнения и возврает масссив с его корнями
-        если корней нет, то можно вернуть массив с длиной 0 (new double[0])
-        математические утилиты обитают в классе Math ввиде статичных функцию
-     */
-
     public static void main(String[] args)
     {
-        //double[] arr = new double[0];
+        /*Student s = new Student(null, 23);
+        System.out.println(GsonUtil.gsonPretty.toJson(s));*/
 
-        /*Student s = new Student("weg'wefojewf", 10);
-        System.out.println(s.level);
-        s.test();
+        /*double[] arr = {1, 2, 3, 4, 5, 6, 7};
+        System.out.println(Arrays.toString(arr));*/
 
-        //System.out.println(Student.testStaticField);
-        Student.testStaticMethod();
+        double[] arr = new double[20000];
 
-        */
+        Random rand = new Random();
+        for(int i=0; i<arr.length; i++) {
+            arr[i] = rand.nextDouble();
+        }
 
-/*
-        System.out.println(Math.sqrt(16));
-        Student s = new Student("weg'wefojewf", 10);
-        System.out.println(s.fio);
-*/
+        long startMills = System.currentTimeMillis();
 
-        System.out.println(Arrays.toString(EquationUtil.solveQuadraticEquation(1, -8, 12)));
+        /*String s = "";
+        for(int i=0; i<arr.length; i++) {
+            s += arr[i];
+            s += ", ";
+        }*/
+
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i<arr.length; i++) {
+            sb.append(arr[i])
+                    .append(", ");
+        }
+        String s = sb.toString();
+
+        long endMills = System.currentTimeMillis() - startMills;
+
+        System.out.println(s.length() + " " + endMills + "ms");
     }
 }
 
