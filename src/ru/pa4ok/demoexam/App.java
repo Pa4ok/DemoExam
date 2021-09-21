@@ -1,5 +1,7 @@
 package ru.pa4ok.demoexam;
 
+import java.util.Arrays;
+
 /**
  * alt + enter - контекстное меню по исправлению ошибки
  * shift + F10 - запуск последней конфигурации
@@ -33,11 +35,13 @@ public class App
 
         */
 
+/*
         System.out.println(Math.sqrt(16));
         Student s = new Student("weg'wefojewf", 10);
         System.out.println(s.fio);
+*/
 
-
+        System.out.println(Arrays.toString(EquationUtil.solveQuadraticEquation(1, -8, 12)));
     }
 }
 
