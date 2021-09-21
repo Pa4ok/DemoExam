@@ -15,13 +15,16 @@ public class App
         - String fio
         - char gender
         - int age
+        - public void nextYear() //age++
 
         Student extends Human
         - int level
+        - public void nextYear() //вызов родительской реализации и level++
 
         Teacher extends Human
         - String subject
         - int exp
+        - public void nextYear() //вызов родительской реализации и exp++
 
         Building
         - String address
@@ -30,14 +33,11 @@ public class App
         School extends Building
         - String title
         - Human[] entities
-        - public void nextYear()
+        - public void nextYearAll()
 
-        метод nextYear() должен перебирать всех обиталей школы и увеличивать им возраст на 1
-        если обитатель является Student увеличить на 1 level
-        если обитатель является Teacher увеличить на 1 exp
-        если level > 11 или age > 60 его необходимо выгнать (заменить на null в массиве)
-        если обитатель не является ни Student, ни Teacher его необходимо сразу заменить на null
-        и вывести информацию в консоль
+        метод nextYear() должен перебирать всех обиталей школы и вызывать у них метод nextYear
+        если после вызова у студента level > 11 или у преподавателя age > 60
+        его необходимо выгнать (заменить на null в массиве) и вывести информацию в консоль
 
      */
 
