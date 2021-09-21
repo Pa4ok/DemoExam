@@ -37,7 +37,7 @@ public class App
     
     public static void main(String[] args)
     {
-        /*Library lib = new Library(
+        Library lib = new Library(
                 "we;fjhewoifew",
                 new Book[]{
                         null,
@@ -50,26 +50,8 @@ public class App
                 }
         );
         System.out.println(lib);
-        lib.addBook(new Book("book5", "author5", 100));
-        lib.addBook(new Book("book6", "author6", 100));
-        lib.addBook(new Book("book7", "author7", 100));
-        System.out.println(lib);*/
-
-        String s1 = "123321";
-        String s2 = "123";
-
-        Scanner scanner = new Scanner(System.in);
-        s2 += scanner.nextLine();
-
-        System.out.println(s1 + " " + s1.length());
-        System.out.println(s2 + " " + s2.length()) ;
-        System.out.println(s1 == s2);
-        System.out.println(s1.equals(s2));
-        System.out.println(s1.equalsIgnoreCase(s2));
-
-        /*String[] arr = new String[3];
-        System.out.println(Arrays.toString(arr));
-        System.out.println(arr[0].equals("123"));*/
+        System.out.println(lib.removeBook("book4", "author4"));
+        System.out.println(lib);
     }
 }
 

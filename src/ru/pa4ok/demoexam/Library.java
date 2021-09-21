@@ -20,15 +20,24 @@ public class Library
         this(address, 10);
     }
 
-    public void addBook(Book b) {
+    public boolean addBook(Book b) {
         for(int i=0; i<books.length; i++) {
             if(books[i] == null) {
                 books[i] = b;
-                System.out.println("Книга " + b + " поставлена на позицию " + i);
-                return;
+                return true;
             }
         }
-        System.out.println("Книге " + b + " не хватило места");
+        return false;
+    }
+
+    public boolean removeBook(String title, String author) {
+        for(int i=0; i<books.length; i++) {
+            if(books[i] != null && books[i].getTitle().equals(title) && books[i].getAuthor().equals(author)) {
+                books[i] = null;
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
