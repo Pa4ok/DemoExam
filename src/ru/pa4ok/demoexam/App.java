@@ -1,8 +1,5 @@
 package ru.pa4ok.demoexam;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
 /**
  * alt + enter - контекстное меню по исправлению ошибки
  * shift + F10 - запуск последней конфигурации
@@ -11,68 +8,36 @@ import java.util.Scanner;
 
 public class App
 {
-     /*
-            пока что во всех наших классах все поля будут приватными
-            +должны быть публичные геттеры и сеттеры для взаимодействия с ними
+    /*
+        все поля приватными + геттеры и сеттеры
+        +переопределенный вывод (toString)
 
-            Student
-            - String fio
-            - int age
-            - int level //класс
-            - public boolean nextYear()
-                age++ level++
-                возврает true если после увеличения level > 11
+        EquationUtil
+        - public static double[] solveQuadraticEquation(double a, double b, double c)
 
-            Teacher
-            - String fio
-            - int age
-            - String subject
-            - int exp //стаж
-            - public boolean nextYear()
-                age++ exp++
-                возврает true если после увеличения age > 60
-
-            School
-            - String address
-            - Teacher[] teachers
-            - Student[] students
-            - public int nextYearAll()
-
-            метод nextYear обозначет то что в школе прошел 1 год
-            он перебирает всех студентов и преподавателей и вызывает у них методы nextYear
-
-            если вызывнный у стундента или преподавателя метод nextYear возвращает true
-            то студента или преподавателя необходимо выпустили или отправить на пенсию
-
-            возвращаем значением самого метода будет int - количество людей покинувших школу на этом этапе
+        метод принимает коэфиценты квадратного ураравнения и возврает масссив с его корнями
+        если корней нет, то можно вернуть массив с длиной 0 (new double[0])
+        математические утилиты обитают в классе Math ввиде статичных функцию
      */
 
     public static void main(String[] args)
     {
-        School sc = new School(
-                "dqoqoidwqdwqoijd",
-                new Teacher[]{
-                        new Teacher("t1", 55, "qwdwqw", 20),
-                        new Teacher("t2", 58, "qwdwqw", 20),
-                        new Teacher("t3", 60, "qwdwqw", 20),
-                },
-                new Student[]{
-                        new Student("s1", 15, 7),
-                        new Student("s2", 15, 9),
-                        new Student("s3", 15, 9),
-                        new Student("s4", 15, 11)
-                }
-        );
+        //double[] arr = new double[0];
 
-        System.out.println(sc);
-        System.out.println(sc.nextYearAll());
-        System.out.println(sc);
-        System.out.println(sc.nextYearAll());
-        System.out.println(sc);
-        System.out.println(sc.nextYearAll());
-        System.out.println(sc);
-        System.out.println(sc.nextYearAll());
-        System.out.println(sc);
+        /*Student s = new Student("weg'wefojewf", 10);
+        System.out.println(s.level);
+        s.test();
+
+        //System.out.println(Student.testStaticField);
+        Student.testStaticMethod();
+
+        */
+
+        System.out.println(Math.sqrt(16));
+        Student s = new Student("weg'wefojewf", 10);
+        System.out.println(s.fio);
+
+
     }
 }
 

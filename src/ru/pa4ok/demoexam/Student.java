@@ -2,53 +2,37 @@ package ru.pa4ok.demoexam;
 
 public class Student
 {
-    private String fio;
-    private int age;
-    private int level;
+    public static int testStaticField = 5;
 
-    public Student(String fio, int age, int level) {
+    //при 1 обращении к классу он загружается в систему
+    //и вызывается статичный блок
+    static {
+        System.out.println("class Student loaded");
+    }
+
+    public String fio;
+    public int level;
+
+    public Student(String fio, int level) {
         this.fio = fio;
-        this.age = age;
         this.level = level;
     }
 
-    public boolean nextYear()
-    {
-        age++;
-        level++;
-        return level > 11;
+    //можно обращаться из обычного контекста в статичный
+    public void test() {
+        System.out.println(testStaticField);
+    }
+
+    //но нельзя из статичного в обычный, так как нет никакого объекта
+    public static void testStaticMethod() {
+        //System.out.println(fio);
     }
 
     @Override
     public String toString() {
         return "Student{" +
                 "fio='" + fio + '\'' +
-                ", age=" + age +
                 ", level=" + level +
                 '}';
-    }
-
-    public String getFio() {
-        return fio;
-    }
-
-    public void setFio(String fio) {
-        this.fio = fio;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
     }
 }
