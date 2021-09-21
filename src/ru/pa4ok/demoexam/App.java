@@ -15,16 +15,16 @@ public class App
         - String fio
         - char gender
         - int age
-        - public void nextYear() //age++
+        - public boolean nextYear() //age++
 
         Student extends Human
         - int level
-        - public void nextYear() //вызов родительской реализации и level++
+        - public boolean nextYear() //вызов родительской реализации и level++
 
         Teacher extends Human
         - String subject
         - int exp
-        - public void nextYear() //вызов родительской реализации и exp++
+        - public boolean nextYear() //вызов родительской реализации и exp++
 
         Building
         - String address
@@ -58,13 +58,13 @@ public class App
         );
 
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYearAll());
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYearAll());
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYearAll());
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYearAll());
         System.out.println(sc);
     }
 }

@@ -6,16 +6,16 @@ public class Teacher extends Human
     protected int exp;
 
     public Teacher(String fio, char gender, int age, String subject, int exp) {
-        //1 делом вызывается родительский конструктор
         super(fio, gender, age);
         this.subject = subject;
         this.exp = exp;
     }
 
     @Override
-    public void test() {
-        System.out.println("print from Teacher");
-        super.test();
+    public boolean nextYear() {
+        super.nextYear();
+        exp++;
+        return age > 60;
     }
 
     @Override

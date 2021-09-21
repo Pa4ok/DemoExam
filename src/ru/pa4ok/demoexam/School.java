@@ -13,28 +13,18 @@ public class School extends Building
         this.entities = entities;
     }
 
-    public void nextYear()
+    public int nextYearAll()
     {
+        int counter = 0;
+
         for(int i=0; i<entities.length; i++) {
-            if(entities[i] != null) {
-                entities[i].age++;
-                if(entities[i] instanceof Teacher) {
-                    Teacher t = (Teacher) entities[i];
-                    t.exp++;
-                    if(t.age > 60) {
-                        entities[i] = null;
-                    }
-                } else if(entities[i] instanceof Student) {
-                    Student s = (Student) entities[i];
-                    s.level++;
-                    if(s.level > 11) {
-                        entities[i] = null;
-                    }
-                } else {
-                    entities[i] = null;
-                }
+            if(entities[i] != null && entities[i].nextYear()) {
+                entities[i] = null;
+                counter++;
             }
         }
+
+        return counter;
     }
 
     @Override
