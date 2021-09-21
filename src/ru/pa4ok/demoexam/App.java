@@ -31,72 +31,23 @@ public class App
     
     public static void main(String[] args)
     {
-        //Test t = new Test();
-        //System.out.println(t.arr);
-
-        /*System.out.println(Arrays.toString(t.arr));
-        t.arr[1] = new TestSmall(1);
-        System.out.println(Arrays.toString(t.arr));*/
-
-        TestSmall[] testArray = new TestSmall[] {
-                new TestSmall(1),
-                new TestSmall(2),
-                new TestSmall(3),
-                null,
-                new TestSmall(4),
-                new TestSmall(5),
-                null
-        };
-
-        /*Test t = new Test(testArray);
-        System.out.println(Arrays.toString(t.arr));*/
-
-        Test t = new Test();
-        t.arr = testArray;
-        System.out.println(Arrays.toString(t.arr));
-
+        Library lib = new Library(
+                "we;fjhewoifew",
+                new Book[]{
+                        null,
+                        new Book("book1", "author1", 100),
+                        new Book("book2", "author2", 100),
+                        null,
+                        new Book("book3", "author3", 100),
+                        new Book("book4", "author4", 100),
+                        new Book("book5", "author5", 100)
+                }
+        );
+        System.out.println(lib);
+        lib.addBook(new Book("book5", "author5", 100));
+        lib.addBook(new Book("book6", "author6", 100));
+        lib.addBook(new Book("book7", "author7", 100));
+        System.out.println(lib);
     }
 }
 
-class Test
-{
-    //public TestSmall[] arr; //null
-
-    //1
-    //public TestSmall[] arr = new TestSmall[3];
-
-    //2
-    /*public TestSmall[] arr;
-
-    public Test(TestSmall[] arr) {
-        this.arr = arr;
-    }
-
-    public Test(int length) {
-        this(new TestSmall[length]);
-    }
-
-    public Test() {
-        this(3);
-    }*/
-
-    public TestSmall[] arr;
-
-    public Test() {
-    }
-}
-
-class TestSmall
-{
-    public int value;
-
-    public TestSmall(int value) {
-        this.value = value;
-    }
-
-    public String toString() {
-        return "TestSmall{" +
-                "value=" + value +
-                '}';
-    }
-}
