@@ -40,46 +40,29 @@ public class Application
 
     public static void main(String[] args)
     {
-        /*Human h = new Human("h1", 'ж', 40);
-        System.out.println(h);
+        School sc = new School(
+                "owefjoiejfwe", 5,
+                new Human[]{
+                        null,
+                        new Teacher("t1", 'м', 55,"dfqdqw", 20),
+                        new Teacher("t2", 'м', 59,"dfqdqw", 20),
+                        new Teacher("t3", 'м', 60,"dfqdqw", 20),
+                        null,
+                        null,
+                        new Student("s1", 'ж', 20, 10),
+                        new Student("s2", 'ж', 20, 10),
+                        new Student("s3", 'ж', 20, 11)
+                }
+        );
 
-        Teacher t = new Teacher("t1", 'м', 55, "s1", 10);
-        System.out.println(t);
-    */
-
-        /*Human h = new Teacher("t1", 'м', 55, "s1", 10);
-        System.out.println(h);
-        System.out.println(h.getClass());
-        Teacher t = (Teacher) h;
-        System.out.println(t.subject + " " + t.exp);*/
-
-        Human h = new Student("t1", 'м', 55, 10);
-        System.out.println(h);
-        System.out.println(h instanceof Human);
-        System.out.println(h instanceof Student);
-        System.out.println(h instanceof Teacher);
-
-        if(h instanceof Student) {
-            Student s = (Student)h;
-            System.out.println("test student: " + s.level);
-        }
-
-        //java 16+
-        if(h instanceof Student s) {
-            System.out.println("test student: " + s.level);
-        }
-    }
-
-    public static void testSchoolEntity(Human h)
-    {
-        h.age++;
-
-        if(h instanceof Student s) {
-            s.level++;
-        }
-
-        if(h instanceof Teacher t) {
-            t.exp++;
-        }
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
     }
 }

@@ -2,7 +2,6 @@ package ru.pa4ok.demoexam;
 
 public class Human
 {
-    //protected - видно в 1 пакете и у всех наследников
     protected String fio;
     protected char gender;
     protected int age;
@@ -11,10 +10,6 @@ public class Human
         this.fio = fio;
         this.gender = gender;
         this.age = age;
-    }
-
-    public void nextYear() {
-        age++;
     }
 
     @Override
