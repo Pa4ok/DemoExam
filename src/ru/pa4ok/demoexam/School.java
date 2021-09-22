@@ -1,4 +1,4 @@
-package ru.pa4ok.demoexam.school;
+package ru.pa4ok.demoexam;
 
 import java.util.Arrays;
 
@@ -15,7 +15,7 @@ public class School
         this.students = students;
     }
 
-    public int nextYear()
+    /*public int nextYear()
     {
         int count = 0;
 
@@ -34,7 +34,7 @@ public class School
         }
 
         return count;
-    }
+    }*/
 
     @Override
     public String toString() {

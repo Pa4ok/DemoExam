@@ -2,30 +2,26 @@ package ru.pa4ok.demoexam;
 
 public class Human
 {
-    static {
-        System.out.println("class Human loaded");
-    }
+    protected String fio;
+    protected char gender;
+    protected int age;
 
-    public static int staticField = 5;
-
-    public String fio;
-
-    public Human(String fio) {
+    public Human(String fio, char gender, int age) {
         this.fio = fio;
-    }
-
-    public static void staticMethod() {
-        System.out.println("test static " + staticField);
+        this.gender = gender;
+        this.age = age;
     }
 
     public void test() {
-        staticField++;
+        System.out.println("print from Human");
     }
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Human{" +
                 "fio='" + fio + '\'' +
+                ", gender=" + gender +
+                ", age=" + age +
                 '}';
     }
 
@@ -35,5 +31,21 @@ public class Human
 
     public void setFio(String fio) {
         this.fio = fio;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
