@@ -1,5 +1,7 @@
 package ru.pa4ok.demoexam;
 
+import java.util.Arrays;
+
 public class App
 {
     /**
@@ -27,9 +29,11 @@ public class App
         Book.testStaticMethod();
         */
 
-        Book b1 = new Book("oiwqdjqwid");
-        System.out.println(Math.sqrt(16));
+        /*Book b1 = new Book("oiwqdjqwid");
+        System.out.println(Math.sqrt(16));*/
 
         //double[] arr = new double[0];
+
+        System.out.println(Arrays.toString(EquationUtil.solveQuadraticEquation(1, 6, -40)));
     }
 }
