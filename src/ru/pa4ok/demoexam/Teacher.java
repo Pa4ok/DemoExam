@@ -10,6 +10,14 @@ public class Teacher extends Human
         this.subject = subject;
         this.exp = exp;
     }
+
+    @Override
+    public boolean nextYear() {
+        super.nextYear();
+        exp++;
+        return age > 60;
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +

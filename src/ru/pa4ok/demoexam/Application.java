@@ -44,14 +44,14 @@ public class Application
 
     public static void main(String[] args)
     {
-       /* School sc = new School(
+       School sc = new School(
                 "owefjoiejfwe", 5,
                 new Human[]{
                         null,
                         new Teacher("t1", 'м', 55,"dfqdqw", 20),
                         new Teacher("t2", 'м', 59,"dfqdqw", 20),
                         new Teacher("t3", 'м', 60,"dfqdqw", 20),
-                        null,
+                        new Human("h1", 'm', 50),
                         null,
                         new Student("s1", 'ж', 20, 10),
                         new Student("s2", 'ж', 20, 10),
@@ -60,21 +60,12 @@ public class Application
         );
 
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYearAll());
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYearAll());
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYearAll());
         System.out.println(sc);
-        sc.nextYear();
-        System.out.println(sc);*/
-
-        A a = new A();
-        B b = new B();
-
-        a.test();
-        System.out.println("==============");
-        b.test();
     }
 }
 
