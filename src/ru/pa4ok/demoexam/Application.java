@@ -14,13 +14,16 @@ public class Application
         - String fio
         - char gender
         - int age
+        - public boolean nextYear() //age++ return true
 
         Student extends Human
         - int level
+        - public boolean nextYear() //вызывает родителькую реализацию, level++, return level > 11
 
         Teacher extends Human
         - String subject
         - int exp
+        - public boolean nextYear() //вызывает родителькую реализацию, exp++, return age > 60
 
         Building
         - String address
@@ -29,18 +32,19 @@ public class Application
         School extends Building
         - String title
         - Human[] entities
-        - public void nextYear()
+        - public int nextYearAll()
 
-        метод nextYear() должен перебирать всех обиталей школы и увеличивать им возраст на 1
+        метод nextYearAll() должен перебирать всех обиталей школы и увеличивать им возраст на 1
         если обитатель является Student увеличить на 1 level
         если обитатель является Teacher увеличить на 1 exp
         если level > 11 или age > 60 его необходимо выгнать (заменить на null в массиве)
+        если обитатель не является ни Student ни Teacher его необходимо сразу убрать из школы
 
      */
 
     public static void main(String[] args)
     {
-        School sc = new School(
+       /* School sc = new School(
                 "owefjoiejfwe", 5,
                 new Human[]{
                         null,
@@ -63,6 +67,29 @@ public class Application
         sc.nextYear();
         System.out.println(sc);
         sc.nextYear();
-        System.out.println(sc);
+        System.out.println(sc);*/
+
+        A a = new A();
+        B b = new B();
+
+        a.test();
+        System.out.println("==============");
+        b.test();
+    }
+}
+
+class A
+{
+    public void test() {
+        System.out.println("print from A");
+    }
+}
+
+class B extends A
+{
+    @Override
+    public void test() {
+        System.out.println("print from B");
+        super.test();
     }
 }
