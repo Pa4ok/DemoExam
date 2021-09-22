@@ -42,70 +42,29 @@ public class App
 
     public static void main(String[] args)
     {
-        /*Teacher[] teachers = new Teacher[] {
-                new Teacher("t1", 55, "s1", 10),
-                null,
-                new Teacher("t2", 58, "s2", 11),
-                new Teacher("t3", 59, "s3", 12)
-        };
+        School school = new School(
+                "fojweoiwf", 5,
+                new Human[] {
+                        new Teacher("t1", 'м', 55, "s1", 10),
+                        null,
+                        new Teacher("t2", 'м', 58, "s2", 11),
+                        new Teacher("t3", 'м', 59, "s3", 12),
+                        new Human("h1", 'ж', 30),
+                        new Student("s1", 'м', 15, 8),
+                        null,
+                        new Student("s2", 'м', 15, 9),
+                        new Student("s3", 'м', 15, 9),
+                        new Student("s4", 'м', 15, 11)
+                }
+        );
 
-        Student[] students = new Student[] {
-                new Student("s1", 15, 8),
-                null,
-                new Student("s2", 15, 9),
-                new Student("s3", 15, 9),
-                new Student("s4", 15, 11)
-        };
-
-        School school = new School("fojweoiwf", teachers, students);
         System.out.println(school);
         System.out.println(school.nextYearAll());
         System.out.println(school);
         System.out.println(school.nextYearAll());
         System.out.println(school);
         System.out.println(school.nextYearAll());
-        System.out.println(school);*/
+        System.out.println(school);
 
-        /*Human h = new Human("h1", 'm', 22);
-        Student s = new Student("s1", 'w', 20, 11);
-
-        h.test();
-        System.out.println("==============");
-        s.test();
-
-        System.out.println();
-        System.out.println(s);*/
-
-        //Human h = new Student("s1", 'w', 20, 11);
-        Human h = new Teacher("t1", 'w', 40, "dwwqdwq", 20);
-
-        /*System.out.println(h);
-        Student s = (Student) h;
-        s.setLevel(20);
-        System.out.println(h);*/
-
-        /*System.out.println(h instanceof Human);
-        System.out.println(h instanceof Student);
-        System.out.println(h instanceof Teacher);*/
-
-        if(h instanceof Teacher) {
-            Teacher t = (Teacher) h;
-            t.setExp(10);
-        } else if(h instanceof Student) {
-            Student s = (Student) h;
-            s.setLevel(10);
-        }
-    }
-
-    public static void increment(Human h)
-    {
-        h.age++;
-        if(h instanceof Teacher) {
-            Teacher t = (Teacher) h;
-            t.exp++;
-        } else if(h instanceof Student) {
-            Student s = (Student) h;
-            s.level++;
-        }
     }
 }

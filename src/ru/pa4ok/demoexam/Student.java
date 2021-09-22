@@ -6,15 +6,15 @@ public class Student extends Human
 
     public Student(String fio, char gender, int age, int level)
     {
-        //вызов родительского конструктора Human
         super(fio, gender, age);
         this.level = level;
     }
 
     @Override
-    public void test() {
-        super.test();
-        System.out.println("print from Student");
+    public boolean nextYear() {
+        super.nextYear();
+        level++;
+        return level > 11;
     }
 
     @Override

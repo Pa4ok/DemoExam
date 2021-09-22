@@ -2,69 +2,44 @@ package ru.pa4ok.demoexam;
 
 import java.util.Arrays;
 
-public class School
+public class School extends Building
 {
-    private String address;
-    private Teacher[] teachers;
-    private Student[] students;
+    private Human[] entities;
 
-    public School(String address, Teacher[] teachers, Student[] students) {
-        this.address = address;
-        this.teachers = teachers;
-        this.students = students;
+    public School(String address, int floorCount, Human[] entities) {
+        super(address, floorCount);
+        this.entities = entities;
     }
 
-    /*public int nextYearAll()
+    public int nextYearAll()
     {
         int counter = 0;
 
-        for(int i=0; i<teachers.length; i++) {
-            if(teachers[i] != null && teachers[i].nextYear()) {
-                teachers[i] = null;
-                counter++;
-            }
-        }
-
-        for (int i = 0; i < students.length; i++) {
-            if(students[i] != null && students[i].nextYear()) {
-                students[i] = null;
+        for(int i=0; i<entities.length; i++) {
+            if(entities[i] != null && entities[i].nextYear()) {
+                entities[i] = null;
                 counter++;
             }
         }
 
         return counter;
-    }*/
+    }
 
     @Override
     public String toString() {
         return "School{" +
                 "address='" + address + '\'' +
-                ", teachers=" + Arrays.toString(teachers) +
-                ", students=" + Arrays.toString(students) +
+                ", floorCount=" + floorCount +
+                ", entities=" + Arrays.toString(entities) +
                 '}';
     }
 
-    public String getAddress() {
-        return address;
+    public Human[] getEntities() {
+        return entities;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Teacher[] getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(Teacher[] teachers) {
-        this.teachers = teachers;
-    }
-
-    public Student[] getStudents() {
-        return students;
-    }
-
-    public void setStudents(Student[] students) {
-        this.students = students;
+    public School setEntities(Human[] entities) {
+        this.entities = entities;
+        return this;
     }
 }
