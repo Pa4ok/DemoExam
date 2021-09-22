@@ -1,56 +1,35 @@
 package ru.pa4ok.demoexam;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
-/**
- * shift + F10 - запуск последней конфигурации
- * alt + enter - контекстное меню по исправлению ошибки
- * ctrl + space - контекстное меню по доступыным полям и методам объекта (после точки)
- * alt + insert - контекстное меню по генерации кода (конструкторы, геттеры, сеттеры, toString...)
- */
-
 public class App
 {
+    /**
+        статика лежит вне объектов
+        можно обращаться из обычного контекста в статичный
+        но нельзя из статичного в обынчый
+        обращении к статиным полям и методам идет по имени класса
+     */
+
     /*
-            пока что во всех наших классах все поля будут приватными
-            +должны быть публичные геттеры и сеттеры для взаимодействия с ними
+        EquationUtil
+        - public static double[] solveQuadraticEquation(double a, double b, double c)
 
-            Student
-            - String fio
-            - int age
-            - int level //класс
-            - public boolean nextYear()
-                age++ level++
-                возврает true если после увеличения level > 11
-
-            Teacher
-            - String fio
-            - int age
-            - String subject
-            - int exp //стаж
-            - public boolean nextYear()
-                age++ exp++
-                возврает true если после увеличения age > 60
-
-            School
-            - String address
-            - Teacher[] teachers
-            - Student[] students
-            - public int nextYearAll()
-
-            метод nextYear обозначет то что в школе прошел 1 год
-            он перебирает всех студентов и преподавателей и вызывает у них методы nextYear
-
-            если вызывнный у стундента или преподавателя метод nextYear возвращает true
-            то студента или преподавателя необходимо выпустили или отправить на пенсию
-
-            возвращаем значением самого метода будет int - количество людей покинувших школу на этом этапе
+        метод принимает коэфиценты квадратного ураравнения и возврает масссив с его корнями
+        если корней нет, то можно вернуть массив с длиной 0 (new double[0])
+        математические утилиты обитают в классе Math ввиде статичных функцию
      */
 
     public static void main(String[] args)
     {
+        /*Book b1 = new Book("oiwqdjqwid");
+        System.out.println(b1.title);*/
 
+        /*System.out.println(Book.testStaticField);
+        Book.testStaticMethod();
+        */
+
+        Book b1 = new Book("oiwqdjqwid");
+        System.out.println(Math.sqrt(16));
+
+        //double[] arr = new double[0];
     }
 }
-
