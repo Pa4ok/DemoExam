@@ -2,31 +2,50 @@ package ru.pa4ok.demoexam;
 
 public class Human
 {
-    public static int staticField = 5;
+    protected String fio;
+    protected char gender;
+    protected int age;
 
-    static {
-        System.out.println("Human cls loaded");
+    public Human(String fio, char gender, int age) {
+        this.fio = fio;
+        this.gender = gender;
+        this.age = age;
     }
 
-    public String fio;
-
-    public Human(String fio) {
-        this.fio = fio;
+    public void test() {
+        System.out.println("print from Human");
     }
 
     @Override
     public String toString() {
         return "Human{" +
                 "fio='" + fio + '\'' +
+                ", gender=" + gender +
+                ", age=" + age +
                 '}';
     }
 
-    public void test() {
-        System.out.println("test " + staticField);
-
+    public String getFio() {
+        return fio;
     }
 
-    public static void staticTest() {
-        System.out.println("static test");
+    public void setFio(String fio) {
+        this.fio = fio;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
