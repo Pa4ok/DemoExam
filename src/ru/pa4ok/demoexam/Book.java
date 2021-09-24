@@ -2,23 +2,17 @@ package ru.pa4ok.demoexam;
 
 public class Book
 {
-    public static final String TEST_PARAM = "123321";
-    public static final String TEST_PARAM_NEW;
-
-    static {
-        TEST_PARAM_NEW = "321123";
-    }
+    private static int idCounter = 0;
 
     private final int id;
     private String title;
-
-    public Book(int id, String title) {
-        this.id = id;
-        this.title = title;
-    }
+    private String test1;
+    private String test2;
+    private String test3;
 
     public Book(String title) {
-        this(-1, title);
+        this.id = ++idCounter;
+        this.title = title;
     }
 
     @Override
@@ -26,6 +20,9 @@ public class Book
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
+                ", test1='" + test1 + '\'' +
+                ", test2='" + test2 + '\'' +
+                ", test3='" + test3 + '\'' +
                 '}';
     }
 
