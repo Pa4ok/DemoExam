@@ -12,6 +12,12 @@ public class Human
         this.age = age;
     }
 
+    public boolean nextYear()
+    {
+        age++;
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Human{" +

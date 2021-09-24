@@ -45,7 +45,7 @@ public class App
 
     public static void main(String[] args)
     {
-        /*School sc = new School(
+        School sc = new School(
                 "oqliwduhqwdud", 5,
                 new Human[] {
                         null,
@@ -60,16 +60,16 @@ public class App
         );
 
         System.out.println(sc);
-        System.out.println(sc.nextYear());
+        System.out.println(sc.nextYearAll());
         System.out.println(sc);
-        System.out.println(sc.nextYear());
+        System.out.println(sc.nextYearAll());
         System.out.println(sc);
-        System.out.println(sc.nextYear());
+        System.out.println(sc.nextYearAll());
         System.out.println(sc);
-        System.out.println(sc.nextYear());
-        System.out.println(sc);*/
+        System.out.println(sc.nextYearAll());
+        System.out.println(sc);
 
-        A[] arr = new A[] {
+        /*A[] arr = new A[] {
                 new A(),
                 new A(),
                 new B(),
@@ -80,7 +80,7 @@ public class App
             System.out.println(a.getClass());
             a.test();
             System.out.println();
-        }
+        }*/
     }
 }
 
