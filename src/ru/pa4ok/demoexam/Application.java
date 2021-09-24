@@ -11,37 +11,58 @@ import java.util.Arrays;
 
 public class Application
 {
+    /*
+        abstract Sortinger
+        - public abstract void sort(int[] arr)
+        - public long sortWithTime(int[] arr)
+
+        sortWithTime сохранять время до сортировки
+        вызывать метод сортировки
+        считать потраченное время и возвращать его
+
+        BubbleSortinger extends Sortinger
+        - public void sort(int[] arr) //реализация для конкретного алгоритма
+
+        +2-3 класса с другими алгоритмами сортировки
+        https://proglib.io/p/java-sorting-algorithms
+     */
+
     public static void main(String[] args)
     {
-        /*Book b1 = new Book("awfeewfwfeewf");
-        Book b2 = new Book("awfeewfwfeewf");
-        Book b3 = new Book("awfeewfwfeewf");
-        Book b4 = new Book("awfeewfwfeewf");
+        //вы не можете напрямую создать объект абстрактного класса
+        //Human h = new Human();
 
-        System.out.println(b1);
-        System.out.println(b2);
-        System.out.println(b3);
-        System.out.println(b4);
-        */
+        //анонимный класс
+        //реализация в рамках только 1 объекта
+        Human h = new Human() {
+            @Override
+            public void test() {
+                System.out.println("wohiowef");
+            }
+        };
 
-        long startMills = System.currentTimeMillis();
+        //текущее время в милисекундах
+        long mills = System.currentTimeMillis();
+    }
+}
 
-        /*String s1 = "";
-        for(int i=0; i<10000; i++) {
-            s1 += i;
-            s1 += ' ';
-            s1 += "#ewf";
-        }*/
+abstract class Human
+{
+    //абстрактная функцию без тела
+    public abstract void test();
+}
 
-        StringBuilder sb = new StringBuilder();
-        for(int i=0; i<10000; i++) {
-            sb.append(i);
-            sb.append(' ');
-            sb.append("#ewf");
-        }
-        String s1 = sb.toString();
+//наследники абстрактного класса либо тоже должны быть абстрактными
+abstract class Teacher extends Human
+{
 
-        System.out.println(s1.length() + " " + (System.currentTimeMillis() - startMills) + "ms");
+}
 
+//либо должны реализовывать все абстрактные функции
+class Student extends Human
+{
+    @Override
+    public void test() {
+        System.out.println("123312");
     }
 }
