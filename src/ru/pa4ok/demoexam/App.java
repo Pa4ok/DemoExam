@@ -14,13 +14,16 @@ public class App
         - String fio
         - char gender
         - int age
+        - public boolean nextYear() //age++ | return true
 
         Student extends Human
         - int level
+        - public boolean nextYear() //вызов родительской реализации | level++ | return level > 11
 
         Teacher extends Human
         - String subject
         - int exp
+        - public boolean nextYear() //вызов родительской реализации | exp++ | return age > 60
 
         Building
         - String address
@@ -28,20 +31,12 @@ public class App
 
         School extends Building
         - Human[] entities
-        - public void nextYear()
-
-        метод nextYear() должен перебирать всех обиталей школы и увеличивать им возраст на 1
-        если обитатель является Student увеличить на 1 level
-        если обитатель является Teacher увеличить на 1 exp
-        если level > 11 или age > 60 его необходимо выгнать (заменить на null в массиве)
-        если обитатель не является ни Student, ни Teacher его необходимо сразу заменить на null
-        и вывести информацию в консоль
-
+        - public int nextYearAll()
      */
 
     public static void main(String[] args)
     {
-        School sc = new School(
+        /*School sc = new School(
                 "dwdqwdqwqwdqwd", 5,
                 new Human[]{
                         null,
@@ -65,6 +60,34 @@ public class App
         sc.nextYear();
         System.out.println(sc);
         sc.nextYear();
-        System.out.println(sc);
+        System.out.println(sc);*/
+
+        A[] arr = new A[] {
+                new A(),
+                new A(),
+                new B(),
+                new B()
+        };
+
+        for(A a : arr) {
+            System.out.println(a.getClass());
+            a.test();
+            System.out.println();
+        }
+    }
+}
+
+class A
+{
+    public void test() {
+        System.out.println("test from A");
+    }
+}
+
+class B extends A
+{
+    @Override
+    public void test() {
+        System.out.println("test from B");
     }
 }
