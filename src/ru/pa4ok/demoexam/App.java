@@ -36,7 +36,7 @@ public class App
 
     public static void main(String[] args)
     {
-        /*School sc = new School(
+        School sc = new School(
                 "dwdqwdqwqwdqwd", 5,
                 new Human[]{
                         null,
@@ -53,41 +53,13 @@ public class App
         );
 
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYearAll());
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYearAll());
         System.out.println(sc);
-        sc.nextYear();
+        System.out.println(sc.nextYearAll());
         System.out.println(sc);
-        sc.nextYear();
-        System.out.println(sc);*/
-
-        A[] arr = new A[] {
-                new A(),
-                new A(),
-                new B(),
-                new B()
-        };
-
-        for(A a : arr) {
-            System.out.println(a.getClass());
-            a.test();
-            System.out.println();
-        }
-    }
-}
-
-class A
-{
-    public void test() {
-        System.out.println("test from A");
-    }
-}
-
-class B extends A
-{
-    @Override
-    public void test() {
-        System.out.println("test from B");
+        System.out.println(sc.nextYearAll());
+        System.out.println(sc);
     }
 }
