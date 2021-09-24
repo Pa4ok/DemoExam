@@ -46,43 +46,28 @@ public class App
 
     public static void main(String[] args)
     {
-        /*Human h = new Human("h1", 'ж', 20);
-        System.out.println(h);
+        School sc = new School(
+                "oqliwduhqwdud", 5,
+                new Human[] {
+                        null,
+                        new Teacher("t1", 'ж', 55, "subject", 10),
+                        new Teacher("t2", 'ж', 58, "subject", 10),
+                        new Teacher("t3", 'ж', 59, "subject", 10),
+                        new Student("s1", 'м', 20, 10),
+                        new Student("s2", 'м', 20, 10),
+                        null,
+                        new Student("s3", 'м', 20, 11)
+                }
+        );
 
-        Student s = new Student("s1", 'ж', 20, 11);
-        System.out.println(s);*/
-
-        Human h = new Student("s1", 'ж', 20, 11);
-        //Human h = new Teacher("t1", 'м', 30, "subj", 5);
-
-        /*Student s = (Student) h;
-        System.out.println(s.getLevel());
-        s.setLevel(10);
-        System.out.println(h);*/
-
-        /*System.out.println(h instanceof Human);
-        System.out.println(h instanceof Teacher);
-        System.out.println(h instanceof Student);*/
-
-        if(h instanceof Teacher) {
-            Teacher t = (Teacher) h;
-            System.out.println("teacher: " + t);
-        } else if(h instanceof Student) {
-            Student s = (Student) h;
-            System.out.println("student: s");
-        } else {
-            System.out.println(h);
-        }
-    }
-
-    public static void updateSchoolEntity(Human h) {
-        h.age++;
-        if(h instanceof Teacher) {
-            Teacher t = (Teacher) h;
-            t.exp++;
-        } else if(h instanceof Student) {
-            Student s = (Student) h;
-            s.level++;
-        }
+        System.out.println(sc);
+        System.out.println(sc.nextYear());
+        System.out.println(sc);
+        System.out.println(sc.nextYear());
+        System.out.println(sc);
+        System.out.println(sc.nextYear());
+        System.out.println(sc);
+        System.out.println(sc.nextYear());
+        System.out.println(sc);
     }
 }

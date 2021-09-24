@@ -2,70 +2,58 @@ package ru.pa4ok.demoexam;
 
 import java.util.Arrays;
 
-public class School
-{
-    private String address;
-    private Teacher[] teachers;
-    private Student[] students;
+public class School extends Building
+{    protected Human[] entities;
 
-    public School(String address, Teacher[] teachers, Student[] students)
-    {
-        this.address = address;
-        this.teachers = teachers;
-        this.students = students;
+    public School(String address, int floorCount, Human[] entities) {
+        super(address, floorCount);
+        this.entities = entities;
     }
 
-    /*public int nextYear()
+    public int nextYear()
     {
         int count = 0;
 
-        for(int i=0; i<teachers.length; i++) {
-            if(teachers[i] != null && teachers[i].nextYear()) {
-                teachers[i] = null;
-                count++;
-            }
-        }
-
-        for(int i=0; i<students.length; i++) {
-            if(students[i] != null && students[i].nextYear()) {
-                students[i] = null;
-                count++;
+        for(int i=0; i<entities.length; i++) {
+            if(entities[i] != null) {
+                entities[i].age++;
+                if(entities[i] instanceof Teacher) {
+                    Teacher t = (Teacher) entities[i];
+                    t.exp++;
+                    if(t.age > 60) {
+                        entities[i] = null;
+                        count++;
+                    }
+                } else if(entities[i] instanceof Student) {
+                    Student s = (Student) entities[i];
+                    s.level++;
+                    if(s.level > 11) {
+                        entities[i] = null;
+                        count++;
+                    }
+                }
             }
         }
 
         return count;
-    }*/
+    }
 
     @Override
     public String toString() {
         return "School{" +
                 "address='" + address + '\'' +
-                ", teachers=" + Arrays.toString(teachers) +
-                ", students=" + Arrays.toString(students) +
+                ", floorCount=" + floorCount +
+                ", entities=" + Arrays.toString(entities) +
                 '}';
     }
 
-    public String getAddress() {
-        return address;
+    public Human[] getEntities() {
+        return entities;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public School setEntities(Human[] entities) {
+        this.entities = entities;
+        return this;
     }
 
-    public Teacher[] getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(Teacher[] teachers) {
-        this.teachers = teachers;
-    }
-
-    public Student[] getStudents() {
-        return students;
-    }
-
-    public void setStudents(Student[] students) {
-        this.students = students;
-    }
 }

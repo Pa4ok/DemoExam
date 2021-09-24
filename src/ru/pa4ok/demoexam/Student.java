@@ -5,16 +5,8 @@ public class Student extends Human
     protected int level;
 
     public Student(String fio, char gender, int age, int level) {
-        //вызов родительского конструктора
         super(fio, gender, age);
         this.level = level;
-    }
-
-    @Override
-    public void test() {
-        //вызов родительской реализации метода test
-        super.test();
-        System.out.println("print from Student");
     }
 
     @Override
