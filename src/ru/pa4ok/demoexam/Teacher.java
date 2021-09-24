@@ -12,12 +12,6 @@ public class Teacher extends Human
     }
 
     @Override
-    public void test() {
-        super.test();
-        System.out.println("test form Teacher");
-    }
-
-    @Override
     public String toString() {
         return "Teacher{" +
                 "fio='" + fio + '\'' +
@@ -26,5 +20,21 @@ public class Teacher extends Human
                 ", subject='" + subject + '\'' +
                 ", exp=" + exp +
                 '}';
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
     }
 }

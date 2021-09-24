@@ -2,7 +2,7 @@ package ru.pa4ok.demoexam;
 
 public class Student extends Human
 {
-    private int level;
+    protected int level;
 
     public Student(String fio, char gender, int age, int level) {
         super(fio, gender, age);
