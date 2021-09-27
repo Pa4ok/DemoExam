@@ -1,5 +1,10 @@
 package ru.pa4ok.demoexam;
 
+import javafx.scene.Parent;
+import javafx.scene.layout.GridPane;
+
+import java.util.Random;
+
 /**
  * shift + F10 - запуск последней конфигурации
  * alt + enter - контекстное меню по исправлению ошибки
@@ -9,62 +14,79 @@ package ru.pa4ok.demoexam;
 
 public class App
 {
-     /*
-        Human
-        - String fio
-        - char gender
-        - int age
-        - public boolean nextYear() //age++ return true
+    /*
+        abstract Sortinger
+        - public abstract void sort(int[] arr)
+        - public long sortWithTime(int[] arr)
+        сохряняет время, вызывает sort, возвращает потраченное на сортировку время
 
-        Student extends Human
-        - int level
-        - public boolean nextYear() //вызывает родителькую реализацию, level++, return level > 11
+        BubbleSortinger extends Sortinger
+        наследует Sortinger и реализует функцию sort под алгоритм пузырька
 
-        Teacher extends Human
-        - String subject
-        - int exp
-        - public boolean nextYear() //вызывает родителькую реализацию, exp++, return age > 60
-
-        Building
-        - String address
-        - int floorCount
-
-        School extends Building
-        - String title
-        - Human[] entities
-        - public int nextYearAll()
-
-        метод nextYearAll() должен перебирать всех обиталей школы и вызывать у них метод nextYear
-        если он возвращает true данного участника необходимо удалить из школы (заменить на null)
-        возвращает метод количество людей покинувших школу на этом этапе
-
+        создать 2-4 класса с различными алгоритмами сортировки
+        алгоритмы можно взять тут
+        https://proglib.io/p/java-sorting-algorithms
      */
 
     public static void main(String[] args)
     {
-        School school = new School(
-                "fojweoiwf", 5,
-                new Human[] {
-                        new Teacher("t1", 'м', 55, "s1", 10),
-                        null,
-                        new Teacher("t2", 'м', 58, "s2", 11),
-                        new Teacher("t3", 'м', 59, "s3", 12),
-                        new Human("h1", 'ж', 30),
-                        new Student("s1", 'м', 15, 8),
-                        null,
-                        new Student("s2", 'м', 15, 9),
-                        new Student("s3", 'м', 15, 9),
-                        new Student("s4", 'м', 15, 11)
-                }
-        );
+        //Test t = new Test();
+        /*NewTest1 t = new NewTest1(1);
 
-        System.out.println(school);
-        System.out.println(school.nextYearAll());
-        System.out.println(school);
-        System.out.println(school.nextYearAll());
-        System.out.println(school);
-        System.out.println(school.nextYearAll());
-        System.out.println(school);
+        Test t1 = new Test(3) {
+            @Override
+            public void test(int t) {
+                System.out.println(t);
+            }
+        };*/
 
+        Random rand = new Random();
+        int i = rand.nextInt();
+        int i1 = rand.nextInt(1000);
+
+        long mills = System.currentTimeMillis();
+    }
+}
+
+abstract class Test
+{
+    public int value;
+
+    public Test(int value) {
+        this.value = value;
+    }
+
+    public abstract void test(int t);
+
+    public void abc() {
+        test(4);
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "value=" + value +
+                '}';
+    }
+}
+
+abstract class NewTest extends Test
+{
+    GridPane
+
+    public NewTest(int value) {
+        super(value);
+    }
+}
+
+class NewTest1 extends Test
+{
+    public NewTest1(int value) {
+        super(value);
+    }
+
+    @Override
+    public void test(int t) {
+        System.out.println("test " + t);
     }
 }
