@@ -1,28 +1,35 @@
 package ru.pa4ok.demoexam;
 
-public class Student
+public class Student extends Human
 {
-    public String fio;
-    public int level;
-    public int test1;
-    public int test2;
-    public int test3;
-    public int test4;
+    private int level;
 
-    public Student(String fio, int level) {
-        this.fio = fio;
+    public Student(String fio, char gender, int age, int level) {
+        super(fio, gender, age);
         this.level = level;
-        this.test1 = level++;
-        this.test2 = test1++;
-        this.test3 = test2++;
-        this.test4 = test3++;
+    }
+
+    @Override
+    public void test() {
+        super.test();
+        System.out.println("test from Student");
     }
 
     @Override
     public String toString() {
         return "Student{" +
                 "fio='" + fio + '\'' +
+                ", gender=" + gender +
+                ", age=" + age +
                 ", level=" + level +
                 '}';
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }
