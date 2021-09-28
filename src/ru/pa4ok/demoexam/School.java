@@ -2,74 +2,58 @@ package ru.pa4ok.demoexam;
 
 import java.util.Arrays;
 
-public class School
+public class School extends Building
 {
-    private String address;
-    private Teacher[] teachers;
-    private Student[] students;
+    private Human[] entities;
 
-    public School(String address, Teacher[] teachers, Student[] students) {
-        this.address = address;
-        this.teachers = teachers;
-        this.students = students;
+    public School(String address, int floorCount, Human[] entities) {
+        super(address, floorCount);
+        this.entities = entities;
     }
 
-    /*public void nextYear()
+    public void nextYear()
     {
-        for(int i=0; i<teachers.length; i++) {
-            if(teachers[i] != null) {
-                teachers[i].setAge(teachers[i].getAge()+1);
-                teachers[i].setExp(teachers[i].getExp()+1);
-                if(teachers[i].getAge() > 60) {
-                    teachers[i] = null;
-                    //...
+        for(int i=0; i< entities.length; i++)
+        {
+            if(entities[i] instanceof Teacher) {
+                Teacher t = (Teacher) entities[i];
+                t.age++;
+                t.exp++;
+                if(t.age > 60) {
+                    System.out.println("Ушел на пенсию: " + entities[i]);
+                    entities[i] = null;
                 }
             }
-        }
-
-        for(int i=0; i< students.length; i++) {
-            if(students[i] != null) {
-                students[i].setAge(students[i].getAge()+1);
-                students[i].setLevel(students[i].getLevel()+1);
-                if(students[i].getLevel() > 11) {
-                    students[i] = null;
-                    //...
+            else if(entities[i] instanceof Student) {
+                Student s = (Student) entities[i];
+                s.age++;
+                s.level++;
+                if(s.level > 11) {
+                    System.out.println("Выпустился: " + entities[i]);
+                    entities[i] = null;
                 }
+            } else if(entities[i] != null) {
+                System.out.println("Левый чел: " + entities[i]);
+                entities[i] = null;
             }
         }
-    }*/
+    }
 
     @Override
     public String toString() {
         return "School{" +
                 "address='" + address + '\'' +
-                ", teachers=" + Arrays.toString(teachers) +
-                ", students=" + Arrays.toString(students) +
+                ", floorCount=" + floorCount +
+                ", entities=" + Arrays.toString(entities) +
                 '}';
     }
 
-    public String getAddress() {
-        return address;
+    public Human[] getEntities() {
+        return entities;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Teacher[] getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(Teacher[] teachers) {
-        this.teachers = teachers;
-    }
-
-    public Student[] getStudents() {
-        return students;
-    }
-
-    public void setStudents(Student[] students) {
-        this.students = students;
+    public void setEntities(Human[] entities) {
+        this.entities = entities;
     }
 }
 

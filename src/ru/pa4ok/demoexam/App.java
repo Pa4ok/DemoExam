@@ -42,76 +42,38 @@ public class App
 
     public static void main(String[] args)
     {
-        /*School sc = new School(
-                "wefoihweofhwef",
-                new Teacher[] {
-                        new Teacher("t1", 55, "subj", 20),
-                        new Teacher("t2", 58, "subj", 20),
-                        new Teacher("t3", 58, "subj", 20),
+        School sc = new School(
+                "wefoihweofhwef", 5,
+                new Human[] {
+                        new Teacher("t1", 'w', 55, "subj", 20),
+                        new Teacher("t2", 'w', 58, "subj", 20),
+                        new Teacher("t3", 'w', 58, "subj", 20),
+                        new Student("s1", 'w', 20, 7),
                         null,
-                        new Teacher("t4", 60, "subj", 20)
-                },
-                new Student[]{
-                        null,
-                        new Student("s1", 20, 7),
-                        null,
-                        new Student("s1", 20, 9),
-                        new Student("s1", 20, 10)
+                        new Human("h1", 'm', 30),
+                        new Student("s1", 'w', 20, 9),
+                        new Student("s1", 'w', 20, 10),
+                        new Teacher("t4", 'w', 60, "subj", 20)
                 }
         );
 
         System.out.println(sc);
         sc.nextYear();
-        System.out.println(sc);
-        sc.nextYear();
-        System.out.println(sc);
-        sc.nextYear();
-        System.out.println(sc);
-        sc.nextYear();
-        System.out.println(sc);*/
-
-        /*Human h1 = new Human("h1", 'w', 20);
-        Student s1 = new Student("s1", 'm', 30, 11);
-
-        System.out.println(h1);
-        System.out.println(s1);
-        h1.test();
         System.out.println();
-        s1.test();*/
 
-        //Human h = new Student("s1", 'm', 30, 11);
-        Human h = new Teacher("t1", 'w', 50,"subj", 20);
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println();
 
-        /*System.out.println(h);
-        Student s = (Student) h;
-        s.age++;
-        s.level++;
-        System.out.println(h);*/
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println();
 
-        System.out.println(h instanceof Human);
-        System.out.println(h instanceof Teacher);
-        System.out.println(h instanceof Student);
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println();
 
-        if(h instanceof Teacher) {
-            Teacher t = (Teacher) h;
-            System.out.println("detect teacher");
-        } else if(h instanceof Student) {
-            Student s = (Student) h;
-            System.out.println("detect student");
-        }
-    }
-
-    public static void test(Human h)
-    {
-        if(h instanceof Teacher) {
-            Teacher t = (Teacher) h;
-            t.exp += 10;
-        } else if(h instanceof Student) {
-            Student s = (Student) h;
-            s.level += 10;
-        } else {
-            //...
-        }
+        System.out.println(sc);
     }
 }
 

@@ -12,10 +12,6 @@ public class Human
         this.age = age;
     }
 
-    public void test() {
-        System.out.println("test from Human");
-    }
-
     @Override
     public String toString() {
         return "Human{" +

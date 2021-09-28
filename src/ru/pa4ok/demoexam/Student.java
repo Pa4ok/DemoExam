@@ -10,12 +10,6 @@ public class Student extends Human
     }
 
     @Override
-    public void test() {
-        System.out.println("test from Student");
-        super.test();
-    }
-
-    @Override
     public String toString() {
         return "Student{" +
                 "fio='" + fio + '\'' +
