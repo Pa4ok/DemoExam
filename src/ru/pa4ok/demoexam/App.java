@@ -38,27 +38,39 @@ public class App
             и вывести информацию в консоль о том что он выпустился
 
             если после увеличения возраста преподавателя он > 70 то его надо убрать из школы (заменить на null)
-            и вывести информацию в консоль о том что он ушел на пенсию
+            и вывести информацию` в консоль о том что он ушел на пенсию
      */
 
 
     public static void main(String[] args)
     {
-        Library lib = new Library(
-                "we;fjhewoifew",
-                new Book[]{
+        School sc = new School(
+                "wefoihweofhwef",
+                new Teacher[] {
+                        new Teacher("t1", 55, "subj", 20),
+                        new Teacher("t2", 58, "subj", 20),
+                        new Teacher("t3", 58, "subj", 20),
                         null,
-                        new Book("book1", "author1", 100),
-                        new Book("book2", "author2", 100),
+                        new Teacher("t4", 60, "subj", 20)
+                },
+                new Student[]{
                         null,
-                        new Book("book3", "author3", 100),
-                        new Book("book4", "author4", 100),
-                        new Book("book5", "author5", 100)
+                        new Student("s1", 20, 7),
+                        null,
+                        new Student("s1", 20, 9),
+                        new Student("s1", 20, 10)
                 }
         );
-        System.out.println(lib);
-        System.out.println(lib.removeBook("book4", "author4"));
-        System.out.println(lib);
+
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
+        sc.nextYear();
+        System.out.println(sc);
     }
 }
 
