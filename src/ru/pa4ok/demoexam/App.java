@@ -33,66 +33,24 @@ public class App
 
     public static void main(String[] args)
     {
-        //System.out.println("программа начала работу");
+        Library lib = new Library(
+                "eqwdijqidjdwq",
+                new Book[]{
+                    new Book("t1", "a1", 100),
+                        new Book("t2", "a2", 100),
+                        new Book("t3", "a3", 100),
+                        new Book("t4", "a4", 100)
+                }
+        );
 
-        //int[] arr = new int[10];
+        System.out.println(lib);
 
-        /*try {
-            arr[11] = 11;
-            double d = 6 / arr[5] * arr[6];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("error 1");
-        } catch (ArithmeticException e) {
-            System.out.println("error 2");
-        }*/
-
-        /*try {
-            arr[11] = 11;
-            double d = 6 / arr[5] * arr[6];
-        } catch (ArrayIndexOutOfBoundsException | ArithmeticException e) {
-            System.out.println("error " + e.getMessage());
-        }*/
-
-        /*try {
-            arr[11] = 11;
-            double d = 6 / arr[5] * arr[6];
-        } catch (Exception e) {
-            System.out.println("error " + e.getMessage());
-        }*/
-
-        /*try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
-        /*try {
-            sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        try {
+            lib.readBook();
+        } catch (LibrarySpaceException e) {
+            System.out.println("Книге не хватило места: " + e.getBook());
         }
 
-        System.out.println(Arrays.toString(arr));
-        System.out.println("программа продолжила работу");*/
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.printf("Введите что-то: ");
-        String s = scanner.nextLine();
-
-        int i = Integer.parseInt(s);
-        System.out.println(i);
-    }
-
-    public static void sleep(int ms) throws InterruptedException
-    {
-        Thread.sleep(ms);
-    }
-
-    public static int test(int i) {
-        if(i > 100) {
-            throw new MyRuntimeException("test");
-        }
-        return i += 100;
+        System.out.println(lib);
     }
 }
