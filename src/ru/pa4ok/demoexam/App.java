@@ -10,41 +10,39 @@ package ru.pa4ok.demoexam;
 public class App
 {
     /*
-        все поля приватными + геттеры и сеттеры
-        +переопределенный вывод (toString)
+        Human
+        - String fio
+        - char gender
+        - int age
 
-            Student
-            - String fio
-            - int age
-            - int level //класс
+        Student extends Human
+        - int level
 
-            Teacher
-            - String fio
-            - int age
-            - String subject
-            - int exp //стаж
+        Teacher extends Human
+        - String subject
+        - int exp
 
-            School
-            - String address
-            - Teacher[] teachers
-            - Student[] students
-            - public void nextYear()
+        Building
+        - String address
+        - int floorCount
 
-            метод nextYear обозначет то что в школе прошел 1 год
-            данный метод должен увеличивать возраст всех учителей и студентов на 1
-            также он должен увеличить у них класс и стаж на 1
+        School extends Building
+        - Human[] entities
+        - public void nextYear()
 
-            если после увеличения класса студента он > 11 то его надо убрать из школы (заменить на null)
-            и вывести информацию в консоль о том что он выпустился
+        метод nextYear() должен перебирать всех обиталей школы и увеличивать им возраст на 1
+        если обитатель является Student увеличить на 1 level
+        если обитатель является Teacher увеличить на 1 exp
+        если level > 11 или age > 60 его необходимо выгнать (заменить на null в массиве)
+        если обитатель не является ни Student, ни Teacher его необходимо сразу заменить на null
+        и вывести информацию в консоль
 
-            если после увеличения возраста преподавателя он > 70 то его надо убрать из школы (заменить на null)
-            и вывести информацию` в консоль о том что он ушел на пенсию
      */
 
 
     public static void main(String[] args)
     {
-        School sc = new School(
+        /*School sc = new School(
                 "wefoihweofhwef",
                 new Teacher[] {
                         new Teacher("t1", 55, "subj", 20),
@@ -70,7 +68,50 @@ public class App
         sc.nextYear();
         System.out.println(sc);
         sc.nextYear();
-        System.out.println(sc);
+        System.out.println(sc);*/
+
+        /*Human h1 = new Human("h1", 'w', 20);
+        Student s1 = new Student("s1", 'm', 30, 11);
+
+        System.out.println(h1);
+        System.out.println(s1);
+        h1.test();
+        System.out.println();
+        s1.test();*/
+
+        //Human h = new Student("s1", 'm', 30, 11);
+        Human h = new Teacher("t1", 'w', 50,"subj", 20);
+
+        /*System.out.println(h);
+        Student s = (Student) h;
+        s.age++;
+        s.level++;
+        System.out.println(h);*/
+
+        System.out.println(h instanceof Human);
+        System.out.println(h instanceof Teacher);
+        System.out.println(h instanceof Student);
+
+        if(h instanceof Teacher) {
+            Teacher t = (Teacher) h;
+            System.out.println("detect teacher");
+        } else if(h instanceof Student) {
+            Student s = (Student) h;
+            System.out.println("detect student");
+        }
+    }
+
+    public static void test(Human h)
+    {
+        if(h instanceof Teacher) {
+            Teacher t = (Teacher) h;
+            t.exp += 10;
+        } else if(h instanceof Student) {
+            Student s = (Student) h;
+            s.level += 10;
+        } else {
+            //...
+        }
     }
 }
 

@@ -1,15 +1,12 @@
 package ru.pa4ok.demoexam;
 
-public class Teacher
+public class Teacher extends Human
 {
-    private String fio;
-    private int age;
-    private String subject;
-    private int exp;
+    protected String subject;
+    protected int exp;
 
-    public Teacher(String fio, int age, String subject, int exp) {
-        this.fio = fio;
-        this.age = age;
+    public Teacher(String fio, char gender, int age, String subject, int exp) {
+        super(fio, gender, age);
         this.subject = subject;
         this.exp = exp;
     }
@@ -18,26 +15,11 @@ public class Teacher
     public String toString() {
         return "Teacher{" +
                 "fio='" + fio + '\'' +
+                ", gender=" + gender +
                 ", age=" + age +
                 ", subject='" + subject + '\'' +
                 ", exp=" + exp +
                 '}';
-    }
-
-    public String getFio() {
-        return fio;
-    }
-
-    public void setFio(String fio) {
-        this.fio = fio;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public String getSubject() {

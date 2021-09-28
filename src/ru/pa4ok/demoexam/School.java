@@ -14,7 +14,7 @@ public class School
         this.students = students;
     }
 
-    public void nextYear()
+    /*public void nextYear()
     {
         for(int i=0; i<teachers.length; i++) {
             if(teachers[i] != null) {
@@ -37,7 +37,7 @@ public class School
                 }
             }
         }
-    }
+    }*/
 
     @Override
     public String toString() {
