@@ -28,64 +28,26 @@ public class App
 
     public static void main(String[] args)
     {
-        //Test t = new Test(5);
-        /*NewTest1 t = new NewTest1(1);
-        System.out.println(t.test("ABC"));
-
-        System.out.println(t);*/
-
-        /*Test t = new Test(5) {
-            @Override
-            public String test(String s) {
-                return "123";
-            }
-        };*/
+        int length = 10000;
+        int[] arr1 = new int[length];
+        int[] arr2 = new int[length];
+        int[] arr3 = new int[length];
 
         Random rand = new Random();
-        int i1 = rand.nextInt();
-        int i2 = rand.nextInt(1000);
+        for(int i=0; i<length; i++) {
+            arr1[i] = arr2[i] = arr3[i] = rand.nextInt(10000);
+        }
 
-        long mills = System.currentTimeMillis();
-    }
-}
+        Sortinger bubble = new BubbleSortinger();
+        Sortinger insert = new InsertSortinger();
+        Sortinger quick = new QuickSortinger();
 
-abstract class Test
-{
-    public int value;
-
-    public Test(int value) {
-        this.value = value;
+        System.out.println(bubble.sortWithTime(arr1) + "ms");
+        System.out.println(insert.sortWithTime(arr2) + "ms");
+        System.out.println(quick.sortWithTime(arr3) + "ms");
     }
 
-    public abstract String test(String s);
-
-    public void test1() {
-        String s = test("ABC");
-    }
-
-    @Override
-    public String toString() {
-        return "Test{" +
-                "value=" + value +
-                '}';
-    }
-}
-
-abstract class NewTest extends Test
-{
-    public NewTest(int value) {
-        super(value);
-    }
-}
-
-class NewTest1 extends Test
-{
-    public NewTest1(int value) {
-        super(value);
-    }
-
-    @Override
-    public String test(String s) {
-        return s.toLowerCase();
+    public static void sort(int[] arr, Sortinger sortinger) {
+        //
     }
 }
