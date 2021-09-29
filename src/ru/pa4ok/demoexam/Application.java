@@ -1,6 +1,7 @@
 package ru.pa4ok.demoexam;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * shift + F10 - запуск последней конфигурации
@@ -29,40 +30,19 @@ public class Application
 
     public static void main(String[] args)
     {
-        //вы не можете напрямую создать объект абстрактного класса
-        //Human h = new Human();
+        int length = 10000;
+        int[] arr1 = new int[length];
+        int[] arr2 = new int[length];
 
-        //анонимный класс
-        //реализация в рамках только 1 объекта
-        Human h = new Human() {
-            @Override
-            public void test() {
-                System.out.println("wohiowef");
-            }
-        };
+        Random rand = new Random();
+        for(int i=0; i<length; i++) {
+            arr1[i] = arr2[i] = rand.nextInt(10000);
+        }
 
-        //текущее время в милисекундах
-        long mills = System.currentTimeMillis();
-    }
-}
+        BubbleSortinger bubble = new BubbleSortinger();
+        QuickSortinger quick = new QuickSortinger();
 
-abstract class Human
-{
-    //абстрактная функцию без тела
-    public abstract void test();
-}
-
-//наследники абстрактного класса либо тоже должны быть абстрактными
-abstract class Teacher extends Human
-{
-
-}
-
-//либо должны реализовывать все абстрактные функции
-class Student extends Human
-{
-    @Override
-    public void test() {
-        System.out.println("123312");
+        System.out.println(bubble.sortWithTime(arr1) + "ms");
+        System.out.println(quick.sortWithTime(arr2) + "ms");
     }
 }
