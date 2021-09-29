@@ -1,5 +1,9 @@
 package ru.pa4ok.demoexam;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.Random;
+
 /**
  * shift + F10 - запуск последней конфигурации
  * alt + enter - контекстное меню по исправлению ошибки
@@ -9,75 +13,78 @@ package ru.pa4ok.demoexam;
 
 public class App
 {
-/*
-        Human
-        - String fio
-        - char gender
-        - int age
+     /*
+        abstract Sortinger
+        - public abstract void sort(int[] arr)
+        - public long sortWithTime(int[] arr)
+        сохряняет время, вызывает sort, возвращает потраченное на сортировку время
 
-        Student extends Human
-        - int level
+        BubbleSortinger extends Sortinger
+        наследует Sortinger и реализует функцию sort под алгоритм пузырька
 
-        Teacher extends Human
-        - String subject
-        - int exp
-
-        Building
-        - String address
-        - int floorCount
-
-        School extends Building
-        - Human[] entities
-        - public void nextYear()
-
-        метод nextYear() должен перебирать всех обиталей школы и увеличивать им возраст на 1
-        если обитатель является Student увеличить на 1 level
-        если обитатель является Teacher увеличить на 1 exp
-        если level > 11 или age > 60 его необходимо выгнать (заменить на null в массиве)
-        если обитатель не является ни Student, ни Teacher его необходимо сразу заменить на null
-        и вывести информацию в консоль
-
+        создать 2-4 класса с различными алгоритмами сортировки
+        алгоритмы можно взять тут
+        https://proglib.io/p/java-sorting-algorithms
      */
-
 
     public static void main(String[] args)
     {
-        /*Human h = new Human("h1", 'w', 44);
-        Teacher t = new Teacher("t1", 'm', 43, "subject", 10);
+        //Test t = new Test(5);
 
-        System.out.println(h);
+        Test t = new Test(5) {
+            @Override
+            public void test() {
+                //...
+            }
+        };
+
         System.out.println(t);
 
-        System.out.println();
+        Random rand = new Random();
+        int i1 = rand.nextInt();
+        int i2 = rand.nextInt(1000);
 
-        //h.test();
-        t.test();*/
-
-        //Human h = new Teacher("t1", 'm', 43, "subject", 10);
-        Human h = new Student("s1", 'm', 43, 10);
-
-        /*System.out.println(h);
-        Teacher t = (Teacher) h;
-        System.out.println(t.getSubject());
-        t.exp++;
-        System.out.println(h);*/
-
-        /*System.out.println(h instanceof Human);
-        System.out.println(h instanceof Teacher);
-        System.out.println(h instanceof Student);*/
-
-        if(h instanceof Teacher) {
-            Teacher t = (Teacher) h;
-            System.out.println("teacher detected");
-        } else if(h instanceof Student) {
-            Student s = (Student) h;
-            System.out.println("student detected");
-        }
-    }
-
-    public static void incrementYear(Human h)
-    {
-        //...
+        long mills = System.currentTimeMillis();
     }
 }
 
+abstract class Test
+{
+    public int value;
+
+    public Test(int value) {
+        this.value = value;
+    }
+
+    public abstract void test();
+
+    public void abc() {
+        test();
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "value=" + value +
+                '}';
+    }
+}
+
+abstract class NewTest extends Test
+{
+    public NewTest(int value) {
+        super(value);
+    }
+}
+
+class NewTest1 extends Test
+{
+    public NewTest1(int value) {
+        super(value);
+    }
+
+    @Override
+    public void test() {
+        //...
+    }
+}
