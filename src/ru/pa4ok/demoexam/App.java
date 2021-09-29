@@ -30,63 +30,20 @@ public class App
 
     public static void main(String[] args)
     {
-        //Test t = new Test();
-        /*NewTest1 t = new NewTest1(1);
-
-        Test t1 = new Test(3) {
-            @Override
-            public void test(int t) {
-                System.out.println(t);
-            }
-        };*/
+        int length = 100000;
+        int[] arr1 = new int[length];
+        int[] arr2 = new int[length];
 
         Random rand = new Random();
-        int i = rand.nextInt();
-        int i1 = rand.nextInt(1000);
+        for(int i=0; i<length; i++) {
+            arr1[i] = arr2[i] = rand.nextInt(10000);
+        }
 
-        long mills = System.currentTimeMillis();
+        BubbleSortinger bubble = new BubbleSortinger();
+        QuickSortinger quick = new QuickSortinger();
+
+        System.out.println(bubble.sortWithTime(arr1) + "ms");
+        System.out.println(quick.sortWithTime(arr2) + "ms");
     }
 }
 
-abstract class Test
-{
-    public int value;
-
-    public Test(int value) {
-        this.value = value;
-    }
-
-    public abstract void test(int t);
-
-    public void abc() {
-        test(4);
-    }
-
-    @Override
-    public String toString() {
-        return "Test{" +
-                "value=" + value +
-                '}';
-    }
-}
-
-abstract class NewTest extends Test
-{
-    GridPane
-
-    public NewTest(int value) {
-        super(value);
-    }
-}
-
-class NewTest1 extends Test
-{
-    public NewTest1(int value) {
-        super(value);
-    }
-
-    @Override
-    public void test(int t) {
-        System.out.println("test " + t);
-    }
-}
