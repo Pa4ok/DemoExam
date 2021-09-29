@@ -29,62 +29,19 @@ public class App
 
     public static void main(String[] args)
     {
-        //Test t = new Test(5);
-
-        Test t = new Test(5) {
-            @Override
-            public void test() {
-                //...
-            }
-        };
-
-        System.out.println(t);
+        int length = 100000;
+        int[] arr1 = new int[length];
+        int[] arr2 = new int[length];
 
         Random rand = new Random();
-        int i1 = rand.nextInt();
-        int i2 = rand.nextInt(1000);
+        for(int i=0; i<length; i++) {
+            arr1[i] = arr2[i] = rand.nextInt(10000);
+        }
 
-        long mills = System.currentTimeMillis();
-    }
-}
-
-abstract class Test
-{
-    public int value;
-
-    public Test(int value) {
-        this.value = value;
-    }
-
-    public abstract void test();
-
-    public void abc() {
-        test();
-    }
-
-    @Override
-    public String toString() {
-        return "Test{" +
-                "value=" + value +
-                '}';
-    }
-}
-
-abstract class NewTest extends Test
-{
-    public NewTest(int value) {
-        super(value);
-    }
-}
-
-class NewTest1 extends Test
-{
-    public NewTest1(int value) {
-        super(value);
-    }
-
-    @Override
-    public void test() {
-        //...
+        Sortinger bubble = new BubbleSortinger();
+        Sortinger quick = new QuickSortinger();
+        
+        System.out.println(bubble.sortWithTime(arr1) + "ms");
+        System.out.println(quick.sortWithTime(arr2) + "ms");
     }
 }
