@@ -11,7 +11,7 @@ import java.util.Random;
  * alt + insert - контекстное меню генерации кода (конструкторы, toString, геттеры и сеттеры)
  */
 
-public class App
+public class App //
 {
     /*
         abstract Sortinger
