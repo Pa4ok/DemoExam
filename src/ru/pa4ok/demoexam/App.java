@@ -1,7 +1,14 @@
 package ru.pa4ok.demoexam;
 
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * shift + F10 - запуск выбранной конфигурации (точка входа psvm)
@@ -11,43 +18,120 @@ import java.util.Random;
  */
 public class App
 {
-    /*
-        abstract Sortinger
-        - public abstract void sort(int[] arr)
-        - public long sortWithTime(int[] arr)
-        сохряняет время, вызывает sort, возвращает потраченное на сортировку время
+     /*
+        Book
+        - String title (>3 & <20 символов)
+        - String author (>3 & <20 символов)
+        - int pages (>0)
 
-        BubbleSortinger extends Sortinger
-        наследует Sortinger и реализует функцию sort под алгоритм пузырька
+        Library
+        - String address
+        - Book[] books
+        - public void readBook() throws BookReadException, LibrarySpaceException
+            метод должен запрашивать у пользователя все поля книги и создавать из них ее объект после чего добавлять в библиотеку
+            если пользователь вводит неверные значения выбрасывать BookReadException
+            если после чтения полей в бибилиотеке нет места то выбрасывать LibrarySpaceException
 
-        создать 2-4 класса с различными алгоритмами сортировки
-        алгоритмы можно взять тут
-        https://proglib.io/p/java-sorting-algorithms
+        BookReadException extends Exception
+
+        LibrarySpaceException extends Exception
+        - Book book
      */
-
 
     public static void main(String[] args)
     {
-        int length = 10000;
-        int[] arr1 = new int[length];
-        int[] arr2 = new int[length];
-        int[] arr3 = new int[length];
+        System.out.println("mark1");
 
-        Random rand = new Random();
-        for(int i=0; i<length; i++) {
-            arr1[i] = arr2[i] = arr3[i] = rand.nextInt(10000);
-        }
+        /*try {
+            int[] arr = new int[3];
+            arr[5] = 5;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ошибка отловлена");
+            e.printStackTrace();
+        }*/
 
-        Sortinger bubble = new BubbleSortinger();
-        Sortinger insert = new InsertSortinger();
-        Sortinger quick = new QuickSortinger();
+        /*try {
+            double d = 5 / 0;
+            int[] arr = new int[3];
+            arr[5] = 5;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ошибка отловлена 1");
+            e.printStackTrace();
+        } catch (ArithmeticException e) {
+            System.out.println("ошибка отловлена 2");
+            e.printStackTrace();
+        }*/
 
-        System.out.println(bubble.sortWithTime(arr1) + "ms");
-        System.out.println(insert.sortWithTime(arr2) + "ms");
-        System.out.println(quick.sortWithTime(arr3) + "ms");
+        /*try {
+            double d = 5 / 0;
+            int[] arr = new int[3];
+            arr[5] = 5;
+        } catch (ArrayIndexOutOfBoundsException | ArithmeticException e) {
+            System.out.println("ошибка отловлена");
+            e.printStackTrace();
+        }*/
+
+        /*try {
+            double d = 5 / 0;
+            int[] arr = new int[3];
+            arr[5] = 5;
+        } catch (Exception e) {
+            System.out.println("ошибка отловлена");
+            e.printStackTrace();
+        }*/
+
+        /*try {
+            sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+
+        /*try {
+            test(555);
+        } catch (MyException e) {
+            e.printStackTrace();
+        }*/
+
+        /*try {
+            test2(555);
+        } catch (MyRuntimeException e) {
+            System.out.println("ошибка отловлена: " + e.value);
+        }*/
+
+        //test3();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.printf("Введите что-то: ");
+        String s = scanner.nextLine();
+        int i = Integer.parseInt(s);
+        System.out.println(i * 100);
+
+        System.out.println("mark2");
     }
 
-    public static void sort(int[] arr, Sortinger sortinger) {
-        //
+    public static void sleep(int sec) throws InterruptedException
+    {
+        Thread.sleep(sec * 1000);
+    }
+
+    public static void test(int i) throws MyException {
+        if(i > 50) {
+            throw new MyException();
+        }
+    }
+
+    public static void test2(int i) {
+        if(i > 50) {
+            throw new MyRuntimeException(i);
+        }
+    }
+
+    public static void test3()
+    {
+        try {
+            FileReader fr = new FileReader("ewrfwefewf.txt");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("eofhwoef", e);
+        }
     }
 }
