@@ -29,79 +29,20 @@ public class App //
 
     public static void main(String[] args)
     {
-        //Test t = new Test(5);
-        //NewTest t = new NewTest(5);
+        int length = 10000;
 
-        Test t = new Test(5) {
-            @Override
-            public String test(int i) {
-                return null;
-            }
-        };
-
-        System.out.println(t);
-        System.out.println(t.test(10));
-
-        ABC abc = new ABC() {
-            @Override
-            public void test() {
-                System.out.println("CBA");
-            }
-        };
-
-        //время в милисекундах
-        long mills = System.currentTimeMillis();
+        int[] arr1 = new int[length];
+        int[] arr2 = new int[length];
 
         Random rand = new Random();
-        int i1 = rand.nextInt();
-        int i2 = rand.nextInt(1000);
-    }
-}
+        for(int i=0; i<length; i++) {
+            arr1[i] = arr2[i] = rand.nextInt(10000);
+        }
 
-class ABC
-{
-    public void test() {
-        System.out.println("ABC");
-    }
-}
+        Sortinger bubble = new BubbleSortinger();
+        Sortinger quick = new QuickSortinger();
 
-abstract class Test
-{
-    public int value;
-
-    public Test(int value) {
-        this.value = value;
-    }
-
-    public abstract String test(int i);
-
-    public void abc() {
-        test(5);
-    }
-
-    @Override
-    public String toString() {
-        return "Test{" +
-                "value=" + value +
-                '}';
-    }
-}
-
-/*abstract class NewTest extends Test
-{
-    public NewTest(int value) {
-        super(value);
-    }
-}*/
-
-class NewTest extends Test
-{
-    public NewTest(int value) {
-        super(value);
-    }
-
-    @Override
-    public String test(int i) {
-        return "spedwfoiwefef " + i;
+        System.out.println(bubble.sortWithTime(arr1) + "ms");
+        System.out.println(quick.sortWithTime(arr2) + "ms");
     }
 }
