@@ -12,8 +12,9 @@ public class Human
         this.age = age;
     }
 
-    public void test() {
-        System.out.println("test from Human");
+    public boolean nextYear() {
+        age++;
+        return true;
     }
 
     @Override
