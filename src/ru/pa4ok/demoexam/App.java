@@ -1,7 +1,8 @@
 package ru.pa4ok.demoexam;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.Random;
 
 /**
  * alt + enter - контекстное меню по исправлению ошибки
@@ -11,93 +12,84 @@ import java.util.Scanner;
 
 public class App
 {
-    /*
-        Human
-        - String fio
-        - char gender
-        - int age
+     /*
+        abstract Sortinger
+        - public abstract void sort(int[] arr)
+        - public long sortWithTime(int[] arr)
+        сохряняет время, вызывает sort, возвращает потраченное на сортировку время
 
-        Student extends Human
-        - int level
+        BubbleSortinger extends Sortinger
+        наследует Sortinger и реализует функцию sort под алгоритм пузырька
 
-        Teacher extends Human
-        - String subject
-        - int exp
-
-        Building
-        - String address
-        - int floorCount
-
-        School extends Building
-        - Human[] entities
-        - public void nextYear()
-
-        метод nextYear() должен перебирать всех обиталей школы и увеличивать им возраст на 1
-        если обитатель является Student увеличить на 1 level
-        если обитатель является Teacher увеличить на 1 exp
-        если level > 11 или age > 60 его необходимо выгнать (заменить на null в массиве)
-        если обитатель не является ни Student, ни Teacher его необходимо сразу заменить на null
-        и вывести информацию в консоль
-
+        создать 2-4 класса с различными алгоритмами сортировки
+        алгоритмы можно взять тут
+        https://proglib.io/p/java-sorting-algorithms
      */
+
 
     public static void main(String[] args)
     {
-        /*School sc = new School(
-                "dqoqoidwqdwqoijd",
-                new Teacher[]{
-                        new Teacher("t1", 55, "qwdwqw", 20),
-                        new Teacher("t2", 58, "qwdwqw", 20),
-                        new Teacher("t3", 60, "qwdwqw", 20),
-                },
-                new Student[]{
-                        new Student("s1", 15, 7),
-                        new Student("s2", 15, 9),
-                        new Student("s3", 15, 9),
-                        new Student("s4", 15, 11)
-                }
-        );
-
-        System.out.println(sc);
-        System.out.println(sc.nextYearAll());
-        System.out.println(sc);
-        System.out.println(sc.nextYearAll());
-        System.out.println(sc);
-        System.out.println(sc.nextYearAll());
-        System.out.println(sc);
-        System.out.println(sc.nextYearAll());
-        System.out.println(sc);*/
-
-        /*Human h = new Human("h1", 'w', 50);
-        Student s = new Student("s1", 'm', 30, 10);
-
-        //System.out.println(h);
-        //System.out.println(s);
-
-        h.test();
-        System.out.println();
-        s.test();*/
-
-        //Human h = new Student("s1", 'm', 30, 10);
-        Human h = new Teacher("t1", 'w', 25, "wafefew", 5);
-
-        /*System.out.println(h);
-        Student s = (Student) h;
-        s.setLevel(5);
-        System.out.println(h);*/
-
-        /*System.out.println(h instanceof Human);
-        System.out.println(h instanceof Teacher);
-        System.out.println(h instanceof Student);
+        /*Test t = new NewTest1(10);
+        System.out.println(t);
         */
 
-        if(h instanceof Teacher) {
-            Teacher t = (Teacher) h;
-            //...
-        } else if(h instanceof Student) {
-            Student s = (Student) h;
-            //...
-        }
+        Test t = new Test(10) {
+            @Override
+            public void test() {
+                //...
+            }
+        };
+
+        System.out.println(t);
+
+        long mills = System.currentTimeMillis();
+
+        Random rand = new Random();
+        int i1 = rand.nextInt();
+        int i2 = rand.nextInt(1000);
+    }
+}
+
+abstract class Test
+{
+    public int value;
+
+    public Test(int value) {
+        this.value = value;
+    }
+
+    public abstract void test();
+
+    public void abc() {
+        //...
+        test();
+        //...
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "value=" + value +
+                '}';
+    }
+}
+
+abstract class NewTest extends Test
+{
+    public NewTest(int value) {
+        super(value);
+    }
+}
+
+class NewTest1 extends Test
+{
+    public NewTest1(int value) {
+        super(value);
+    }
+
+    @Override
+    public void test() {
+        //...
     }
 }
 
