@@ -1,5 +1,8 @@
 package ru.pa4ok.demoexam;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 /**
  * alt + enter - контекстное меню исправления ошибки
  * shift + F10 - запуск последней конфигурации
@@ -10,80 +13,79 @@ package ru.pa4ok.demoexam;
 public class App
 {
     /*
-        Human
-        - String fio
-        - char gender
-        - int age
-        - public boolean nextYear() //age++ | return true
+        abstract Sortinger
+        - public abstract void sort(int[] arr)
+        - public long sortWithTime(int[] arr)
+        сохряняет время, вызывает sort, возвращает потраченное на сортировку время
 
-        Student extends Human
-        - int level
-        - public boolean nextYear() //вызов родительской реализации | level++ | return level > 11
+        BubbleSortinger extends Sortinger
+        наследует Sortinger и реализует функцию sort под алгоритм пузырька
 
-        Teacher extends Human
-        - String subject
-        - int exp
-        - public boolean nextYear() //вызов родительской реализации | exp++ | return age > 60
-
-        Building
-        - String address
-        - int floorCount
-
-        School extends Building
-        - Human[] entities
-        - public int nextYearAll()
-
-        nextYearAll перебирает всех обиталелей школы и вызывает у них метод nextYear
-        если он возвращает true, то текущего обиталя надо заменить на null
-        сам метод возврает количество людей покинувших школу "за вызов"
-
+        создать 2-4 класса с различными алгоритмами сортировки
+        алгоритмы можно взять тут
+        https://proglib.io/p/java-sorting-algorithms
      */
-
 
     public static void main(String[] args)
     {
-        /*School sc = new School(
-                "wefoihweofhwef", 5,
-                new Human[] {
-                        new Teacher("t1", 'w', 55, "subj", 20),
-                        new Teacher("t2", 'w', 58, "subj", 20),
-                        new Teacher("t3", 'w', 58, "subj", 20),
-                        new Student("s1", 'w', 20, 7),
-                        null,
-                        new Human("h1", 'm', 30),
-                        new Student("s1", 'w', 20, 9),
-                        new Student("s1", 'w', 20, 10),
-                        new Teacher("t4", 'w', 60, "subj", 20)
-                }
-        );
+        //Test t = new Test(5);
+        //Test t = new NewTest2(5);
+        //System.out.println(t);
 
-        System.out.println(sc);
-        sc.nextYear();
-        System.out.println();
-
-        System.out.println(sc);
-        sc.nextYear();
-        System.out.println();
-
-        System.out.println(sc);
-        sc.nextYear();
-        System.out.println();
-
-        System.out.println(sc);
-        sc.nextYear();
-        System.out.println();
-
-        System.out.println(sc);*/
-
-        A[] arr = new A[] {
-                new A(),
-                new B()
+        Test t = new Test(5) {
+            @Override
+            public int test() {
+                return 0;
+            }
         };
 
-        for(A a : arr) {
-            System.out.println(a.getClass());
-            a.test();
-            System.out.println();
-        }
+        System.out.println(t);
+
+        long mills = System.currentTimeMillis();
+    }
+}
+
+abstract class Test
+{
+    public int value;
+
+    public Test(int value) {
+        this.value = value;
+    }
+
+    public abstract int test();
+
+    public void abc()
+    {
+        //...
+        int i = test();
+        //...
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "value=" + value +
+                '}';
+    }
+}
+
+abstract class NewTest1 extends Test
+{
+    public NewTest1(int value) {
+        super(value);
+    }
+}
+
+class NewTest2 extends Test
+{
+    public NewTest2(int value) {
+        super(value);
+    }
+
+    @Override
+    public int test() {
+        System.out.println("123");
+        return 123;
     }
 }
