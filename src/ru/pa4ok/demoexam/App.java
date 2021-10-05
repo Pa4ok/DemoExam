@@ -87,18 +87,3 @@ public class App
         }
     }
 }
-
-class A
-{
-    public void test() {
-        System.out.println("test from A");
-    }
-}
-
-class B extends A
-{
-    @Override
-    public void test() {
-        System.out.println("test from B");
-    }
-}
