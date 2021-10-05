@@ -20,8 +20,8 @@ public class App
         - String address
         - Set<Book> books
         - public Book addBook(String title, String author, int pages)
-        - public Book removeBook(String title, String author)
-        - public boolean hasBook(String title, String author)
+        - public Book removeBook(String title, String author, int pages)
+        - public boolean hasBook(String title, String author, int pages)
 
         методы addBook и removeBook принимают поля книги
 
