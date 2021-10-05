@@ -1,8 +1,6 @@
 package ru.pa4ok.demoexam;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * alt + enter - контекстное меню по исправлению ошибки
@@ -20,7 +18,7 @@ public class App
 
         Library
         - String address
-        - List<Book> books
+        - Set<Book> books
         - public Book addBook(String title, String author, int pages)
         - public Book removeBook(String title, String author)
         - public boolean hasBook(String title, String author)
@@ -36,19 +34,85 @@ public class App
 
     public static void main(String[] args)
     {
-        Library lib = new Library("qwefoipjewfjew");
-        lib.addBook("t1", "a1", 10);
-        lib.addBook("t2", "a2", 10);
-        lib.addBook("t3", "a3", 10);
-        lib.addBook("t4", "a4", 10);
-        System.out.println(lib);
-        System.out.println(lib.hasBook("t4", "a4"));
-        System.out.println(lib.hasBook("t5", "a5"));
-        System.out.println(lib.addBook("t5", "a5", 10));
-        System.out.println(lib.addBook("t5", "a5", 10));
-        System.out.println(lib);
-        System.out.println(lib.removeBook("t5", "a5"));
-        System.out.println(lib.removeBook("t5", "a5"));
-        System.out.println(lib);
+        /*List<String> list1 = new ArrayList<>();
+        List<Book> list2 = new ArrayList<>();
+
+        list1.add("123");
+        list2.add(new Book("123"));
+
+        System.out.println(list1.contains("123"));
+        System.out.println(list2.contains(new Book("123")));
+
+        Book b1 = new Book("123");
+        Book b2 = new Book("123");
+        System.out.println(b1.equals(b2));*/
+
+        //long startMills = System.currentTimeMillis();
+
+        /*List<Book> list = new ArrayList<>();
+        for(int i=0; i<1000; i++) {
+            list.add(new Book("title-" + i));
+        }
+
+        System.out.println(list);
+        for(int i=0; i<1000; i++) {
+            for(int j=0; j<1000; j++) {
+                Book b = new Book("title-" + i);
+                if(!list.contains(b)) {
+                    list.add(b);
+                }
+            }
+        }
+        System.out.println(list);*/
+
+        /*Set<Book> set = new HashSet<>();
+        for(int i=0; i<1000; i++) {
+            set.add(new Book("title-" + i));
+        }
+
+        System.out.println(set);
+        for(int i=0; i<1000; i++) {
+            for(int j=0; j<1000; j++) {
+                set.add(new Book("title-" + i));
+            }
+        }
+        System.out.println(set);*/
+
+        //System.out.println((System.currentTimeMillis() - startMills) + "ms");
+
+        Book b1 = new Book("123");
+        Book b2 = new Book("123");
+
+        System.out.println(b1.hashCode());
+        System.out.println(b2.hashCode());
+    }
+}
+
+class Book
+{
+    public String title;
+
+    public Book(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(title, book.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                '}';
     }
 }
