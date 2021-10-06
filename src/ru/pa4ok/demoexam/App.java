@@ -1,8 +1,8 @@
 package ru.pa4ok.demoexam;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * shift + F10 - запуск последней конфигурации
@@ -15,49 +15,95 @@ public class App
 {
     /*
         Book
-        - String title (>3 & <20 символов)
-        - String author (>3 & <20 символов)
-        - int pages (>0)
+        - String author
+        - String title
+        - ing pages
 
         Library
         - String address
-        - Book[] books
-        - public void readBook()
-            метод должен запрашивать у пользователя все поля книги и создавать из них ее объект после чего добавлять в библиотеку
-            если пользователь вводит неверные значения выбрасывать BookReadException
-            если после чтения полей в бибилиотеке нет места то выбрасывать LibrarySpaceException
+        - List<Book> books
+        - public boolean hasBook(String title, String author, int pages)
+        - public Book addBook(String title, String author, int pages)
+        - public Book removeBook(String title, String author, int pages)
 
-        BookReadException extends Exception
+        методы addBook и removeBook принимают поля книги
 
-        LibrarySpaceException extends Exception
-        - Book book
+        добавить книгу нужно только в том случае, если нет аналогичной
+        если аналогичная книга есть, метод возврает null, если книга успешно добавлена - вернуть ее
+
+        метод удаления книги возвращает объект удаленной из коллекции книги
+        если такой книги в списке нет - возращаете null
      */
-
 
     public static void main(String[] args)
     {
-        Library lib = new Library(
-                "wefwefpoiewfhwe",
-                new Book[]{
-                        null,
-                        new Book("title1", "author1", 10),
-                        null
-                }
-        );
+        /*Container c1 = new Container("wefwfewf");
+        String s = (String) c1.value;
 
-        System.out.println(lib);
+        Container c2 = new Container(new Book("efjiwef", "werfwef", 22));
+        Book book = (Book) c2.value;*/
 
-        while(true)
-        {
-            try {
-                lib.readBook();
-            } catch (BookReadException e) {
-                System.out.println("ошибка чтения книги");
-                e.printStackTrace();
-            } catch (LibrarySpaceException e) {
-                System.out.println("место кончилось на книге: " + e.getBook());
-                break;
+        /*Container<String> c1 = new Container<>("wefwfewf");
+        String s = c1.value;
+
+        Container<Book> c2 = new Container<>(new Book("efjiwef", "werfwef", 22));
+        Book book = c2.value;*/
+
+        /*List<String> list = new ArrayList<>();
+        list.add("one");
+        list.add("two");
+        list.add("three");
+        System.out.println(list);
+        System.out.println(list.size());
+        System.out.println(list.isEmpty());
+        //list.clear();
+        System.out.println(list.get(1));
+        list.set(0, "aaaa");
+        System.out.println(list);
+        list.remove(2);
+        System.out.println(list);*/
+
+        List<String> list = new ArrayList<>(Arrays.asList(
+                "1", "22", "3", "44", "55", "7", "88"
+        ));
+
+        System.out.println(list);
+
+        /*for(String s : list) {
+            //...
+        }*/
+
+        /*for(int i=0; i<list.size(); i++) {
+            if(list.get(i).length() > 1) {
+                list.remove(i);
+                i--;
             }
-        }
+        }*/
+
+        /*for(int i=list.size()-1; i>=0; i--) {
+            if(list.get(i).length() > 1) {
+                list.remove(i);
+            }
+        }*/
+
+        list.removeIf(s -> s.length() > 1);
+
+        System.out.println(list);
+    }
+}
+
+class Container<T>
+{
+    public T value;
+
+    public Container(T value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "Container{" +
+                "value=" + value +
+                '}';
     }
 }
