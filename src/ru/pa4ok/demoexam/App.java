@@ -1,8 +1,6 @@
 package ru.pa4ok.demoexam;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class App
 {
@@ -14,10 +12,10 @@ public class App
 
         Library
         - String address
-        - List<Book> books
+        - Set<Book> books
         - public Book addBook(String title, String author, int pages)
-        - public Book removeBook(String title, String author)
-        - public boolean hasBook(String title, String author)
+        - public Book removeBook(String title, String author, int pages)
+        - public boolean hasBook(String title, String author, int pages)
 
         методы addBook и removeBook принимают поля книги
 
@@ -74,7 +72,7 @@ public class App
 
         System.out.println(b1.equals(b2));*/
 
-        List<Book> list = new ArrayList<>(Arrays.asList(
+        /*List<Book> list = new ArrayList<>(Arrays.asList(
                 new Book("t1", "a1", 10),
                 new Book("t2", "a2", 10),
                 new Book("t3", "a3", 10)
@@ -85,6 +83,51 @@ public class App
         System.out.println(list.contains(new Book("efwefwefwfe", "a3", 10)));
         System.out.println(list.remove(new Book("t3", "a3", 10)));
         System.out.println(list.remove(new Book("tëfwewfwefwewf3", "a3", 10)));
-        System.out.println(list);
+        System.out.println(list);*/
+
+        /*List<Book> list = new ArrayList<>();
+        for(int i=0; i<1000; i++) {
+            list.add(new Book("title-" + i, "author-" + i, i));
+        }
+
+        long startMills = System.currentTimeMillis();
+
+        for(int i=0; i<1000; i++) {
+            for(int j=999; j>=0; j--) {
+                Book b = new Book("title-" + j, "author-" + j, j);
+                if(!list.contains(b)) {
+                    list.add(b);
+                }
+             }
+        }
+
+        System.out.println((System.currentTimeMillis() - startMills) + "ms");*/
+
+        /*Set<Book> set = new HashSet<>();
+        set.add(new Book("t1", "a1", 10));
+        set.add(new Book("t2", "a2", 10));
+        set.add(new Book("t1", "a1", 10));
+        System.out.println(set);*/
+
+        /*Book b1 = new Book("t1", "a1", 10);
+        Book b2 = new Book("t1", "a1", 10);
+
+        System.out.println(b1.hashCode());
+        System.out.println(b2.hashCode());*/
+
+        /*Set<Book> set = new HashSet<>();
+        for(int i=0; i<1000; i++) {
+            set.add(new Book("title-" + i, "author-" + i, i));
+        }
+
+        long startMills = System.currentTimeMillis();
+
+        for(int i=0; i<1000; i++) {
+            for(int j=999; j>=0; j--) {
+                set.add(new Book("title-" + j, "author-" + j, j));
+            }
+        }
+
+        System.out.println((System.currentTimeMillis() - startMills) + "ms");*/
     }
 }
