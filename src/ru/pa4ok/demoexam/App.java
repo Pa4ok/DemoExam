@@ -35,9 +35,9 @@ public class App
 
     public static void main(String[] args)
     {
-        /*Library lib = new Library(
+        Library lib = new Library(
                 "grreegerrgger",
-                new ArrayList<>(Arrays.asList(
+                new HashSet<>(Arrays.asList(
                     new Book("t1", "a1", 10),
                         new Book("t2", "a2", 10),
                         new Book("t3", "a3", 10)
@@ -45,82 +45,14 @@ public class App
         );
 
         System.out.println(lib);
-        System.out.println(lib.hasBook("t3", "a3"));
-        System.out.println(lib.hasBook("t4", "a4"));
+        System.out.println(lib.hasBook("t3", "a3", 10));
+        System.out.println(lib.hasBook("t4", "a4", 10));
         System.out.println(lib.addBook("t4", "a4", 10));
         System.out.println(lib.addBook("t4", "a4", 10));
-        System.out.println(lib.hasBook("t4", "a4"));
-        System.out.println(lib.removeBook("t1", "a1"));
-        System.out.println(lib.removeBook("t1", "a1"));
-        System.out.println(lib);*/
-
-        /*Book b1 = new Book("1", "1", 1);
-        Book b2 = new Book("1", "1", 1);
-
-        System.out.println(b1.equals(b2));*/
-
-        /*List<Book> list = new ArrayList<>(Arrays.asList(
-                new Book("t1", "a1", 10),
-                new Book("t2", "a2", 10),
-                new Book("t3", "a3", 10)
-        ));
-
-        System.out.println(list);
-        list.remove(new Book("t2", "a2", 10));
-        System.out.println(list);*/
-
-       /* Set<Book> set = new HashSet<>();
-        set.add(new Book("t2", "a2", 10));
-        set.add(new Book("t1", "a1", 10));
-        set.add(new Book("t2", "a2", 10));
-        System.out.println(set);*/
-
-        /*Book b1 = new Book("t2", "a2", 10);
-        Book b2 = new Book("t3", "a2", 10);
-
-        System.out.println(b1.hashCode());
-        System.out.println(b2.hashCode());*/
-
-        /*List<Book> list = new ArrayList<>();
-        for(int i=0; i<1000; i++) {
-            list.add(new Book("title-" + i, "author-" + i, i));
-        }
-
-        long mills = System.currentTimeMillis();
-
-        for(int i=0; i<1000; i++) {
-            for(int j=0; j<1000; j++) {
-                Book b = new Book("title-" + i, "author-" + i, i);
-                if(!list.contains(b)) {
-                    list.add(b);
-
-                }
-            }
-        }
-
-        System.out.println(System.currentTimeMillis() - mills + "ms");*/
-
-        /*Set<Book> set = new HashSet<>();
-        for(int i=0; i<1000; i++) {
-            set.add(new Book("title-" + i, "author-" + i, i));
-        }
-
-        long mills = System.currentTimeMillis();
-
-        for(int i=0; i<1000; i++) {
-            for(int j=0; j<1000; j++) {
-                set.add(new Book("title-" + i, "author-" + i, i));
-            }
-        }
-
-        System.out.println(System.currentTimeMillis() - mills + "ms");*/
-
-        Set<Book> set = new HashSet<>();
-        for(Book b : set) {
-        }
-
-        boolean b1 = set.add(new Book("1", "1", 1));
-        boolean b2 = set.remove(new Book("1", "1", 1));
+        System.out.println(lib.hasBook("t4", "a4", 10));
+        System.out.println(lib.removeBook("t1", "a1", 10));
+        System.out.println(lib.removeBook("t1", "a1", 10));
+        System.out.println(lib);
     }
 }
 
