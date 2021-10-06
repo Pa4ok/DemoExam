@@ -35,120 +35,26 @@ public class App
         если такой книги в списке нет - возращаете null
      */
 
-    public static void main(String[] args) {
-        /*Container<Book> c = new Container<>(new Book("werkweofhew"));
-        System.out.println(c.value.title);*/
+    public static void main(String[] args)
+    {
+        Library lib = new Library(
+                "grreegerrgger",
+                new ArrayList<>(Arrays.asList(
+                    new Book("t1", "a1", 10),
+                        new Book("t2", "a2", 10),
+                        new Book("t3", "a3", 10)
+                ))
+        );
 
-        /*List<String> list = new ArrayList<>();
-        list.add("one");
-        list.add("two");
-        list.add("three");
-        System.out.println(list);
-        System.out.println(list.get(0));
-        list.set(0, "aaaa");
-        System.out.println(list);
-        System.out.println(list.contains("one"));
-        System.out.println(list.contains("two"));
-        System.out.println(list.remove("two"));
-        System.out.println(list.remove(1));
-        System.out.println(list.size());
-        System.out.println(list);
-        test(list);
-        System.out.println(list);*/
-
-        List<String> list = new ArrayList<>(Arrays.asList(
-                "1", "22", "3", "44", "55", "55", "5", "66", "7"
-        ));
-
-        System.out.println(list);
-
-        /*for(int i=0; i<list.size(); i++) {
-            String s = list.get(i);
-            if(s.length() > 1) {
-                list.remove(i);
-            }
-        }*/
-        /*for(int i=list.size()-1; i>=0; i--) {
-            String s = list.get(i);
-            if(s.length() > 1) {
-                list.remove(i);
-            }
-        }*/
-
-        //list.removeIf(s -> s.length() > 1);
-
-        /*for(String s : list) {
-            if(s.length() > 1) {
-                list.remove(s);
-            }
-        }*/
-
-        System.out.println(list);
-
-        /*for(String s : list) {
-            //...
-        }*/
-
-
-        /*System.out.println(list);
-        list.add("1");
-        System.out.println(list);
-
-        Test t = new Test();
-        t.getList().add("123");
-        t.getList().add("123");*/
-
-        String s1 = "12ewfef";
-        String s2 = "12ewfef";
-        boolean b = s1.equals(s2);
-    }
-
-
-    public static void test(List<String> list) {
-        list.add("123");
+        System.out.println(lib);
+        System.out.println(lib.hasBook("t3", "a3"));
+        System.out.println(lib.hasBook("t4", "a4"));
+        System.out.println(lib.addBook("t4", "a4", 10));
+        System.out.println(lib.addBook("t4", "a4", 10));
+        System.out.println(lib.hasBook("t4", "a4"));
+        System.out.println(lib.removeBook("t1", "a1"));
+        System.out.println(lib.removeBook("t1", "a1"));
+        System.out.println(lib);
     }
 }
 
-class Container<T> {
-    public T value;
-
-    public Container(T value) {
-        this.value = value;
-    }
-
-    public void test() {
-        if (value instanceof Book) {
-            Book b = (Book) value;
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "Container{" +
-                "value=" + value +
-                '}';
-    }
-}
-
-class Book {
-    public String title;
-
-    public Book(String title) {
-        this.title = title;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                '}';
-    }
-}
-
-class Test {
-    private List<String> list = new ArrayList<>();
-
-    public List<String> getList() {
-        return list;
-    }
-}
