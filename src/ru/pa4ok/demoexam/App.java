@@ -22,17 +22,9 @@ public class App //
         Library
         - String address
         - List<Book> books
-        - public boolean hasBook(String title, String author, int pages)
-        - public Book addBook(String title, String author, int pages)
-        - public Book removeBook(String title, String author, int pages)
-
-        методы addBook и removeBook принимают поля книги
-
-        добавить книгу нужно только в том случае, если нет аналогичной
-        если аналогичная книга есть, метод возврает null, если книга успешно добавлена - вернуть ее
-
-        метод удаления книги возвращает объект удаленной из коллекции книги
-        если такой книги в списке нет - возращаете null
+        - public boolean hasBook(Book book)
+        - public boolean addBook(Book book)
+        - public boolean removeBook(Book book)
      */
 
     public static void main(String[] args)
@@ -91,7 +83,7 @@ public class App //
         //list.removeIf(s -> s.length() > 1);
         //System.out.println(list);
 
-        Library lib = new Library(
+        /*Library lib = new Library(
                 "weprigjpqwofqw",
                 new ArrayList<>(Arrays.asList(
                         new Book("t1", "a1", 10)
@@ -107,7 +99,28 @@ public class App //
         System.out.println(lib.hasBook("t2", "a2", 10));
         System.out.println(lib.removeBook("t2", "a2", 10));
         System.out.println(lib.removeBook("t2", "a2", 10));
-        System.out.println(lib);
+        System.out.println(lib);*/
+
+
+        Book b2 = new Book("t2", "a2", 10);
+        List<Book> list = new ArrayList<>(Arrays.asList(
+                new Book("t1", "a1", 10),
+                b2,
+                new Book("t3", "a3", 10)
+        ));
+
+        //System.out.println(list.contains(b2));
+        //System.out.println(list.contains(new Book("t2", "a2", 10)));
+        /*System.out.println(list);
+        System.out.println(list.remove(new Book("t2", "a2", 10)));
+        System.out.println(list);
+
+        */
+
+        for(Book b : list) {
+            System.out.println(b2.equals(b));
+        }
+
     }
 }
 
