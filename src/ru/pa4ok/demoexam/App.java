@@ -6,6 +6,7 @@ public class App
 {
     /*
         Book
+        - int id
         - String author
         - String title
         - ing pages
@@ -13,38 +14,45 @@ public class App
         Library
         - String address
         - Set<Book> books
-        - public Book addBook(String title, String author, int pages)
-        - public Book removeBook(String title, String author, int pages)
-        - public boolean hasBook(String title, String author, int pages)
+        - Map<Integer, Book> bookIdCache //ключ - id книги, объект - сама книга
 
-        методы addBook и removeBook принимают поля книги
+        - public boolean addBook(Book book)
+        - public boolean hasBook(Book book)
+        - public boolean removeBook(Book book)
 
-        добавить книгу нужно только в том случае, если нет аналогичной
-        если аналогичная книга есть, метод возврает null, если книга успешно добавлена - вернуть ее
+        - public Book addBook(int id, String title, String author, int pages)
+        - public Book hasBook(int bookId)
+        - public Book removeBook(int bookId)
 
-        метод удаления книги возвращает объект удаленной из коллекции книги
-        если такой книги в списке нет - возращаете null
+        при добавлении или удалении книги из библиотеки необходимо обновлять bookIdCache
+
+        методы которые принимают объект возрают true/false если они смогли найти/добавить/удалить такую книгу
+
+        методы которые принимают поля книги/ее id, возврают саму книгу, если они ее нашли/добавали/удалили
+        если не смогли - возрашают null
      */
 
     public static void main(String[] args)
     {
-        Library lib = new Library(
-                "wpefowepofwe",
-                new HashSet<>(Arrays.asList(
-                        new Book("t1", "a1", 10),
-                        new Book("t2", "a2", 10),
-                        new Book("t3", "a3", 10),
-                        new Book("t4", "a4", 10)
-                ))
-        );
-        System.out.println(lib);
-        System.out.println(lib.hasBook("t3", "a3", 10));
-        System.out.println(lib.hasBook("t5", "a5", 10));
-        System.out.println(lib.addBook("t5", "a5", 10));
-        System.out.println(lib.addBook("t5", "a5", 10));
-        System.out.println(lib.hasBook("t5", "a5", 10));
-        System.out.println(lib.removeBook("t1", "a1", 10));
-        System.out.println(lib.removeBook("t1", "a1", 10));
-        System.out.println(lib);
+        /*Map<String, String> map = new HashMap<>();
+        map.put("testkey1", "testvalue1");
+        map.put("testkey2", "testvalue2");
+        System.out.println(map);
+        //System.out.println(map.get("testkey2"));
+        //System.out.println(map.get("pwefjipwefwei"));
+
+        //все значения
+        List<String> values = new ArrayList<>(map.values());
+        System.out.println(values);
+
+        //все ключи
+        //List<String> keys = new ArrayList<>(map.keySet());
+        Set<String> keys = new HashSet<>(map.keySet());
+        System.out.println(keys);
+
+        //Set<Map.Entry<String, String>> entrySet = map.entrySet();
+        for(Map.Entry<String, String> entry : map.entrySet()) {
+            System.out.println("ключ: " + entry.getKey() + " | " + "значение: " + entry.getValue());
+        }*/
     }
 }
