@@ -62,9 +62,9 @@ public class App //
         System.out.println(list.size());
         System.out.println(list.isEmpty());*/
 
-        List<String> list = new ArrayList<>(Arrays.asList(
+        /*List<String> list = new ArrayList<>(Arrays.asList(
                 "1","22","3","44","55","66","7","88","9"
-        ));
+        ));*/
 
         /*for(int i=0; i<list.size(); i++) {
             System.out.println(list.get(i));
@@ -73,7 +73,7 @@ public class App //
             System.out.println(s);
         }*/
 
-        System.out.println(list);
+        //System.out.println(list);
 
         /*for(int i=0; i<list.size(); i++) {
             if(list.get(i).length() > 1) {
@@ -88,9 +88,26 @@ public class App //
             }
         }*/
 
-        list.removeIf(s -> s.length() > 1);
+        //list.removeIf(s -> s.length() > 1);
+        //System.out.println(list);
 
-        System.out.println(list);
+        Library lib = new Library(
+                "weprigjpqwofqw",
+                new ArrayList<>(Arrays.asList(
+                        new Book("t1", "a1", 10)
+                ))
+        );
+
+        System.out.println(lib);
+        System.out.println(lib.hasBook("t1", "a1", 10));
+        System.out.println(lib.hasBook("t2", "a2", 10));
+        System.out.println(lib.addBook("t2", "a2", 10));
+        System.out.println(lib.addBook("t2", "a2", 10));
+        System.out.println(lib.addBook("t2", "a2", 10));
+        System.out.println(lib.hasBook("t2", "a2", 10));
+        System.out.println(lib.removeBook("t2", "a2", 10));
+        System.out.println(lib.removeBook("t2", "a2", 10));
+        System.out.println(lib);
     }
 }
 
