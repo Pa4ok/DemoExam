@@ -21,7 +21,7 @@ public class Library
         Book b = new Book(title, author, pages);
         return books.remove(b) ? b : null;
     }
-  
+
     public boolean hasBook(String title, String author, int pages) {
         return books.contains(new Book(title, author, pages));
     }
