@@ -12,23 +12,23 @@ public class Library
         this.books = books;
     }
 
-    public boolean hasBook(String title, String author, int pages) {
+    public boolean hasBook(Book book) {
         for(Book b : books) {
-            if(title.equals(b.getTitle()) && author.equals(b.getAuthor()) && pages == b.getPages()) {
+            if(b.equals(book)) {
                 return true;
             }
         }
         return false;
     }
 
-    public Book addBook(String title, String author, int pages) {
+    /*public Book addBook(String title, String author, int pages) {
         if(hasBook(title, author, pages)) {
             return null;
         }
         Book b = new Book(title, author, pages);
         books.add(b);
         return b;
-    }
+    }*/
 
     public Book removeBook(String title, String author, int pages) {
         for(int i=0; i<books.size(); i++) {
