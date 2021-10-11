@@ -1,8 +1,6 @@
 package ru.pa4ok.demoexam;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * shift + F10 - запуск последней конфигурации
@@ -13,7 +11,7 @@ import java.util.List;
 
 public class App
 {
-    /*
+     /*
         Book
         - String author
         - String title
@@ -21,7 +19,7 @@ public class App
 
         Library
         - String address
-        - List<Book> books
+        - Set<Book> books
         - public boolean hasBook(String title, String author, int pages)
         - public Book addBook(String title, String author, int pages)
         - public Book removeBook(String title, String author, int pages)
@@ -37,73 +35,99 @@ public class App
 
     public static void main(String[] args)
     {
-        /*Container c1 = new Container("wefwfewf");
-        String s = (String) c1.value;
+        /*List<Test> list = new ArrayList<>();
+        for(int i=0; i<1000; i++) {
+            list.add(new Test("value-a-" + i, "value-b-" + i,"value-c-" + i));
+        }
 
-        Container c2 = new Container(new Book("efjiwef", "werfwef", 22));
-        Book book = (Book) c2.value;*/
+        long startMills = System.currentTimeMillis();
 
-        /*Container<String> c1 = new Container<>("wefwfewf");
-        String s = c1.value;
+        for(int i=0; i<1000; i++) {
+            for(int j=0; j<1000; j++) {
+                Test t = new Test("value-a-" + j, "value-b-" + j,"value-c-" + j);
+                if(!list.contains(t)) {
+                    list.add(t);
+                }
+            }
+        }
 
-        Container<Book> c2 = new Container<>(new Book("efjiwef", "werfwef", 22));
-        Book book = c2.value;*/
+        System.out.println((System.currentTimeMillis() - startMills) + "ms");*/
 
-        /*List<String> list = new ArrayList<>();
-        list.add("one");
-        list.add("two");
-        list.add("three");
-        System.out.println(list);
-        System.out.println(list.size());
-        System.out.println(list.isEmpty());
-        //list.clear();
-        System.out.println(list.get(1));
-        list.set(0, "aaaa");
-        System.out.println(list);
-        list.remove(2);
-        System.out.println(list);*/
+       /* Set<Test> set = new HashSet<>();
+        for(int i=0; i<1000; i++) {
+            set.add(new Test("value-a-" + i, "value-b-" + i,"value-c-" + i));
+        }
 
-        List<String> list = new ArrayList<>(Arrays.asList(
-                "1", "22", "3", "44", "55", "7", "88"
-        ));
+        long startMills = System.currentTimeMillis();
 
-        System.out.println(list);
+        for(int i=0; i<1000; i++) {
+            for(int j=0; j<1000; j++) {
+                set.add(new Test("value-a-" + j, "value-b-" + j,"value-c-" + j));
+            }
+        }
 
-        /*for(String s : list) {
+        System.out.println((System.currentTimeMillis() - startMills) + "ms");*/
+
+        /*Set<Test> set = new HashSet<>();
+        set.add(new Test("1", "2", "3"));
+        set.add(new Test("4", "5", "6"));
+        set.add(new Test("0", "-1", "-2"));
+        System.out.println(set);
+
+        for(Test t : set) {
             //...
         }*/
 
-        /*for(int i=0; i<list.size(); i++) {
-            if(list.get(i).length() > 1) {
-                list.remove(i);
-                i--;
-            }
-        }*/
+       /* Test t1 = new Test("1", "2", "3");
+        Test t2 = new Test("4", "5", "6");
+        Test t3 = new Test("1", "2", "3");
 
-        /*for(int i=list.size()-1; i>=0; i--) {
-            if(list.get(i).length() > 1) {
-                list.remove(i);
-            }
-        }*/
+        System.out.println(t1.hashCode());
+        System.out.println(t2.hashCode());
+        System.out.println(t3.hashCode());*/
 
-        list.removeIf(s -> s.length() > 1);
+        /*String s1 = "123321";
+        String s2 = "123321";
+        System.out.println(s1.equals(s2));*/
 
-        System.out.println(list);
+        Test t1 = new Test("1", "2", "3");
+        Test t2 = new Test("1", "2", "3");
+        System.out.println(t1.equals(t2));
+
     }
 }
 
-class Container<T>
+class Test
 {
-    public T value;
+    public String a;
+    public String b;
+    public String c;
 
-    public Container(T value) {
-        this.value = value;
+    public Test(String a, String b, String c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Test test = (Test) o;
+        return Objects.equals(a, test.a) && Objects.equals(b, test.b) && Objects.equals(c, test.c);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(a, b, c);
     }
 
     @Override
     public String toString() {
-        return "Container{" +
-                "value=" + value +
+        return "Test{" +
+                "a='" + a + '\'' +
+                ", b='" + b + '\'' +
+                ", c='" + c + '\'' +
                 '}';
     }
 }
