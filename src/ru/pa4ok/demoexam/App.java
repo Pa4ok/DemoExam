@@ -14,108 +14,59 @@ public class App
 {
     /*
         Book
-        - String title
+        - int id
         - String author
+        - String title
         - ing pages
 
         Library
         - String address
         - Set<Book> books
-        - public boolean hasBook(String title, String author, int pages)
-        - public Book addBook(String title, String author, int pages)
-        - public Book removeBook(String title, String author, int pages)
+        - Map<Integer, Book> bookIdCache //ключ - id книги, объект - сама книга
 
-        методы addBook и removeBook принимают поля книги
+        - public boolean addBook(Book book)
+        - public boolean hasBook(Book book)
+        - public boolean removeBook(Book book)
 
-        добавить книгу нужно только в том случае, если нет аналогичной
-        если аналогичная книга есть, метод возврает null, если книга успешно добавлена - вернуть ее
+        - public Book addBook(int id, String title, String author, int pages)
+        - public Book hasBook(int bookId)
+        - public Book removeBook(int bookId)
 
-        метод удаления книги возвращает объект удаленной из коллекции книги
-        если такой книги в списке нет - возращаете null
+        при добавлении или удалении книги из библиотеки необходимо обновлять bookIdCache
+
+        методы которые принимают объект возрают true/false если они смогли найти/добавить/удалить такую книгу
+
+        методы которые принимают поля книги/ее id, возврают саму книгу, если они ее нашли/добавали/удалили
+        если не смогли - возрашают null
      */
 
     public static void main(String[] args)
     {
-        /*Library lib = new Library(
-                "wefpiewrifgjwe",
-                new ArrayList<>(Arrays.asList(
-                        new Book("title-1", "author-1", 10),
-                        new Book("title-2", "author-2", 10)
-                ))
-        );
+        /*Book b1 = new Book("title1", "author1", 10);
+        Book b2 = new Book("title2", "author2", 10);
+        Book b3 = new Book("title3", "author3", 10);
 
-        System.out.println(lib);
-        System.out.println(lib.hasBook("title-2", "author-2", 10));
-        System.out.println(lib.hasBook("title-3", "author-3", 10));
-        System.out.println(lib.addBook("title-3", "author-3", 10));
-        System.out.println(lib.addBook("title-3", "author-3", 10));
-        System.out.println(lib.removeBook("title-1", "author-1", 10));
-        System.out.println(lib.removeBook("title-1", "author-1", 10));
-        System.out.println(lib);*/
+        Map<String, Book> map = new HashMap<>();
+        map.put(b1.getTitle(), b1);
+        map.put(b2.getTitle(), b2);
+        map.put(b3.getTitle(), b3);
+        System.out.println(map);
 
-        /*Book b1 = new Book("title", "author", 10);
-        Book b2 = new Book("title", "author", 10);
-        System.out.println(b1 == b2);
-        System.out.println(b1.equals(b2));*/
+        System.out.println(map.get("title4"));
+        System.out.println(map.get("title2"));
 
-        /*List<Book> list = new ArrayList<>(Arrays.asList(
-                new Book("title-1", "author-1", 10),
-                new Book("title-2", "author-2", 10)
-        ));
+        Set<String> keys = map.keySet();
+        System.out.println(keys);
 
-        System.out.println(list);
-        //list.remove(new Book("title-1", "author-1", 10));
-        //System.out.println(list.indexOf(new Book("title-1", "author-1", 10)));
-        //System.out.println(list.indexOf(new Book("ewfweflknewfoew-1", "author-1", 10)));
-        System.out.println(list.contains(new Book("title-1", "author-1", 10)));
-        System.out.println(list.contains(new Book("wefwefwefwef-1", "author-1", 10)));
-        System.out.println(list);*/
+        List<Book> values = new ArrayList<>(map.values());
+        System.out.println(values);
 
-        Set<Book> set = new HashSet<>();
-        //set.add(new Book("t1", "a1", 10));
-        set.add(new Book("1t2wefwefew", "a2", 10));
-        set.add(new Book("trthy1", "a1", 10));
-        set.add(new Book("juy6ytujyt65yt1", "a1", 10));
-        set.add(new Book("442", "a1", 10));
-        System.out.println(set);
+        Set<Map.Entry<String, Book>> entries = map.entrySet();
+        for(Map.Entry<String, Book> e : entries) {
+            System.out.println(e.getKey() + " | " + e.getValue());
+        }*/
 
-        for(Book b : set) {
-            //...
-        }
-
-        set.removeIf(book -> book.getPages() < 50);
-
-        /*List<Book> list = new ArrayList<>();
-        for(int i=0; i<1000; i++) {
-            list.add(new Book("title-1", "auhtor-1", i*10));
-        }
-
-        long startMills = System.currentTimeMillis();
-
-        for(int i=0; i<1000; i++) {
-            for(int j=0; j<1000; j++) {
-                Book b = new Book("title-1", "auhtor-1", i*10);
-                if(!list.contains(b)) {
-                    list.add(b);
-                }
-            }
-        }
-
-        System.out.println((System.currentTimeMillis() - startMills) + "ms");*/
-
-        /*Set<Book> set = new HashSet<>();
-        for(int i=0; i<1000; i++) {
-            set.add(new Book("title-1", "auhtor-1", i*10));
-        }
-
-        long startMills = System.currentTimeMillis();
-
-        for(int i=0; i<1000; i++) {
-            for(int j=0; j<1000; j++) {
-                set.add(new Book("title-1", "auhtor-1", i*10));
-            }
-        }
-
-        System.out.println((System.currentTimeMillis() - startMills) + "ms");*/
-    }
+        List<Integer> list = new ArrayList<>();
+        list.add(3);
+   }
 }
