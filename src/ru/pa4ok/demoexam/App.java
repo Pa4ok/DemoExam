@@ -25,7 +25,7 @@ public class App {
         - public List<Book> getSortedById()
         - public List<Book> getSortedByTitle()
         - public List<Book> getSortedByPages()
-        - public List<Book> getAuthorBooks()
+        - public List<Book> getAuthorBooks(String author)
 
      */
 
