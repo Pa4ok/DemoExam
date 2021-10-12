@@ -1,29 +1,64 @@
 package ru.pa4ok.demoexam;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Library
 {
     private String address;
-    private Set<Book> books;
+    private Set<Book> books = new HashSet<>();
+    private Map<Integer, Book> bookIdCache = new HashMap<>();
 
-    public Library(String address, Set<Book> books) {
+    public Library(String address) {
         this.address = address;
-        this.books = books;
     }
 
-    public Book addBook(String title, String author, int pages) {
-        Book b = new Book(title, author, pages);
-        return books.add(b) ? b : null;
+    public boolean addBook(Book book) {
+        if(books.add(book)) {
+            bookIdCache.put(book.getId(), book);
+            return true;
+        }
+        return false;
     }
 
-    public Book removeBook(String title, String author, int pages) {
-        Book b = new Book(title, author, pages);
-        return books.remove(b) ? b : null;
+    public boolean hasBook(Book book) {
+        return books.contains(book);
     }
 
-    public boolean hasBook(String title, String author, int pages) {
-        return books.contains(new Book(title, author, pages));
+    public boolean removeBook(Book book) {
+        if(books.remove(book)) {
+            bookIdCache.remove(book.getId());
+            return true;
+        }
+        return false;
+    }
+
+    public Book addBook(int id, String title, String author, int pages) {
+        if(!bookIdCache.containsKey(id)) {
+            Book book = new Book(id, title, author, pages);
+            books.add(book);
+            bookIdCache.put(id, book);
+            return book;
+        }
+        return null;
+    }
+
+    public Book hasBook(int bookId) {
+        return bookIdCache.get(bookId);
+    }
+
+    public Book removeBook(int bookId) {
+        Book book = bookIdCache.remove(bookId);
+        if(book != null) {
+            books.remove(book);
+        }
+        return book;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     @Override
@@ -31,23 +66,8 @@ public class Library
         return "Library{" +
                 "address='" + address + '\'' +
                 ", books=" + books +
+                ", bookIdCache=" + bookIdCache +
                 '}';
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Set<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Set<Book> books) {
-        this.books = books;
     }
 }
 
