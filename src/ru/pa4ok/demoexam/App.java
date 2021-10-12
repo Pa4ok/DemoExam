@@ -8,13 +8,13 @@ import java.util.*;
  * alt + insert - контекстное меню по генерации кода (конструторы, toString, геттеры и сеттеры)
  */
 
-public class App
-{
-     /*
+public class App {
+
+    /*
         Book
         - int id
-        - String author
         - String title
+        - String author
         - ing pages
 
         Library
@@ -22,28 +22,69 @@ public class App
         - Set<Book> books
         - Map<Integer, Book> bookIdCache //ключ - id книги, объект - сама книга
 
-        - public boolean addBook(Book book)
-        - public boolean hasBook(Book book)
-        - public boolean removeBook(Book book)
+        - public List<Book> getSortedById()
+        - public List<Book> getSortedByTitle()
+        - public List<Book> getSortedByPages()
+        - public List<Book> getAuthorBooks()
 
-        - public Book addBook(int id, String title, String author, int pages)
-        - public Book hasBook(int bookId)
-        - public Book removeBook(int bookId)
-
-        при добавлении или удалении книги из библиотеки необходимо обновлять bookIdCache
-
-        методы которые принимают объект возрают true/false если они смогли найти/добавить/удалить такую книгу
-
-        методы которые принимают поля книги/ее id, возврают саму книгу, если они ее нашли/добавали/удалили
-        если не смогли - возрашают null
      */
-
 
     public static void main(String[] args)
     {
-       Library lib = new Library("ewrfwfewfew");
-       lib.addBook(new Book(1, "1", "1", 1));
-       lib.addBook(2, "2", "2", 2);
-       System.out.println(lib);
+        List<Book> list = new ArrayList<>(Arrays.asList(
+                new Book(3, "c", "3", 3),
+                new Book(1, "a", "1", 1),
+                new Book(2, "b", "2", 2)
+        ));
+
+        /*List<Book> newList = new ArrayList<>(list);
+        newList.removeIf(book -> book.getId() < 3);*/
+
+        //list.removeIf(book -> book.getPages() < 50);
+
+        System.out.println(list);
+
+        /*Collections.sort(list, (o1, o2) -> {
+            if(o1.getId() > o2.getId()) {
+                return 1;
+            }
+            if(o1.getId() < o2.getId()) {
+                return -1;
+            }
+            return 0;
+        });*/
+
+        /*Collections.sort(list, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                if(o1.getId() > o2.getId()) {
+                    return 1;
+                }
+                if(o1.getId() < o2.getId()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });*/
+
+        /*Collections.sort(list, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return Integer.compare(o1.getId(), o2.getId());
+            }
+        });*/
+
+        Collections.sort(list, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return o1.getTitle().compareTo(o2.getTitle());
+            }
+        });
+
+        System.out.println(list);
+
+        Collections.shuffle(list);
+
+        System.out.println(list);
     }
 }
