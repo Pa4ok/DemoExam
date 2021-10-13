@@ -2,57 +2,59 @@ package ru.pa4ok.demoexam;
 
 import java.util.*;
 
-public class App
-{
-    /*
-        Book
-        - int id
-        - String author
-        - String title
-        - ing pages
+public class App {
 
-        Library
-        - String address
-        - Set<Book> books
-        - Map<Integer, Book> bookIdCache //ключ - id книги, объект - сама книга
+    public static void main(String[] args) {
+        List<Book> list = new ArrayList<>(Arrays.asList(
+                new Book(2, "b", "2", 2),
+                new Book(1, "c", "1", 1),
+                new Book(3, "a", "3", 3)
 
-        - public boolean addBook(Book book)
-        - public boolean hasBook(Book book)
-        - public boolean removeBook(Book book)
+        ));
 
-        - public Book addBook(int id, String title, String author, int pages)
-        - public Book hasBook(int bookId)
-        - public Book removeBook(int bookId)
+        System.out.println(list);
 
-        при добавлении или удалении книги из библиотеки необходимо обновлять bookIdCache
+        /*Collections.sort(list, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                //-1 o1 < o2
+                //0 o1 == o2
+                //1 o1 > o2
 
-        методы которые принимают объект возрают true/false если они смогли найти/добавить/удалить такую книгу
+                if(o1.getId() > o2.getId()) {
+                    return 1;
+                }
+                if(o1.getId() < o2.getId()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });*/
 
-        методы которые принимают поля книги/ее id, возврают саму книгу, если они ее нашли/добавали/удалили
-        если не смогли - возрашают null
-     */
+        /*Collections.sort(list, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return Integer.compare(o1.getId(), o2.getId());
+            }
+        });*/
 
-    public static void main(String[] args)
-    {
-        /*Map<String, String> map = new HashMap<>();
-        map.put("testkey1", "testvalue1");
-        map.put("testkey2", "testvalue2");
-        System.out.println(map);
-        //System.out.println(map.get("testkey2"));
-        //System.out.println(map.get("pwefjipwefwei"));
+        Collections.sort(list, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return o1.getTitle().compareTo(o2.getTitle());
+            }
+        });
 
-        //все значения
-        List<String> values = new ArrayList<>(map.values());
-        System.out.println(values);
+        //тоже самое что и сверху
+        //Collections.sort(list, (o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
 
-        //все ключи
-        //List<String> keys = new ArrayList<>(map.keySet());
-        Set<String> keys = new HashSet<>(map.keySet());
-        System.out.println(keys);
+        System.out.println(list);
 
-        //Set<Map.Entry<String, String>> entrySet = map.entrySet();
-        for(Map.Entry<String, String> entry : map.entrySet()) {
-            System.out.println("ключ: " + entry.getKey() + " | " + "значение: " + entry.getValue());
-        }*/
+        Collections.shuffle(list);
+
+        System.out.println(list);
+
+        //копия коллекции, ЭЛЕМЕНТЫ 1 И ТЕ ЖЕ
+        //List<Book> copy = new ArrayList<>(list);
     }
 }
