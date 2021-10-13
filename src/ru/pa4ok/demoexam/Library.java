@@ -12,36 +12,19 @@ public class Library
         this.books = books;
     }
 
-    public boolean hasBook(String title, String author, int pages)
+    public boolean hasBook(Book book)
     {
-        for(Book b : books) {
-            if(b.getTitle().equals(title) && b.getAuthor().equals(author) && b.getPages() == pages) {
-                return true;
-            }
-        }
-        return false;
+        return books.contains(book);
     }
 
-    public Book addBook(String title, String author, int pages)
+    public boolean addBook(Book book)
     {
-        if(!hasBook(title, author, pages)) {
-            Book b = new Book(title, author, pages);
-            books.add(b);
-            return b;
-        }
-        return null;
+        return books.add(book);
     }
 
-    public Book removeBook(String title, String author, int pages)
+    public boolean removeBook(Book book)
     {
-        for(int i=0; i<books.size(); i++) {
-            Book b = books.get(i);
-            if(b.getTitle().equals(title) && b.getAuthor().equals(author) && b.getPages() == pages) {
-                books.remove(i);
-                return b;
-            }
-        }
-        return null;
+        return books.remove(book);
     }
 
     @Override
