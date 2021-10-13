@@ -1,37 +1,58 @@
 package ru.pa4ok.demoexam;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class Library
-{
+public class Library {
     private String address;
-    private Set<Book> books;
-
-    public Library(String address, Set<Book> books) {
-        this.address = address;
-        this.books = books;
-    }
+    private Set<Book> books = new HashSet<>();
+    private Map<Integer, Book> bookIdCache = new HashMap<>();
 
     public Library(String address) {
-        this(address, new HashSet<>());
+        this.address = address;
     }
 
-    public boolean hasBook(String title, String author, int pages) {
-        return books.contains(new Book(title, author, pages));
+    public boolean addBook(Book book) {
+        if(!bookIdCache.containsKey(book.getId())) {
+            books.add(book);
+            bookIdCache.put(book.getId(), book);
+            return true;
+        }
+        return false;
     }
 
-    public Book addBook(String title, String author, int pages)
+    public boolean hasBook(Book book) {
+        return bookIdCache.containsKey(book.getId());
+    }
+
+    public boolean removeBook(Book book) {
+        if(bookIdCache.remove(book.getId()) != null) {
+            books.remove(book);
+            return true;
+        }
+        return false;
+    }
+
+    public Book addBook(int id, String title, String author, int pages) {
+        if(!bookIdCache.containsKey(id)) {
+            Book b = new Book(id, title, author, pages);
+            books.add(b);
+            bookIdCache.put(id, b);
+            return b;
+        }
+        return null;
+    }
+
+    public Book hasBook(int bookId) {
+        return bookIdCache.get(bookId);
+    }
+
+    public Book removeBook(int bookId)
     {
-        Book b = new Book(title, author, pages);
-        return books.add(b) ? b : null;
-    }
-
-    public Book removeBook(String title, String author, int pages) {
-        Book b = new Book(title, author, pages);
-        return books.remove(b) ? b : null;
+        Book b = bookIdCache.remove(bookId);
+        if(b != null) {
+            books.remove(b);
+        }
+        return b;
     }
 
     @Override
@@ -39,6 +60,7 @@ public class Library
         return "Library{" +
                 "address='" + address + '\'' +
                 ", books=" + books +
+                ", bookIdCache=" + bookIdCache +
                 '}';
     }
 
@@ -56,5 +78,13 @@ public class Library
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    public Map<Integer, Book> getBookIdCache() {
+        return bookIdCache;
+    }
+
+    public void setBookIdCache(Map<Integer, Book> bookIdCache) {
+        this.bookIdCache = bookIdCache;
     }
 }
