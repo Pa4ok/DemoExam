@@ -4,6 +4,23 @@ import java.util.*;
 
 public class App {
 
+    /*
+        Book
+        - int id
+        - String author
+        - String title
+        - ing pages
+
+        Library
+        - String address
+        - Set<Book> books
+        - public List<Book> getSortedById()
+        - public List<Book> getSortedByTitle()
+        - public List<Book> getSortedByPages()
+        - public List<Book> getAuthorBooks(String author)
+
+     */
+
     public static void main(String[] args) {
         List<Book> list = new ArrayList<>(Arrays.asList(
                 new Book(2, "b", "2", 2),
