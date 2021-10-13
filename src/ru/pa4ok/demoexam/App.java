@@ -11,38 +11,72 @@ import java.util.*;
 
 public class App
 {
+
     /*
         Book
         - int id
-        - String title
         - String author
+        - String title
         - ing pages
 
         Library
         - String address
         - Set<Book> books
-        - Map<Integer, Book> bookIdCache //ключ - id книги, объект - сама книга
+        - public List<Book> getSortedById()
+        - public List<Book> getSortedByTitle()
+        - public List<Book> getSortedByPages()
+        - public List<Book> getAuthorBooks(String author)
 
-        - public boolean addBook(Book book)
-        - public boolean hasBook(Book book)
-        - public boolean removeBook(Book book)
-
-        - public Book addBook(int id, String title, String author, int pages)
-        - public Book hasBook(int bookId)
-        - public Book removeBook(int bookId)
-
-        при добавлении или удалении книги из библиотеки необходимо обновлять bookIdCache
-
-        методы которые принимают объект возрают true/false если они смогли найти/добавить/удалить такую книгу
-
-        методы которые принимают поля книги/ее id, возврают саму книгу, если они ее нашли/добавали/удалили
-        если не смогли - возрашают null
      */
 
     public static void main(String[] args)
     {
-        Library lib = new Library("grreegerrgger");
-        lib.
+        List<Book> list = new ArrayList<>(Arrays.asList(
+                new Book(2, "b", "2", 2),
+                new Book(1, "c", "2", 2),
+                new Book(3, "a", "2", 2)
+        ));
+
+        System.out.println(list);
+
+        /*Collections.sort(list, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                *//*
+                    -1: o1 <  o2
+                     0: o1 == o2
+                     1: o1 >  o2
+                 *//*
+                if(o1.getId() > o2.getId()) {
+                    return 1;
+                }
+                if(o1.getId() < o2.getId()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });*/
+
+        Collections.sort(list, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return Integer.compare(o1.getId(), o2.getId());
+            }
+        });
+
+        /*Collections.sort(list, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return o1.getTitle().compareTo(o2.getTitle());
+            }
+        });*/
+
+        //тоже самое что и наверху
+        //Collections.sort(list, (o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
+
+        System.out.println(list);
+
+        //List<Book> copy = new ArrayList<>(list);
     }
 }
 
