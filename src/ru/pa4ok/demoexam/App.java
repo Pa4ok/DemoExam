@@ -14,76 +14,103 @@ public class App
       /*
         Book
         - int id
-        - String title
         - String author
+        - String title
         - ing pages
 
         Library
         - String address
         - Set<Book> books
+        - Map<Integer, Book> bookIdCache //ключ - id книги, объект - сама книга
 
-        - public List<Book> getSortedById()
-        - public List<Book> getSortedByTitle()
-        - public List<Book> getSortedByPages()
-        - public List<Book> getAuthorBooks(String author)
+        - public boolean addBook(Book book)
+        - public boolean hasBook(Book book)
+        - public boolean removeBook(Book book)
+
+        - public Book addBook(int id, String title, String author, int pages)
+        - public Book hasBook(int bookId)
+        - public Book removeBook(int bookId)
+
+        при добавлении или удалении книги из библиотеки необходимо обновлять bookIdCache
+
+        методы которые принимают объект возрают true/false если они смогли найти/добавить/удалить такую книгу
+
+        методы которые принимают поля книги/ее id, возврают саму книгу, если они ее нашли/добавали/удалили
+        если не смогли - возрашают null
      */
 
     public static void main(String[] args)
     {
-        List<Book> list = new ArrayList<>(Arrays.asList(
-                new Book("a", "3", 3),
-                new Book("c", "1", 1),
-                new Book("b", "2", 2)
-        ));
+        Map<String, Test> map = new HashMap<>();
 
-        //копия спика
-        //List<Book> copy = new ArrayList<>(list);
+        Test t1 = new Test("1", 1);
+        Test t2 = new Test("2", 2);
+        Test t3 = new Test("1", 3);
 
-        //Set<Book> set = new HashSet<>();
-        //List<Book> copy = new ArrayList<>(set);
+        map.put(t1.title, t1);
+        map.put(t2.title, t2);
+        System.out.println(map);
+        /*map.put(t3.title, t3);
+        System.out.println(map);
+        System.out.println(map.containsKey("1"));
+        System.out.println(map.containsKey("3"));
+        System.out.println(map.get("2"));
+        System.out.println(map.remove("2"));
+        System.out.println(map.remove("2"));*/
 
-        System.out.println(list);
+        System.out.println();
 
-        /*Collections.sort(list, new Comparator<Book>() {
-            @Override
-            public int compare(Book o1, Book o2) {
-                *//*
-                    -1: o1 < o2
-                     0: o1 = o2
-                     1: o1 > o2
-                 *//*
-                if(o1.getPages() > o2.getPages()) {
-                    return 1;
-                }
-                if(o1.getPages() < o2.getPages()) {
-                    return -1;
-                }
-                return 0;
-            }
-        });*/
+        Set<String> keys = map.keySet();
+        System.out.println(keys);
 
-        /*Collections.sort(list, new Comparator<Book>() {
-            @Override
-            public int compare(Book o1, Book o2) {
-                return Integer.compare(o1.getPages(), o2.getPages());
-            }
-        });*/
+        System.out.println();
 
-        Collections.sort(list, new Comparator<Book>() {
-            @Override
-            public int compare(Book o1, Book o2) {
-                return o1.getTitle().compareTo(o2.getTitle());
-            }
-        });
+        List<Test> values = new ArrayList<>(map.values());
+        System.out.println(values);
 
-        //то же самое что и выше
-        //Collections.sort(list, (o1, o2) -> Integer.compare(o1.getPages(), o2.getPages()));
+        System.out.println();
 
-        //снова то же самое что и выше
-        //Collections.sort(list, Comparator.comparingInt(Book::getPages));
+        Set<Map.Entry<String, Test>> entries = map.entrySet();
+        for(Map.Entry<String, Test> e : entries) {
+            System.out.println(e.getKey() + " | " + e.getValue());
+        }
 
-        System.out.println(list);
+        //List<int> list = new ArrayList<>();
+        /*List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(3);
+        System.out.println(list);*/
+    }
+}
 
+class Test
+{
+    public String title;
+    public int value;
 
+    public Test(String title, int value) {
+        this.title = title;
+        this.value = value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Test test = (Test) o;
+        return value == test.value && Objects.equals(title, test.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, value);
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "title='" + title + '\'' +
+                ", value=" + value +
+                '}';
     }
 }
