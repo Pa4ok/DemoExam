@@ -1,77 +1,78 @@
 package ru.pa4ok.demoexam;
 
-import java.util.*;
-
 public class App {
-
     /*
-        Book
-        - int id
-        - String author
+        GameServer
+        - World world //мир c сущностями
+        - int updateCounter //колчество обновлений сервера
+        - public void updateServer()
+
+        class World
+        - List<Entity> entities
+        - public void updateWorld()
+        - public List<Entity> getEntitiesInRegion(int x, int y, double range)
+        - public List<Entity> getEntitiesNearEntity(Entity entity, double range)
+        - public List<EntityPlayer> getAllPlayers()
+
+        abstract Entity
         - String title
-        - ing pages
+        - int xPos
+        - int zPos
+        - int age //количество пережитых обновлений
+        - double maxHealth //максимальное колво хп
+        - double health //текущее количество хп
+        - public void update() //age++
+        - public boolean attackEntityFrom(Entity entity, double damage)
 
-        Library
-        - String address
-        - Set<Book> books
-        - public List<Book> getSortedById()
-        - public List<Book> getSortedByTitle()
-        - public List<Book> getSortedByPages()
-        - public List<Book> getAuthorBooks(String author)
+        EntityPlayer extends Entity
+        - double exp
+        - public void update()
+        - public boolean attackEntityFrom(Entity entity, double damage)
+        - public double calculateDamage()
 
+        EntityGuard extends Entity
+        - public void update()
+
+        EntityMonster extends Entity
+        - double damage
+        - public void update()
+
+        GameServer
+        updateServer фунция сначала увеличивает updateCounter на 1
+        потом вызывает у world функцию updateWorld
+
+        World
+        функция updateWorld перебирает всех сущностей и вызывает у них функцию update
+        после этого в конце обновления (мира) из списка должны удаляться все сущности у которых health <= 0
+
+        Entity описывает вообще всех сущностей
+        метод update в нем должен только увеличивать поле age на 1
+        метод attackEntityFrom принимает атакующую сущность и урон
+        должен вычитать урон из жизней сущности, возвращает true, если сущность умерла (health <= 0)
+
+        EntityGuard наследует Entity
+        метод update сначала должен вызывать родительскую реализацию
+        после чего искать ближайшего сущность EntityPlayer и двигаться к ней
+
+        EntityPlayer наследует Entity
+        метод update сначала должен вызывать родительскую реализацию
+        также раз в 2 обновления если health < maxHealth && health > 0, health нужно увеличить на 1
+        метод attackEntityFrom переопределяет родительский метод: если в радиусе 2есть EntityGuard
+        то они должны принимать урон вместо игрока (вызывать метод attackEntityFrom для них)
+        если рядом нет EntityGuard и после удара игрок выживает он вызывает attackEntityFrom для атакующей сущности
+        функция calculateDamage расчитывает урон игрока по формуле 3 + exp / 2
+        если игрок убивает сущность, то exp увеличивается на 1
+
+        EntityMonster наследует Entity
+        метод update сначала должен вызывать родительскую реализацию
+        после чего искать ближайшего сущность EntityPlayer и двигаться к ней
+        если в радиусе 2 есть сущность(ти) EntityPlayer
+        для них необходимо вызывать метод attackEntityFrom(this)
+
+        *движение сущностей
+        сущность за 1 обновление может смещаться на 1 по xPos и на 1 по zPos
      */
 
     public static void main(String[] args) {
-        List<Book> list = new ArrayList<>(Arrays.asList(
-                new Book(2, "b", "2", 2),
-                new Book(1, "c", "1", 1),
-                new Book(3, "a", "3", 3)
-
-        ));
-
-        System.out.println(list);
-
-        /*Collections.sort(list, new Comparator<Book>() {
-            @Override
-            public int compare(Book o1, Book o2) {
-                //-1 o1 < o2
-                //0 o1 == o2
-                //1 o1 > o2
-
-                if(o1.getId() > o2.getId()) {
-                    return 1;
-                }
-                if(o1.getId() < o2.getId()) {
-                    return -1;
-                }
-                return 0;
-            }
-        });*/
-
-        /*Collections.sort(list, new Comparator<Book>() {
-            @Override
-            public int compare(Book o1, Book o2) {
-                return Integer.compare(o1.getId(), o2.getId());
-            }
-        });*/
-
-        Collections.sort(list, new Comparator<Book>() {
-            @Override
-            public int compare(Book o1, Book o2) {
-                return o1.getTitle().compareTo(o2.getTitle());
-            }
-        });
-
-        //тоже самое что и сверху
-        //Collections.sort(list, (o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
-
-        System.out.println(list);
-
-        Collections.shuffle(list);
-
-        System.out.println(list);
-
-        //копия коллекции, ЭЛЕМЕНТЫ 1 И ТЕ ЖЕ
-        //List<Book> copy = new ArrayList<>(list);
     }
 }
