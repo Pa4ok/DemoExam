@@ -1,9 +1,8 @@
 package ru.pa4ok.demoexam;
 
-import java.util.Set;
+import java.util.*;
 
-public class Library
-{
+public class Library {
     private String address;
     private Set<Book> books;
 
@@ -12,19 +11,45 @@ public class Library
         this.books = books;
     }
 
-    public boolean hasBook(Book book)
+    public List<Book> getSortedById()
     {
-        return books.contains(book);
+        List<Book> list = new ArrayList<>(books);
+        Collections.sort(list, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return Integer.compare(o1.getId(), o2.getId());
+            }
+        });
+        return list;
     }
 
-    public boolean addBook(Book book)
+    public List<Book> getSortedByTitle()
     {
-        return books.add(book);
+        List<Book> list = new ArrayList<>(books);
+        Collections.sort(list, (o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
+        return list;
     }
 
-    public boolean removeBook(Book book)
+    public List<Book> getSortedByPages()
     {
-        return books.remove(book);
+        List<Book> list = new ArrayList<>(books);
+        Collections.sort(list, (o1, o2) -> Integer.compare(o1.getPages(), o2.getPages()));
+        return list;
+    }
+
+    public List<Book> getAuthorBooks(String author)
+    {
+        //List<Book> list = new ArrayList<>(books);
+        //list.removeIf(book -> !book.getAuthor().equals(author));
+
+        List<Book> list = new ArrayList<>();
+        for(Book book : books) {
+            if(book.getAuthor().equals(author)) {
+                list.add(book);
+            }
+        }
+
+        return list;
     }
 
     @Override

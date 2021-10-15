@@ -4,11 +4,13 @@ import java.util.Objects;
 
 public class Book
 {
+    private int id;
     private String title;
     private String author;
     private int pages;
 
-    public Book(String title, String author, int pages) {
+    public Book(int id, String title, String author, int pages) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.pages = pages;
@@ -19,21 +21,30 @@ public class Book
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return pages == book.pages && Objects.equals(title, book.title) && Objects.equals(author, book.author);
+        return id == book.id && pages == book.pages && Objects.equals(title, book.title) && Objects.equals(author, book.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, author, pages);
+        return Objects.hash(id, title, author, pages);
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", pages=" + pages +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

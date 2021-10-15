@@ -26,7 +26,6 @@ public class App
         - public List<Book> getSortedByTitle()
         - public List<Book> getSortedByPages()
         - public List<Book> getAuthorBooks(String author)
-
      */
 
     public static void main(String[] args)
@@ -39,6 +38,9 @@ public class App
 
         //копия спика
         //List<Book> copy = new ArrayList<>(list);
+
+        //Set<Book> set = new HashSet<>();
+        //List<Book> copy = new ArrayList<>(set);
 
         System.out.println(list);
 
