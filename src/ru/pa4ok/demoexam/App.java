@@ -11,6 +11,7 @@ import java.util.*;
 public class App {
       /*
         Book
+        - int id
         - String author
         - String title
         - ing pages
@@ -18,9 +19,22 @@ public class App {
         Library
         - String address
         - Set<Book> books
-        - public boolean hasBook(Book book)
+        - Map<Integer, Book> bookIdCache //ключ - id книги, объект - сама книга
+
         - public boolean addBook(Book book)
+        - public boolean hasBook(Book book)
         - public boolean removeBook(Book book)
+
+        - public Book addBook(int id, String title, String author, int pages)
+        - public Book hasBook(int bookId)
+        - public Book removeBook(int bookId)
+
+        при добавлении или удалении книги из библиотеки необходимо обновлять bookIdCache
+
+        методы которые принимают объект возрают true/false если они смогли найти/добавить/удалить такую книгу
+
+        методы которые принимают поля книги/ее id, возврают саму книгу, если они ее нашли/добавали/удалили
+        если не смогли - возрашают null
      */
 
 
@@ -44,69 +58,72 @@ public class App {
         System.out.println(lib.removeBook("title-1", "author-1", 10));
         System.out.println(lib);*/
 
-        /*Book b1 = new Book("title-1", "author-1", 10);
-        Book b2 = new Book("title-1", "author-1", 10);
+        Map<String, Test> map = new HashMap<>();
 
-        System.out.println(b1 == b2);
-        System.out.println(b1.equals(b2));*/
+        Test t1 = new Test("test1", 1);
+        Test t2 = new Test("test2", 2);
+        Test t3 = new Test("test3", 3);
 
-        /*List<Book> list = new ArrayList<>(Arrays.asList(
-                new Book("title-1", "author-1", 10),
-                new Book("title-2", "author-2", 10),
-                new Book("title-3", "author-3", 10)
-        ));
+        map.put(t1.title, t1);
+        map.put(t2.title, t2);
+        map.put(t3.title, t3);
+        map.put(t1.title, t1);
 
-        System.out.println(list);
-        list.remove(new Book("title-2", "author-2", 10));
-        System.out.println(list);
-        System.out.println(list.contains(new Book("title-3", "author-3", 10)));
-        System.out.println(list.contains(new Book("title-4", "author-3", 10)));
-        System.out.println(list.indexOf(new Book("title-3", "author-3", 10)));
-        System.out.println(list.indexOf(new Book("title-4", "author-3", 10)));*/
+        System.out.println(map);
+        System.out.println(map.containsKey("test3"));
+        System.out.println(map.containsKey("test4"));
+        System.out.println(map.get("test3"));
+        System.out.println(map.get("test4"));
+        System.out.println(map.remove("test3"));
+        System.out.println(map.remove("test3"));
+        System.out.println(map);
 
-        /*List<Book> list = new ArrayList<>();
-        for(int i=0; i<1000; i++) {
-            list.add(new Book("title-" + i, "author-" + i, i * 10));
+        Set<String> keys = map.keySet();
+        System.out.println(keys);
+
+        List<Test> values = new ArrayList<>(map.values());
+        System.out.println(values);
+
+        Set<Map.Entry<String, Test>> entries = map.entrySet();
+        for(Map.Entry<String, Test> e : entries) {
+            System.out.println(e.getKey() + " | " + e.getValue());
         }
 
-        long startMills = System.currentTimeMillis();
+        //List<int> intList = new ArrayList<>();
+        /*List<Integer> intList = new ArrayList<>();
+        intList.add(1);
+        intList.add(2);
+        System.out.println(intList);*/
+    }
+}
 
-        for(int i=0; i<1000; i++) {
-            for(int j=0; j<1000; j++) {
-                Book b = new Book("title-" + j, "author-" + j, j * 10);
-                if(!list.contains(b)) {
-                    list.add(b);
-                }
-            }
-        }
+class Test {
+    public String title;
+    public int value;
 
-        System.out.println((System.currentTimeMillis() - startMills) + "ms");*/
+    public Test(String title, int value) {
+        this.title = title;
+        this.value = value;
+    }
 
-        /*Set<Book> set = new HashSet<>();
-        set.add(new Book("fqwfewef-3", "author-3", 10));
-        set.add(new Book("tiwefweftle-2", "author-2", 10));
-        set.add(new Book("jyttyjtle-1", "author-1", 10));
-        System.out.println(set);
-        set.remove(new Book("tiwefweftle-2", "author-2", 10));
-        System.out.println(set);
+    @Override
+    public String toString() {
+        return "Test{" +
+                "title='" + title + '\'' +
+                ", value=" + value +
+                '}';
+    }
 
-        for(Book b : set) {
-            //...
-        }*/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Test test = (Test) o;
+        return value == test.value && Objects.equals(title, test.title);
+    }
 
-        Set<Book> set = new HashSet<>();
-        for(int i=0; i<1000; i++) {
-            set.add(new Book("title-" + i, "author-" + i, i * 10));
-        }
-
-        long startMills = System.currentTimeMillis();
-
-        for(int i=0; i<1000; i++) {
-            for(int j=0; j<1000; j++) {
-                set.add(new Book("title-" + j, "author-" + j, j * 10));
-            }
-        }
-
-        System.out.println((System.currentTimeMillis() - startMills) + "ms");
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, value);
     }
 }
