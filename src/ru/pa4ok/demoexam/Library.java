@@ -1,52 +1,30 @@
 package ru.pa4ok.demoexam;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 public class Library
 {
     private String address;
-    private List<Book> books;
+    private Set<Book> books;
 
-    public Library(String address, List<Book> books) {
+    public Library(String address, Set<Book> books) {
         this.address = address;
         this.books = books;
     }
 
-    public boolean hasBook(String title, String author, int pages)
+    public boolean hasBook(Book book)
     {
-        for(Book b : books) {
-            if(b.getTitle().equals(title) && b.getAuthor().equals(author) && b.getPages() == pages) {
-                return true;
-            }
-        }
-        return false;
+        return books.contains(book);
     }
 
-    public Book addBook(String title, String author, int pages)
+    public boolean addBook(Book book)
     {
-        if(!hasBook(title, author, pages)) {
-            Book b = new Book(title, author, pages);
-            books.add(b);
-            return b;
-        }
-        return null;
+        return books.add(book);
     }
 
-    public Book removeBook(String title, String author, int pages)
+    public boolean removeBook(Book book)
     {
-        for(int i=0; i<books.size(); i++) {
-            Book b = books.get(i);
-            if(b.getTitle().equals(title) && b.getAuthor().equals(author) && b.getPages() == pages) {
-                books.remove(i);
-                return b;
-            }
-        }
-        return null;
-    }
-
-    public Library(String address) {
-        this(address, new ArrayList<>());
+        return books.remove(book);
     }
 
     @Override
@@ -65,11 +43,11 @@ public class Library
         this.address = address;
     }
 
-    public List<Book> getBooks() {
+    public Set<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(List<Book> books) {
+    public void setBooks(Set<Book> books) {
         this.books = books;
     }
 }

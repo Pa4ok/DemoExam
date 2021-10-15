@@ -9,7 +9,7 @@ import java.util.*;
  * alt + insert - контекстное меню генерации кода (конструкторы, toString, геттеры и сеттеры)
  */
 
-public class App //
+public class App
 {
     /*
         Book
@@ -27,52 +27,15 @@ public class App //
 
     public static void main(String[] args)
     {
-        /*List<Book> list = new ArrayList<>();
-        for(int i=0; i<1000; i++) {
-            list.add(new Book("title-" + i, "author-" + i, i * 10));
-        }
+        Library lib = new Library(
+                "wfe;oefwefew",
+                new HashSet<>(Arrays.asList(
+                        new Book("1", "1", 1),
+                        new Book("2", "2", 2),
+                        new Book("3", "3", 3)
+                )));
 
-        long mills = System.currentTimeMillis();
-
-        for(int i=0; i<1000; i++) {
-            for(int j=0; j<1000; j++) {
-                Book b = new Book("title-" + j, "author-" + j, j * 10);
-                if(!list.contains(b)) {
-                    list.add(b);
-                }
-            }
-        }
-
-        System.out.println((System.currentTimeMillis() - mills) + "ms");*/
-
-        /*Set<Book> set = new HashSet<>();
-        set.add(new Book("1", "1", 1));
-        set.add(new Book("2", "2", 2));
-        set.add(new Book("1", "1", 1));
-        System.out.println(set);
-        System.out.println(set.contains(new Book("2", "2", 2)));
-        System.out.println(set.contains(new Book("3", "2", 2)));
-        System.out.println(set.remove(new Book("2", "2", 2)));
-        System.out.println(set.remove(new Book("3", "2", 2)));
-        System.out.println(set);
-
-        for(Book b : set) {
-            //...
-        }*/
-
-        Set<Book> set = new HashSet<>();
-        for(int i=0; i<1000; i++) {
-            set.add(new Book("title-" + i, "author-" + i, i * 10));
-        }
-
-        long mills = System.currentTimeMillis();
-
-        for(int i=0; i<1000; i++) {
-            for(int j=0; j<1000; j++) {
-                set.add(new Book("title-" + j, "author-" + j, j * 10));
-            }
-        }
-
-        System.out.println((System.currentTimeMillis() - mills) + "ms");
+        lib.addBook(new Book("4", "4", 4));
+        lib.getBooks().add(new Book("5", "5", 5));
     }
 }
