@@ -4,52 +4,60 @@ import java.util.*;
 
 public class Library {
     private String address;
-    private Set<Book> books;
+    private Set<Book> books = new HashSet<>();
+    private Map<Integer, Book> bookIdCache = new HashMap<>();
 
-    public Library(String address, Set<Book> books) {
+    public Library(String address) {
         this.address = address;
-        this.books = books;
     }
 
-    public List<Book> getSortedById()
+    public boolean addBook(Book book)
     {
-        List<Book> list = new ArrayList<>(books);
-        Collections.sort(list, new Comparator<Book>() {
-            @Override
-            public int compare(Book o1, Book o2) {
-                return Integer.compare(o1.getId(), o2.getId());
-            }
-        });
-        return list;
-    }
-
-    public List<Book> getSortedByTitle()
-    {
-        List<Book> list = new ArrayList<>(books);
-        Collections.sort(list, (o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
-        return list;
-    }
-
-    public List<Book> getSortedByPages()
-    {
-        List<Book> list = new ArrayList<>(books);
-        Collections.sort(list, (o1, o2) -> Integer.compare(o1.getPages(), o2.getPages()));
-        return list;
-    }
-
-    public List<Book> getAuthorBooks(String author)
-    {
-        //List<Book> list = new ArrayList<>(books);
-        //list.removeIf(book -> !book.getAuthor().equals(author));
-
-        List<Book> list = new ArrayList<>();
-        for(Book book : books) {
-            if(book.getAuthor().equals(author)) {
-                list.add(book);
-            }
+        if(!bookIdCache.containsKey(book.getId())) {
+            books.add(book);
+            bookIdCache.put(book.getId(), book);
+            return true;
         }
+        return false;
+    }
 
-        return list;
+    public boolean hasBook(Book book)
+    {
+        return bookIdCache.containsKey(book.getId());
+    }
+
+    public boolean removeBook(Book book)
+    {
+        if(bookIdCache.remove(book.getId()) != null) {
+            books.remove(book);
+            return true;
+        }
+        return false;
+    }
+
+    public Book addBook(int id, String title, String author, int pages)
+    {
+        if(!bookIdCache.containsKey(id)) {
+            Book book = new Book(id, title, author, pages);
+            books.add(book);
+            bookIdCache.put(id, book);
+            return book;
+        }
+        return null;
+    }
+
+    public Book hasBook(int bookId)
+    {
+        return bookIdCache.get(bookId);
+    }
+
+    public Book removeBook(int bookId)
+    {
+        Book book = bookIdCache.remove(bookId);
+        if(book != null) {
+            books.remove(book);
+        }
+        return book;
     }
 
     @Override
@@ -57,6 +65,7 @@ public class Library {
         return "Library{" +
                 "address='" + address + '\'' +
                 ", books=" + books +
+                ", bookIdCache=" + bookIdCache +
                 '}';
     }
 

@@ -41,76 +41,12 @@ public class App
 
     public static void main(String[] args)
     {
-        Map<String, Test> map = new HashMap<>();
+        Library lib = new Library("oweifjoe0w9pfrew");
+        Book b = new Book(1, "1", "2", 1);
+        lib.addBook(b);
 
-        Test t1 = new Test("1", 1);
-        Test t2 = new Test("2", 2);
-        Test t3 = new Test("1", 3);
-
-        map.put(t1.title, t1);
-        map.put(t2.title, t2);
-        System.out.println(map);
-        /*map.put(t3.title, t3);
-        System.out.println(map);
-        System.out.println(map.containsKey("1"));
-        System.out.println(map.containsKey("3"));
-        System.out.println(map.get("2"));
-        System.out.println(map.remove("2"));
-        System.out.println(map.remove("2"));*/
-
-        System.out.println();
-
-        Set<String> keys = map.keySet();
-        System.out.println(keys);
-
-        System.out.println();
-
-        List<Test> values = new ArrayList<>(map.values());
-        System.out.println(values);
-
-        System.out.println();
-
-        Set<Map.Entry<String, Test>> entries = map.entrySet();
-        for(Map.Entry<String, Test> e : entries) {
-            System.out.println(e.getKey() + " | " + e.getValue());
-        }
-
-        //List<int> list = new ArrayList<>();
-        /*List<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(3);
-        System.out.println(list);*/
-    }
-}
-
-class Test
-{
-    public String title;
-    public int value;
-
-    public Test(String title, int value) {
-        this.title = title;
-        this.value = value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Test test = (Test) o;
-        return value == test.value && Objects.equals(title, test.title);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, value);
-    }
-
-    @Override
-    public String toString() {
-        return "Test{" +
-                "title='" + title + '\'' +
-                ", value=" + value +
-                '}';
+        System.out.println(lib);
+        b.setPages(2);
+        System.out.println(lib);
     }
 }
