@@ -1,8 +1,8 @@
 package ru.pa4ok.demoexam;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * alt + enter - контекстное меню исправления ошибки
@@ -15,108 +15,140 @@ public class App
 {
     /*
         Book
-        - String title (>3 & <20 символов)
-        - String author (>3 & <20 символов)
-        - int pages (>0)
+        - String author
+        - String title
+        - ing pages
 
         Library
         - String address
-        - Book[] books
-        - public void readBook() throws BookReadException, LibrarySpaceException
-            метод должен запрашивать у пользователя все поля книги и создавать из них ее объект после чего добавлять в библиотеку
-            если пользователь вводит неверные значения выбрасывать BookReadException
-            если после чтения полей в бибилиотеке нет места то выбрасывать LibrarySpaceException
+        - List<Book> books
+        - public boolean hasBook(String title, String author, int pages)
+        - public Book addBook(String title, String author, int pages)
+        - public Book removeBook(String title, String author, int pages)
 
-        BookReadException extends Exception
-
-        LibrarySpaceException extends Exception
-        - Book book
-
-        создаете библиотеку и в цикле while(true) читаете книги
-        если вылетает BookReadException продолжаете читать
-        если вылетает LibrarySpaceException завершаете цикл
+        методы addBook и removeBook принимают поля книги
+        добавить книгу нужно только в том случае, если нет аналогичной
+        если аналогичная книга есть, метод возврает null, если книга успешно добавлена - вернуть ее
+        метод удаления книги возвращает объект удаленной из коллекции книги
+        если такой книги в списке нет - возращаете null
      */
-    public static void main(String[] args) {
-        //System.out.println("mark1");
 
-        /*try {
-            int[] arr = new int[3];
-            arr[5] = 10;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("ошибка отловлена " + e.getMessage());
+    public static void main(String[] args)
+    {
+        /*Container c1 = new Container("ewfpfojweoife");
+        Container c2 = new Container(new Book(34));
+
+        String s1 = (String) c1.value;
+        Book b1 = (Book) c2.value;*/
+
+        /*Container<String> c1 = new Container<>("ewfpfojweoife");
+        Container<Book> c2 = new Container<>(new Book(34));
+
+        String s1 = c1.value;
+        Book b1 = c2.value;*/
+
+        /*List<String> list = new ArrayList<>();
+
+        list.add("rgojregreg");
+        list.add("ewfeof");
+        list.add("ewfeof");
+        System.out.println(list.get(1));
+        System.out.println(list.size());
+        System.out.println(list.isEmpty());
+        //list.clear();
+        list.set(1, "new123");
+
+        System.out.println(list);*/
+
+        List<String> list = new ArrayList<>(Arrays.asList(
+                "1", "22", "3", "44", "55", "66", "7", "88", "9"
+        ));
+
+        /*for(int i=0; i<list.size(); i++) {
+            System.out.println(list.get(i));
         }*/
 
-        /*try {
-            double d = 5 / 0;
-            int[] arr = new int[3];
-            arr[5] = 10;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("ошибка отловлена 1 " + e.getMessage());
-        } catch (ArithmeticException e) {
-            System.out.println("ошибка отловлена 2 " + e.getMessage());
+        /*for(String s : list) {
+            System.out.println(s);
         }*/
 
-        /*try {
-            double d = 5 / 0;
-            int[] arr = new int[3];
-            arr[5] = 10;
-        } catch (ArrayIndexOutOfBoundsException | ArithmeticException e) {
-            System.out.println("ошибка отловлена " + e.getMessage());
-        } */
+        System.out.println(list);
 
-        /*try {
-            double d = 5 / 0;
-            int[] arr = new int[3];
-            arr[5] = 10;
-        } catch (Exception e) {
-            System.out.println("ошибка отловлена " + e.getMessage());
+        /*for(int i=0; i<list.size(); i++) {
+            if(list.get(i).length() > 1) {
+                list.remove(i);
+            }
         }*/
 
-        /*try {
-            FileReader fr = new FileReader("regergreuhgre.txt");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        /*for(int i=0; i<list.size(); i++) {
+            if(list.get(i).length() > 1) {
+                list.remove(i);
+                i--;
+            }
         }*/
 
-        /*try {
-            test();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        /*for(int i=list.size()-1; i>=0; i--) {
+            if(list.get(i).length() > 1) {
+                list.remove(i);
+            }
         }*/
 
-        /*try {
-            test1(60);
-        } catch (MyException e) {
-            System.out.println("ошибка: " + e.value);
-        }*/
+        list.removeIf(s -> s.length() > 1);
 
-        //test2();
-        //System.out.println("mark2");
+        System.out.println(list);
+        t(list);
+        System.out.println(list);
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.printf("введите что-то: ");
-        String s = scanner.nextLine();
-        int i = Integer.parseInt(s);
-        System.out.println(i * 100);
+        /*Test t = new Test();
+        t.list.add("123");*/
     }
 
-    public static void test() throws FileNotFoundException {
-        FileReader fr = new FileReader("regergreuhgre.txt");
+    public static void t(List<String> list) {
+        list.add("123");
+    }
+}
+
+class Test
+{
+    //1
+    //public List<String> list = new ArrayList<>();
+
+    //2
+    public List<String> list;
+
+    public Test(List<String> list) {
+        this.list = list;
+    }
+}
+
+/*class Container<T>
+{
+    public T value;
+
+    public Container(T value) {
+        this.value = value;
     }
 
-    public static void test1(int i) throws MyException {
-        if (i > 50) {
-            throw new MyException(i);
-        }
+    @Override
+    public String toString() {
+        return "Container{" +
+                "value=" + value +
+                '}';
+    }
+}*/
+
+class Book
+{
+    public int pages;
+
+    public Book(int pages) {
+        this.pages = pages;
     }
 
-    public static void test2() {
-        //...
-        try {
-            FileReader fr = new FileReader("23423432432");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        //...
+    @Override
+    public String toString() {
+        return "Book{" +
+                "pages=" + pages +
+                '}';
     }
 }
