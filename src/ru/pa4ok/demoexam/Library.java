@@ -6,59 +6,52 @@ public class Library
 {
     private String address;
     private Set<Book> books = new HashSet<>();
-    private Map<Integer, Book> bookIdCache = new HashMap<>();
 
     public Library(String address) {
         this.address = address;
     }
 
-    public boolean addBook(Book book) {
-        if(!bookIdCache.containsKey(book.getId())) {
-            books.add(book);
-            bookIdCache.put(book.getId(), book);
-            return true;
-        }
-        return false;
+    public List<Book> getSortedById()
+    {
+        List<Book> list = new ArrayList<>(books);
+        Collections.sort(list, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return Integer.compare(o1.getId(), o2.getId());
+            }
+        });
+        return list;
     }
 
-    public boolean hasBook(Book book)
+    public List<Book> getSortedByTitle()
     {
-        return bookIdCache.containsKey(book.getId());
+        List<Book> list = new ArrayList<>(books);
+        Collections.sort(list, (o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
+        return list;
     }
 
-    public boolean removeBook(Book book)
+    public List<Book> getSortedByPages()
     {
-        if(bookIdCache.remove(book.getId()) != null) {
-            books.remove(book);
-            return true;
-        }
-        return false;
+        List<Book> list = new ArrayList<>(books);
+        Collections.sort(list, (o1, o2) -> Integer.compare(o1.getPages(), o2.getPages()));
+        return list;
     }
 
-    public Book addBook(int id, String title, String author, int pages)
+    public List<Book> getAuthorBooks(String author)
     {
-        if(!bookIdCache.containsKey(id)) {
-            Book book = new Book(id, title, author, pages);
-            books.add(book);
-            bookIdCache.put(id, book);
-            return book;
-        }
-        return null;
+        /*List<Book> list = new ArrayList<>();
+        for(Book b : books) {
+            if(b.getAuthor().equals(author)) {
+                list.add(b);
+            }
+        }*/
+
+        List<Book> list = new ArrayList<>(books);
+        list.removeIf(book -> !book.getAuthor().equals(author));
+
+        return list;
     }
 
-    public Book hasBook(int bookId)
-    {
-        return bookIdCache.get(bookId);
-    }
-
-    public Book removeBook(int bookId)
-    {
-        Book book = bookIdCache.remove(bookId);
-        if(book != null) {
-            books.remove(book);
-        }
-        return book;
-    }
 
     @Override
     public String toString() {
