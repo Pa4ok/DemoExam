@@ -9,91 +9,84 @@ import java.util.*;
  * alt + insert - контекстное меню генерации кода (конструкторы, toString, геттеры, сеттеры)
  */
 public class App {
-      /*
+
+     /*
         Book
         - int id
-        - String author
         - String title
+        - String author
         - ing pages
 
         Library
         - String address
         - Set<Book> books
-        - Map<Integer, Book> bookIdCache //ключ - id книги, объект - сама книга
 
-        - public boolean addBook(Book book)
-        - public boolean hasBook(Book book)
-        - public boolean removeBook(Book book)
+        - public List<Book> getSortedById()
+        - public List<Book> getSortedByTitle()
+        - public List<Book> getSortedByPages()
+        - public List<Book> getAuthorBooks(String author)
 
-        - public Book addBook(int id, String title, String author, int pages)
-        - public Book hasBook(int bookId)
-        - public Book removeBook(int bookId)
-
-        при добавлении или удалении книги из библиотеки необходимо обновлять bookIdCache
-
-        методы которые принимают объект возрают true/false если они смогли найти/добавить/удалить такую книгу
-
-        методы которые принимают поля книги/ее id, возврают саму книгу, если они ее нашли/добавали/удалили
-        если не смогли - возрашают null
      */
 
 
     public static void main(String[] args) {
-        /*Library lib = new Library(
-                "wpeofjpweofjew",
-                new ArrayList<>(Arrays.asList(
-                        new Book("title-1", "author-1", 10),
-                        new Book("title-2", "author-2", 10),
-                        new Book("title-3", "author-3", 10)
-                )));
+        List<Test> list = new ArrayList<>(Arrays.asList(
+                new Test("ccc", 1),
+                new Test("aaa", 3),
+                new Test("bbb", 2)
+        ));
 
-        System.out.println(lib);
-        System.out.println();
-        System.out.println(lib.hasBook("title-3", "author-3", 10));
-        System.out.println(lib.hasBook("title-4", "author-3", 10));
-        System.out.println();
-        System.out.println(lib.addBook("title-4", "author-3", 10));
-        System.out.println(lib.addBook("title-4", "author-3", 10));
-        System.out.println(lib.removeBook("title-1", "author-1", 10));
-        System.out.println(lib.removeBook("title-1", "author-1", 10));
-        System.out.println(lib);*/
+        //копия коллекции
+        //List<Test> copy = new ArrayList<>(list);
 
-        Map<String, Test> map = new HashMap<>();
+        System.out.println(list);
 
-        Test t1 = new Test("test1", 1);
-        Test t2 = new Test("test2", 2);
-        Test t3 = new Test("test3", 3);
+        /*Collections.sort(list, new Comparator<Test>() {
+            @Override
+            public int compare(Test o1, Test o2) {
+                *//*
+                    -1: o1 < o2
+                     0: o1 = o2
+                     1: o1 > o2
+                 *//*
+                if(o1.value > o2.value) {
+                    return 1;
+                }
+                if(o1.value < o2.value) {
+                    return -1;
+                }
+                return 0;
+            }
+        });*/
 
-        map.put(t1.title, t1);
-        map.put(t2.title, t2);
-        map.put(t3.title, t3);
-        map.put(t1.title, t1);
+        /*Collections.sort(list, new Comparator<Test>() {
+            @Override
+            public int compare(Test o1, Test o2) {
+                return Integer.compare(o1.value, o2.value);
+            }
+        });*/
 
-        System.out.println(map);
-        System.out.println(map.containsKey("test3"));
-        System.out.println(map.containsKey("test4"));
-        System.out.println(map.get("test3"));
-        System.out.println(map.get("test4"));
-        System.out.println(map.remove("test3"));
-        System.out.println(map.remove("test3"));
-        System.out.println(map);
+        Collections.sort(list, new Comparator<Test>() {
+            @Override
+            public int compare(Test o1, Test o2) {
+                return o1.title.compareTo(o2.title);
+            }
+        });
 
-        Set<String> keys = map.keySet();
-        System.out.println(keys);
+        /*Collections.sort(list, new Comparator<Test>() {
+            @Override
+            public int compare(Test o1, Test o2) {
+                return String.CASE_INSENSITIVE_ORDER.compare(o1.title, o2.title);
+            }
+        });*/
 
-        List<Test> values = new ArrayList<>(map.values());
-        System.out.println(values);
+        //то же самое что и сверху
+        //Collections.sort(list, (o1, o2) -> Integer.compare(o1.value, o2.value));
 
-        Set<Map.Entry<String, Test>> entries = map.entrySet();
-        for(Map.Entry<String, Test> e : entries) {
-            System.out.println(e.getKey() + " | " + e.getValue());
-        }
+        //снова то же самое
+        //Collections.sort(list, Comparator.comparingInt(o -> o.value));
 
-        //List<int> intList = new ArrayList<>();
-        /*List<Integer> intList = new ArrayList<>();
-        intList.add(1);
-        intList.add(2);
-        System.out.println(intList);*/
+        System.out.println(list);
     }
 }
 
