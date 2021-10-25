@@ -4,6 +4,8 @@ import ru.pa4ok.demoexam.App;
 import ru.pa4ok.demoexam.entity.BookEntity;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookEntityManager
 {
@@ -40,6 +42,75 @@ public class BookEntityManager
 
             //если не было ни 1 ключа - выбрасываем ошибку
             throw new SQLException("entity not added");
+        }
+    }
+
+    public static BookEntity selectById(int id) throws SQLException
+    {
+        try(Connection c = App.getConnection())
+        {
+            String sql = "SELECT * FROM books WHERE id=?";
+
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet resultSet = ps.executeQuery();
+            if(resultSet.next()) {
+                return new BookEntity(
+                        resultSet.getInt("id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("author"),
+                        resultSet.getInt("pages")
+                );
+            }
+            return null;
+        }
+    }
+
+    public static List<BookEntity> selectAll() throws SQLException
+    {
+        try(Connection c = App.getConnection())
+        {
+            String sql = "SELECT * FROM books";
+            Statement s = c.createStatement();
+            ResultSet resultSet = s.executeQuery(sql);
+
+            List<BookEntity> list = new ArrayList<>();
+            while(resultSet.next()) {
+                list.add(new BookEntity(
+                        resultSet.getInt("id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("author"),
+                        resultSet.getInt("pages")
+                ));
+            }
+
+            return list;
+        }
+    }
+
+    public static List<BookEntity> selectByAuthor(String author) throws SQLException
+    {
+        try(Connection c = App.getConnection())
+        {
+            String sql = "SELECT * FROM books where author=?";
+
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1, author);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            List<BookEntity> list = new ArrayList<>();
+            while(resultSet.next()) {
+                list.add(new BookEntity(
+                        resultSet.getInt("id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("author"),
+                        resultSet.getInt("pages")
+                ));
+            }
+
+            return list;
         }
     }
 }
