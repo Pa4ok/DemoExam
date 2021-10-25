@@ -16,6 +16,10 @@ public class BookEntity
         this.pages = pages;
     }
 
+    public BookEntity(String title, String author, int pages) {
+        this(-1, title, author, pages);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

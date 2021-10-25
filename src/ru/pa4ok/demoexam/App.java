@@ -31,13 +31,13 @@ public class App
          - String fio
          - int yearOfBirth
          - String profession
-         
+
          создать таблицу в базе, сущность в программе и метод добавления сущностей в базу
      */
 
     public static void main(String[] args)
     {
-        BookEntity book = new BookEntity(228, "title-1", "author-1", 1411);
+        BookEntity book = new BookEntity("title-1", "author-1", 1411);
 
         System.out.println(book);
 
