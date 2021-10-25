@@ -56,9 +56,14 @@ public class App
             //System.out.println(BookEntityManager.selectById(3));
             //System.out.println(BookEntityManager.selectAll());
 
-            System.out.println(BookEntityManager.selectByAuthor("author-1"));
-            System.out.println();
-            System.out.println(BookEntityManager.selectByAuthor("author-3"));
+            /*BookEntity b4 = BookEntityManager.selectById(4);
+            System.out.println(b4);
+            b4.setTitle("new title");
+            b4.setAuthor("oeiwfohef");
+            b4.setPages(111);
+            BookEntityManager.update(b4);*/
+
+            BookEntityManager.delete(2);
 
         } catch (SQLException e) {
             e.printStackTrace();
