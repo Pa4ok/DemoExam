@@ -136,4 +136,36 @@ public class App
     }
 }
 
+class TestMain
+{
+    public static void main(String[] args) {
+        new GameServer();
+    }
+}
+
+class GameServer
+{
+    public static GameServer INSTANCE;
+
+    public World world = new World();
+
+    public GameServer() {
+        INSTANCE = this;
+    }
+}
+
+class World
+{
+
+}
+
+class Entity
+{
+    public void update()
+    {
+        World world = GameServer.INSTANCE.world;
+    }
+}
+
+
 
