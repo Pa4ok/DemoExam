@@ -6,6 +6,7 @@ import ru.pa4ok.demoexam.manager.BookEntityManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 /**
  * alt + enter - контекстное меню по исправлению ошибки
@@ -25,21 +26,30 @@ import java.sql.SQLException;
 public class App
 {
     /*
-        Human
+        Product
         - int id
-        - String fio
-        - int yearOfBirth
-        - char gender
-        - double rating
+        - String title
+        - double cost
+        - int countInStock
 
-        создать ручками таблицу в базе
-        создать в программе сущность и обработчик с методом добавления в базу
-        ===================
-        дописать получение по id / всех записей / по году рожденияZ
+        написать консольное приложение, которое предоставляет пользователю выбор
+        1 - вывести все продукты
+        2 - добавить продукт (запросит все поля)
+        3 - удалить продукт (запросит id)
+        4 - отредактировать продукт (запросить id, а после все поля)
+        0 - выход из программы
      */
 
     public static void main(String[] args)
     {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.printf("Введите что-то");
+        String line = scanner.nextLine();
+
+        int i = Integer.parseInt(line);
+        double d = Double.parseDouble(line);
+
         /*BookEntity b = new BookEntity("title1", "author1", 100);
 
         System.out.println(b);
@@ -52,22 +62,22 @@ public class App
 
         System.out.println(b);*/
 
-        try {
+        /*try {
             //System.out.println(BookEntityManager.selectById(3));
             //System.out.println(BookEntityManager.selectAll());
 
-            /*BookEntity b4 = BookEntityManager.selectById(4);
+            BookEntity b4 = BookEntityManager.selectById(4);
             System.out.println(b4);
             b4.setTitle("new title");
             b4.setAuthor("oeiwfohef");
             b4.setPages(111);
-            BookEntityManager.update(b4);*/
+            BookEntityManager.update(b4);
 
             BookEntityManager.delete(2);
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     //получения соединения с базой данных
