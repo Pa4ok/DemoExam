@@ -35,9 +35,8 @@ public class App
          создать таблицу в базе, сущность в программе и метод добавления сущностей в базу
      */
 
-    public static void main(String[] args)
-    {
-        BookEntity book = new BookEntity("title-1", "author-1", 1411);
+    public static void main(String[] args) throws SQLException {
+        /*BookEntity book = new BookEntity("title-1", "author-1", 1411);
 
         System.out.println(book);
 
@@ -47,7 +46,15 @@ public class App
             e.printStackTrace();
         }
 
-        System.out.println(book);
+        System.out.println(book);*/
+
+        //System.out.println(BookEntityManager.selectById(3));
+        //System.out.println(BookEntityManager.selectAll());
+
+        BookEntity b4 = BookEntityManager.selectById(4);
+        System.out.println(b4);
+        b4.setTitle("pghoregjk3333333");
+        BookEntityManager.update(b4);
     }
 
     public static Connection getConnection() throws SQLException {
