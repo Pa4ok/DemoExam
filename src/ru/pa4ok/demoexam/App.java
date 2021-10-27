@@ -33,12 +33,12 @@ public class App
          - int yearOfBirth
          - String profession
 
-         создать таблицу в базе, сузность в программе и метод добавления сущностей в базу
+         создать таблицу в базе, сущность в программе и все 5 методов взаимодействия в менеджере для нее
      */
 
     public static void main(String[] args)
     {
-        BookEntity book = new BookEntity("title-1", "author-1", 10);
+        /*BookEntity book = new BookEntity("title-1", "author-1", 10);
 
         System.out.println(book);
         try {
@@ -46,7 +46,23 @@ public class App
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(book);
+        System.out.println(book);*/
+
+        try {
+            //System.out.println(BookEntityManager.selectById(10));
+            //System.out.println(BookEntityManager.selectAll());
+
+            BookEntity b2 = BookEntityManager.selectById(2);
+            System.out.println(b2);
+            b2.setTitle("new title");
+            b2.setAuthor("new author");
+            b2.setPages(2124);
+            BookEntityManager.update(b2);
+            System.out.println(BookEntityManager.selectById(2));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Connection getConnection() throws SQLException {
