@@ -1,122 +1,101 @@
 package ru.pa4ok.demoexam;
 
-import java.util.*;
-
 /**
  * shift + F10 - запуск выбранной конфигурации (точка входа psvm)
  * ctrl + space - подсказка по методам после точки
  * alt + enter - контекстное меню по исправлению ошибки
  * alt + insert - контекстное меню генерации кода (конструкторы, toString, геттеры, сеттеры)
  */
-public class App {
+public class App
+{
+    /*
+        задачи лабораторной работы
+        - создать описанную нижу струтуру
+        - заполнить тестовыми сущностями
+        - продемострировать корректную работу кода
 
-     /*
-        Book
-        - int id
+        GameServer
+        - World world //мир c сущностями
+        - int updateCounter //колчество обновлений сервера
+        - public void updateServer()
+
+        class World
+        - List<Entity> entities
+        - public void updateWorld()
+        - public List<Entity> getEntitiesInRegion(int x, int z, double range)
+        - public List<Entity> getEntitiesNearEntity(Entity entity, double range)
+        - public List<EntityGuard> getGuardiansInRegion(int x, int z, double range)
+
+        abstract Entity
         - String title
-        - String author
-        - ing pages
+        - int xPos
+        - int zPos
+        - int age //количество пережитых обновлений
+        - double maxHealth //максимальное колво хп
+        - double health //текущее количество хп
+        - public void update() //age++
+        - public boolean attackEntityFrom(Entity entity, double damage)
 
-        Library
-        - String address
-        - Set<Book> books
+        EntityPlayer extends Entity
+        - int exp
+        - public void update()
+        - public boolean attackEntityFrom(Entity entity, double damage)
+        - public double calculateDamage()
 
-        - public List<Book> getSortedById()
-        - public List<Book> getSortedByTitle()
-        - public List<Book> getSortedByPages()
-        - public List<Book> getAuthorBooks(String author)
+        EntityGuard extends Entity
+        - public void update()
 
+        EntityMonster extends Entity
+        - double damage
+        - public void update()
+
+        GameServer
+        updateServer фунция сначала увеличивает updateCounter на 1
+        потом вызывает у world функцию updateWorld
+
+        World
+        метод updateWorld перебирает всех живых сущностей и вызывает у них функцию update
+        после этого в конце обновления (мира) из списка должны удаляться все сущности у которых health <= 0
+        методы getEntities(InRegion/getNearEntity) принимают координаты и радиус/сущность (взять ее координаты)
+        и возвращают список сущностей в радиусе от этих координат
+        метод getGuardiansInRegion делает то же самое, но ищет только сущностей EntityGuard
+
+        Entity описывает вообще всех сущностей
+        метод update в нем должен только увеличивать поле age на 1
+        метод attackEntityFrom принимает атакующую сущность и урон
+        должен вычитать урон из жизней сущности, возвращает true, если сущность умерла (health <= 0)
+
+        EntityGuard наследует Entity
+        метод update сначала должен вызывать родительскую реализацию
+        после чего искать ближайшего сущность EntityPlayer и двигаться к ней
+
+        EntityPlayer наследует Entity
+        метод update сначала должен вызывать родительскую реализацию
+        также раз в 2 обновления если health < maxHealth && health > 0, health нужно увеличить на 1
+        метод attackEntityFrom переопределяет родительский метод: если в радиусе 2 есть живые EntityGuard
+        то они должны принимать урон вместо игрока (вызывать метод attackEntityFrom для них)
+        если рядом нет EntityGuard и после удара игрок выживает он вызывает attackEntityFrom для атакующей сущности
+        метод calculateDamage расчитывает урон игрока по формуле 3 + exp / 2
+        если игрок убивает сущность, то exp увеличивается на 1
+
+        EntityMonster наследует Entity
+        метод update сначала должен вызывать родительскую реализацию
+        после чего искать ближайшего сущность EntityPlayer и двигаться к ней
+        если в радиусе 2 есть живая(ые) сущность(ти) EntityPlayer
+        для ближайшего из них необходимо вызывать метод attackEntityFrom(this)
+
+        *движение сущностей
+        сущность за 1 обновление может смещаться на 1 по xPos и на 1 по zPos
+
+        *убийство
+        когда сущность убивает другую сущность об этом необходимо вывести уведомление в консоль (кто и кого убил)
+
+        *общие требования к коду
+        если класс наследуется другим классом, все его поля должны быть protected, если нет - private
+        у всех классов должен быть переопределен метод toString() и должны быть геттеры и сеттеры
+        если есть необходимость можно создавать свои классы, методы, поля
      */
 
-
     public static void main(String[] args) {
-        List<Test> list = new ArrayList<>(Arrays.asList(
-                new Test("ccc", 1),
-                new Test("aaa", 3),
-                new Test("bbb", 2)
-        ));
-
-        //копия коллекции
-        //List<Test> copy = new ArrayList<>(list);
-
-        System.out.println(list);
-
-        /*Collections.sort(list, new Comparator<Test>() {
-            @Override
-            public int compare(Test o1, Test o2) {
-                *//*
-                    -1: o1 < o2
-                     0: o1 = o2
-                     1: o1 > o2
-                 *//*
-                if(o1.value > o2.value) {
-                    return 1;
-                }
-                if(o1.value < o2.value) {
-                    return -1;
-                }
-                return 0;
-            }
-        });*/
-
-        /*Collections.sort(list, new Comparator<Test>() {
-            @Override
-            public int compare(Test o1, Test o2) {
-                return Integer.compare(o1.value, o2.value);
-            }
-        });*/
-
-        Collections.sort(list, new Comparator<Test>() {
-            @Override
-            public int compare(Test o1, Test o2) {
-                return o1.title.compareTo(o2.title);
-            }
-        });
-
-        /*Collections.sort(list, new Comparator<Test>() {
-            @Override
-            public int compare(Test o1, Test o2) {
-                return String.CASE_INSENSITIVE_ORDER.compare(o1.title, o2.title);
-            }
-        });*/
-
-        //то же самое что и сверху
-        //Collections.sort(list, (o1, o2) -> Integer.compare(o1.value, o2.value));
-
-        //снова то же самое
-        //Collections.sort(list, Comparator.comparingInt(o -> o.value));
-
-        System.out.println(list);
-    }
-}
-
-class Test {
-    public String title;
-    public int value;
-
-    public Test(String title, int value) {
-        this.title = title;
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return "Test{" +
-                "title='" + title + '\'' +
-                ", value=" + value +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Test test = (Test) o;
-        return value == test.value && Objects.equals(title, test.title);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, value);
     }
 }
