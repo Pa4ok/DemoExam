@@ -1,15 +1,15 @@
-package ru.pa4ok.demoexam;
+package ru.pa4ok.demoexam.entity;
 
 import java.util.Objects;
 
-public class Book
+public class BookEntity
 {
     private int id;
     private String title;
     private String author;
     private int pages;
 
-    public Book(int id, String title, String author, int pages) {
+    public BookEntity(int id, String title, String author, int pages) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -20,8 +20,8 @@ public class Book
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return id == book.id && pages == book.pages && Objects.equals(title, book.title) && Objects.equals(author, book.author);
+        BookEntity that = (BookEntity) o;
+        return id == that.id && pages == that.pages && Objects.equals(title, that.title) && Objects.equals(author, that.author);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class Book
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "BookEntity{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +

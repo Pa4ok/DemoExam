@@ -1,6 +1,11 @@
 package ru.pa4ok.demoexam;
 
-import java.util.*;
+import ru.pa4ok.demoexam.entity.BookEntity;
+import ru.pa4ok.demoexam.manager.BookEntityManager;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  * shift + F10 - запуск последней конфигурации
@@ -9,44 +14,43 @@ import java.util.*;
  * alt + insert - контекстное меню генерации кода (конструкторы, toString, геттеры и сеттеры)
  */
 
+/**
+ * библиотека-драйвер для субд mysql: mysql:mysql-connector-java:8.0.27
+ *
+ * готовая удаленная база mysql (если лень подымать свою):
+ * адрес: 116.202.236.174:3306
+ * название/пользователь/пароль: DemoExam
+ * веб интерфейс: https://phpmy.pa4ok.ru/
+ * !!!создавайте таблицы со своими названиями, чтобы не было путаницы!!!
+ */
+
 public class App
 {
-      /*
-        Book
-        - int id
-        - String author
-        - String title
-        - ing pages
-
-        Library
-        - String address
-        - Set<Book> books
-        - Map<Integer, Book> bookIdCache //ключ - id книги, объект - сама книга
-
-        - public boolean addBook(Book book)
-        - public boolean hasBook(Book book)
-        - public boolean removeBook(Book book)
-
-        - public Book addBook(int id, String title, String author, int pages)
-        - public Book hasBook(int bookId)
-        - public Book removeBook(int bookId)
-
-        при добавлении или удалении книги из библиотеки необходимо обновлять bookIdCache
-
-        методы которые принимают объект возрают true/false если они смогли найти/добавить/удалить такую книгу
-
-        методы которые принимают поля книги/ее id, возврают саму книгу, если они ее нашли/добавали/удалили
-        если не смогли - возрашают null
+    /*
+         UserEntity
+         - int id (автоинкремент)
+         - String fio
+         - int yearOfBirth
+         - String profession
+         создать таблицу в базе, сущность в программе и метод добавления сущностей в базу
      */
 
     public static void main(String[] args)
     {
-        Library lib = new Library("oweifjoe0w9pfrew");
-        Book b = new Book(1, "1", "2", 1);
-        lib.addBook(b);
+        BookEntity book = new BookEntity(229, "t-e0fpjew", "ayhew9gfew", 222);
 
-        System.out.println(lib);
-        b.setPages(2);
-        System.out.println(lib);
+        System.out.println(book);
+
+        try {
+            BookEntityManager.insert(book);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(book);
+    }
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/demoexam", "root", "1234");
     }
 }
