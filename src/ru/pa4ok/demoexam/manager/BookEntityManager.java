@@ -50,8 +50,7 @@ public class BookEntityManager
                         resultSet.getString("title"),
                         resultSet.getString("author"),
                         resultSet.getInt("pages"),
-                        resultSet.getTimestamp("writeDateTime"),
-                        resultSet.setS
+                        resultSet.getTimestamp("writeDateTime")
                 );
             }
 
