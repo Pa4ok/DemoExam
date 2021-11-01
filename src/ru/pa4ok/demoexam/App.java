@@ -6,6 +6,13 @@ import ru.pa4ok.demoexam.manager.BookEntityManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * alt + enter - контекстное меню по исправлению ошибки
@@ -29,35 +36,73 @@ public class App
          UserEntity
          - int id (автоинкремент)
          - String fio
-         - int yearOfBirth
+         - char gender
+         - Date birthday
          - String profession
 
-         создать таблицу в базе, сущность в программе и метод добавления сущностей в базу
+        написать консольное приложение, которое предоставляет пользователю выбор
+        1 - вывести всех пользователей
+        2 - добавить пользователя (запросит все поля)
+        3 - удалить пользователя (запросит id)
+        4 - отредактировать пользователя (запросить id, а после все поля)
+        0 - выход из программы
      */
 
-    public static void main(String[] args) throws SQLException {
-        /*BookEntity book = new BookEntity("title-1", "author-1", 1411);
+    public static void main(String[] args) throws SQLException
+    {
+        /*Date date = new Date();
+        System.out.println(date);
 
-        System.out.println(book);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(format.format(date));
 
+        Date date1 = new Date(0L);
+        System.out.println(date1);
+
+        String dateString = "28.12.20 23:22:36";
+        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yy HH:mm:ss");
         try {
-            BookEntityManager.insert(book);
-        } catch (SQLException e) {
+            Date date2 = format1.parse(dateString);
+            System.out.println(date2);
+
+        } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        System.out.println(book);*/
+        /*System.out.println(new Date().getTime());
+        System.out.println(System.currentTimeMillis());*/
 
-        //System.out.println(BookEntityManager.selectById(3));
-        //System.out.println(BookEntityManager.selectAll());
+        //BookEntityManager.insert(new BookEntity("tielwepihfef", "pa4ok", 100, new Date()));
 
-        BookEntity b4 = BookEntityManager.selectById(4);
-        System.out.println(b4);
-        b4.setTitle("pghoregjk3333333");
-        BookEntityManager.update(b4);
+        /*List<BookEntity> list = BookEntityManager.selectAll();
+        for(BookEntity book : list) {
+            System.out.println(book);
+        }*/
+
+        /*BookEntity b1 = BookEntityManager.selectById(1);
+        b1.setWriteDateTime(new Date(100000));
+        BookEntityManager.update(b1);*/
+
+        /*long tenDayMills = TimeUnit.DAYS.toMillis(10);
+        System.out.println(tenDayMills);
+
+        BookEntity b1 = BookEntityManager.selectById(1);
+        b1.setWriteDateTime(new Date(tenDayMills));
+        BookEntityManager.update(b1);*/
+
+        /*char gender = 'w';
+        String s1 = "" + gender;
+        String s2 = String.valueOf(gender);
+        char genderBack = s2.charAt(0);*/
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.printf("Введите что-то: ");
+        String s = scanner.nextLine();
+        int i = Integer.parseInt(s);
+        System.out.println(i);
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/demoexam", "root", "1234");
+        return DriverManager.getConnection("jdbc:mysql://116.202.236.174:3306/DemoExam", "DemoExam", "DemoExam");
     }
 }
