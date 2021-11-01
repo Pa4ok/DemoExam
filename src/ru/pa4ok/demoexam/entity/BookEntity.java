@@ -20,11 +20,7 @@ public class BookEntity
     }
 
     public BookEntity(String title, String author, int pages, Date writeDateTime) {
-        this.id = -1;
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.writeDateTime = writeDateTime;
+        this(-1, title, author, pages, writeDateTime);
     }
 
     @Override

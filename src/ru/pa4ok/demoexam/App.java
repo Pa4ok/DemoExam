@@ -34,7 +34,10 @@ public class App
         - int id
         - String title
         - double cost
-        - int countInStock
+        - Date manufactureDateTime
+
+        создать таблицу, менеджер, протестировать работу с временем
+        протестировать возможности бибилиотеки lombok
      */
 
     public static void main(String[] args)
