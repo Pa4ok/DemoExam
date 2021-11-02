@@ -1,0 +1,43 @@
+package ru.pa4ok.demoexam.manager;
+
+import ru.pa4ok.demoexam.App;
+import ru.pa4ok.demoexam.entity.BookEntity;
+
+import java.sql.*;
+
+public class BookEntityManager
+{
+    public static void insert(BookEntity book) throws SQLException
+    {
+        //получаем соединение с базой
+        //все что в скобках try будет автоматически закрыто по выходу из блока (вместо c.close)
+        try(Connection c = App.getConnection())
+        {
+            //строковый запрос, вместе всех подставляемых данных ?
+            String sql = "INSERT INTO books(title, author, pages) VALUES(?,?,?)";
+
+            //получаем объект PreparedStatement, передаем в него строковый запрос
+            //RETURN_GENERATED_KEYS нужен чтобы потом получить сгенерированные базой ключи (id...)
+            PreparedStatement ps = c.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            //заменяем ? на данные
+            ps.setString(1, book.getTitle());
+            ps.setString(2, book.getAuthor());
+            ps.setInt(3, book.getPages());
+
+            //выполняем запрос
+            ps.executeUpdate();
+
+            //получаем набор записей с сгенерированными базой ключами
+            ResultSet keys = ps.getGeneratedKeys();
+            //проверяем, что есть хотя бы 1 запись и переключаемся на нее
+            if(keys.next()) {
+                //получаем из записи 1 ключ и устанавливаем его в сущность
+                book.setId(keys.getInt(1));
+                return;
+            }
+
+            //если из базы не вернулось ни 1 ключа, дропаем ошибку
+            throw new SQLException("entity not added");
+        }
+    }
+}
