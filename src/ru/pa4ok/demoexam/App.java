@@ -2,6 +2,7 @@ package ru.pa4ok.demoexam;
 
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
+import ru.pa4ok.demoexam.manager.TestManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -30,67 +31,27 @@ import java.util.concurrent.TimeUnit;
 public class App
 {
     /*
-        Product
-        - int id
-        - String title
-        - double cost
-        - Date manufactureDateTime
+        найти все услуги оказанные клиенту и посчитать их общую стоимость
+        при этом о клиенте известен не его id, а FirstName, LastName и Patronymic
 
-        создать таблицу, менеджер, протестировать работу с временем
-        протестировать возможности бибилиотеки lombok
+        найти всех клиентов, которым была оказана услуга
+        о услуге известно только ее название
+
+        таблицы с данными есть у меня на удаленном сервер
+        также прилагая скрипт импорта
      */
+
 
     public static void main(String[] args)
     {
-        /*Date date = new Date();
-        System.out.println(date);
-
-        Date date1 = new Date(0L);
-        System.out.println(date1);
-
-        Date date2 = new Date(1000000);
-        System.out.println(date2);
-
-        long daysMills = TimeUnit.DAYS.toMillis(64);
-        Date date3 = new Date(daysMills);
-        System.out.println(date3);
-        */
-
-        /*SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //Date date = new Date();
-        //System.out.println(dateFormat.format(date));
-
-        Scanner scanner = new Scanner(System.in);
-        String dateString = scanner.nextLine();
         try {
-            Date date = dateFormat.parse(dateString);
-            System.out.println(date);
-
-        } catch (ParseException e) {
+            TestManager.test();
+        } catch (SQLException e) {
             e.printStackTrace();
-        }*/
-
-        //System.out.println(System.currentTimeMillis());
-        //System.out.println(new Date().getTime());
-
-        /*Date date1 = new Date(1000);
-        Date date2 = new Date(100000);
-        System.out.println(date1.compareTo(date2));
-        System.out.println(date1.before(date2));*/
-
-        try {
-            //BookEntityManager.add(new BookEntity("title", "pa4ok", 2000, new Date()));
-
-            BookEntity b2 = BookEntityManager.selectById(2);
-            b2.setWriteDateTime(new Date(1000));
-            BookEntityManager.update(b2);
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://116.202.236.174:3306/DemoExam", "DemoExam", "DemoExam");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/demoexam", "root", "1234");
     }
 }
