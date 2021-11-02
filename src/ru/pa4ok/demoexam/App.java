@@ -2,6 +2,7 @@ package ru.pa4ok.demoexam;
 
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
+import ru.pa4ok.demoexam.manager.TestManger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,20 +34,16 @@ import java.util.concurrent.TimeUnit;
 public class App
 {
      /*
-         UserEntity
-         - int id (автоинкремент)
-         - String fio
-         - char gender
-         - Date birthday
-         - String profession
+        найти все услуги оказанные клиенту и посчитать их общую стоимость учитывая размер скидки
+        при этом о клиенте известен не его id, а FirstName, LastName и Patronymic
 
-        написать консольное приложение, которое предоставляет пользователю выбор
-        1 - вывести всех пользователей
-        2 - добавить пользователя (запросит все поля)
-        3 - удалить пользователя (запросит id)
-        4 - отредактировать пользователя (запросить id, а после все поля)
-        0 - выход из программы
+        найти всех клиентов, которым была оказана услуга
+        о услуге известно только ее название
+
+        таблицы с данными есть у меня на удаленном сервер
+        также прилагая скрипт импорта
      */
+
 
     public static void main(String[] args) throws SQLException
     {
@@ -95,11 +92,13 @@ public class App
         String s2 = String.valueOf(gender);
         char genderBack = s2.charAt(0);*/
 
-        Scanner scanner = new Scanner(System.in);
+        /*Scanner scanner = new Scanner(System.in);
         System.out.printf("Введите что-то: ");
         String s = scanner.nextLine();
         int i = Integer.parseInt(s);
-        System.out.println(i);
+        System.out.println(i);*/
+
+        TestManger.test();
     }
 
     public static Connection getConnection() throws SQLException {
