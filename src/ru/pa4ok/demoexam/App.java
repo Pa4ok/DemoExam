@@ -6,7 +6,11 @@ import ru.pa4ok.demoexam.manager.BookEntityManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.List;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * alt + enter - контекстное меню по исправлению ошибки
@@ -16,6 +20,7 @@ import java.util.List;
 
 /**
  * библиотека-драйвер для субд mysql: mysql:mysql-connector-java:8.0.27
+ * библиотека lombok: org.projectlombok:lombok:1.18.22
  *
  * готовая удаленная база mysql (если лень подымать свою):
  * адрес: 116.202.236.174:3306
@@ -26,44 +31,74 @@ import java.util.List;
 public class App
 {
      /*
-         UserEntity
-         - int id (автоинкремент)
-         - String fio
-         - int yearOfBirth
-         - String profession
-         
-         создать таблицу в базе, сущность в программе и менеджер со всеми 5 методами
+         Product
+        - int id
+        - String title
+        - double cost
+        - Date manufactureDate
+
+        написать консольное приложение, которое предоставляет пользователю выбор
+        1 - вывести все продукты
+        2 - добавить продукт (запросит все поля)
+        3 - удалить продукт (запросит id)
+        4 - отредактировать продукт (запросить id, а после все поля)
+        0 - выход из программы
      */
 
     public static void main(String[] args)
     {
-        BookEntity book = new BookEntity("titewfouewf", "weofhoewif", 111);
-        //System.out.println(book);
+        //long mills = System.currentTimeMillis();
+        //System.out.println(mills + "ms");
 
+        //Date date = new Date();
+        //System.out.println(date);
+        //System.out.println(date.getTime());
+
+        //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //Date date = new Date();
+        //System.out.println(format.format(date));
+
+        /*SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        String s = "18.07.2000";
         try {
-            BookEntityManager.insert(book);
+            Date date = format.parse(s);
+            System.out.println(date);
 
-            /*BookEntity b5 = BookEntityManager.selectById(5);
-            b5.setTitle("title for 5");
-            b5.setAuthor("Pa4ok");
-            b5.setPages(1337);
-            BookEntityManager.update(b5);*/
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
 
-            /*List<BookEntity> list = BookEntityManager.selectAll();
+        /*Date date1 = new Date();
+        Date date2 = new Date(0L);
+        Date date3 = new Date(TimeUnit.DAYS.toMillis(10));
+
+        System.out.println(date1);
+        System.out.println(date2);
+        System.out.println(date3);
+
+        System.out.println(date1.compareTo(date2));
+        System.out.println(date1.before(date2));*/
+
+        /*try {
+            //BookEntityManager.insert(new BookEntity("title 123", "pa4ok", 228, new Date()));
+
+            List<BookEntity> list = BookEntityManager.selectAll();
             for(BookEntity b : list) {
                 System.out.println(b);
-            }*/
-
-            //BookEntityManager.delete(1);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        //System.out.println(book);
+        Scanner scanner = new Scanner(System.in);
+        System.out.printf("Введите что-то: ");
+        String s = scanner.nextLine();
+        int i = Integer.parseInt(s);
+        System.out.println(i);
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/demoexam", "root", "1234");
+        return DriverManager.getConnection("jdbc:mysql://116.202.236.174:3306/DemoExam", "DemoExam", "DemoExam");
     }
 }
