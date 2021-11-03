@@ -2,6 +2,7 @@ package ru.pa4ok.demoexam;
 
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
+import ru.pa4ok.demoexam.manager.TestManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,6 +22,7 @@ import java.util.Scanner;
 
 /**
  * библиотека-драйвер для субд mysql: mysql:mysql-connector-java:8.0.27
+ * библиотека lombok: org.projectlombok:lombok:1.18.22
  *
  * готовая удаленная база mysql (если лень подымать свою):
  * адрес: 116.202.236.174:3306
@@ -31,15 +33,15 @@ import java.util.Scanner;
 
 public class App
 {
-    /*
-         UserEntity
-         - int id (автоинкремент)
-         - String fio
-         - char gender
-         - Date birthday
-         - String profession
+     /*
+        найти все услуги оказанные клиенту и посчитать их общую стоимость включая скидку
+        при этом о клиенте известен не его id, а FirstName, LastName и Patronymic
 
-         создать таблицу в базе, сущность в программе и все 5 методов взаимодействия в менеджере для нее
+        найти всех клиентов, которым была оказана услуга
+        о услуге известно только ее название
+
+        таблицы с данными есть у меня на удаленном сервер
+        также прилагая скрипт импорта db.sql
      */
 
     public static void main(String[] args) throws ParseException, SQLException {
@@ -100,10 +102,12 @@ public class App
         System.out.println(date);
         */
 
-        char gender = 'w';
+        /*char gender = 'w';
         String s = "" + gender;
         String s1 = String.valueOf(gender);
-        char gender1 = s.charAt(0);
+        char gender1 = s.charAt(0);*/
+
+        TestManager.test();
     }
 
     public static Connection getConnection() throws SQLException {
