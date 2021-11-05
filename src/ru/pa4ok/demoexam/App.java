@@ -6,6 +6,7 @@ import ru.pa4ok.demoexam.manager.BookEntityManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * shift + F10 - запуск выбранной конфигурации (точка входа psvm)
@@ -33,17 +34,31 @@ public class App
         - int yearOfBirth
         - String profession
 
-         создать таблицу в базе, сущность в программе и метод добавления сущностей в базу
+         создать таблицу в базе, сущность в программе и менеджер на все 5 базовых методов работы с бд
      */
 
     public static void main(String[] args)
     {
-        BookEntity book = new BookEntity(10, "title", "pa4ok", 222);
+        BookEntity book = new BookEntity("title", "pa4ok", 222);
 
         try {
-            System.out.println(book);
+            /*System.out.println(book);
             BookEntityManager.insert(book);
-            System.out.println(book);
+            System.out.println(book);*/
+
+            //System.out.println(BookEntityManager.selectById(2));
+            /*List<BookEntity> list = BookEntityManager.selectAll();
+            for(BookEntity b : list) {
+                System.out.println(b);
+            }*/
+
+            /*BookEntity b1 = BookEntityManager.selectById(1);
+            b1.setTitle("new title");
+            b1.setAuthor("new Author");
+            b1.setPages(213);
+            BookEntityManager.update(b1);*/
+
+            BookEntityManager.delete(3);
 
         } catch (SQLException e) {
             e.printStackTrace();
