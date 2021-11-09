@@ -6,7 +6,11 @@ import ru.pa4ok.demoexam.manager.BookEntityManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * alt + enter - контекстное меню исправления ошибки
@@ -32,33 +36,44 @@ public class App
          протестить все методы
      */
 
-
     public static void main(String[] args)
     {
-        BookEntity book = new BookEntity("title-abc", "pa4ok", 220);
+        /*System.out.println(System.currentTimeMillis());
+        System.out.println();
+
+        Date date = new Date();
+        System.out.println(date);
+        System.out.println(date.getTime());
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        System.out.println(format.format(date));*/
+
+        /*String s = "06.28.2000";
+        SimpleDateFormat format = new SimpleDateFormat("MM.dd.yyyy");
+        try {
+            Date date = format.parse(s);
+            System.out.println(date);
+            System.out.println(date.getTime());
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+
+        /*Date date1 = new Date(0L);
+        Date date2 = new Date(100000000L);
+        Date date3 = new Date(TimeUnit.DAYS.toMillis(100));
+
+        System.out.println(date1);
+        System.out.println(date2);
+        System.out.println(date3);
+
+        System.out.println();
+
+        System.out.println(date1.compareTo(date2));
+        System.out.println(date1.before(date2));*/
 
         try {
-
-            /*System.out.println(book);
-            BookEntityManager.insert(book);
-            System.out.println(book);*/
-
-            //System.out.println(BookEntityManager.selectById(7));
-            //System.out.println(BookEntityManager.selectById(700));
-
-            /*List<BookEntity> list = BookEntityManager.selectAll();
-            for(BookEntity b : list) {
-                System.out.println(b);
-            }*/
-
-            BookEntity b7 = BookEntityManager.selectById(7);
-            System.out.println(b7);
-            b7.setTitle("new title");
-            b7.setAuthor("qwerty");
-            b7.setPages(228);
-            System.out.println(b7);
-            BookEntityManager.update(b7);
-
+            BookEntityManager.insert(new BookEntity("title", "wqjwoqid", 44, new Date()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
