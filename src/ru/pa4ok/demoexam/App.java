@@ -28,13 +28,8 @@ import java.util.List;
 public class App
 {
     /*
-         UserEntity
-         - int id (автоинкремент)
-         - String fio
-         - int yearOfBirth
-         - String profession
-
-         создать таблицу в базе, сущность в программе и менеджер к сущности со всеми 5 методами взаимодейсвия
+         создать сущность и менедежер со всеми методами для таблицы Product
+         протестить все методы
      */
 
 
@@ -71,9 +66,7 @@ public class App
 
     public static Connection getConnection() throws SQLException
     {
-                                             // протокол     адрес           порт название базы   пользователь         пароль
         return DriverManager.getConnection("jdbc:mysql://116.202.236.174:3306/DemoExam", "DemoExam", "DemoExam");
-
     }
 }
 
