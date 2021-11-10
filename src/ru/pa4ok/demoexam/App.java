@@ -1,12 +1,17 @@
 package ru.pa4ok.demoexam;
 
 import ru.pa4ok.demoexam.entity.BookEntity;
+import ru.pa4ok.demoexam.entity.BookEntityCopy;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * shift + F10 - запуск выбранной конфигурации (точка входа psvm)
@@ -17,6 +22,7 @@ import java.util.List;
 
 /**
  * библиотека-драйвер для субд mysql: mysql:mysql-connector-java:8.0.27
+ * библиотека lombok (также нужен одноименный плагин): org.projectlombok:lombok:1.18.22
  *
  * готовая удаленная база mysql (если лень подымать свою):
  * адрес: 116.202.236.174:3306
@@ -25,13 +31,14 @@ import java.util.List;
  * !!!создавайте таблицы со своими названиями, чтобы не было путаницы!!!
  */
 
+
 public class App
 {
     /*
         UserEntity
         - int id (автоинкремент)
         - String fio
-        - int yearOfBirth
+        - Date birthday
         - String profession
 
          создать таблицу в базе, сущность в программе и менеджер на все 5 базовых методов работы с бд
@@ -39,30 +46,53 @@ public class App
 
     public static void main(String[] args)
     {
-        BookEntity book = new BookEntity("title", "pa4ok", 222);
+        /*long mills = System.currentTimeMillis();
+        System.out.println(mills);
 
+        Date date = new Date();
+        System.out.println(date);
+
+        Date date1 = new Date(0);
+        System.out.println(date1);*/
+
+        /*Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        System.out.println(format.format(date));
+        */
+
+        /*String s = "07.28.20";
+        SimpleDateFormat format = new SimpleDateFormat("MM.dd.yy");
         try {
-            /*System.out.println(book);
-            BookEntityManager.insert(book);
-            System.out.println(book);*/
+            Date date = format.parse(s);
+            System.out.println(date);
 
-            //System.out.println(BookEntityManager.selectById(2));
-            /*List<BookEntity> list = BookEntityManager.selectAll();
-            for(BookEntity b : list) {
-                System.out.println(b);
-            }*/
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
 
-            /*BookEntity b1 = BookEntityManager.selectById(1);
-            b1.setTitle("new title");
-            b1.setAuthor("new Author");
-            b1.setPages(213);
-            BookEntityManager.update(b1);*/
+        //System.out.println(System.currentTimeMillis());
+        //System.out.println(new Date().getTime());
 
-            BookEntityManager.delete(3);
+        /*Date date1 = new Date(0);
+        Date date2 = new Date();
+
+        System.out.println(date1.compareTo(date2));
+        System.out.println(date1.before(date2));*/
+
+        //Date date = new Date(TimeUnit.DAYS.toMillis(14));
+        //System.out.println(date);
+
+        /*try {
+            //BookEntityManager.insert(new BookEntity("123", "312", 222, new Date(TimeUnit.DAYS.toMillis(10000))));
+
+            System.out.println(BookEntityManager.selectAll());
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
+
+        BookEntityCopy book = new BookEntityCopy("123", "312", 222, new Date(TimeUnit.DAYS.toMillis(10000)));
+        System.out.println(book);
     }
 
     public static Connection getConnection() throws SQLException {

@@ -16,7 +16,7 @@ public class BookEntityManager
         try(Connection c = App.getConnection())
         {
             //строковы запрос, вместо всех подставляемых данных ?
-            String sql = "INSERT INTO books(title, author, pages) VALUES(?,?,?)";
+            String sql = "INSERT INTO books(title, author, pages, writeDateTime) VALUES(?,?,?,?)";
 
             //получаем объект PreparedStatement
             //RETURN_GENERATED_KEYS нужен чтобы потом получить сгенерированные базой ключи (id...)
@@ -25,6 +25,7 @@ public class BookEntityManager
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getAuthor());
             ps.setInt(3, book.getPages());
+            ps.setTimestamp(4, new Timestamp(book.getWriteDateTime().getTime()));
 
             //выполнение запроса
             ps.executeUpdate();
@@ -58,7 +59,8 @@ public class BookEntityManager
                         resultSet.getInt("id"),
                         resultSet.getString("title"),
                         resultSet.getString("author"),
-                        resultSet.getInt("pages")
+                        resultSet.getInt("pages"),
+                        resultSet.getTimestamp("writeDateTime")
                 );
             }
 
@@ -80,7 +82,8 @@ public class BookEntityManager
                         resultSet.getInt("id"),
                         resultSet.getString("title"),
                         resultSet.getString("author"),
-                        resultSet.getInt("pages")
+                        resultSet.getInt("pages"),
+                        resultSet.getTimestamp("writeDateTime")
                 ));
             }
 
@@ -92,13 +95,14 @@ public class BookEntityManager
     {
         try(Connection c = App.getConnection())
         {
-            String sql = "UPDATE books SET title=?, author=?, pages=? WHERE id=?";
+            String sql = "UPDATE books SET title=?, author=?, pages=?, writeDateTime=? WHERE id=?";
 
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getAuthor());
             ps.setInt(3, book.getPages());
-            ps.setInt(4, book.getId());
+            ps.setTimestamp(4, new Timestamp(book.getWriteDateTime().getTime()));
+            ps.setInt(5, book.getId());
 
             ps.executeUpdate();
         }
