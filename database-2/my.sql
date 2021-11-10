@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `Shop` (
 CREATE TABLE IF NOT EXISTS `MaterialCountHistory` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `MaterialID` INT NOT NULL,
-  `ChangeDate` DATETIME(6) NOT NULL,
+  `ChangeDate` DATETIME NOT NULL,
   `CountValue` DOUBLE NOT NULL,
   PRIMARY KEY (`ID`),
   CONSTRAINT `FK_MaterialCountHistory_Material`
@@ -196,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `MaterialCountHistory` (
 CREATE TABLE IF NOT EXISTS `ProductCostHistory` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ProductID` INT NOT NULL,
-  `ChangeDate` DATETIME(6) NOT NULL,
+  `ChangeDate` DATETIME NOT NULL,
   `CostValue` DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (`ID`),
   CONSTRAINT `FK_ProductCostHistory_Product`
@@ -211,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `ProductCostHistory` (
 CREATE TABLE IF NOT EXISTS `AgentPriorityHistory` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `AgentID` INT NOT NULL,
-  `ChangeDate` DATETIME(6) NOT NULL,
+  `ChangeDate` DATETIME NOT NULL,
   `PriorityValue` INT NOT NULL,
   PRIMARY KEY (`ID`),
   CONSTRAINT `FK_AgentPriorityHistory_Agent`
