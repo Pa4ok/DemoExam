@@ -5,8 +5,6 @@ import lombok.*;
 import java.util.Date;
 import java.util.Objects;
 
-//org.projectlombok:lombok:1.18.22
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data //@EqualsAndHashCode @ToString @ToString @Getter @Setter
