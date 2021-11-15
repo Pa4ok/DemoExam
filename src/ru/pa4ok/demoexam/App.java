@@ -1,18 +1,11 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.entity.BookEntity;
-import ru.pa4ok.demoexam.manager.BookEntityManager;
+import ru.pa4ok.demoexam.ui.TestForm;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 /**
  * shift + F10 - запуск последней конфигурации
@@ -35,69 +28,20 @@ import java.util.concurrent.TimeUnit;
 public class App
 {
     /*
-         Product
-        - int id
-        - String title
-        - double cost
-        - Date manufactureDate
-
-        написать консольное приложение, которое предоставляет пользователю выбор
-        1 - вывести все продукты
-        2 - добавить продукт (запросит все поля)
-        3 - удалить продукт (запросит id)
-        4 - отредактировать продукт (запросить id, а после все поля)
-        0 - выход из программы
+        берем первую базу, которую чинили (database-1)
+        и делаем форму для добавления сущностей в таблицу Client
+        починить таблицу -> сделать класс сущность и менеджер -> сделать форму
      */
 
     public static void main(String[] args) throws SQLException
     {
-        //long mills = System.currentTimeMillis();
-        //System.out.println(mills);
-
-        //Date date = new Date();
-        //System.out.println(date);
-        //System.out.println(date.getTime());
-
-        /*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //System.out.println(format.format(new Date()));
-        String s = "2021-11-03 17:14:42";
-
         try {
-            Date date = format.parse(s);
-            System.out.println(date);
-            System.out.println(date.getTime());
-        } catch (ParseException e) {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
 
-        /*Date date1 = new Date();
-        Date date2 = new Date(0L);
-        Date date3 = new Date(TimeUnit.DAYS.toMillis(56));
-
-        System.out.println(date1);
-        System.out.println(date2);
-        System.out.println(date3);
-
-        System.out.println(date1.compareTo(date2));
-        System.out.println(date1.before(date2));*/
-
-        //BookEntityManager.insert(new BookEntity("title 123", "pa4ok", 20, new Date()));
-        //BookEntityManager.insert(new BookEntity("title 321", "pa4ok", 20, new Date(0L)));
-
-        /*List<BookEntity> list = BookEntityManager.selectAll();
-        for(BookEntity b : list) {
-            System.out.println(b);
-        }*/
-
-        /*BookEntity b2 = BookEntityManager.selectById(2);
-        b2.setWriteDateTime(new Date(TimeUnit.DAYS.toMillis(10000)));
-        BookEntityManager.update(b2);*/
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.printf("Введите что-то: ");
-        String s = scanner.nextLine();
-        int i = Integer.parseInt(s);
-        System.out.println(i);
+        new TestForm();
     }
 
     public static Connection getConnection() throws SQLException {
