@@ -1,17 +1,11 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.entity.BookEntity;
-import ru.pa4ok.demoexam.manager.BookEntityManager;
-import ru.pa4ok.demoexam.manager.TestManager;
+import ru.pa4ok.demoexam.ui.CreateBookForm;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 /**
  * alt + enter - контекстное меню по исправлению ошибки
@@ -30,28 +24,25 @@ import java.util.concurrent.TimeUnit;
  */
 public class App
 {
+
     /*
-        найти все услуги оказанные клиенту и посчитать их общую стоимость
-        при этом о клиенте известен не его id, а FirstName, LastName и Patronymic
-
-        найти всех клиентов, которым была оказана услуга
-        о услуге известно только ее название
-
-        таблицы с данными есть у меня на удаленном сервер
-        также прилагая скрипт импорта
+        берем первую базу, которую чинили (database-1)
+        и делаем форму для добавления сущностей в таблицу Client
+        починить таблицу -> сделать класс сущность и менеджер -> сделать форму
      */
-
 
     public static void main(String[] args)
     {
         try {
-            TestManager.test();
-        } catch (SQLException e) {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+        new CreateBookForm();
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/demoexam", "root", "1234");
+        return DriverManager.getConnection("jdbc:mysql://116.202.236.174:3306/DemoExam", "DemoExam", "DemoExam");
     }
 }
