@@ -5,7 +5,6 @@ import ru.pa4ok.demoexam.entity.BookEntity;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class BookEntityManager

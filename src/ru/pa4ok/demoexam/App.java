@@ -1,6 +1,7 @@
 package ru.pa4ok.demoexam;
 
 import ru.pa4ok.demoexam.ui.BookCreateForm;
+import ru.pa4ok.demoexam.ui.TestForm;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -41,7 +42,8 @@ public class App
             e.printStackTrace();
         }
 
-        new BookCreateForm();
+        //new BookCreateForm();
+        new TestForm();
     }
 
     public static Connection getConnection() throws SQLException {
