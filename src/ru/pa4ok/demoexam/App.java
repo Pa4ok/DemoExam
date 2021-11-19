@@ -1,6 +1,8 @@
 package ru.pa4ok.demoexam;
 
 import ru.pa4ok.demoexam.ui.BookCreateForm;
+import ru.pa4ok.demoexam.ui.MainForm;
+import ru.pa4ok.demoexam.ui.TextForm;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -31,15 +33,22 @@ public class App
         починить таблицу -> сделать класс сущность и менеджер -> сделать форму
      */
 
-    public static void main(String[] args)
-    {
+    static {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-        new BookCreateForm();
+    public static MainForm mainForm = new MainForm();
+    public static BookCreateForm bookCreateForm = new BookCreateForm();
+    public static TextForm textForm = new TextForm();
+
+    public static void main(String[] args)
+    {
+        //new TestForm();
+        mainForm.setVisible(true);
     }
 
     public static Connection getConnection() throws SQLException {

@@ -1,27 +1,40 @@
 package ru.pa4ok.demoexam.ui;
 
+import ru.pa4ok.demoexam.App;
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
+import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class BookCreateForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTextField titleField;
     private JTextField authorField;
-    private JTextField dateField;
     private JButton saveButton;
     private JSpinner pageSpinner;
+    private JComboBox<Integer> dayBox;
+    private JComboBox<String> monthBox;
+    private JComboBox<Integer> yearBox;
+    private JButton backButton;
 
     public BookCreateForm()
     {
         super("Школа языков Леарн", 450, 250);
         setContentPane(mainPanel);
+
+        for(int i=1; i<=31; i++) {
+            dayBox.addItem(i);
+        }
+        for(int i=1940; i<=2021; i++) {
+            yearBox.addItem(i);
+        }
 
         /*
         //вариант 1
@@ -34,42 +47,60 @@ public class BookCreateForm extends BaseForm
 
         //вариант 2
         saveButton.addActionListener(e -> {
-            //...
+,            //...
         });*/
 
         saveButton.addActionListener(e ->
         {
             String title = titleField.getText();
+            if(title.length() > 50) {
+                DialogUtil.showError(this, "Слишком длинное название");
+                return;
+            }
+
             String author = authorField.getText();
 
             int pages = (int) pageSpinner.getValue();
             if(pages <= 0) {
-                System.out.println("Количество страниц введено неверно");
+                DialogUtil.showError(this, "Количество страниц введено неверно");
                 return;
             }
 
-            Date date = null;
-            try {
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-                date = format.parse(dateField.getText());
-            } catch (Exception ex) {
-                System.out.println("Дата введена неверно, правильный формат: yyyy-MM-dd hh:mm");
+            /*GregorianCalendar calendar = new GregorianCalendar();
+            calendar.set((int)yearBox.getSelectedItem(), monthBox.getSelectedIndex(), (Integer) dayBox.getSelectedItem());
+            Date date = calendar.getTime();*/
+
+            GregorianCalendar calendar = new GregorianCalendar();
+            calendar.set(Calendar.YEAR, (int)yearBox.getSelectedItem());
+            calendar.set(Calendar.MONTH, monthBox.getSelectedIndex());
+            int day = (int) dayBox.getSelectedItem();
+            if(day > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+                DialogUtil.showError(this, "В этом месяце нет такого количества дней");
                 return;
             }
+            calendar.set(Calendar.DAY_OF_MONTH, day);
+            Date date = calendar.getTime();
 
             BookEntity book = new BookEntity(title, author, pages, date);
 
             try {
                 BookEntityManager.insert(book);
             } catch (SQLException ex) {
-                System.out.println("Ошибка сохранения данных: " + ex.getMessage());
+                DialogUtil.showError(this, "Ошибка сохранения данных: " + ex.getMessage());
                 ex.printStackTrace();
                 return;
             }
 
-            System.out.println("Кгига успешно добавлена: " + book);
+            DialogUtil.showInfo(this, "Кгига успешно добавлена: " + book);
         });
 
-        setVisible(true);
+        backButton.addActionListener(e -> {
+            //dispose();
+            //new TestForm();
+            setVisible(false);
+            App.mainForm.setVisible(true);
+        });
+
+        //setVisible(true);
     }
 }
