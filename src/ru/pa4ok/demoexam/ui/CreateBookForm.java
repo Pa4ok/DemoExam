@@ -10,7 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class CreateBookForm extends BaseForm
 {
@@ -19,26 +21,21 @@ public class CreateBookForm extends BaseForm
     private JTextField authorField;
     private JButton saveButton;
     private JSpinner pageSpinner;
-    private JTextField dateField;
+    private JComboBox<Integer> dayBox;
+    private JComboBox<String> monthBox;
+    private JComboBox<Integer> yearBox;
 
     public CreateBookForm()
     {
         super("My super app", 450, 250);
         setContentPane(mainPanel);
 
-        /*
-        //вариант 1
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //...
-            }
-        });
-
-        //вариант 2
-        saveButton.addActionListener(e -> {
-            //...
-        });*/
+        for(int i=1; i<=31; i++) {
+            dayBox.addItem(i);
+        }
+        for(int i=1940; i<=2021; i++) {
+            yearBox.addItem(i);
+        }
 
         saveButton.addActionListener(e ->
         {
@@ -60,14 +57,20 @@ public class CreateBookForm extends BaseForm
                 return;
             }
 
-            Date date = null;
-            try {
-                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-                date = format.parse(dateField.getText());
-            } catch (Exception ex) {
-                System.out.println("Неверный формат даты, правильный формат: dd-MM-yyyy HH:mm");
+            /*GregorianCalendar calendar = new GregorianCalendar();
+            calendar.set((int)yearBox.getSelectedItem(), monthBox.getSelectedIndex(), (int)dayBox.getSelectedItem());
+            Date date = calendar.getTime();*/
+
+            GregorianCalendar calendar = new GregorianCalendar();
+            calendar.set(Calendar.YEAR, (int)yearBox.getSelectedItem());
+            calendar.set(Calendar.MONTH, monthBox.getSelectedIndex());
+            int day = (int)dayBox.getSelectedItem();
+            if(day > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+                System.out.println("В этом месяце нет столько дней");
                 return;
             }
+            calendar.set(Calendar.DAY_OF_MONTH, day);
+            Date date = calendar.getTime();
 
             BookEntity book = new BookEntity(title, author, pages, date);
 
