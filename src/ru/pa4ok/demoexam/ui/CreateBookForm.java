@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CreateBookForm extends BaseForm
 {
@@ -17,6 +19,7 @@ public class CreateBookForm extends BaseForm
     private JTextField authorField;
     private JButton saveButton;
     private JSpinner pageSpinner;
+    private JTextField dateField;
 
     public CreateBookForm()
     {
@@ -57,7 +60,16 @@ public class CreateBookForm extends BaseForm
                 return;
             }
 
-            BookEntity book = new BookEntity(title, author, pages);
+            Date date = null;
+            try {
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                date = format.parse(dateField.getText());
+            } catch (Exception ex) {
+                System.out.println("Неверный формат даты, правильный формат: dd-MM-yyyy HH:mm");
+                return;
+            }
+
+            BookEntity book = new BookEntity(title, author, pages, date);
 
             try {
                 BookEntityManager.insert(book);

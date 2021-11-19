@@ -6,6 +6,10 @@ import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * shift + F10 - запуск последней конфигурации
@@ -16,6 +20,7 @@ import java.sql.SQLException;
 
 /**
  * библиотека-драйвер для субд mysql: mysql:mysql-connector-java:8.0.27
+ * библиотека lombok: org.projectlombok:lombok:1.18.22
  *
  * готовая удаленная база mysql (если лень подымать свою):
  * адрес: 116.202.236.174:3306
@@ -32,8 +37,34 @@ public class App
         починить таблицу -> сделать класс сущность и менеджер -> сделать форму
      */
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws ParseException
     {
+        /*long mills = System.currentTimeMillis();
+        System.out.println(mills);
+
+        Date date = new Date();
+        System.out.println(date);
+        System.out.println(date.getTime());*/
+
+        /*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        System.out.println(format.format(new Date()));
+        String s = "2000-11-01 15:33:21";
+        Date date = format.parse(s);
+        System.out.println(date);*/
+
+        /*Date date1 = new Date();
+        Date date2 = new Date(0);
+        Date date3 = new Date(TimeUnit.DAYS.toMillis(100));
+
+        System.out.println(date1);
+        System.out.println(date2);
+        System.out.println(date3);
+
+        System.out.println();
+
+        System.out.println(date1.compareTo(date2));
+        System.out.println(date2.before(date3));*/
+
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
