@@ -5,6 +5,8 @@ import java.awt.*;
 
 public class BaseForm extends JFrame
 {
+    public static String title = "Application";
+
     public BaseForm(int width, int height)
     {
         setMinimumSize(new Dimension(width, height));
@@ -13,5 +15,7 @@ public class BaseForm extends JFrame
                 Toolkit.getDefaultToolkit().getScreenSize().width / 2 - width / 2,
                 Toolkit.getDefaultToolkit().getScreenSize().height / 2 - height / 2
         );
+
+        setTitle(title);
     }
 }
