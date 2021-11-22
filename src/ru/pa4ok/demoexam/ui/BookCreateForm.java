@@ -15,7 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class CreateBookForm extends BaseForm
+public class BookCreateForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTextField titleField;
@@ -25,12 +25,21 @@ public class CreateBookForm extends BaseForm
     private JComboBox<Integer> monthBox;
     private JComboBox<Integer> yearBox;
     private JComboBox<Integer> dayBox;
+    private JButton backButton;
 
-    public CreateBookForm()
+    public BookCreateForm()
     {
-        super("Our super application", 450, 250);
+        super(450, 250);
         setContentPane(mainPanel);
 
+        this.initBoxes();
+        this.initButtons();
+
+        setVisible(true);
+    }
+
+    private void initBoxes()
+    {
         for(int i=1; i<=31; i++) {
             dayBox.addItem(i);
         }
@@ -38,7 +47,10 @@ public class CreateBookForm extends BaseForm
         for(int i=1980; i<2021; i++) {
             yearBox.addItem(i);
         }
+    }
 
+    private void initButtons()
+    {
         saveButton.addActionListener(e ->
         {
             String title = titleField.getText();
@@ -65,8 +77,13 @@ public class CreateBookForm extends BaseForm
             }
 
             DialogUtil.showInfo(this, "Книга успешно добавлена");
+            dispose();
+            new MainForm();
         });
 
-        setVisible(true);
+        backButton.addActionListener(e -> {
+            dispose();
+            new MainForm();
+        });
     }
 }

@@ -1,7 +1,6 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.ui.CreateBookForm;
-import ru.pa4ok.demoexam.ui.TestNewForm;
+import ru.pa4ok.demoexam.ui.MainForm;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -29,9 +28,27 @@ public class App
 {
     /*
         берем первую базу, которую чинили (database-1)
-        и делаем форму для добавления сущностей в таблицу Client
-        починить таблицу -> сделать класс сущность и менеджер -> сделать форму
+        создаем сущность и менеджер под таблицу Client
+        таблица уже в починенном виде есть на моем серверве
+
+        делаем следующие формы
+
+        MainForm
+        содержит 3 кнопки, которые открывают новые формы
+            список всех клиентов
+            добавить нового клиента
+            редактировать клиента (запросить id)
+
+        ClientCreateForm
+        форма создания нового клиента
+        содержит все поля кроме id
+
+        ClientEditForm
+        форма редактирования клиента
+        содержит все поля, поле id заблокировано для ввода
+        также должна содержать кнопку "Удалить"
      */
+
 
     public static void main(String[] args) throws SQLException
     {
@@ -41,7 +58,7 @@ public class App
             e.printStackTrace();
         }
 
-        new TestNewForm();
+        new MainForm();
     }
 
     public static Connection getConnection() throws SQLException {
