@@ -3,6 +3,7 @@ package ru.pa4ok.demoexam.ui;
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
+import ru.pa4ok.demoexam.util.BaseSubForm;
 import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class BookCreateForm extends BaseForm
+public class BookCreateForm extends BaseSubForm<MainForm>
 {
     private JPanel mainPanel;
     private JTextField titleField;
@@ -23,9 +24,9 @@ public class BookCreateForm extends BaseForm
     private JComboBox<Integer> yearBox;
     private JButton backButton;
 
-    public BookCreateForm()
+    public BookCreateForm(MainForm mainForm)
     {
-        super(450, 250);
+        super(mainForm, 450, 250);
         setContentPane(mainPanel);
 
         initBoxes();
@@ -97,8 +98,7 @@ public class BookCreateForm extends BaseForm
         });
 
         backButton.addActionListener(e -> {
-            dispose();
-            new MainForm();
+            closeSubForm();
         });
     }
 }

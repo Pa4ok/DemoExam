@@ -3,6 +3,7 @@ package ru.pa4ok.demoexam.ui;
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
+import ru.pa4ok.demoexam.util.BaseSubForm;
 import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class BookEditForm extends BaseForm
+public class BookEditForm extends BaseSubForm<MainForm>
 {
     private JPanel mainPanel;
     private JTextField titleField;
@@ -27,9 +28,9 @@ public class BookEditForm extends BaseForm
 
     private BookEntity book;
 
-    public BookEditForm(BookEntity book)
+    public BookEditForm(MainForm mainForm, BookEntity book)
     {
-        super(450, 250);
+        super(mainForm, 450, 250);
         this.book = book;
         setContentPane(mainPanel);
 
@@ -118,17 +119,17 @@ public class BookEditForm extends BaseForm
             }
 
             DialogUtil.showInfo(this, "Книга обновлена успешно");
-            goBack();
+            closeSubForm();
         });
 
         deleteButton.addActionListener(e ->
         {
-            if(JOptionPane.showConfirmDialog(this, "123?", "Подтверждение", JOptionPane.YES_NO_OPTION)
+            if(JOptionPane.showConfirmDialog(this, "Вы точно хотите удалить данную книжку?", "Подтверждение", JOptionPane.YES_NO_OPTION)
                 == JOptionPane.YES_OPTION) {
                 try {
                     BookEntityManager.delete(book);
                     DialogUtil.showInfo(this, "Книжка успешно удалена");
-                    goBack();
+                    closeSubForm();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                     DialogUtil.showError(this, "Ошибка удаленния данных");
@@ -137,13 +138,7 @@ public class BookEditForm extends BaseForm
         });
 
         backButton.addActionListener(e -> {
-            goBack();
+            closeSubForm();
         });
-    }
-
-    private void goBack()
-    {
-        dispose();
-        new MainForm();
     }
 }

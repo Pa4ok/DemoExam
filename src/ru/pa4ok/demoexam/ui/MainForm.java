@@ -28,13 +28,11 @@ public class MainForm extends BaseForm
     private void initButtons()
     {
         listButton.addActionListener(e -> {
-            dispose();
-            new BookListForm();
+            new BookListForm(this);
         });
 
         addButton.addActionListener(e -> {
-            dispose();
-            new BookCreateForm();
+            new BookCreateForm(this);
         });
 
         editButton.addActionListener(e -> {
@@ -59,8 +57,7 @@ public class MainForm extends BaseForm
                 return;
             }
 
-            dispose();
-            new BookEditForm(book);
+            new BookEditForm(this, book);
         });
     }
 }
