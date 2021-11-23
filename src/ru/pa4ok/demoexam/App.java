@@ -1,16 +1,11 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.entity.BookEntity;
-import ru.pa4ok.demoexam.manager.BookEntityManager;
+import ru.pa4ok.demoexam.ui.BookCreateForm;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * alt + enter - контекстное меню исправления ошибки
@@ -31,52 +26,21 @@ import java.util.concurrent.TimeUnit;
 
 public class App
 {
-    /*
-         создать сущность и менедежер со всеми методами для таблицы Product
-         протестить все методы
-     */
-
     public static void main(String[] args)
     {
-        /*System.out.println(System.currentTimeMillis());
-        System.out.println();
-
-        Date date = new Date();
-        System.out.println(date);
-        System.out.println(date.getTime());
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        System.out.println(format.format(date));*/
-
-        /*String s = "06.28.2000";
-        SimpleDateFormat format = new SimpleDateFormat("MM.dd.yyyy");
-        try {
-            Date date = format.parse(s);
-            System.out.println(date);
-            System.out.println(date.getTime());
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
-
-        /*Date date1 = new Date(0L);
-        Date date2 = new Date(100000000L);
-        Date date3 = new Date(TimeUnit.DAYS.toMillis(100));
-
-        System.out.println(date1);
-        System.out.println(date2);
-        System.out.println(date3);
-
-        System.out.println();
-
-        System.out.println(date1.compareTo(date2));
-        System.out.println(date1.before(date2));*/
+         /*
+            берем первую базу, которую чинили (database-1)
+            и делаем форму для добавления сущностей в таблицу Client
+            починить таблицу -> сделать класс сущность и менеджер -> сделать форму
+        */
 
         try {
-            BookEntityManager.insert(new BookEntity("title", "wqjwoqid", 44, new Date()));
-        } catch (SQLException e) {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+        new BookCreateForm();
     }
 
     public static Connection getConnection() throws SQLException
