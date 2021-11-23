@@ -1,16 +1,19 @@
 package ru.pa4ok.demoexam.ui;
 
+import ru.pa4ok.demoexam.entity.BookEntity;
+import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
+import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 public class MainForm extends BaseForm
 {
     private JPanel mainPanel;
     private JButton listButton;
     private JButton addButton;
-
-    //private CreateBookForm createBookForm = new CreateBookForm(this);
+    private JButton editButton;
 
     public MainForm()
     {
@@ -32,8 +35,32 @@ public class MainForm extends BaseForm
         addButton.addActionListener(e -> {
             dispose();
             new BookCreateForm();
-            //setVisible(false);
-            //createBookForm.setVisible(true);
+        });
+
+        editButton.addActionListener(e -> {
+            int id = -1;
+            try {
+                id = Integer.parseInt(JOptionPane.showInputDialog(this, "Введите id", "Ввод", JOptionPane.QUESTION_MESSAGE));
+            } catch (Exception ex) {
+                DialogUtil.showError(this, "Id не введен или введен неверно");
+                return;
+            }
+
+            BookEntity book = null;
+            try {
+                book = BookEntityManager.selectById(id);
+            } catch (SQLException ex) {
+                DialogUtil.showError(this, "Ошибка получения данных: " + ex.getMessage());
+                return;
+            }
+
+            if(book == null) {
+                DialogUtil.showError(this, "Книжки с таким id не существует");
+                return;
+            }
+
+            dispose();
+            new BookEditForm(book);
         });
     }
 }

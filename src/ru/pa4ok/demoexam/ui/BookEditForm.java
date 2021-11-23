@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class BookCreateForm extends BaseForm
+public class BookEditForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTextField titleField;
@@ -22,26 +22,49 @@ public class BookCreateForm extends BaseForm
     private JComboBox<String> monthBox;
     private JComboBox<Integer> yearBox;
     private JButton backButton;
+    private JTextField idField;
+    private JButton deleteButton;
 
-    public BookCreateForm()
+    private BookEntity book;
+
+    public BookEditForm(BookEntity book)
     {
         super(450, 250);
+        this.book = book;
         setContentPane(mainPanel);
 
+        initFields();
         initBoxes();
         initButtons();
 
         setVisible(true);
     }
 
+    private void initFields()
+    {
+        idField.setEditable(false);
+        idField.setText(String.valueOf(book.getId()));
+        titleField.setText(book.getTitle());
+        authorField.setText(book.getAuthor());
+        pageSpinner.setValue(book.getPages());
+    }
+
     private void initBoxes()
     {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(book.getWriteDateTime());
+
         for(int i=1; i<=31; i++) {
             dayBox.addItem(i);
         }
+        dayBox.setSelectedItem(calendar.get(Calendar.DAY_OF_MONTH));
+
         for(int i=1940; i<=2021; i++) {
             yearBox.addItem(i);
         }
+        yearBox.setSelectedItem(calendar.get(Calendar.YEAR));
+
+        monthBox.setSelectedIndex(calendar.get(Calendar.MONTH));
     }
 
     private void initButtons()
@@ -81,24 +104,46 @@ public class BookCreateForm extends BaseForm
             calendar.set(Calendar.DAY_OF_MONTH, days);
             Date date = calendar.getTime();
 
-            BookEntity book = new BookEntity(title, author, pages, date);
+            book.setTitle(title);
+            book.setAuthor(author);
+            book.setPages(pages);
+            book.setWriteDateTime(date);
 
             try {
-                BookEntityManager.add(book);
+                BookEntityManager.update(book);
             } catch (SQLException ex) {
                 DialogUtil.showError(this, "Ошибка сохранения данных " + ex.getMessage());
                 ex.printStackTrace();
                 return;
             }
 
-            DialogUtil.showInfo(this, "Книга добавлена успешно");
-            dispose();
-            new MainForm();
+            DialogUtil.showInfo(this, "Книга обновлена успешно");
+            goBack();
+        });
+
+        deleteButton.addActionListener(e ->
+        {
+            if(JOptionPane.showConfirmDialog(this, "123?", "Подтверждение", JOptionPane.YES_NO_OPTION)
+                == JOptionPane.YES_OPTION) {
+                try {
+                    BookEntityManager.delete(book);
+                    DialogUtil.showInfo(this, "Книжка успешно удалена");
+                    goBack();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    DialogUtil.showError(this, "Ошибка удаленния данных");
+                }
+            }
         });
 
         backButton.addActionListener(e -> {
-            dispose();
-            new MainForm();
+            goBack();
         });
+    }
+
+    private void goBack()
+    {
+        dispose();
+        new MainForm();
     }
 }
