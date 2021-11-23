@@ -1,15 +1,13 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.ui.CreateBookForm;
+import ru.pa4ok.demoexam.ui.BookListForm;
+import ru.pa4ok.demoexam.ui.MainForm;
 
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * shift + F10 - запуск последней конфигурации
@@ -33,45 +31,36 @@ public class App
 {
     /*
         берем первую базу, которую чинили (database-1)
-        и делаем форму для добавления сущностей в таблицу Client
-        починить таблицу -> сделать класс сущность и менеджер -> сделать форму
+        создаем сущность и менеджер под таблицу Client
+        таблица уже в починенном виде есть на моем серверве
+
+        делаем следующие формы
+
+        MainForm
+        содержит 3 кнопки, которые меняют форму
+            список всех клиентов
+            добавить нового клиента
+            редактировать клиента (запросить id)
+
+        ClientCreateForm
+        форма создания нового клиента
+        содержит все поля кроме id
+
+        ClientEditForm
+        форма редактирования клиента
+        содержит все поля, поле id заблокировано для ввода
+        также должна содержать кнопку "Удалить"
      */
 
     public static void main(String[] args) throws ParseException
     {
-        /*long mills = System.currentTimeMillis();
-        System.out.println(mills);
-
-        Date date = new Date();
-        System.out.println(date);
-        System.out.println(date.getTime());*/
-
-        /*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        System.out.println(format.format(new Date()));
-        String s = "2000-11-01 15:33:21";
-        Date date = format.parse(s);
-        System.out.println(date);*/
-
-        /*Date date1 = new Date();
-        Date date2 = new Date(0);
-        Date date3 = new Date(TimeUnit.DAYS.toMillis(100));
-
-        System.out.println(date1);
-        System.out.println(date2);
-        System.out.println(date3);
-
-        System.out.println();
-
-        System.out.println(date1.compareTo(date2));
-        System.out.println(date2.before(date3));*/
-
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        new CreateBookForm();
+        new MainForm();
     }
 
     public static Connection getConnection() throws SQLException {

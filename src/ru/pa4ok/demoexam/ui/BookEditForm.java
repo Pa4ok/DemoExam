@@ -3,18 +3,15 @@ package ru.pa4ok.demoexam.ui;
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
+import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class CreateBookForm extends BaseForm
+public class BookEditForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTextField titleField;
@@ -24,36 +21,70 @@ public class CreateBookForm extends BaseForm
     private JComboBox<Integer> dayBox;
     private JComboBox<String> monthBox;
     private JComboBox<Integer> yearBox;
+    private JButton backButton;
+    private JTextField idField;
 
-    public CreateBookForm()
+    private BookEntity book;
+
+    public BookEditForm(BookEntity book)
     {
-        super("My super app", 450, 250);
+        super(450, 250);
+        this.book = book;
         setContentPane(mainPanel);
+
+        initFields();
+        initBoxes();
+        initButtons();
+
+        setVisible(true);
+    }
+
+    private void initFields()
+    {
+        idField.setEditable(false);
+        idField.setText(String.valueOf(book.getId()));
+        titleField.setText(book.getTitle());
+        authorField.setText(book.getAuthor());
+        pageSpinner.setValue(book.getPages());
+    }
+
+    private void initBoxes()
+    {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(book.getWriteDateTime());
 
         for(int i=1; i<=31; i++) {
             dayBox.addItem(i);
         }
+        dayBox.setSelectedItem(calendar.get(Calendar.DAY_OF_MONTH));
+
         for(int i=1940; i<=2021; i++) {
             yearBox.addItem(i);
         }
+        yearBox.setSelectedItem(calendar.get(Calendar.YEAR));
 
+        monthBox.setSelectedIndex(calendar.get(Calendar.MONTH));
+    }
+
+    private void initButtons()
+    {
         saveButton.addActionListener(e ->
         {
             String title = titleField.getText().trim();
             if(title.isEmpty() || title.length() > 256) {
-                System.out.println("Слишком короткое или длинное название");
+                DialogUtil.showError(this, "Слишком короткое или длинное название");
                 return;
             }
 
             String author = authorField.getText().trim();
             if(author.isEmpty() || author.length() > 256) {
-                System.out.println("Слишком длинный или короткий автор");
+                DialogUtil.showError(this, "Слишком длинный или короткий автор");
                 return;
             }
 
             int pages = (int) pageSpinner.getValue();
             if(pages <= 0) {
-                System.out.println("Количество страниц введено неверно");
+                DialogUtil.showError(this, "Количество страниц введено неверно");
                 return;
             }
 
@@ -66,25 +97,34 @@ public class CreateBookForm extends BaseForm
             calendar.set(Calendar.MONTH, monthBox.getSelectedIndex());
             int day = (int)dayBox.getSelectedItem();
             if(day > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
-                System.out.println("В этом месяце нет столько дней");
+                DialogUtil.showError(this, "В этом месяце нет столько дней");
                 return;
             }
             calendar.set(Calendar.DAY_OF_MONTH, day);
             Date date = calendar.getTime();
 
-            BookEntity book = new BookEntity(title, author, pages, date);
+            book.setTitle(title);
+            book.setAuthor(author);
+            book.setPages(pages);
+            book.setWriteDateTime(date);
 
             try {
-                BookEntityManager.insert(book);
+                BookEntityManager.update(book);
             } catch (SQLException ex) {
-                System.out.println("Ошибка сохранения данных: " + ex.getMessage());
+                DialogUtil.showError(this, "Ошибка сохранения данных: " + ex.getMessage());
                 ex.printStackTrace();
                 return;
             }
 
-            System.out.println("Книга успешно добавлена: " + book);
+            DialogUtil.showInfo(this, "Книга успешно изменена");
+
+            dispose();
+            new MainForm();
         });
 
-        setVisible(true);
+        backButton.addActionListener(e -> {
+            dispose();
+            new MainForm();
+        });
     }
 }

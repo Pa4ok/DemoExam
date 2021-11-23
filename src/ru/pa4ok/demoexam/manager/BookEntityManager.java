@@ -56,8 +56,8 @@ public class BookEntityManager
             if(resultSet.next()) {
                 return new BookEntity(
                         resultSet.getInt("id"),
-                        resultSet.getString("author"),
                         resultSet.getString("title"),
+                        resultSet.getString("author"),
                         resultSet.getInt("pages"),
                         resultSet.getTimestamp("writeDateTime")
                 );
@@ -79,8 +79,8 @@ public class BookEntityManager
             while(resultSet.next()) {
                 list.add(new BookEntity(
                         resultSet.getInt("id"),
-                        resultSet.getString("author"),
                         resultSet.getString("title"),
+                        resultSet.getString("author"),
                         resultSet.getInt("pages"),
                         resultSet.getTimestamp("writeDateTime")
                 ));
