@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * shift + F10 - запуск выбранной конфигурации (точка входа psvm)
