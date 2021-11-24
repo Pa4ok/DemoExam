@@ -1,8 +1,6 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.ui.BookCreateForm;
 import ru.pa4ok.demoexam.ui.MainForm;
-import ru.pa4ok.demoexam.ui.TextForm;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -29,26 +27,36 @@ public class App
 {
     /*
         берем первую базу, которую чинили (database-1)
-        и делаем форму для добавления сущностей в таблицу Client
-        починить таблицу -> сделать класс сущность и менеджер -> сделать форму
+        создаем сущность и менеджер под таблицу Client
+        таблица уже в починенном виде есть на моем серверве
+
+        делаем следующие формы
+
+        MainForm
+        содержит 3 кнопки, которые открывают дополнительные / полностью меняют форму
+            список всех клиентов
+            добавить нового клиента
+            редактировать клиента (запросить id)
+
+        ClientCreateForm
+        форма создания нового клиента
+        содержит все поля кроме id
+
+        ClientEditForm
+        форма редактирования клиента
+        содержит все поля, поле id заблокировано для ввода
+        также должна содержать кнопку "Удалить"
      */
 
-    static {
+    public static void main(String[] args)
+    {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-    public static MainForm mainForm = new MainForm();
-    public static BookCreateForm bookCreateForm = new BookCreateForm();
-    public static TextForm textForm = new TextForm();
-
-    public static void main(String[] args)
-    {
-        //new TestForm();
-        mainForm.setVisible(true);
+        new MainForm();
     }
 
     public static Connection getConnection() throws SQLException {

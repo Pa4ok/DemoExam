@@ -1,29 +1,33 @@
 package ru.pa4ok.demoexam.ui;
 
-import ru.pa4ok.demoexam.App;
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
 
 import javax.swing.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class TextForm extends BaseForm
+public class BookListForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTextArea textArea;
     private JButton backButton;
 
-    public TextForm()
+    public BookListForm()
     {
-        super("текст", 600, 400);
+        super(600, 400);
         setContentPane(mainPanel);
-        backButton.addActionListener(e -> {
-            setVisible(false);
-            App.mainForm.setVisible(true);
-        });
+
+        initText();
+        initButtons();
+
+        setVisible(true);
+    }
+
+    private void initText()
+    {
+        textArea.setEditable(false);
 
         try {
             List<BookEntity> books = BookEntityManager.selectAll();
@@ -35,5 +39,13 @@ public class TextForm extends BaseForm
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void initButtons()
+    {
+        backButton.addActionListener(e -> {
+            dispose();
+            new MainForm();
+        });
     }
 }
