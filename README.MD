@@ -21,10 +21,12 @@
 - git checkout <НАЗВАНИЕ ВАШЕЙ ВЕТКИ>
 - git reset <ИНДЕФИКАТОР КОММИТА>
 
-## Что можно почитать и посмотреть самостоятельно
+## Что можно почитать и посмотреть по основам java
 - https://metanit.com/java/tutorial/ - текстовые основы на русском
 - https://o7planning.org/en/10973/java-basic - текстовые основы на английском
 - https://www.youtube.com/playlist?list=PLAma_mKffTOSUkXp26rgdnC0PicnmnDak - видеокурс подробно мелкими видосами (проще с 0)
 - https://www.youtube.com/playlist?list=PLlb7e2G7aSpRZSRZxANkvpYC82BXUzCTY - видеокурс большими видосами (проще если есть опыт)
 - https://paulradzkov.com/2014/markdown_cheatsheet/ - гайд по разметке README.md файла
 
+## Гайды по бд, десктопу и самому экзамену
+- https://pa4ok.ru/itmo/guide/2021/db-using-guide.mp4 - работа с базами данных из кода (+установка ПО)
