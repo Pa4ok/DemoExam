@@ -2,28 +2,28 @@ package ru.pa4ok.demoexam.ui;
 
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
-import ru.pa4ok.demoexam.util.BaseSubForm;
+import ru.pa4ok.demoexam.util.BaseForm;
 
 import javax.swing.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class BookListForm extends BaseSubForm<MainForm>
+public class BookListForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTextArea textArea;
     private JButton backButton;
 
-    public BookListForm(MainForm mainForm)
+    public BookListForm()
     {
-        super(mainForm, 400, 300);
+        super(400, 300);
         setContentPane(mainPanel);
 
         textArea.setEditable(false);
 
         backButton.addActionListener(e -> {
-            closeSubForm();
+            dispose();
+            new MainForm();
         });
 
         try {

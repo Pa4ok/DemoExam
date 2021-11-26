@@ -2,38 +2,35 @@ package ru.pa4ok.demoexam.ui;
 
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
-import ru.pa4ok.demoexam.util.BaseSubForm;
+import ru.pa4ok.demoexam.util.BaseForm;
 import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
 import java.sql.SQLException;
-import java.util.Calendar;
+import java.text.ParseException;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
-public class BookEditForm extends BaseSubForm<MainForm>
+public class BookEditForm extends BaseForm
 {
     private JPanel mainPanel;
-    private JTextField idField;
     private JTextField titleField;
     private JTextField authorField;
-    private JSpinner pageSpinner;
-    private JComboBox<Integer> dayBox;
-    private JComboBox<String> monthBox;
-    private JComboBox<Integer> yearBox;
-    private JButton backButton;
     private JButton saveButton;
+    private JSpinner pageSpinner;
+    private JButton backButton;
+    private JTextField idField;
+    private JTextField dateField;
+    private JButton deleteButton;
 
     private BookEntity book;
 
-    public BookEditForm(MainForm mainForm, BookEntity book)
+    public BookEditForm(BookEntity book)
     {
-        super(mainForm, 420, 250);
+        super(420, 250);
         this.book = book;
         setContentPane(mainPanel);
 
         this.initFields();
-        this.initBoxes();
         this.initButtons();
 
         setVisible(true);
@@ -46,24 +43,7 @@ public class BookEditForm extends BaseSubForm<MainForm>
         titleField.setText(book.getTitle());
         authorField.setText(book.getAuthor());
         pageSpinner.setValue(book.getPages());
-    }
-
-    private void initBoxes()
-    {
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(book.getWriteDateTime());
-
-        for(int i=1; i<=31; i++) {
-            dayBox.addItem(i);
-        }
-        dayBox.setSelectedItem(calendar.get(Calendar.DAY_OF_MONTH));
-
-        for(int i=1940; i<=2021; i++) {
-            yearBox.addItem(i);
-        }
-        yearBox.setSelectedItem(calendar.get(Calendar.YEAR));
-
-        monthBox.setSelectedIndex(calendar.get(Calendar.MONTH));
+        dateField.setText(BookEntity.DATE_FORMAT.format(book.getWriteDateTime()));
     }
 
     private void initButtons()
@@ -79,9 +59,13 @@ public class BookEditForm extends BaseSubForm<MainForm>
                 return;
             }
 
-            GregorianCalendar calendar = new GregorianCalendar();
-            calendar.set((int)yearBox.getSelectedItem(), monthBox.getSelectedIndex(), (int)dayBox.getSelectedItem(), 0, 0);
-            Date date = calendar.getTime();
+            Date date = null;
+            try {
+                date = BookEntity.DATE_FORMAT.parse(dateField.getText());
+            } catch (ParseException ex) {
+                DialogUtil.showError(this, "Дата введена неверно");
+                return;
+            }
 
             book.setTitle(title);
             book.setAuthor(author);
@@ -97,11 +81,29 @@ public class BookEditForm extends BaseSubForm<MainForm>
             }
 
             DialogUtil.showInfo(this, "Книжка успешно отредактирована");
-            closeSubForm();
+            dispose();
+            new MainForm();
         });
 
         backButton.addActionListener(e -> {
-            closeSubForm();
+            dispose();
+            new MainForm();
+        });
+
+        deleteButton.addActionListener(e ->
+        {
+            if(JOptionPane.showConfirmDialog(this, "Вы точно хотите удалить эту книгу?", "Подтверждение", JOptionPane.YES_NO_OPTION)
+                == JOptionPane.YES_OPTION) {
+                try {
+                    BookEntityManager.delete(book);
+                    DialogUtil.showInfo(this, "Книжка удалена успешно");
+                    dispose();
+                    new MainForm();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    DialogUtil.showError(this, "Ошибка удаления данных: " + ex.getMessage());
+                }
+            }
         });
     }
 }

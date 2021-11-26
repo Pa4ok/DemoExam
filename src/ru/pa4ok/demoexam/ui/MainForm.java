@@ -28,25 +28,22 @@ public class MainForm extends BaseForm
     private void initButtons()
     {
         listButton.addActionListener(e -> {
-            new BookListForm(this);
+            dispose();
+            new BookListForm();
         });
 
         addButton.addActionListener(e -> {
-            new BookCreateForm(this);
+            dispose();
+            new BookCreateForm();
         });
 
-        editButton.addActionListener(e -> {
-            String s = JOptionPane.showInputDialog(this, "Введите id книги");
-            if(s.isEmpty()) {
-                DialogUtil.showError(this, "Id не введен");
-                return;
-            }
-
+        editButton.addActionListener(e ->
+        {
             int id = -1;
             try {
-                id = Integer.parseInt(s);
+                id = Integer.parseInt(JOptionPane.showInputDialog(this, "Введите id книги", "Ввод", JOptionPane.QUESTION_MESSAGE));
             } catch (Exception ex) {
-                DialogUtil.showError(this, "Id введен некоретно");
+                DialogUtil.showError(this, "Id не введен или введен некорректно");
                 return;
             }
 
@@ -64,7 +61,8 @@ public class MainForm extends BaseForm
                 return;
             }
 
-            new BookEditForm(this, book);
+            dispose();
+            new BookEditForm(book);
         });
     }
 }
