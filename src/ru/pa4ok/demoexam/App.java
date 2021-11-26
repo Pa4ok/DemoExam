@@ -48,12 +48,23 @@ public class App
         также должна содержать кнопку "Удалить"
      */
 
+    public static boolean admin = false;
+
     public static void main(String[] args)
     {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        if(JOptionPane.showInputDialog(
+                null,
+                "Введите пароль админа (если знаете)",
+                "Режим администратора",
+                JOptionPane.QUESTION_MESSAGE
+        ).equalsIgnoreCase("0000")) {
+            admin = true;
         }
 
         new MainForm();

@@ -1,5 +1,6 @@
 package ru.pa4ok.demoexam.ui;
 
+import ru.pa4ok.demoexam.App;
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
@@ -17,7 +18,7 @@ public class MainForm extends BaseForm
 
     public MainForm()
     {
-        super(400, 250);
+        super(800, 600);
         setContentPane(mainPanel);
 
         initButtons();
@@ -33,8 +34,8 @@ public class MainForm extends BaseForm
         });
 
         listButton.addActionListener(e -> {
-            dispose();
-            new BookListForm();
+            //dispose();
+            new BookListForm(this);
         });
 
         editButton.addActionListener(e ->
@@ -64,5 +65,10 @@ public class MainForm extends BaseForm
             dispose();
             new BookEditForm(book);
         });
+
+        if(!App.admin) {
+            addButton.setEnabled(false);
+            editButton.setEnabled(false);
+        }
     }
 }

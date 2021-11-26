@@ -1,5 +1,7 @@
 package ru.pa4ok.demoexam.util;
 
+import ru.pa4ok.demoexam.App;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,6 +18,6 @@ public class BaseForm extends JFrame
                 Toolkit.getDefaultToolkit().getScreenSize().height / 2 - height / 2
         );
 
-        setTitle(APP_TITLE);
+        setTitle(APP_TITLE + (App.admin ? " [admin mode]" : ""));
     }
 }
