@@ -17,7 +17,7 @@ public class MainForm extends BaseForm
 
     public MainForm()
     {
-        super(600, 400);
+        super(800, 600);
         setContentPane(mainPanel);
 
         initButtons();
@@ -28,8 +28,8 @@ public class MainForm extends BaseForm
     private void initButtons()
     {
         listButton.addActionListener(e -> {
-            dispose();
-            new BookListForm();
+            //dispose();
+            new BookListForm(this);
         });
 
         addButton.addActionListener(e -> {

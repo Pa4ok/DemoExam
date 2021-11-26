@@ -3,21 +3,22 @@ package ru.pa4ok.demoexam.ui;
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
+import ru.pa4ok.demoexam.util.BaseSubForm;
 import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
 import java.sql.SQLException;
 import java.util.List;
 
-public class BookListForm extends BaseForm
+public class BookListForm extends BaseSubForm<MainForm>
 {
     private JPanel mainPanel;
     private JTextArea textArea;
     private JButton backButton;
 
-    public BookListForm()
+    public BookListForm(MainForm mainForm)
     {
-        super(600, 400);
+        super(mainForm, 600, 400);
         setContentPane(mainPanel);
 
         initText();
@@ -48,8 +49,7 @@ public class BookListForm extends BaseForm
     private void initButtons()
     {
         backButton.addActionListener(e -> {
-            dispose();
-            new MainForm();
+            closeSubForm();
         });
     }
 }
