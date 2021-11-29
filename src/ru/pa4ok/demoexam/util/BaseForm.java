@@ -13,9 +13,8 @@ public class BaseForm extends JFrame
         setMinimumSize(new Dimension(width, height));
         setLocation(
                 Toolkit.getDefaultToolkit().getScreenSize().width / 2 - width / 2,
-                Toolkit.getDefaultToolkit().getScreenSize().height / 2 - height /2
+                Toolkit.getDefaultToolkit().getScreenSize().height / 2 - height / 2
         );
-
         setTitle(APP_TITLE);
     }
 }

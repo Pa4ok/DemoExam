@@ -1,14 +1,13 @@
 package ru.pa4ok.demoexam.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
+import java.util.Objects;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Data //@EqualsAndHashCode @ToString @Getter @Setter
+@NoArgsConstructor
+@Data //@EqualsAndHashCode @ToString @ToString @Getter @Setter
 public class BookEntity
 {
     private int id;

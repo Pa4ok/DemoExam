@@ -1,19 +1,16 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.ui.BookListForm;
-import ru.pa4ok.demoexam.ui.MainForm;
+import ru.pa4ok.demoexam.ui.BookTableForm;
 
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.text.ParseException;
 
 /**
- * shift + F10 - запуск последней конфигурации
  * alt + enter - контекстное меню по исправлению ошибки
- * ctrl + space - контекстное меню по достпуным методам и полям объекта (после точки)
- * alt + insert - контекстное меню генерации кода (конструкторы, toString, геттеры и сеттеры)
+ * shift + F10 - запуск последней конфигурации
+ * alt + insert - контекстное меню по генерации кода (конструторы, toString, геттеры и сеттеры)
  */
 
 /**
@@ -29,30 +26,20 @@ import java.text.ParseException;
 
 public class App
 {
+
     /*
         берем первую базу, которую чинили (database-1)
         создаем сущность и менеджер под таблицу Client
         таблица уже в починенном виде есть на моем серверве
 
-        делаем следующие формы
-
-        MainForm
-        содержит 3 кнопки, которые меняют форму
-            список всех клиентов
-            добавить нового клиента
-            редактировать клиента (запросить id)
-
-        ClientCreateForm
-        форма создания нового клиента
-        содержит все поля кроме id
-
-        ClientEditForm
-        форма редактирования клиента
-        содержит все поля, поле id заблокировано для ввода
-        также должна содержать кнопку "Удалить"
+        делаем форму с таблицей через CustomTableModel
+        по двойному клику должна открываться форма с редактированием/удалением
+        также под таблицей должна быть кнопка для открытия формы добавления
      */
 
-    public static void main(String[] args) throws ParseException
+
+
+    public static void main(String[] args) throws SQLException
     {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -60,7 +47,7 @@ public class App
             e.printStackTrace();
         }
 
-        new MainForm();
+        new BookTableForm();
     }
 
     public static Connection getConnection() throws SQLException {

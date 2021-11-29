@@ -14,15 +14,15 @@ import java.util.GregorianCalendar;
 public class BookEditForm extends BaseForm
 {
     private JPanel mainPanel;
+    private JTextField idField;
     private JTextField titleField;
     private JTextField authorField;
-    private JButton saveButton;
     private JSpinner pageSpinner;
     private JComboBox<Integer> dayBox;
     private JComboBox<String> monthBox;
     private JComboBox<Integer> yearBox;
     private JButton backButton;
-    private JTextField idField;
+    private JButton saveButton;
 
     private BookEntity book;
 
@@ -32,9 +32,9 @@ public class BookEditForm extends BaseForm
         this.book = book;
         setContentPane(mainPanel);
 
-        initFields();
-        initBoxes();
-        initButtons();
+        this.initFields();
+        this.initBoxes();
+        this.initButtons();
 
         setVisible(true);
     }
@@ -58,7 +58,7 @@ public class BookEditForm extends BaseForm
         }
         dayBox.setSelectedItem(calendar.get(Calendar.DAY_OF_MONTH));
 
-        for(int i=1940; i<=2021; i++) {
+        for(int i=1980; i<2021; i++) {
             yearBox.addItem(i);
         }
         yearBox.setSelectedItem(calendar.get(Calendar.YEAR));
@@ -70,37 +70,17 @@ public class BookEditForm extends BaseForm
     {
         saveButton.addActionListener(e ->
         {
-            String title = titleField.getText().trim();
-            if(title.isEmpty() || title.length() > 256) {
-                DialogUtil.showError(this, "Слишком короткое или длинное название");
-                return;
-            }
-
-            String author = authorField.getText().trim();
-            if(author.isEmpty() || author.length() > 256) {
-                DialogUtil.showError(this, "Слишком длинный или короткий автор");
-                return;
-            }
+            String title = titleField.getText();
+            String author = authorField.getText();
 
             int pages = (int) pageSpinner.getValue();
             if(pages <= 0) {
-                DialogUtil.showError(this, "Количество страниц введено неверно");
+                DialogUtil.showError(this, "Неверно введено количество страниц");
                 return;
             }
-
-            /*GregorianCalendar calendar = new GregorianCalendar();
-            calendar.set((int)yearBox.getSelectedItem(), monthBox.getSelectedIndex(), (int)dayBox.getSelectedItem());
-            Date date = calendar.getTime();*/
 
             GregorianCalendar calendar = new GregorianCalendar();
-            calendar.set(Calendar.YEAR, (int)yearBox.getSelectedItem());
-            calendar.set(Calendar.MONTH, monthBox.getSelectedIndex());
-            int day = (int)dayBox.getSelectedItem();
-            if(day > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
-                DialogUtil.showError(this, "В этом месяце нет столько дней");
-                return;
-            }
-            calendar.set(Calendar.DAY_OF_MONTH, day);
+            calendar.set((int)yearBox.getSelectedItem(), monthBox.getSelectedIndex(), (int)dayBox.getSelectedItem());
             Date date = calendar.getTime();
 
             book.setTitle(title);
@@ -116,15 +96,14 @@ public class BookEditForm extends BaseForm
                 return;
             }
 
-            DialogUtil.showInfo(this, "Книга успешно изменена");
-
+            DialogUtil.showInfo(this, "Книга успешно сохранена");
             dispose();
-            new MainForm();
+            new BookTableForm();
         });
 
         backButton.addActionListener(e -> {
             dispose();
-            new MainForm();
+            new BookTableForm();
         });
     }
 }
