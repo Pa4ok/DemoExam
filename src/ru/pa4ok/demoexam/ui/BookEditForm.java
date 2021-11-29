@@ -1,5 +1,6 @@
 package ru.pa4ok.demoexam.ui;
 
+import ru.pa4ok.demoexam.App;
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
@@ -43,7 +44,7 @@ public class BookEditForm extends BaseForm
         titleField.setText(book.getTitle());
         authorField.setText(book.getAuthor());
         pageSpinner.setValue(book.getPages());
-        dateField.setText(BookEntity.DATE_FORMAT.format(book.getWriteDateTime()));
+        dateField.setText(App.DATE_FORMAT.format(book.getWriteDateTime()));
     }
 
     private void initButtons()
@@ -61,7 +62,7 @@ public class BookEditForm extends BaseForm
 
             Date date = null;
             try {
-                date = BookEntity.DATE_FORMAT.parse(dateField.getText());
+                date = App.DATE_FORMAT.parse(dateField.getText());
             } catch (ParseException ex) {
                 DialogUtil.showError(this, "Дата введена неверно");
                 return;
@@ -82,12 +83,12 @@ public class BookEditForm extends BaseForm
 
             DialogUtil.showInfo(this, "Книжка успешно отредактирована");
             dispose();
-            new MainForm();
+            new BookTableForm();
         });
 
         backButton.addActionListener(e -> {
             dispose();
-            new MainForm();
+            new BookTableForm();
         });
 
         deleteButton.addActionListener(e ->
@@ -98,7 +99,7 @@ public class BookEditForm extends BaseForm
                     BookEntityManager.delete(book);
                     DialogUtil.showInfo(this, "Книжка удалена успешно");
                     dispose();
-                    new MainForm();
+                    new BookTableForm();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                     DialogUtil.showError(this, "Ошибка удаления данных: " + ex.getMessage());
