@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class BookEditForm extends BaseSubForm<MainForm>
+public class BookEditForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTextField titleField;
@@ -28,9 +28,9 @@ public class BookEditForm extends BaseSubForm<MainForm>
 
     private BookEntity book;
 
-    public BookEditForm(MainForm mainForm, BookEntity book)
+    public BookEditForm(BookEntity book)
     {
-        super(mainForm, 450, 250);
+        super(450, 250);
         this.book = book;
         setContentPane(mainPanel);
 
@@ -119,7 +119,8 @@ public class BookEditForm extends BaseSubForm<MainForm>
             }
 
             DialogUtil.showInfo(this, "Книга обновлена успешно");
-            closeSubForm();
+            dispose();
+            new BookTableForm();
         });
 
         deleteButton.addActionListener(e ->
@@ -129,7 +130,8 @@ public class BookEditForm extends BaseSubForm<MainForm>
                 try {
                     BookEntityManager.delete(book);
                     DialogUtil.showInfo(this, "Книжка успешно удалена");
-                    closeSubForm();
+                    dispose();
+                    new BookTableForm();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                     DialogUtil.showError(this, "Ошибка удаленния данных");
@@ -138,7 +140,8 @@ public class BookEditForm extends BaseSubForm<MainForm>
         });
 
         backButton.addActionListener(e -> {
-            closeSubForm();
+            dispose();
+            new BookTableForm();
         });
     }
 }
