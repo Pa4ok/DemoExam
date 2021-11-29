@@ -98,12 +98,12 @@ public class BookEditForm extends BaseForm
 
             DialogUtil.showInfo(this, "Книга успешно сохранена");
             dispose();
-            new MainForm();
+            new BookTableForm();
         });
 
         backButton.addActionListener(e -> {
             dispose();
-            new MainForm();
+            new BookTableForm();
         });
     }
 }
