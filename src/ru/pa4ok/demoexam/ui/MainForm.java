@@ -17,11 +17,13 @@ public class MainForm extends BaseForm
 
     public MainForm()
     {
-        super(600, 400);
+        super(800, 600);
         setContentPane(mainPanel);
 
         bookListButton.addActionListener(e -> {
-            new TextForm(this);
+            //new TextForm(this);
+            dispose();
+            new BookTableForm();
         });
 
         addButton.addActionListener(e -> {
