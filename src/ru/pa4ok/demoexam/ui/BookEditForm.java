@@ -29,7 +29,7 @@ public class BookEditForm extends BaseForm
 
     public BookEditForm(BookEntity book)
     {
-        super(450, 250);
+        super(450, 275);
         this.book = book;
         setContentPane(mainPanel);
 

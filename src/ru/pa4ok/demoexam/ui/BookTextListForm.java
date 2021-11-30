@@ -28,6 +28,8 @@ public class BookTextListForm extends BaseForm
 
     private void initText()
     {
+        textArea.setEditable(false);
+
         try {
             List<BookEntity> list = BookEntityManager.selectAll();
             String s = "";
