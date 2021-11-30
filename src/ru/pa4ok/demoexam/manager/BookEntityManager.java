@@ -13,13 +13,14 @@ public class BookEntityManager
     {
         try(Connection c = App.getConnection())
         {
-            String sql = "INSERT INTO books(title, author, pages, writeDateTime) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO books(title, author, pages, writeDateTime, type) VALUES(?,?,?,?,?)";
 
             PreparedStatement ps = c.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getAuthor());
             ps.setInt(3, book.getPages());
             ps.setTimestamp(4, new Timestamp(book.getWriteDateTime().getTime()));
+            ps.setString(5, book.getType());
 
             ps.executeUpdate();
 
@@ -49,7 +50,8 @@ public class BookEntityManager
                         resultSet.getString("title"),
                         resultSet.getString("author"),
                         resultSet.getInt("pages"),
-                        resultSet.getTimestamp("writeDateTime")
+                        resultSet.getTimestamp("writeDateTime"),
+                        resultSet.getString("type")
                 );
             }
 
@@ -72,7 +74,8 @@ public class BookEntityManager
                         resultSet.getString("title"),
                         resultSet.getString("author"),
                         resultSet.getInt("pages"),
-                        resultSet.getTimestamp("writeDateTime")
+                        resultSet.getTimestamp("writeDateTime"),
+                        resultSet.getString("type")
                 ));
             }
 
@@ -84,14 +87,15 @@ public class BookEntityManager
     {
         try(Connection c = App.getConnection())
         {
-            String sql = "UPDATE books SET title=?, author=?, pages=?, writeDateTime=? WHERE id=?";
+            String sql = "UPDATE books SET title=?, author=?, pages=?, writeDateTime=?, type=? WHERE id=?";
 
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getAuthor());
             ps.setInt(3, book.getPages());
             ps.setTimestamp(4, new Timestamp(book.getWriteDateTime().getTime()));
-            ps.setInt(5, book.getId());
+            ps.setString(5, book.getType());
+            ps.setInt(6, book.getId());
 
             ps.executeUpdate();
         }

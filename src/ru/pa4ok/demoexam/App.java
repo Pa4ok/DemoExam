@@ -16,6 +16,7 @@ import java.sql.SQLException;
 
 /**
  * библиотека-драйвер для субд mysql: mysql:mysql-connector-java:8.0.27
+ * библиотека lombok: org.projectlombok:lombok:1.18.22
  *
  * готовая удаленная база mysql (если лень подымать свою):
  * адрес: 116.202.236.174:3306
