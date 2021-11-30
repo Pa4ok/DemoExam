@@ -6,19 +6,24 @@ import ru.pa4ok.demoexam.util.BaseForm;
 import ru.pa4ok.demoexam.util.CustomTableModel;
 
 import javax.swing.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.sql.SQLException;
+import java.util.*;
 
 public class BookTableForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTable table;
     private JButton addButton;
+    private JComboBox authorFilterBox;
+    private JComboBox pageFilterBox;
+    private JButton idSortButton;
+    private JButton dateSortButton;
 
     private CustomTableModel<BookEntity> model;
+
+    private boolean idSort = true;
+    private boolean dateSort = false;
 
     public BookTableForm()
     {
@@ -26,6 +31,7 @@ public class BookTableForm extends BaseForm
         setContentPane(mainPanel);
 
         initTable();
+        initBoxes();
         initButtons();
 
         setVisible(true);
@@ -73,6 +79,7 @@ public class BookTableForm extends BaseForm
                             try {
                                 BookEntityManager.delete(model.getRows().get(row));
                                 model.getRows().remove(row);
+                                model.fireTableDataChanged();
                             } catch (SQLException ex) {
                                 ex.printStackTrace();
                             }
@@ -83,11 +90,112 @@ public class BookTableForm extends BaseForm
         });
     }
 
+    private void initBoxes()
+    {
+        authorFilterBox.addItem("Все авторы");
+        try {
+            List<BookEntity> list = BookEntityManager.selectAll();
+            Set<String> authors = new HashSet<>();
+            for(BookEntity b : list) {
+                authors.add(b.getAuthor());
+            }
+            for(String s : authors) {
+                authorFilterBox.addItem(s);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        authorFilterBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(e.getStateChange() == ItemEvent.SELECTED) {
+                    applyFilters();
+                }
+            }
+        });
+
+        pageFilterBox.addItem("Все книги");
+        pageFilterBox.addItem(10);
+        pageFilterBox.addItem(100);
+        pageFilterBox.addItem(1000);
+        pageFilterBox.addItem(10000);
+
+        pageFilterBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(e.getStateChange() == ItemEvent.SELECTED) {
+                    applyFilters();
+                }
+            }
+        });
+    }
+
+    private void applyFilters()
+    {
+        try {
+            List<BookEntity> list = BookEntityManager.selectAll();
+
+            if(authorFilterBox.getSelectedIndex() != 0) {
+                list.removeIf(b -> !b.getAuthor().equals(authorFilterBox.getSelectedItem()));
+            }
+
+            if(pageFilterBox.getSelectedIndex() != 0) {
+                list.removeIf(b -> b.getPages() < (int)pageFilterBox.getSelectedItem());
+            }
+
+            idSort = true;
+            dateSort = false;
+
+            model.setRows(list);
+            model.fireTableDataChanged();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     private void initButtons()
     {
         addButton.addActionListener(e -> {
             dispose();
             new BookCreateForm();
+        });
+
+        idSortButton.addActionListener(e -> {
+            Collections.sort(model.getRows(), new Comparator<BookEntity>() {
+                @Override
+                public int compare(BookEntity o1, BookEntity o2) {
+                    if(idSort) {
+                        return Integer.compare(o2.getId(), o1.getId());
+                    } else {
+                        return Integer.compare(o1.getId(), o2.getId());
+                    }
+                }
+            });
+
+            idSort = !idSort;
+            dateSort = false;
+
+            model.fireTableDataChanged();
+        });
+
+        dateSortButton.addActionListener(e -> {
+            Collections.sort(model.getRows(), new Comparator<BookEntity>() {
+                @Override
+                public int compare(BookEntity o1, BookEntity o2) {
+                    if(dateSort) {
+                        return o2.getWriteDateTime().compareTo(o1.getWriteDateTime());
+                    } else {
+                        return o1.getWriteDateTime().compareTo(o2.getWriteDateTime());
+                    }
+                }
+            });
+
+            dateSort = !dateSort;
+            idSort = false;
+
+            model.fireTableDataChanged();
         });
     }
 }
