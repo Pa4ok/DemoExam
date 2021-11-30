@@ -172,9 +172,7 @@ public class BookTableForm extends BaseForm
             idSort = !idSort;
             dateSort = false;
         });
-
-        Predicate
-
+        
         dateSortButton.addActionListener(e -> {
             Collections.sort(model.getRows(), new Comparator<BookEntity>() {
                 @Override
