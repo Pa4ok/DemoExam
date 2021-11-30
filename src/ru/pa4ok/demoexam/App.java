@@ -1,11 +1,13 @@
 package ru.pa4ok.demoexam;
 
 import ru.pa4ok.demoexam.ui.BookCreateForm;
+import ru.pa4ok.demoexam.ui.MainForm;
 
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 /**
  * alt + enter - контекстное меню исправления ошибки
@@ -27,6 +29,8 @@ import java.sql.SQLException;
 
 public class App
 {
+    public static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+
     public static void main(String[] args)
     {
          /*
@@ -41,7 +45,7 @@ public class App
             e.printStackTrace();
         }
 
-        new BookCreateForm();
+        new MainForm();
     }
 
     public static Connection getConnection() throws SQLException

@@ -3,18 +3,16 @@ package ru.pa4ok.demoexam.ui;
 import ru.pa4ok.demoexam.App;
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
+import ru.pa4ok.demoexam.ui.MainForm;
 import ru.pa4ok.demoexam.util.BaseForm;
 import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class BookCreateForm extends BaseForm
+public class BookEditForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTextField titleField;
@@ -24,16 +22,32 @@ public class BookCreateForm extends BaseForm
     private JSpinner pageSpinner;
     private JComboBox typeBox;
     private JButton backButton;
+    private JTextField idField;
+    private JButton deleteButton;
 
-    public BookCreateForm()
+    private BookEntity book;
+
+    public BookEditForm(BookEntity book)
     {
         super(450, 250);
+        this.book = book;
         setContentPane(mainPanel);
 
+        initFields();
         initBoxes();
         initButtons();
 
         setVisible(true);
+    }
+
+    private void initFields()
+    {
+        idField.setEditable(false);
+        idField.setText(String.valueOf(book.getId()));
+        titleField.setText(book.getTitle());
+        authorField.setText(book.getAuthor());
+        pageSpinner.setValue(book.getPages());
+        dateField.setText(App.DATE_FORMAT.format(book.getWriteDateTime()));
     }
 
     private void initBoxes()
@@ -41,6 +55,8 @@ public class BookCreateForm extends BaseForm
         typeBox.addItem("FIRST");
         typeBox.addItem("SECOND");
         typeBox.addItem("THIRD");
+
+        typeBox.setSelectedItem(book.getType());
     }
 
     private void initButtons()
@@ -72,19 +88,42 @@ public class BookCreateForm extends BaseForm
                 return;
             }
 
-            BookEntity book = new BookEntity(title, author, pages, date, (String) typeBox.getSelectedItem());
+            book.setTitle(title);
+            book.setAuthor(author);
+            book.setPages(pages);
+            book.setWriteDateTime(date);
+            book.setType((String) typeBox.getSelectedItem());
 
             try {
-                BookEntityManager.insert(book);
+                BookEntityManager.update(book);
             } catch (SQLException ex) {
                 DialogUtil.showError(this, "Ошибка сохранения данных");
                 ex.printStackTrace();
                 return;
             }
 
-            DialogUtil.showInfo(this, "Книжка успешно добавлена");
+            DialogUtil.showInfo(this, "Книжка успешно отредактирована");
             dispose();
             new MainForm();
+        });
+
+        deleteButton.addActionListener(e -> {
+            if(JOptionPane.showConfirmDialog(
+                    this,
+                    "Вы точно хотите удалить данную книжку?",
+                    "Подтверждение",
+                    JOptionPane.YES_NO_OPTION
+            ) == JOptionPane.YES_OPTION) {
+                try {
+                    BookEntityManager.delete(book);
+                    DialogUtil.showInfo(this, "Книжка успешно удалена");
+                    dispose();
+                    new MainForm();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    DialogUtil.showError(this, "Ошибка удаления данных: " + ex.getMessage());
+                }
+            }
         });
 
         backButton.addActionListener(e -> {
