@@ -6,16 +6,15 @@ import ru.pa4ok.demoexam.util.BaseForm;
 import ru.pa4ok.demoexam.util.CustomTableModel;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.util.List;
 
 public class BookTableForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTable table;
-    private JButton backButton;
-    private JButton testButton;
+    private JButton addButton;
 
     private CustomTableModel<BookEntity> model;
 
@@ -45,17 +44,26 @@ public class BookTableForm extends BaseForm
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getClickCount() == 2) {
+                    int row = table.rowAtPoint(e.getPoint());
+                    if(row != -1) {
+                        dispose();
+                        new BookEditForm(model.getRows().get(row));
+                    }
+                }
+            }
+        });
     }
 
     private void initButtons()
     {
-        backButton.addActionListener(e -> {
+        addButton.addActionListener(e -> {
             dispose();
-            new MainForm();
-        });
-
-        testButton.addActionListener(e -> {
-            System.out.println(model.getRows().get(3));
+            new BookCreateForm();
         });
     }
 }

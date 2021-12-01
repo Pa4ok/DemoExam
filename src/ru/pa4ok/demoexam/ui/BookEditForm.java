@@ -2,6 +2,7 @@ package ru.pa4ok.demoexam.ui;
 
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
+import ru.pa4ok.demoexam.util.BaseForm;
 import ru.pa4ok.demoexam.util.BaseSubForm;
 import ru.pa4ok.demoexam.util.DialogUtil;
 
@@ -11,7 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class BookEditForm extends BaseSubForm<MainForm>
+public class BookEditForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTextField idField;
@@ -23,12 +24,13 @@ public class BookEditForm extends BaseSubForm<MainForm>
     private JComboBox<Integer> yearBox;
     private JButton saveButton;
     private JButton backButton;
+    private JButton deleteButton;
 
     private BookEntity book;
 
-    public BookEditForm(MainForm mainForm, BookEntity book)
+    public BookEditForm(BookEntity book)
     {
-        super(mainForm, 400, 250);
+        super(400, 250);
         this.book = book;
         setContentPane(mainPanel);
 
@@ -97,11 +99,32 @@ public class BookEditForm extends BaseSubForm<MainForm>
             }
 
             DialogUtil.showInfo("Книжка успешно сохранена");
-            closeSubForm();
+            dispose();
+            new BookTableForm();
         });
 
         backButton.addActionListener(e -> {
-            closeSubForm();
+            dispose();
+            new BookTableForm();
+        });
+
+        deleteButton.addActionListener(e -> {
+            if(JOptionPane.showConfirmDialog(
+                    this,
+                    "Вы точно хотите удалить данную запись?",
+                    "Подтверждение",
+                    JOptionPane.YES_NO_OPTION
+            ) == JOptionPane.YES_OPTION) {
+                try {
+                    BookEntityManager.delete(book);
+                    DialogUtil.showInfo(this, "Книжка успешно удалена");
+                    dispose();
+                    new BookTableForm();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    DialogUtil.showError(this, "Ошибка удаления данных: " + ex.getMessage());
+                }
+            }
         });
     }
 }
