@@ -115,12 +115,12 @@ public class BookEditForm extends BaseForm
 
             DialogUtil.showInfo(this, "Кгига успешно отредактирована");
             dispose();
-            new MainForm();
+            new BookTableForm();
         });
 
         backButton.addActionListener(e -> {
             dispose();
-            new MainForm();
+            new BookTableForm();
         });
 
         deleteButton.addActionListener(e ->
@@ -135,7 +135,7 @@ public class BookEditForm extends BaseForm
                     BookEntityManager.delete(book);
                     DialogUtil.showInfo(this, "Кгига успешно удалена");
                     dispose();
-                    new MainForm();
+                    new BookTableForm();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                     DialogUtil.showError(this, "Ошибка удаления данных: " + ex.getMessage());
