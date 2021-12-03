@@ -68,7 +68,7 @@ public class BookCreateForm extends BaseForm
             try {
                 date = App.DATE_FORMAT.parse(dateField.getText());
             } catch (Exception ex) {
-                DialogUtil.showError(this, "Дата введена в неправильно, корректный формат: dd.MM.yyyy hh:mm");
+                DialogUtil.showError(this, "Дата введена в неправильно, корректный формат: " + App.DATE_FORMAT.toLocalizedPattern());
                 return;
             }
 
@@ -84,12 +84,12 @@ public class BookCreateForm extends BaseForm
 
             DialogUtil.showInfo(this, "Книжка успешно добавлена");
             dispose();
-            new MainForm();
+            new BookTableForm();
         });
 
         backButton.addActionListener(e -> {
             dispose();
-            new MainForm();
+            new BookTableForm();
         });
     }
 }

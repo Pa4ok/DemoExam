@@ -1,7 +1,6 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.ui.BookCreateForm;
-import ru.pa4ok.demoexam.ui.MainForm;
+import ru.pa4ok.demoexam.ui.BookTableForm;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -33,29 +32,15 @@ public class App
 
     public static void main(String[] args)
     {
-        /*
+    /*
         берем первую базу, которую чинили (database-1)
         создаем сущность и менеджер под таблицу Client
         таблица уже в починенном виде есть на моем серверве
 
-        делаем следующие формы
-
-        MainForm
-        содержит 3 кнопки, которые меняют форму
-            список всех клиентов
-            добавить нового клиента
-            редактировать клиента (запросить id)
-
-        ClientCreateForm
-        форма создания нового клиента
-        содержит все поля кроме id
-
-        ClientEditForm
-        форма редактирования клиента
-        содержит все поля, поле id заблокировано для ввода
-        также должна содержать кнопку "Удалить"
+        делаем форму с таблицей через CustomTableModel
+        по двойному клику должна открываться форма с редактированием/удалением
+        также под таблицей должна быть кнопка для открытия формы добавления
      */
-
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -63,7 +48,7 @@ public class App
             e.printStackTrace();
         }
 
-        new MainForm();
+        new BookTableForm();
     }
 
     public static Connection getConnection() throws SQLException

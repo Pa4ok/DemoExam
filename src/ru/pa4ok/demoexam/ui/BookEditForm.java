@@ -3,13 +3,11 @@ package ru.pa4ok.demoexam.ui;
 import ru.pa4ok.demoexam.App;
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
-import ru.pa4ok.demoexam.ui.MainForm;
 import ru.pa4ok.demoexam.util.BaseForm;
 import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BookEditForm extends BaseForm
@@ -104,7 +102,7 @@ public class BookEditForm extends BaseForm
 
             DialogUtil.showInfo(this, "Книжка успешно отредактирована");
             dispose();
-            new MainForm();
+            new BookTableForm();
         });
 
         deleteButton.addActionListener(e -> {
@@ -118,7 +116,7 @@ public class BookEditForm extends BaseForm
                     BookEntityManager.delete(book);
                     DialogUtil.showInfo(this, "Книжка успешно удалена");
                     dispose();
-                    new MainForm();
+                    new BookTableForm();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                     DialogUtil.showError(this, "Ошибка удаления данных: " + ex.getMessage());
@@ -128,7 +126,7 @@ public class BookEditForm extends BaseForm
 
         backButton.addActionListener(e -> {
             dispose();
-            new MainForm();
+            new BookTableForm();
         });
     }
 }
