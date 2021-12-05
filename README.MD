@@ -31,3 +31,4 @@
 ## Гайды по бд, десктопу и самому экзамену
 - https://pa4ok.ru/itmo/guide/2021/db-using-guide.mp4 - работа с базами данных из кода (+установка ПО)
 - https://pa4ok.ru/itmo/guide/2021/db-fix-guide.mp4 - починка сломанных баз данных (2 бд подробно)
+- https://pa4ok.ru/itmo/guide/2021/ui-part-1-guide.mp4 - основы работы с десктопом (без таблиц)
