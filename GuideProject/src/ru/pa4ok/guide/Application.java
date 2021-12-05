@@ -1,13 +1,12 @@
 package ru.pa4ok.guide;
 
-import ru.pa4ok.guide.entity.ClientEntity;
-import ru.pa4ok.guide.manager.ClientEntityManager;
+import ru.pa4ok.guide.ui.MainForm;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
 
 /**
  * библиотека-драйвер для субд mysql: mysql:mysql-connector-java:8.0.27
@@ -21,43 +20,17 @@ import java.util.List;
  */
 public class Application
 {
+    public static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
     public static void main(String[] args)
     {
-        /*ClientEntity client = new ClientEntity(
-                1,
-                "firstname",
-                "efwwfe",
-                "fewwfe",
-                new Date(),
-                new Date(),
-                "efwwefwe",
-                "wefwefwef",
-                'm'
-        );*/
-
         try {
-            /*System.out.println(client);
-            ClientEntityManager.insert(client);
-            System.out.println(client);*/
-
-            //System.out.println(ClientEntityManager.selectById(59));
-            //System.out.println(ClientEntityManager.selectById(1090));
-
-            /*List<ClientEntity> list = ClientEntityManager.selectAll();
-            for(ClientEntity c : list) {
-                System.out.println(c);
-            }*/
-
-            /*ClientEntity client = ClientEntityManager.selectById(59);
-            System.out.println(client);
-            client.setEmail("123321@mail.ru");
-            ClientEntityManager.update(client);*/
-
-            ClientEntityManager.delete(55);
-
-        } catch (SQLException e) {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+        new MainForm();
     }
 
     public static Connection getConnection() throws SQLException {

@@ -18,4 +18,8 @@ public class ClientEntity
     private String email;
     private String phone;
     private char gender;
+
+    public ClientEntity(String firstname, String lastname, String patronymic, Date birthday, Date regDate, String email, String phone, char gender) {
+        this(-1, firstname, lastname, patronymic, birthday, regDate, email, phone, gender);
+    }
 }
