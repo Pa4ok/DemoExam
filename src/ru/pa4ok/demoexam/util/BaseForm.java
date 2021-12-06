@@ -1,11 +1,23 @@
 package ru.pa4ok.demoexam.util;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class BaseForm extends JFrame
 {
-    public static final String APP_TITLE = "Application";
+    public static String APP_TITLE = "Application";
+    public static Image APP_ICON = null;
+
+    static {
+        try {
+            APP_ICON = ImageIO.read(BaseForm.class.getClassLoader().getResource("school_logo.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            DialogUtil.showError("Ошибка загрузки иконки");
+        }
+    }
 
     public BaseForm(int width, int height)
     {
@@ -17,5 +29,8 @@ public class BaseForm extends JFrame
         );
 
         setTitle(APP_TITLE);
+        if(APP_ICON != null) {
+            setIconImage(APP_ICON);
+        }
     }
 }

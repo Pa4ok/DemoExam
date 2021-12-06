@@ -9,6 +9,11 @@ import java.util.List;
 
 public class BookEntityManager
 {
+    /**
+     * метод добаления сущностей книг в базу данных
+     * @param book
+     * @throws SQLException
+     */
     public static void add(BookEntity book) throws SQLException
     {
         try(Connection c = App.getConnection())

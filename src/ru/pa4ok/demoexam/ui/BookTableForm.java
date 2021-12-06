@@ -45,11 +45,12 @@ public class BookTableForm extends BaseForm
     private void initTable()
     {
         table.getTableHeader().setReorderingAllowed(false);
+        table.setRowHeight(50);
 
         try {
             model = new CustomTableModel<>(
                     BookEntity.class,
-                    new String[] { "ID", "Название", "Автор", "Страниц", "Дата написания" },
+                    new String[] { "ID", "Название", "Автор", "Страниц", "Дата написания", "тест", "Изображение" },
                     BookEntityManager.selectAll()
             );
             table.setModel(model);
