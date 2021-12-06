@@ -47,4 +47,8 @@ public class CustomTableModel<T> extends AbstractTableModel
     public List<T> getRows() {
         return rows;
     }
+
+    public void setRows(List<T> rows) {
+        this.rows = rows;
+    }
 }
