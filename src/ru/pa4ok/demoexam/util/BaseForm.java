@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class BaseForm extends JFrame
 {
-    public static String APP_TITLE = "Application";
+    public static String APP_TITLE = "Школа языков “Леарн”";
     public static Image APP_ICON = null;
 
     static {
@@ -15,7 +15,7 @@ public class BaseForm extends JFrame
             APP_ICON = ImageIO.read(BaseForm.class.getClassLoader().getResource("school_logo.png"));
         } catch (IOException e) {
             e.printStackTrace();
-            DialogUtil.showError("Ошибка загрузки иконки");
+            DialogUtil.showError(null, "Ошибка загрузки иконки");
         }
     }
 

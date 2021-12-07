@@ -1,6 +1,6 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.ui.BookTableForm;
+import ru.pa4ok.demoexam.ui.ServiceTableForm;
 
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
@@ -25,15 +25,8 @@ import java.sql.SQLException;
  * !!!создавайте таблицы со своими названиями, чтобы не было путаницы!!!
  */
 
-/**
- * главный класс
- */
 public class App
 {
-    /**
-     * главный метод, точка входа в программу
-     * @param args
-     */
     public static void main(String[] args)
     {
         try {
@@ -44,11 +37,11 @@ public class App
 
         changeAllFonts(new FontUIResource("Comic Sans MS", Font.TRUETYPE_FONT, 12));
 
-        new BookTableForm();
+        new ServiceTableForm();
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://116.202.236.174:3306/DemoExam", "DemoExam", "DemoExam");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "1234");
     }
 
     public static void changeAllFonts(Font font) {
