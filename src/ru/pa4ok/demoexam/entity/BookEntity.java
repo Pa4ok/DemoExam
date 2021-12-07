@@ -3,6 +3,7 @@ package ru.pa4ok.demoexam.entity;
 import lombok.*;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Data //@EqualsAndHashCode @ToString @Getter @Setter
 @AllArgsConstructor

@@ -1,5 +1,7 @@
 package ru.pa4ok.demoexam;
 
+import ru.pa4ok.demoexam.entity.BookEntity;
+import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.ui.BookTableForm;
 
 import javax.swing.*;
@@ -7,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * alt + enter - контекстное меню исправления ошибки
@@ -49,6 +52,34 @@ public class App
         }
 
         new BookTableForm();
+
+        //test();
+    }
+
+    private static void test()
+    {
+        try {
+            List<BookEntity> list = BookEntityManager.selectAll();
+            System.out.println(list);
+
+            Collections.sort(list, new Comparator<BookEntity>() {
+                @Override
+                public int compare(BookEntity o1, BookEntity o2) {
+                    /*
+                        o1 < o2 | <0
+                        o1 = o2 | 0
+                        o1 > o2 | >0
+                     */
+                    return Integer.compare(o1.getPages(), o2.getPages());
+                    //return o1.getAuthor().compareTo(o2.getAuthor());
+                }
+            });
+
+            System.out.println(list);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Connection getConnection() throws SQLException
