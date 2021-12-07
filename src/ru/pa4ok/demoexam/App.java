@@ -3,6 +3,8 @@ package ru.pa4ok.demoexam;
 import ru.pa4ok.demoexam.ui.BookTableForm;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,7 +17,6 @@ import java.sql.SQLException;
 
 /**
  * библиотека-драйвер для субд mysql: mysql:mysql-connector-java:8.0.27
- * библиотека lombok: org.projectlombok:lombok:1.18.22
  *
  * готовая удаленная база mysql (если лень подымать свою):
  * адрес: 116.202.236.174:3306
@@ -24,22 +25,16 @@ import java.sql.SQLException;
  * !!!создавайте таблицы со своими названиями, чтобы не было путаницы!!!
  */
 
+/**
+ * главный класс
+ */
 public class App
 {
-
-    /*
-        берем первую базу, которую чинили (database-1)
-        создаем сущность и менеджер под таблицу Client
-        таблица уже в починенном виде есть на моем серверве
-
-        делаем форму с таблицей через CustomTableModel
-        по двойному клику должна открываться форма с редактированием/удалением
-        также под таблицей должна быть кнопка для открытия формы добавления
+    /**
+     * главный метод, точка входа в программу
+     * @param args
      */
-
-
-
-    public static void main(String[] args) throws SQLException
+    public static void main(String[] args)
     {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -47,10 +42,22 @@ public class App
             e.printStackTrace();
         }
 
+        changeAllFonts(new FontUIResource("Comic Sans MS", Font.TRUETYPE_FONT, 12));
+
         new BookTableForm();
     }
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:mysql://116.202.236.174:3306/DemoExam", "DemoExam", "DemoExam");
+    }
+
+    public static void changeAllFonts(Font font) {
+        java.util.Enumeration keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof javax.swing.plaf.FontUIResource)
+                UIManager.put(key, font);
+        }
     }
 }

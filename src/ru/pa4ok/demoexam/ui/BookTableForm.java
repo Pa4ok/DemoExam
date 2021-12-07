@@ -4,9 +4,13 @@ import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
 import ru.pa4ok.demoexam.util.CustomTableModel;
+import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -15,10 +19,11 @@ public class BookTableForm extends BaseForm
     private JPanel mainPanel;
     private JTable table;
     private JButton addButton;
-    private JComboBox authorFilterBox;
+    private JComboBox<String> authorFilterBox;
     private JComboBox pageFilterBox;
     private JButton idSortButton;
     private JButton dateSortButton;
+    private JButton clearButton;
 
     private CustomTableModel<BookEntity> model;
 
@@ -40,17 +45,19 @@ public class BookTableForm extends BaseForm
     private void initTable()
     {
         table.getTableHeader().setReorderingAllowed(false);
+        table.setRowHeight(50);
 
         try {
             model = new CustomTableModel<>(
                     BookEntity.class,
-                    new String[] { "ID", "Название", "Автор", "Страниц", "Дата написания" },
+                    new String[] { "ID", "Название", "Автор", "Страниц", "Дата написания", "тест", "Изображение" },
                     BookEntityManager.selectAll()
             );
             table.setModel(model);
 
         } catch (SQLException e) {
             e.printStackTrace();
+            DialogUtil.showError(this, "Ошибка работы с бд");
         }
 
         table.addMouseListener(new MouseAdapter() {
@@ -58,33 +65,7 @@ public class BookTableForm extends BaseForm
             public void mouseClicked(MouseEvent e) {
                 if(e.getClickCount() == 2) {
                     int row = table.rowAtPoint(e.getPoint());
-                    dispose();
-                    new BookEditForm(model.getRows().get(row));
-                }
-            }
-        });
-
-        table.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_DELETE) {
-                    int row = table.getSelectedRow();
-                    if(row != -1) {
-                        if(JOptionPane.showConfirmDialog(
-                                BookTableForm.this,
-                                "Вы точно хотите удалить данную запись?",
-                                "Подтверждение",
-                                JOptionPane.YES_NO_OPTION
-                        ) == JOptionPane.YES_OPTION) {
-                            try {
-                                BookEntityManager.delete(model.getRows().get(row));
-                                model.getRows().remove(row);
-                                model.fireTableDataChanged();
-                            } catch (SQLException ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-                    }
+                    new BookEditForm(BookTableForm.this, model.getRows().get(row));
                 }
             }
         });
@@ -104,6 +85,7 @@ public class BookTableForm extends BaseForm
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            DialogUtil.showError(this, "Ошибка работы с бд");
         }
 
         authorFilterBox.addItemListener(new ItemListener() {
@@ -115,11 +97,10 @@ public class BookTableForm extends BaseForm
             }
         });
 
-        pageFilterBox.addItem("Все книги");
+        pageFilterBox.addItem("Все");
         pageFilterBox.addItem(10);
         pageFilterBox.addItem(100);
         pageFilterBox.addItem(1000);
-        pageFilterBox.addItem(10000);
 
         pageFilterBox.addItemListener(new ItemListener() {
             @Override
@@ -134,32 +115,32 @@ public class BookTableForm extends BaseForm
     private void applyFilters()
     {
         try {
-            List<BookEntity> list = BookEntityManager.selectAll();
+            List<BookEntity> allBooks = BookEntityManager.selectAll();
 
             if(authorFilterBox.getSelectedIndex() != 0) {
-                list.removeIf(b -> !b.getAuthor().equals(authorFilterBox.getSelectedItem()));
+                allBooks.removeIf(b -> !b.getAuthor().equals(authorFilterBox.getSelectedItem()));
             }
 
             if(pageFilterBox.getSelectedIndex() != 0) {
-                list.removeIf(b -> b.getPages() < (int)pageFilterBox.getSelectedItem());
+                allBooks.removeIf(b -> b.getPages() < (int)pageFilterBox.getSelectedItem());
             }
 
             idSort = true;
             dateSort = false;
 
-            model.setRows(list);
+            model.setRows(allBooks);
             model.fireTableDataChanged();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+            DialogUtil.showError(BookTableForm.this, "Ошибка работы с бд");
         }
     }
 
     private void initButtons()
     {
         addButton.addActionListener(e -> {
-            dispose();
-            new BookCreateForm();
+            new BookCreateForm(this);
         });
 
         idSortButton.addActionListener(e -> {
@@ -197,5 +178,14 @@ public class BookTableForm extends BaseForm
 
             model.fireTableDataChanged();
         });
+
+        clearButton.addActionListener(e -> {
+            authorFilterBox.setSelectedIndex(0);
+            pageFilterBox.setSelectedIndex(0);
+        });
+    }
+
+    public CustomTableModel<BookEntity> getModel() {
+        return model;
     }
 }

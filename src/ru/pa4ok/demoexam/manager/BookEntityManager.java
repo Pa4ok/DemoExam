@@ -9,11 +9,16 @@ import java.util.List;
 
 public class BookEntityManager
 {
-    public static void insert(BookEntity book) throws SQLException
+    /**
+     * метод добаления сущностей книг в базу данных
+     * @param book
+     * @throws SQLException
+     */
+    public static void add(BookEntity book) throws SQLException
     {
         try(Connection c = App.getConnection())
         {
-            String sql = "INSERT INTO books(title, author, pages, writeDateTime) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO books(title, author, pages, writeDateTime) VALUES (?,?,?,?)";
 
             PreparedStatement ps = c.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, book.getTitle());
@@ -52,7 +57,6 @@ public class BookEntityManager
                         resultSet.getTimestamp("writeDateTime")
                 );
             }
-
             return null;
         }
     }

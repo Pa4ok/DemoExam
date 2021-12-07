@@ -3,6 +3,7 @@ package ru.pa4ok.demoexam.ui;
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
+import ru.pa4ok.demoexam.util.BaseSubForm;
 import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
@@ -11,30 +12,31 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class BookEditForm extends BaseForm
+public class BookEditForm extends BaseSubForm<BookTableForm>
 {
     private JPanel mainPanel;
-    private JTextField idField;
     private JTextField titleField;
     private JTextField authorField;
+    private JButton saveButton;
     private JSpinner pageSpinner;
     private JComboBox<Integer> dayBox;
     private JComboBox<String> monthBox;
     private JComboBox<Integer> yearBox;
     private JButton backButton;
-    private JButton saveButton;
+    private JTextField idField;
+    private JButton deleteButton;
 
     private BookEntity book;
 
-    public BookEditForm(BookEntity book)
+    public BookEditForm(BookTableForm mainForm, BookEntity book)
     {
-        super(450, 250);
+        super(mainForm,450, 275);
         this.book = book;
         setContentPane(mainPanel);
 
-        this.initFields();
-        this.initBoxes();
-        this.initButtons();
+        initFields();
+        initBoxes();
+        initButtons();
 
         setVisible(true);
     }
@@ -58,7 +60,7 @@ public class BookEditForm extends BaseForm
         }
         dayBox.setSelectedItem(calendar.get(Calendar.DAY_OF_MONTH));
 
-        for(int i=1980; i<2021; i++) {
+        for(int i=1940; i<=2021; i++) {
             yearBox.addItem(i);
         }
         yearBox.setSelectedItem(calendar.get(Calendar.YEAR));
@@ -71,16 +73,36 @@ public class BookEditForm extends BaseForm
         saveButton.addActionListener(e ->
         {
             String title = titleField.getText();
-            String author = authorField.getText();
-
-            int pages = (int) pageSpinner.getValue();
-            if(pages <= 0) {
-                DialogUtil.showError(this, "Неверно введено количество страниц");
+            if(title.isEmpty() || title.length() > 50) {
+                DialogUtil.showError(this, "Название сликом корокткое или больше 50 символов");
                 return;
             }
 
+            String author = authorField.getText();
+            if(author.isEmpty() || author.length() > 50) {
+                DialogUtil.showError(this, "Автор сликом корокткий или больше 50 символов");
+                return;
+            }
+
+            int pages = (int)pageSpinner.getValue();
+            if(pages <= 0) {
+                DialogUtil.showError(this, "Количество страниц введено неверно");
+                return;
+            }
+
+            /*GregorianCalendar calendar = new GregorianCalendar();
+            calendar.set((int)yearBox.getSelectedItem(), monthBox.getSelectedIndex(), (int)dayBox.getSelectedItem(), 0, 0, 0);
+            Date date = calendar.getTime();*/
+
             GregorianCalendar calendar = new GregorianCalendar();
-            calendar.set((int)yearBox.getSelectedItem(), monthBox.getSelectedIndex(), (int)dayBox.getSelectedItem());
+            calendar.set(Calendar.YEAR, (int)yearBox.getSelectedItem());
+            calendar.set(Calendar.MONTH, monthBox.getSelectedIndex());
+            int days = (int)dayBox.getSelectedItem();
+            if(days > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+                DialogUtil.showError(this, "В этом месяце нет такого количества дней");
+                return;
+            }
+            calendar.set(Calendar.DAY_OF_MONTH, days);
             Date date = calendar.getTime();
 
             book.setTitle(title);
@@ -90,20 +112,36 @@ public class BookEditForm extends BaseForm
 
             try {
                 BookEntityManager.update(book);
+                mainForm.getModel().fireTableDataChanged();
             } catch (SQLException ex) {
-                DialogUtil.showError(this, "Ошибка сохранения данных: " + ex.getMessage());
+                DialogUtil.showError(this, "Ошибка сохранения данных " + ex.getMessage());
                 ex.printStackTrace();
                 return;
             }
 
-            DialogUtil.showInfo(this, "Книга успешно сохранена");
-            dispose();
-            new BookTableForm();
+            DialogUtil.showInfo(this, "Книга обновлена успешно");
+            closeSubForm();
+        });
+
+        deleteButton.addActionListener(e ->
+        {
+            if(JOptionPane.showConfirmDialog(this, "Вы точно хотите удалить данную книжку?", "Подтверждение", JOptionPane.YES_NO_OPTION)
+                == JOptionPane.YES_OPTION) {
+                try {
+                    BookEntityManager.delete(book);
+                    mainForm.getModel().getRows().remove(book);
+                    mainForm.getModel().fireTableDataChanged();
+                    DialogUtil.showInfo(this, "Книжка успешно удалена");
+                    closeSubForm();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    DialogUtil.showError(this, "Ошибка удаленния данных");
+                }
+            }
         });
 
         backButton.addActionListener(e -> {
-            dispose();
-            new BookTableForm();
+            closeSubForm();
         });
     }
 }
