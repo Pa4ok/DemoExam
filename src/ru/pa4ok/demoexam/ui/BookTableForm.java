@@ -65,8 +65,7 @@ public class BookTableForm extends BaseForm
             public void mouseClicked(MouseEvent e) {
                 if(e.getClickCount() == 2) {
                     int row = table.rowAtPoint(e.getPoint());
-                    dispose();
-                    new BookEditForm(model.getRows().get(row));
+                    new BookEditForm(BookTableForm.this, model.getRows().get(row));
                 }
             }
         });
@@ -141,8 +140,7 @@ public class BookTableForm extends BaseForm
     private void initButtons()
     {
         addButton.addActionListener(e -> {
-            dispose();
-            new BookCreateForm();
+            new BookCreateForm(this);
         });
 
         idSortButton.addActionListener(e -> {
@@ -185,5 +183,9 @@ public class BookTableForm extends BaseForm
             authorFilterBox.setSelectedIndex(0);
             pageFilterBox.setSelectedIndex(0);
         });
+    }
+
+    public CustomTableModel<BookEntity> getModel() {
+        return model;
     }
 }

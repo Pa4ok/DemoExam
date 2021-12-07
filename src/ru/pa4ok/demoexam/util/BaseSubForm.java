@@ -5,7 +5,7 @@ import java.awt.event.WindowEvent;
 
 public class BaseSubForm<T extends BaseForm> extends BaseForm
 {
-    private T mainForm;
+    protected T mainForm;
 
     public BaseSubForm(T mainForm, int width, int height)
     {
@@ -27,7 +27,7 @@ public class BaseSubForm<T extends BaseForm> extends BaseForm
     {
         dispose();
         mainForm.setEnabled(true);
-        mainForm.setVisible(false);
-        mainForm.setVisible(true);
+        mainForm.toFront();
+        mainForm.requestFocus();
     }
 }

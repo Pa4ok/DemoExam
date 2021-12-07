@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Random;
@@ -52,7 +53,10 @@ public class BookEntity
         this.writeDateTime = writeDateTime;
 
         try {
-            this.image = new ImageIcon(ImageIO.read(BookEntity.class.getClassLoader().getResource("книги/book.jpg")));
+            this.image = new ImageIcon(
+                    ImageIO.read(BookEntity.class.getClassLoader().getResource("книги/book.jpg"))
+                            .getScaledInstance(50, 50, Image.SCALE_DEFAULT)
+            );
         } catch (Exception e) {
             e.printStackTrace();
         }

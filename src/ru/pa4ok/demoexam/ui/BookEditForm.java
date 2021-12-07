@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class BookEditForm extends BaseForm
+public class BookEditForm extends BaseSubForm<BookTableForm>
 {
     private JPanel mainPanel;
     private JTextField titleField;
@@ -28,9 +28,9 @@ public class BookEditForm extends BaseForm
 
     private BookEntity book;
 
-    public BookEditForm(BookEntity book)
+    public BookEditForm(BookTableForm mainForm, BookEntity book)
     {
-        super(450, 250);
+        super(mainForm,450, 275);
         this.book = book;
         setContentPane(mainPanel);
 
@@ -112,6 +112,7 @@ public class BookEditForm extends BaseForm
 
             try {
                 BookEntityManager.update(book);
+                mainForm.getModel().fireTableDataChanged();
             } catch (SQLException ex) {
                 DialogUtil.showError(this, "Ошибка сохранения данных " + ex.getMessage());
                 ex.printStackTrace();
@@ -119,8 +120,7 @@ public class BookEditForm extends BaseForm
             }
 
             DialogUtil.showInfo(this, "Книга обновлена успешно");
-            dispose();
-            new BookTableForm();
+            closeSubForm();
         });
 
         deleteButton.addActionListener(e ->
@@ -129,9 +129,10 @@ public class BookEditForm extends BaseForm
                 == JOptionPane.YES_OPTION) {
                 try {
                     BookEntityManager.delete(book);
+                    mainForm.getModel().getRows().remove(book);
+                    mainForm.getModel().fireTableDataChanged();
                     DialogUtil.showInfo(this, "Книжка успешно удалена");
-                    dispose();
-                    new BookTableForm();
+                    closeSubForm();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                     DialogUtil.showError(this, "Ошибка удаленния данных");
@@ -140,8 +141,7 @@ public class BookEditForm extends BaseForm
         });
 
         backButton.addActionListener(e -> {
-            dispose();
-            new BookTableForm();
+            closeSubForm();
         });
     }
 }

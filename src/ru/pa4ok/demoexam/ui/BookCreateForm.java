@@ -3,6 +3,7 @@ package ru.pa4ok.demoexam.ui;
 import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
+import ru.pa4ok.demoexam.util.BaseSubForm;
 import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class BookCreateForm extends BaseForm
+public class BookCreateForm extends BaseSubForm<BookTableForm>
 {
     private JPanel mainPanel;
     private JTextField titleField;
@@ -23,9 +24,9 @@ public class BookCreateForm extends BaseForm
     private JComboBox<Integer> yearBox;
     private JButton backButton;
 
-    public BookCreateForm()
+    public BookCreateForm(BookTableForm mainForm)
     {
-        super(450, 250);
+        super(mainForm, 450, 250);
         setContentPane(mainPanel);
 
         initBoxes();
@@ -85,6 +86,8 @@ public class BookCreateForm extends BaseForm
 
             try {
                 BookEntityManager.add(book);
+                mainForm.getModel().getRows().add(book);
+                mainForm.getModel().fireTableDataChanged();
             } catch (SQLException ex) {
                 DialogUtil.showError(this, "Ошибка сохранения данных " + ex.getMessage());
                 ex.printStackTrace();
@@ -92,13 +95,11 @@ public class BookCreateForm extends BaseForm
             }
 
             DialogUtil.showInfo(this, "Книга добавлена успешно");
-            dispose();
-            new BookTableForm();
+            closeSubForm();
         });
 
         backButton.addActionListener(e -> {
-            dispose();
-            new BookTableForm();
+            closeSubForm();
         });
     }
 }
