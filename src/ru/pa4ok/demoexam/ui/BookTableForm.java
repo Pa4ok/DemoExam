@@ -4,6 +4,7 @@ import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
 import ru.pa4ok.demoexam.util.CustomTableModel;
+import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
 import java.awt.event.ItemEvent;
@@ -24,6 +25,8 @@ public class BookTableForm extends BaseForm
     private JButton idSortButton;
     private JButton dateSortButton;
     private JButton clearFilterButton;
+    private JButton helpButton;
+    private JButton dealButton;
 
     private CustomTableModel<BookEntity> model;
 
@@ -45,17 +48,23 @@ public class BookTableForm extends BaseForm
     private void initTable()
     {
         table.getTableHeader().setReorderingAllowed(false);
+        table.setRowHeight(50);
 
         try {
             model = new CustomTableModel<>(
                     BookEntity.class,
-                    new String[] { "ID", "Название", "Автор", "Страниц", "Дата написания" },
+                    new String[] { "ID", "Название", "Автор", "Страниц", "Дата написания", "Тест", "Изображение" },
                     BookEntityManager.selectAll()
             );
             table.setModel(model);
 
+            if(model.getRows().isEmpty()) {
+                DialogUtil.showInfo(this, "В базе данных не обнаружено ни 1 записи");
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
+            DialogUtil.showError(this, "Ошибка получения данных: " + e.getMessage());
         }
 
         table.addMouseListener(new MouseAdapter() {
@@ -86,6 +95,7 @@ public class BookTableForm extends BaseForm
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            DialogUtil.showError(this, "Ошибка получения данных: " + e.getMessage());
         }
 
         authorFilterBox.addItemListener(new ItemListener() {
@@ -140,6 +150,11 @@ public class BookTableForm extends BaseForm
 
             model.setRows(list);
             model.fireTableDataChanged();
+
+            if(model.getRows().isEmpty()) {
+                DialogUtil.showInfo(this, "После применения фильров в базе данных не обнаружено ни 1 подходящей записи");
+            }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -187,6 +202,14 @@ public class BookTableForm extends BaseForm
         clearFilterButton.addActionListener(e -> {
             authorFilterBox.setSelectedIndex(0);
             pageSortBox.setSelectedIndex(0);
+        });
+
+        helpButton.addActionListener(e -> {
+            DialogUtil.showInfo(this, "Редактирование - двойной клик по записи\nУдаление - внутри формы редактирования");
+        });
+
+        dealButton.addActionListener(e -> {
+            DialogUtil.showInfo(this, "Связаться с разработчиком можно по почте vasya_8b@mail.ru");
         });
     }
 }

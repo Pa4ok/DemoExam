@@ -3,6 +3,8 @@ package ru.pa4ok.demoexam;
 import ru.pa4ok.demoexam.ui.BookTableForm;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -26,18 +28,11 @@ import java.sql.SQLException;
  */
 
 
+/**
+ * главный класс
+ */
 public class App
 {
-    /*
-        берем первую базу, которую чинили (database-1)
-        создаем сущность и менеджер под таблицу Client
-        таблица уже в починенном виде есть на моем сервере
-
-        делаем форму с таблицей через CustomTableModel
-        по двойному клику должна открываться форма с редактированием/удалением
-        также под таблицей должна быть кнопка для открытия формы добавления
-     */
-
     public static void main(String[] args)
     {
         try {
@@ -46,9 +41,27 @@ public class App
             e.printStackTrace();
         }
 
+        changeAllFonts(new FontUIResource("Comic Sans MS", Font.TRUETYPE_FONT, 12));
+
         new BookTableForm();
     }
 
+    public static void changeAllFonts(Font font)
+    {
+        java.util.Enumeration keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof javax.swing.plaf.FontUIResource)
+                UIManager.put(key, font);
+        }
+    }
+
+    /**
+     * метод для получения соединения с бд
+     * @return объект соединения
+     * @throws SQLException
+     */
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:mysql://116.202.236.174:3306/DemoExam", "DemoExam", "DemoExam");
     }
