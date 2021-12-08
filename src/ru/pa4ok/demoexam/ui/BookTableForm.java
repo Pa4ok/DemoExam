@@ -4,6 +4,7 @@ import ru.pa4ok.demoexam.entity.BookEntity;
 import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
 import ru.pa4ok.demoexam.util.CustomTableModel;
+import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
 import java.awt.event.ItemEvent;
@@ -24,6 +25,9 @@ public class BookTableForm extends BaseForm
     private JButton idSortButton;
     private JButton dateSortButton;
     private JButton clearFilterButton;
+    private JButton helpButton;
+    private JButton dealButton;
+    private JLabel rowCountLabel;
 
     private CustomTableModel<BookEntity> model;
 
@@ -45,17 +49,24 @@ public class BookTableForm extends BaseForm
     private void initTable()
     {
         table.getTableHeader().setReorderingAllowed(false);
+        table.setRowHeight(50);
 
         try {
             model = new CustomTableModel<>(
                     BookEntity.class,
-                    new String[] { "ID", "Название", "Автор", "Страниц", "Дата написания" },
+                    new String[] { "ID", "Название", "Автор", "Страниц", "Дата написания", "Тест", "Картинка" },
                     BookEntityManager.selectAll()
             );
             table.setModel(model);
+            updateRowCountLabel(model.getRows().size(), model.getRows().size());
+
+            if(model.getRows().isEmpty()) {
+                DialogUtil.showInfo(this, "В БД не найдено ни 1 записи");
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            DialogUtil.showError(this, "Ошибка получения данных: " + e.getMessage());
         }
 
         table.addMouseListener(new MouseAdapter() {
@@ -86,6 +97,7 @@ public class BookTableForm extends BaseForm
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            DialogUtil.showError(this, "Ошибка получения данных: " + e.getMessage());
         }
 
         authorFilterBox.addItemListener(new ItemListener() {
@@ -117,6 +129,7 @@ public class BookTableForm extends BaseForm
     {
         try {
             List<BookEntity> list = BookEntityManager.selectAll();
+            int max = list.size();
 
             if(authorFilterBox.getSelectedIndex() != 0) {
                 list.removeIf(b -> !b.getAuthor().equals(authorFilterBox.getSelectedItem()));
@@ -140,9 +153,22 @@ public class BookTableForm extends BaseForm
 
             model.setRows(list);
             model.fireTableDataChanged();
+
+            updateRowCountLabel(list.size(), max);
+
+            if(model.getRows().isEmpty()) {
+                DialogUtil.showInfo(this, "В БД не найдено ни 1 записи после применения фильтров");
+            }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
+            DialogUtil.showError(this, "Ошибка получения данных: " + ex.getMessage());
         }
+    }
+
+    private void updateRowCountLabel(int actual, int max)
+    {
+        rowCountLabel.setText("Записей: " + actual + " / " + max);
     }
 
     private void initButtons()
@@ -187,6 +213,14 @@ public class BookTableForm extends BaseForm
         clearFilterButton.addActionListener(e -> {
             authorFilterBox.setSelectedIndex(0);
             pageFilterBox.setSelectedIndex(0);
+        });
+
+        helpButton.addActionListener(e -> {
+            DialogUtil.showInfo(this, "Редактирование - двойной клик по таблице\nУдаление - внутри формы редактирования");
+        });
+
+        dealButton.addActionListener(e -> {
+            DialogUtil.showInfo(this, "Связаться с автором можно по почте vasya_8b@mail.ru");
         });
     }
 }
