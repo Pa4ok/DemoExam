@@ -44,6 +44,11 @@ public class CustomTableModel<T> extends AbstractTableModel
         return columnNames.length > column ? columnNames[column] : "Column title";
     }
 
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return cls.getDeclaredFields()[columnIndex].getType();
+    }
+
     public List<T> getRows() {
         return rows;
     }
