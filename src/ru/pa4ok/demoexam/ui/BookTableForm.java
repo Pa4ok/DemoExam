@@ -15,8 +15,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class BookTableForm extends BaseForm
-{
+public class BookTableForm extends BaseForm {
     private JPanel mainPanel;
     private JTable table;
     private JButton addButton;
@@ -27,14 +26,14 @@ public class BookTableForm extends BaseForm
     private JButton clearFilterButton;
     private JButton helpButton;
     private JButton dealButton;
+    private JLabel rowCountLabel;
 
     private CustomTableModel<BookEntity> model;
 
     private boolean idSort = true;
     private boolean dateSort = false;
 
-    public BookTableForm()
-    {
+    public BookTableForm() {
         super(800, 600);
         setContentPane(mainPanel);
 
@@ -45,20 +44,20 @@ public class BookTableForm extends BaseForm
         setVisible(true);
     }
 
-    private void initTable()
-    {
+    private void initTable() {
         table.getTableHeader().setReorderingAllowed(false);
         table.setRowHeight(50);
 
         try {
             model = new CustomTableModel<>(
                     BookEntity.class,
-                    new String[] { "ID", "Название", "Автор", "Страниц", "Дата написания", "Тест", "Изображение" },
+                    new String[]{"ID", "Название", "Автор", "Страниц", "Дата написания", "Тест", "Изображение"},
                     BookEntityManager.selectAll()
             );
             table.setModel(model);
 
-            if(model.getRows().isEmpty()) {
+            updateRowCountLabel(model.getRows().size(), model.getRows().size());
+            if (model.getRows().isEmpty()) {
                 DialogUtil.showInfo(this, "В базе данных не обнаружено ни 1 записи");
             }
 
@@ -70,9 +69,9 @@ public class BookTableForm extends BaseForm
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(e.getClickCount() == 2) {
+                if (e.getClickCount() == 2) {
                     int row = table.rowAtPoint(e.getPoint());
-                    if(row != -1) {
+                    if (row != -1) {
                         dispose();
                         new BookEditForm(model.getRows().get(row));
                     }
@@ -81,16 +80,15 @@ public class BookTableForm extends BaseForm
         });
     }
 
-    private void initBoxes()
-    {
+    private void initBoxes() {
         authorFilterBox.addItem("Все авторы");
         try {
             List<BookEntity> list = BookEntityManager.selectAll();
             Set<String> authors = new HashSet<>();
-            for(BookEntity b : list) {
+            for (BookEntity b : list) {
                 authors.add(b.getAuthor());
             }
-            for(String a : authors) {
+            for (String a : authors) {
                 authorFilterBox.addItem(a);
             }
         } catch (SQLException e) {
@@ -101,7 +99,7 @@ public class BookTableForm extends BaseForm
         authorFilterBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if(e.getStateChange() == ItemEvent.SELECTED) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
                     applyFilters();
                 }
             }
@@ -116,31 +114,31 @@ public class BookTableForm extends BaseForm
         pageSortBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if(e.getStateChange() == ItemEvent.SELECTED) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
                     applyFilters();
                 }
             }
         });
     }
 
-    private void applyFilters()
-    {
+    private void applyFilters() {
         try {
             List<BookEntity> list = BookEntityManager.selectAll();
+            int max = list.size();
 
-            if(authorFilterBox.getSelectedIndex() != 0) {
+            if (authorFilterBox.getSelectedIndex() != 0) {
                 list.removeIf(b -> !b.getAuthor().equals(authorFilterBox.getSelectedItem()));
             }
 
-            if(pageSortBox.getSelectedIndex() != 0) {
+            if (pageSortBox.getSelectedIndex() != 0) {
                 int index = pageSortBox.getSelectedIndex();
-                if(index == 1) {
+                if (index == 1) {
                     list.removeIf(b -> b.getPages() > 10);
-                } else if(index == 2) {
+                } else if (index == 2) {
                     list.removeIf(b -> b.getPages() < 11 || b.getPages() > 100);
-                } else if(index == 3) {
+                } else if (index == 3) {
                     list.removeIf(b -> b.getPages() < 101 || b.getPages() > 1000);
-                } else if(index == 4) {
+                } else if (index == 4) {
                     list.removeIf(b -> b.getPages() < 1001);
                 }
             }
@@ -151,7 +149,8 @@ public class BookTableForm extends BaseForm
             model.setRows(list);
             model.fireTableDataChanged();
 
-            if(model.getRows().isEmpty()) {
+            updateRowCountLabel(list.size(), max);
+            if (model.getRows().isEmpty()) {
                 DialogUtil.showInfo(this, "После применения фильров в базе данных не обнаружено ни 1 подходящей записи");
             }
 
@@ -160,8 +159,7 @@ public class BookTableForm extends BaseForm
         }
     }
 
-    private void initButtons()
-    {
+    private void initButtons() {
         addButton.addActionListener(e -> {
             dispose();
             new BookCreateForm();
@@ -171,7 +169,7 @@ public class BookTableForm extends BaseForm
             Collections.sort(model.getRows(), new Comparator<BookEntity>() {
                 @Override
                 public int compare(BookEntity o1, BookEntity o2) {
-                    if(idSort) {
+                    if (idSort) {
                         return Integer.compare(o2.getId(), o1.getId());
                     } else {
                         return Integer.compare(o1.getId(), o2.getId());
@@ -187,7 +185,7 @@ public class BookTableForm extends BaseForm
             Collections.sort(model.getRows(), new Comparator<BookEntity>() {
                 @Override
                 public int compare(BookEntity o1, BookEntity o2) {
-                    if(dateSort) {
+                    if (dateSort) {
                         return o2.getWriteDateTime().compareTo(o1.getWriteDateTime());
                     } else {
                         return o1.getWriteDateTime().compareTo(o2.getWriteDateTime());
@@ -211,5 +209,10 @@ public class BookTableForm extends BaseForm
         dealButton.addActionListener(e -> {
             DialogUtil.showInfo(this, "Связаться с разработчиком можно по почте vasya_8b@mail.ru");
         });
+    }
+
+    private void updateRowCountLabel(int actual, int max)
+    {
+        rowCountLabel.setText("Записей: " + actual + " / " + max);
     }
 }
