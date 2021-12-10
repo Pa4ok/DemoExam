@@ -1,15 +1,14 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.entity.BookEntity;
-import ru.pa4ok.demoexam.manager.BookEntityManager;
 import ru.pa4ok.demoexam.ui.BookTableForm;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.*;
 
 /**
  * alt + enter - контекстное меню исправления ошибки
@@ -29,63 +28,51 @@ import java.util.*;
  * !!!создавайте таблицы со своими названиями, чтобы не было путаницы!!!
  */
 
+/**
+ * главный класс
+ */
 public class App
 {
     public static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
+    /**
+     * главный метод, точка входа в программу
+     * @param args
+     */
     public static void main(String[] args)
     {
-    /*
-        берем первую базу, которую чинили (database-1)
-        создаем сущность и менеджер под таблицу Client
-        таблица уже в починенном виде есть на моем серверве
-
-        делаем форму с таблицей через CustomTableModel
-        по двойному клику должна открываться форма с редактированием/удалением
-        также под таблицей должна быть кнопка для открытия формы добавления
-     */
-
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        changeAllFonts(new FontUIResource("Comic Sans MS", Font.TRUETYPE_FONT, 12));
+
         new BookTableForm();
-
-        //test();
     }
 
-    private static void test()
-    {
-        try {
-            List<BookEntity> list = BookEntityManager.selectAll();
-            System.out.println(list);
-
-            Collections.sort(list, new Comparator<BookEntity>() {
-                @Override
-                public int compare(BookEntity o1, BookEntity o2) {
-                    /*
-                        o1 < o2 | <0
-                        o1 = o2 | 0
-                        o1 > o2 | >0
-                     */
-                    return Integer.compare(o1.getPages(), o2.getPages());
-                    //return o1.getAuthor().compareTo(o2.getAuthor());
-                }
-            });
-
-            System.out.println(list);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * метод получения соединения с базой
+     * @return соединение с базой
+     * @throws SQLException
+     */
     public static Connection getConnection() throws SQLException
     {
         return DriverManager.getConnection("jdbc:mysql://116.202.236.174:3306/DemoExam", "DemoExam", "DemoExam");
     }
+
+    public static void changeAllFonts(Font font)
+    {
+        java.util.Enumeration keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof javax.swing.plaf.FontUIResource)
+                UIManager.put(key, font);
+        }
+    }
+
 }
 
 
