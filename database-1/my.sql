@@ -144,12 +144,12 @@ CREATE TABLE IF NOT EXISTS `ClientService` (
   CONSTRAINT `FK_ClientService_Client`
     FOREIGN KEY (`ClientID`)
     REFERENCES `Client` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `FK_ClientService_Service`
     FOREIGN KEY (`ServiceID`)
     REFERENCES `Service` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION);
 
 -- ----------------------------------------------------------------------------
