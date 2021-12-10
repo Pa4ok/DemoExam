@@ -5,7 +5,6 @@ import ru.pa4ok.demoexam.App;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class BaseForm extends JFrame
 {
@@ -17,7 +16,7 @@ public class BaseForm extends JFrame
             APP_ICON = ImageIO.read(BaseForm.class.getClassLoader().getResource("school_logo.png"));
         } catch (Exception e) {
             e.printStackTrace();
-            DialogUtil.showError("Ошибка при загрузке иконки");
+            DialogUtil.showError(null,"Ошибка при загрузке иконки");
         }
     }
 
