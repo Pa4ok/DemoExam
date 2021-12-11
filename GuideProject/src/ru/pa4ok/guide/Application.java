@@ -1,6 +1,6 @@
 package ru.pa4ok.guide;
 
-import ru.pa4ok.guide.ui.MainForm;
+import ru.pa4ok.guide.ui.ClientTableForm;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -30,7 +30,7 @@ public class Application
             e.printStackTrace();
         }
 
-        new MainForm();
+        new ClientTableForm();
     }
 
     public static Connection getConnection() throws SQLException {

@@ -13,7 +13,7 @@ public class ClientEntityManager
     {
         try(Connection c = Application.getConnection())
         {
-            String sql = "INSERT INTO Client(FirstName, LastName, Patronymic, Birthday, RegistrationDate, Email, Phone, GenderCode) VALUES(?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Client(FirstName, LastName, Patronymic, Birthday, RegistrationDate, Email, Phone, GenderCode, PhotoPath) VALUES(?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement ps = c.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, client.getFirstname());
@@ -24,6 +24,7 @@ public class ClientEntityManager
             ps.setString(6, client.getEmail());
             ps.setString(7, client.getPhone());
             ps.setString(8, String.valueOf(client.getGender()));
+            ps.setString(9, client.getPhotoPath());
 
             ps.executeUpdate();
 
@@ -57,7 +58,8 @@ public class ClientEntityManager
                         resultSet.getTimestamp("RegistrationDate"),
                         resultSet.getString("Email"),
                         resultSet.getString("Phone"),
-                        resultSet.getString("GenderCode").charAt(0)
+                        resultSet.getString("GenderCode").charAt(0),
+                        resultSet.getString("PhotoPath")
                 );
             }
 
@@ -84,7 +86,8 @@ public class ClientEntityManager
                         resultSet.getTimestamp("RegistrationDate"),
                         resultSet.getString("Email"),
                         resultSet.getString("Phone"),
-                        resultSet.getString("GenderCode").charAt(0)
+                        resultSet.getString("GenderCode").charAt(0),
+                        resultSet.getString("PhotoPath")
                 ));
             }
 
@@ -96,7 +99,7 @@ public class ClientEntityManager
     {
         try(Connection c = Application.getConnection())
         {
-            String sql = "UPDATE Client SET FirstName=?, LastName=?, Patronymic=?, Birthday=?, RegistrationDate=?, Email=?, Phone=?, GenderCode=? WHERE ID=?";
+            String sql = "UPDATE Client SET FirstName=?, LastName=?, Patronymic=?, Birthday=?, RegistrationDate=?, Email=?, Phone=?, GenderCode=?, PhotoPath=? WHERE ID=?";
 
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, client.getFirstname());
@@ -107,7 +110,8 @@ public class ClientEntityManager
             ps.setString(6, client.getEmail());
             ps.setString(7, client.getPhone());
             ps.setString(8, String.valueOf(client.getGender()));
-            ps.setInt(9, client.getId());
+            ps.setString(9, client.getPhotoPath());
+            ps.setInt(10, client.getId());
 
             ps.executeUpdate();
         }

@@ -26,12 +26,13 @@ public class ClientEditForm extends BaseForm
     private JTextField idField;
     private JTextField regDateField;
     private JButton deleteButton;
+    private JTextField imageField;
 
     private ClientEntity client;
 
     public ClientEditForm(ClientEntity client)
     {
-        super(400, 350);
+        super(400, 375);
         this.client = client;
         setContentPane(mainPanel);
 
@@ -60,6 +61,7 @@ public class ClientEditForm extends BaseForm
         emailField.setText(client.getEmail());
         phoneField.setText(client.getPhone());
         genderBox.setSelectedIndex(client.getGender() == 'ж' ? 0 : 1);
+        imageField.setText(client.getPhotoPath());
     }
 
     private void initButtons()
@@ -113,6 +115,8 @@ public class ClientEditForm extends BaseForm
 
             char gender = genderBox.getSelectedIndex() == 0 ? 'ж' : 'м';
 
+            String imagePath = imageField.getText();
+
             client.setFirstname(firstname);
             client.setLastname(lastname);
             client.setPatronymic(patronymic);
@@ -121,6 +125,7 @@ public class ClientEditForm extends BaseForm
             client.setEmail(email);
             client.setPhone(phone);
             client.setGender(gender);
+            client.setPhotoPath(imagePath);
 
             try {
                 ClientEntityManager.update(client);
@@ -132,12 +137,12 @@ public class ClientEditForm extends BaseForm
 
             DialogUtil.showInfo(this, "Клиент успешно отредактирован");
             dispose();
-            new MainForm();
+            new ClientTableForm();
         });
 
         backButton.addActionListener(e -> {
             dispose();
-            new MainForm();
+            new ClientTableForm();
         });
 
         deleteButton.addActionListener(e -> {
@@ -147,7 +152,7 @@ public class ClientEditForm extends BaseForm
                     ClientEntityManager.delete(client);
                     DialogUtil.showInfo(this, "Клиент успешно удален");
                     dispose();
-                    new MainForm();
+                    new ClientTableForm();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                     DialogUtil.showError(this, "Ошибка удаления данных: " + ex.getMessage());

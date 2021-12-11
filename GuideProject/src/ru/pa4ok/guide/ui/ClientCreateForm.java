@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
 
-public class BookCreateForm extends BaseForm
+public class ClientCreateForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTextField firstnameField;
@@ -23,10 +23,11 @@ public class BookCreateForm extends BaseForm
     private JComboBox<String> genderBox;
     private JButton saveButton;
     private JButton backButton;
+    private JTextField imageField;
 
-    public BookCreateForm()
+    public ClientCreateForm()
     {
-        super(400, 350);
+        super(400, 375);
         setContentPane(mainPanel);
 
         initBoxes();
@@ -84,11 +85,14 @@ public class BookCreateForm extends BaseForm
 
             char gender = genderBox.getSelectedIndex() == 0 ? 'ж' : 'м';
 
+            String imagePath = imageField.getText();
+
             ClientEntity client = new ClientEntity(
                     firstname, lastname, patronymic,
                     birthday, new Date(),
                     email, phone,
-                    gender
+                    gender,
+                    imagePath
             );
 
             try {
@@ -101,12 +105,12 @@ public class BookCreateForm extends BaseForm
 
             DialogUtil.showInfo(this, "Клиент успешно добавлен");
             dispose();
-            new MainForm();
+            new ClientTableForm();
         });
 
         backButton.addActionListener(e -> {
             dispose();
-            new MainForm();
+            new ClientTableForm();
         });
     }
 }
