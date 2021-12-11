@@ -32,5 +32,6 @@
 - https://pa4ok.ru/itmo/guide/2021/db-using-guide.mp4 - работа с базами данных из кода (+установка ПО)
 - https://pa4ok.ru/itmo/guide/2021/db-fix-guide.mp4 - починка сломанных баз данных (2 бд подробно)
 - https://pa4ok.ru/itmo/guide/2021/ui-part-1-guide.mp4 - основы работы с десктопом (без таблиц)
+- https://pa4ok.ru/itmo/guide/2021/ui-part-2-tables-guide.mp4 - работа с таблицами (включая фильтрации, сортировки, картинки)
 <br><br>Дублирование всех гайдов на диск
 - https://disk.yandex.ru/d/uGxEf-fam3fT7w
