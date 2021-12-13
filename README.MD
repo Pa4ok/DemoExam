@@ -26,7 +26,10 @@
 - https://o7planning.org/en/10973/java-basic - текстовые основы на английском
 - https://www.youtube.com/playlist?list=PLAma_mKffTOSUkXp26rgdnC0PicnmnDak - видеокурс подробно мелкими видосами (проще с 0)
 - https://www.youtube.com/playlist?list=PLlb7e2G7aSpRZSRZxANkvpYC82BXUzCTY - видеокурс большими видосами (проще если есть опыт)
-- https://paulradzkov.com/2014/markdown_cheatsheet/ - гайд по разметке README.md файла
+
+## Разметка README файла
+- git-cmd.txt - инструкция от меня
+- https://paulradzkov.com/2014/markdown_cheatsheet/ - полный туториал
 
 ## Гайды по бд, десктопу и самому экзамену
 - https://pa4ok.ru/itmo/guide/2021/db-using-guide.mp4 - работа с базами данных из кода (+установка ПО)
@@ -34,5 +37,6 @@
 - https://pa4ok.ru/itmo/guide/2021/ui-part-1-guide.mp4 - основы работы с десктопом (без таблиц)
 - https://pa4ok.ru/itmo/guide/2021/ui-part-2-tables-guide.mp4 - работа с таблицами (включая фильтрации, сортировки, картинки)
 - https://pa4ok.ru/itmo/guide/2021/extended-table-model-guide.mp4 - расширенная модель для таблицы
+
 <br><br>Дублирование всех гайдов на диск
 - https://disk.yandex.ru/d/uGxEf-fam3fT7w
