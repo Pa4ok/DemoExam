@@ -37,14 +37,6 @@ public class BookEntity
     private Boolean testBoolean = new Random().nextBoolean();
     private ImageIcon image;
 
-    /**
-     *
-     * @param id
-     * @param title
-     * @param author
-     * @param pages
-     * @param writeDateTime
-     */
     public BookEntity(int id, String title, String author, int pages, Date writeDateTime) {
         this.id = id;
         this.title = title;
