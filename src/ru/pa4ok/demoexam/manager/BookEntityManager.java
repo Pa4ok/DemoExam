@@ -33,30 +33,6 @@ public class BookEntityManager
         }
     }
 
-    public static BookEntity selectById(int id) throws SQLException
-    {
-        try(Connection c = App.getConnection())
-        {
-            String sql = "SELECT * FROM books where id=?";
-
-            PreparedStatement ps = c.prepareStatement(sql);
-            ps.setInt(1, id);
-
-            ResultSet resultSet = ps.executeQuery();
-            if(resultSet.next()) {
-                return new BookEntity(
-                        resultSet.getInt("id"),
-                        resultSet.getString("title"),
-                        resultSet.getString("author"),
-                        resultSet.getInt("pages"),
-                        resultSet.getTimestamp("writeDateTime")
-                );
-            }
-
-            return null;
-        }
-    }
-
     public static List<BookEntity> selectAll() throws SQLException
     {
         try(Connection c = App.getConnection())
@@ -97,19 +73,14 @@ public class BookEntityManager
         }
     }
 
-    public static void delete(int id) throws SQLException
+    public static void delete(BookEntity book) throws SQLException
     {
         try(Connection c = App.getConnection())
         {
             String sql = "DELETE FROM books WHERE id=?";
             PreparedStatement ps = c.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, book.getId());
             ps.executeUpdate();
         }
-    }
-
-    public static void delete(BookEntity book) throws SQLException
-    {
-        delete(book.getId());
     }
 }

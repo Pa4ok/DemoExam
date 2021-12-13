@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,8 +30,11 @@ public class BookEntity
         this.writeDateTime = writeDateTime;
 
         try {
-            this.image = new ImageIcon(ImageIO.read(BookEntity.class.getClassLoader().getResource("books/book.jpg")));
-        } catch (IOException e) {
+            this.image = new ImageIcon(
+                    ImageIO.read(BookEntity.class.getClassLoader().getResource("books/book.jpg"))
+                            .getScaledInstance(50, 50, Image.SCALE_DEFAULT)
+            );
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
