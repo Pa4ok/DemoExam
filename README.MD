@@ -27,9 +27,6 @@
 - https://www.youtube.com/playlist?list=PLAma_mKffTOSUkXp26rgdnC0PicnmnDak - видеокурс подробно мелкими видосами (проще с 0)
 - https://www.youtube.com/playlist?list=PLlb7e2G7aSpRZSRZxANkvpYC82BXUzCTY - видеокурс большими видосами (проще если есть опыт)
 
-## Разметка README файла
-- git-cmd.txt - инструкция от меня
-- https://paulradzkov.com/2014/markdown_cheatsheet/ - справочник
 
 ## Гайды по бд, десктопу и самому экзамену
 - https://pa4ok.ru/itmo/guide/2021/db-using-guide.mp4 - работа с базами данных из кода (+установка ПО)
@@ -37,7 +34,9 @@
 - https://pa4ok.ru/itmo/guide/2021/ui-part-1-guide.mp4 - основы работы с десктопом (без таблиц)
 - https://pa4ok.ru/itmo/guide/2021/ui-part-2-tables-guide.mp4 - работа с таблицами (включая фильтрации, сортировки, картинки)
 - https://pa4ok.ru/itmo/guide/2021/extended-table-model-guide.mp4 - расширенная модель для таблицы
+<br>
 - https://pa4ok.ru/itmo/guide/2021/gogs-guide.mp4 - работа с системой контроля версий gogs
-
-<br><br>Дублирование всех гайдов на диск
-- https://disk.yandex.ru/d/uGxEf-fam3fT7w
+- https://paulradzkov.com/2014/markdown_cheatsheet/ - справочник по разметке README файла
+- git-cmd.txt - работа с консолью гита (если смотрите в 1 раз - вариант 2 для вас)
+<br>
+- https://disk.yandex.ru/d/uGxEf-fam3fT7w - дублирование всех гайдов на диск
