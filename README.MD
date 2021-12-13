@@ -37,7 +37,7 @@
 - https://pa4ok.ru/itmo/guide/2021/ui-part-1-guide.mp4 - основы работы с десктопом (без таблиц)
 - https://pa4ok.ru/itmo/guide/2021/ui-part-2-tables-guide.mp4 - работа с таблицами (включая фильтрации, сортировки, картинки)
 - https://pa4ok.ru/itmo/guide/2021/extended-table-model-guide.mp4 - расширенная модель для таблицы
-- https://pa4ok.ru/itmo/gogs-guide.mp4 - работа с системой контроля версий gogs
+- https://pa4ok.ru/itmo/guide/2021/gogs-guide.mp4 - работа с системой контроля версий gogs
 
 <br><br>Дублирование всех гайдов на диск
 - https://disk.yandex.ru/d/uGxEf-fam3fT7w
