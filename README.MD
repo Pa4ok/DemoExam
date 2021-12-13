@@ -33,10 +33,8 @@
 - https://pa4ok.ru/itmo/guide/2021/db-fix-guide.mp4 - починка сломанных баз данных (2 бд подробно)
 - https://pa4ok.ru/itmo/guide/2021/ui-part-1-guide.mp4 - основы работы с десктопом (без таблиц)
 - https://pa4ok.ru/itmo/guide/2021/ui-part-2-tables-guide.mp4 - работа с таблицами (включая фильтрации, сортировки, картинки)
-- https://pa4ok.ru/itmo/guide/2021/extended-table-model-guide.mp4 - расширенная модель для таблицы
-<br>
+- https://pa4ok.ru/itmo/guide/2021/extended-table-model-guide.mp4 - расширенная модель для таблицы<br>
 - https://pa4ok.ru/itmo/guide/2021/gogs-guide.mp4 - работа с системой контроля версий gogs
 - https://paulradzkov.com/2014/markdown_cheatsheet/ - справочник по разметке README файла
-- git-cmd.txt - работа с консолью гита (если смотрите в 1 раз - вариант 2 для вас)
-<br>
+- git-cmd.txt - работа с консолью гита (если смотрите в 1 раз - вариант 2 для вас)<br>
 - https://disk.yandex.ru/d/uGxEf-fam3fT7w - дублирование всех гайдов на диск
