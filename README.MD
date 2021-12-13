@@ -29,7 +29,7 @@
 
 ## Разметка README файла
 - git-cmd.txt - инструкция от меня
-- https://paulradzkov.com/2014/markdown_cheatsheet/ - полный туториал
+- https://paulradzkov.com/2014/markdown_cheatsheet/ - справочник
 
 ## Гайды по бд, десктопу и самому экзамену
 - https://pa4ok.ru/itmo/guide/2021/db-using-guide.mp4 - работа с базами данных из кода (+установка ПО)
@@ -37,6 +37,7 @@
 - https://pa4ok.ru/itmo/guide/2021/ui-part-1-guide.mp4 - основы работы с десктопом (без таблиц)
 - https://pa4ok.ru/itmo/guide/2021/ui-part-2-tables-guide.mp4 - работа с таблицами (включая фильтрации, сортировки, картинки)
 - https://pa4ok.ru/itmo/guide/2021/extended-table-model-guide.mp4 - расширенная модель для таблицы
+- https://pa4ok.ru/itmo/gogs-guide.mp4 - работа с системой контроля версий gogs
 
 <br><br>Дублирование всех гайдов на диск
 - https://disk.yandex.ru/d/uGxEf-fam3fT7w
