@@ -1,0 +1,76 @@
+скачать гитовскую консоль можно тут https://git-scm.com/
+
+заполнили логин и email
+git config --global user.name "Pa4ok"
+git config --global user.email "pa4ok228@mail.ru"
+
+клонируем репозиторий и переходим в него
+git clone https://github.com/Pa4ok/TestGit.git
+cd TestGit/
+
+проверка "че как"
+git status 
+
+добавление файлов для коммита
+git add text.txt
+git add * [добавит все новые файлы]
+git add -A [используем всегда это, сохраняет все изменения]
+
+после добавления файлов нужно сделать коммита
+git commit -m "commit message"
+
+выгрузка всех локальных коммитов
+git push
+git push -f [полная выгрузка с локального репозитория, даже если на сервере есть другие комиты]
+
+откатить к какому то комиту
+git reset --hard <индефикатор коммита>
+/*
+	тут вы делаете дальше комиты и тд
+*/
+gut push -f
+
+синхронизация с репозиторием
+git pull
+
+возврат к состоянию комита (откат всех незадокументированных изменений)
+git stash
+
+создание новой ветки
+git branch session1 [за то вы загрузите ваш дэ в такую ветку - получите 0.2 балла]
+
+переход на новую ветку
+git checkout session1
+
+в 1 раз когда пушите в новой ветке нужно указать агрументы
+git push --set-upstream origin session1
+
+вариант номер 2 как создать репозиторий для дэ
+открываем папку с проектом и пишем 
+git init
+git remote add origin https://github.com/Pa4ok/TestGit.git
+git add -A
+git commit -m "message"
+git branch session1
+git checkout session1
+git push --set-upstream origin session1
+	на данном этапе у вас есть репозиторий с 1 комитом
+	после чего по мере написания кода делаете еще пару комитов
+	git add -A
+	git commit -m "message"
+	git push
+
+если возникли проблемы
+что-то не работает, кидает ошибки, не пушите
+копируете папку [НЕ ПОТЕРЯЙТЕ ВСЕ], удаляете старую
+git clone https://github.com/Pa4ok/TestGit.git
+закидываете туда все из скопированной папки
+git add -A
+git commit -m "message"
+git push
+
+в папках где вы работаете с гитом
+появляется СКРЫТАЯ папка .git
+если вы ее удалите, то получите чистый проект без гита
+чтобы потом инициализировать там гит
+git init
