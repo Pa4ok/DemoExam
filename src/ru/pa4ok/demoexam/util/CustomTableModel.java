@@ -1,21 +1,20 @@
 package ru.pa4ok.demoexam.util;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.swing.table.AbstractTableModel;
 import java.lang.reflect.Field;
 import java.util.List;
 
-@AllArgsConstructor
 public class CustomTableModel<T> extends AbstractTableModel
 {
     private Class<T> cls;
     private String[] columnNames;
-
-    @Getter @Setter
     private List<T> rows;
+
+    public CustomTableModel(Class<T> cls, String[] columnNames, List<T> rows) {
+        this.cls = cls;
+        this.columnNames = columnNames;
+        this.rows = rows;
+    }
 
     @Override
     public int getRowCount() {
@@ -48,5 +47,13 @@ public class CustomTableModel<T> extends AbstractTableModel
             e.printStackTrace();
             return "ERROR";
         }
+    }
+
+    public List<T> getRows() {
+        return rows;
+    }
+
+    public void setRows(List<T> rows) {
+        this.rows = rows;
     }
 }

@@ -75,19 +75,14 @@ public class ServiceCreateForm extends BaseForm
             }
 
             String imagePath = imagePathField.getText();
-            if(imagePath.length() > 1000) {
-                DialogUtil.showError(this, "Путь до картинки слишком длинный");
-                return;
-            }
-
             String desc = descField.getText();
 
             ServiceEntity service = new ServiceEntity(
                     title,
                     duration,
                     cost, discount,
-                    desc,
-                    imagePath
+                    imagePath,
+                    desc
             );
 
             try {

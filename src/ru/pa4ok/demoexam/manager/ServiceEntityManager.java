@@ -35,6 +35,32 @@ public class ServiceEntityManager
         }
     }
 
+    public static ServiceEntity selectById(int id) throws SQLException
+    {
+        try(Connection c = App.getConnection())
+        {
+            String sql = "SELECT * FROM Service WHERE id=?";
+
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet resultSet = ps.executeQuery();
+            if(resultSet.next()) {
+                return new ServiceEntity(
+                        resultSet.getInt("ID"),
+                        resultSet.getString("Title"),
+                        resultSet.getInt("Duration"),
+                        resultSet.getDouble("Cost"),
+                        resultSet.getDouble("Discount"),
+                        resultSet.getString("MainImagePath"),
+                        resultSet.getString("Description")
+                );
+            }
+
+            return null;
+        }
+    }
+
     public static List<ServiceEntity> selectAll() throws SQLException
     {
         try(Connection c = App.getConnection())
@@ -51,8 +77,8 @@ public class ServiceEntityManager
                         resultSet.getInt("Duration"),
                         resultSet.getDouble("Cost"),
                         resultSet.getDouble("Discount"),
-                        resultSet.getString("Description"),
-                        resultSet.getString("MainImagePath")
+                        resultSet.getString("MainImagePath"),
+                        resultSet.getString("Description")
                 ));
             }
 
@@ -79,14 +105,19 @@ public class ServiceEntityManager
         }
     }
 
-    public static void delete(ServiceEntity service) throws SQLException
+    public static void delete(int id) throws SQLException
     {
         try(Connection c = App.getConnection())
         {
             String sql = "DELETE FROM Service WHERE ID=?";
             PreparedStatement ps = c.prepareStatement(sql);
-            ps.setInt(1, service.getId());
+            ps.setInt(1, id);
             ps.executeUpdate();
         }
+    }
+
+    public static void delete(ServiceEntity service) throws SQLException
+    {
+        delete(service.getId());
     }
 }

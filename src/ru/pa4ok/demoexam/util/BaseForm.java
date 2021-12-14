@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class BaseForm extends JFrame
 {
-    public static String APP_TITLE = "Application";
+    public static String APP_TITLE = "Школа языков “Леарн”";
     public static Image APP_ICON = null;
 
     static {

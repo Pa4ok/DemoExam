@@ -1,12 +1,10 @@
 package ru.pa4ok.demoexam.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 @Data
 public class ServiceEntity
@@ -16,19 +14,19 @@ public class ServiceEntity
     private int duration;
     private double cost;
     private double discount;
-    private String desc;
     private String imagePath;
+    private String desc;
 
     private ImageIcon image;
 
-    public ServiceEntity(int id, String title, int duration, double cost, double discount, String desc, String imagePath) {
+    public ServiceEntity(int id, String title, int duration, double cost, double discount, String imagePath, String desc) {
         this.id = id;
         this.title = title;
         this.duration = duration;
         this.cost = cost;
         this.discount = discount;
-        this.desc = desc;
         this.imagePath = imagePath;
+        this.desc = desc;
 
         try {
             this.image = new ImageIcon(
@@ -39,7 +37,7 @@ public class ServiceEntity
         }
     }
 
-    public ServiceEntity(String title, int duration, double cost, double discount, String desc, String imagePath) {
-        this(-1, title, duration, cost, discount, desc, imagePath);
+    public ServiceEntity(String title, int duration, double cost, double discount, String imagePath, String desc) {
+        this(-1, title, duration, cost, discount, imagePath, desc);
     }
 }

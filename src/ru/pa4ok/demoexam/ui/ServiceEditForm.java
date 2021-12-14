@@ -105,21 +105,20 @@ public class ServiceEditForm extends BaseForm
 
             try {
                 ServiceEntityManager.update(service);
-                DialogUtil.showInfo(this, "Запись успешно отредактирована");
-                dispose();
-                new ServiceTableForm();
             } catch (SQLException ex) {
                 ex.printStackTrace();
                 DialogUtil.showError(this, "Ошибка сохранения данных: " + ex.getMessage());
+                return;
             }
+
+            DialogUtil.showInfo(this, "Запись успешно отредактирована");
+            dispose();
+            new ServiceTableForm();
         });
 
         deleteButton.addActionListener(e -> {
             if(JOptionPane.showConfirmDialog(
-                    this,
-                    "Вы точно хотите удалить данную запись",
-                    "Подтверждение",
-                    JOptionPane.YES_NO_OPTION
+                    this, "Вы точно хотите удалить данную запись", "Подтверждение", JOptionPane.YES_NO_OPTION
             ) == JOptionPane.YES_OPTION) {
                 try {
                     ServiceEntityManager.delete(service);
