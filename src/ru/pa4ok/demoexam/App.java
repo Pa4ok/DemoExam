@@ -1,5 +1,7 @@
 package ru.pa4ok.demoexam;
 
+import ru.pa4ok.demoexam.entity.ClientServiceEntity;
+import ru.pa4ok.demoexam.manager.ClientServiceEntityManager;
 import ru.pa4ok.demoexam.ui.ServiceTableForm;
 
 import javax.swing.*;
@@ -8,6 +10,7 @@ import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * alt + enter - контекстное меню по исправлению ошибки

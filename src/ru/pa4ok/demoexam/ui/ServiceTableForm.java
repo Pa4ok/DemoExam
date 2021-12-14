@@ -7,17 +7,28 @@ import ru.pa4ok.demoexam.util.CustomTableModel;
 import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class ServiceTableForm extends BaseForm
 {
     private JTable table;
     private JPanel mainPanel;
     private JButton addButton;
+    private JButton costSortButton;
+    private JComboBox discountFilterBox;
+    private JLabel rowCountLabel;
+    private JButton clientServiceTableButton;
 
     private CustomTableModel<ServiceEntity> model;
+
+    private boolean costSort = false;
 
     public ServiceTableForm()
     {
@@ -25,6 +36,7 @@ public class ServiceTableForm extends BaseForm
         setContentPane(mainPanel);
 
         initTable();
+        initBoxes();
         initButtons();
 
         setVisible(true);
@@ -42,6 +54,8 @@ public class ServiceTableForm extends BaseForm
                     ServiceEntityManager.selectAll()
             );
             table.setModel(model);
+
+            updateRowCountLabel(model.getRows().size(), model.getRows().size());
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,11 +76,82 @@ public class ServiceTableForm extends BaseForm
         });
     }
 
+    private void initBoxes()
+    {
+        discountFilterBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(e.getStateChange() == ItemEvent.SELECTED) {
+                    try {
+                        List<ServiceEntity> list = ServiceEntityManager.selectAll();
+                        int max = list.size();
+
+                        int index = discountFilterBox.getSelectedIndex();
+                        switch (index)
+                        {
+                            case 1:
+                                list.removeIf(s -> s.getDiscount() >= 5);
+                                break;
+                            case 2:
+                                list.removeIf(s -> s.getDiscount() < 5 || s.getDiscount() >= 15);
+                                break;
+                            case 3:
+                                list.removeIf(s -> s.getDiscount() < 15 || s.getDiscount() >= 30);
+                                break;
+                            case 4:
+                                list.removeIf(s -> s.getDiscount() < 30 || s.getDiscount() >= 70);
+                                break;
+                            case 5:
+                                list.removeIf(s -> s.getDiscount() < 70);
+                                break;
+                        }
+
+                        model.setRows(list);
+                        model.fireTableDataChanged();
+
+                        costSort = false;
+
+                        updateRowCountLabel(list.size(), max);
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                        DialogUtil.showError(ServiceTableForm.this, "Ошибка получения данных");
+                    }
+                }
+            }
+        });
+    }
+
     private void initButtons()
     {
         addButton.addActionListener(e -> {
             dispose();
             new ServiceCreateForm();
         });
+
+        costSortButton.addActionListener(e -> {
+            Collections.sort(model.getRows(), new Comparator<ServiceEntity>() {
+                @Override
+                public int compare(ServiceEntity o1, ServiceEntity o2) {
+                    if(costSort) {
+                        return Double.compare(o2.getCost(), o1.getCost());
+                    } else {
+                        return Double.compare(o1.getCost(), o2.getCost());
+                    }
+                }
+            });
+            costSort = !costSort;
+            model.fireTableDataChanged();
+        });
+
+        clientServiceTableButton.addActionListener(e -> {
+            dispose();
+            new ClientServiceTableForm();
+        });
+    }
+
+    private void updateRowCountLabel(int actual, int max)
+    {
+        rowCountLabel.setText("Отображено записей: " + actual + " / " + max);
     }
 }
