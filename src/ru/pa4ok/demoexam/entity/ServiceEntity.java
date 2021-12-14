@@ -36,4 +36,8 @@ public class ServiceEntity
         } catch (Exception e) {
         }
     }
+
+    public ServiceEntity(String title, int duration, double cost, double discount, String desc, String imagePath) {
+        this(-1, title, duration, cost, discount, desc, imagePath);
+    }
 }
