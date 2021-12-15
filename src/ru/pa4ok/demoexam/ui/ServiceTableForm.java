@@ -26,6 +26,8 @@ public class ServiceTableForm extends BaseForm
     private JComboBox discountFilterBox;
     private JButton clearFilterButton;
     private JLabel rowCountLabel;
+    private JButton helpButton;
+    private JButton dealButton;
 
     private CustomTableModel<ServiceEntity> model;
 
@@ -155,6 +157,14 @@ public class ServiceTableForm extends BaseForm
 
         clearFilterButton.addActionListener(e -> {
             discountFilterBox.setSelectedIndex(0);
+        });
+
+        helpButton.addActionListener(e -> {
+            DialogUtil.showInfo(this, "Редактирование - двойной клик по записи\nУдаление - внутри формы редактирования");
+        });
+
+        dealButton.addActionListener(e -> {
+            DialogUtil.showInfo(this, "Связаться с разработчиком можно по почте vasya_2008@mail.ru");
         });
     }
 

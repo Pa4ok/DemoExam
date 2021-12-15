@@ -26,10 +26,17 @@ import java.sql.SQLException;
  * !!!создавайте таблицы со своими названиями, чтобы не было путаницы!!!
  */
 
+/**
+ * главный класс
+ */
 public class App
 {
     public static boolean admin = false;
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args)
     {
         try {
@@ -43,6 +50,11 @@ public class App
         new ServiceTableForm();
     }
 
+    /**
+     * ...
+     * @return
+     * @throws SQLException
+     */
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "1234");
     }
