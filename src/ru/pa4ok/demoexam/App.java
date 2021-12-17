@@ -1,6 +1,6 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.ui.BookTableForm;
+import ru.pa4ok.demoexam.ui.ServiceTableForm;
 
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
@@ -33,14 +33,12 @@ import java.text.SimpleDateFormat;
  */
 public class App
 {
-    public static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-
     /**
      * главный метод, точка входа
      * @param args
      * @throws SQLException
      */
-    public static void main(String[] args) throws SQLException
+    public static void main(String[] args)
     {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -50,11 +48,11 @@ public class App
 
         changeAllFonts(new FontUIResource("Comic Sans MS", Font.TRUETYPE_FONT, 12));
 
-        new BookTableForm();
+        new ServiceTableForm();
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://116.202.236.174:3306/DemoExam", "DemoExam", "DemoExam");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "1234");
     }
 
     /**
