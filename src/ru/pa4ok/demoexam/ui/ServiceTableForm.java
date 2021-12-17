@@ -26,6 +26,7 @@ public class ServiceTableForm extends BaseForm
     private JComboBox discountFilterBox;
     private JLabel rowCountLabel;
     private JButton clearButton;
+    private JButton clientServiceTableButton;
 
     private CustomTableModel<ServiceEntity> model;
 
@@ -156,6 +157,11 @@ public class ServiceTableForm extends BaseForm
 
         clearButton.addActionListener(e -> {
             discountFilterBox.setSelectedIndex(0);
+        });
+
+        clientServiceTableButton.addActionListener(e -> {
+            dispose();
+            new ClientServiceTableForm();
         });
     }
 
