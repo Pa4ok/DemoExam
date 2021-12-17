@@ -28,6 +28,7 @@ public class ServiceTableForm extends BaseForm
     private JLabel rowCountLabel;
     private JButton helpButton;
     private JButton dealButton;
+    private JButton clientServiceTableButton;
 
     private CustomTableModel<ServiceEntity> model;
 
@@ -165,6 +166,11 @@ public class ServiceTableForm extends BaseForm
 
         dealButton.addActionListener(e -> {
             DialogUtil.showInfo(this, "Связаться с разработчиком можно по почте vasya_2008@mail.ru");
+        });
+
+        clientServiceTableButton.addActionListener(e -> {
+            dispose();
+            new ClientServiceTableForm();
         });
     }
 
