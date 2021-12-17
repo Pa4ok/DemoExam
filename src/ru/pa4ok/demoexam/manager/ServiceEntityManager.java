@@ -39,7 +39,7 @@ public class ServiceEntityManager
     {
         try(Connection c = App.getConnection())
         {
-            String sql = "UPDATE Service Title=?, Duration=?, Cost=?, Discount=?, Description=?, MainImagePath=? WHERE ID=?";
+            String sql = "UPDATE Service SET Title=?, Duration=?, Cost=?, Discount=?, Description=?, MainImagePath=? WHERE ID=?";
 
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, service.getTitle());
