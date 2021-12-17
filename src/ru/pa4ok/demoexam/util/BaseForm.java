@@ -15,7 +15,7 @@ public class BaseForm extends JFrame
             APP_ICON = ImageIO.read(BaseForm.class.getClassLoader().getResource("school_logo.png"));
         } catch (Exception e) {
             e.printStackTrace();
-            DialogUtil.showError("Иконка не загружена");
+            DialogUtil.showError(null, "Иконка не загружена");
         }
     }
 
