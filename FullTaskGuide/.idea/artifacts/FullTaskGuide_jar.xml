@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FullTaskGuide:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/FullTaskGuide_jar</output-path>
+    <root id="archive" name="FullTaskGuide.jar">
+      <element id="module-output" name="FullTaskGuide" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.27/mysql-connector-java-8.0.27.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.11.4/protobuf-java-3.11.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
