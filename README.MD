@@ -34,7 +34,7 @@
 - https://pa4ok.ru/itmo/guide/2021/ui-part-2-tables-guide.mp4 - работа с таблицами (включая фильтрации, сортировки, картинки)
 - https://pa4ok.ru/itmo/guide/2021/extended-table-model-guide.mp4 - расширенная модель для таблицы
 - https://pa4ok.ru/itmo/guide/2021/gogs-guide.mp4 - работа с системой контроля версий gogs
-
+- https://pa4ok.ru/itmo/guide/2021/full-task-1-guide.mp4 - полное решение варианта из test-task-1.7z
 ## Еще что-то полезное
 - https://disk.yandex.ru/d/uGxEf-fam3fT7w - дублирование всех видео гайдов на яндекс диск
 - https://paulradzkov.com/2014/markdown_cheatsheet/ - справочник по разметке README файла
