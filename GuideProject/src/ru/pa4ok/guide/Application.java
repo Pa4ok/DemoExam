@@ -2,7 +2,14 @@ package ru.pa4ok.guide;
 
 import ru.pa4ok.guide.ui.ClientTableForm;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,15 +29,31 @@ public class Application
 {
     public static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
-        try {
+        /*try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        new ClientTableForm();
+        new ClientTableForm();*/
+
+        Files.createDirectories(Paths.get("./mine_out/"));
+        Files.list(Paths.get("./mine/")).forEach(f -> {
+            try {
+                Image image = ImageIO.read(f.toFile()).getScaledInstance(96, 96, Image.SCALE_REPLICATE);
+
+                BufferedImage bi = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D bGr = bi.createGraphics();
+                bGr.drawImage(image, 0, 0, null);
+                bGr.dispose();
+
+                ImageIO.write(bi, "png", new File("./mine_out/" + f.getFileName()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public static Connection getConnection() throws SQLException {

@@ -26,7 +26,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ExtendedTableModel" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2492212" />
@@ -34,6 +34,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Kolya\Desktop\DemoExam\GuideProject\resources" />
       <recent name="C:\Users\Kolya\Desktop\DemoExam\GuideProject\src\ru\pa4ok\guide\util" />
       <recent name="C:\Users\Kolya\Desktop\DemoExam\GuideProject\src\ru\pa4ok\guide\ui" />
     </key>
