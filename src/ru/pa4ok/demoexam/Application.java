@@ -1,14 +1,11 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.ui.ServiceTableForm;
+import ru.pa4ok.demoexam.ui.MaterialTableForm;
 
 import javax.swing.*;
-import javax.swing.plaf.FontUIResource;
-import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 
 /**
  * alt + enter - контекстное меню исправления ошибки
@@ -28,17 +25,8 @@ import java.text.SimpleDateFormat;
  * !!!создавайте таблицы со своими названиями, чтобы не было путаницы!!!
  */
 
-/**
- * главный класс
- */
-public class App
+public class Application
 {
-    public static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
-
-    /**
-     * главный метод, точка входа в программу
-     * @param args
-     */
     public static void main(String[] args)
     {
         try {
@@ -47,32 +35,12 @@ public class App
             e.printStackTrace();
         }
 
-        changeAllFonts(new FontUIResource("Comic Sans MS", Font.TRUETYPE_FONT, 12));
-
-        new ServiceTableForm();
+        new MaterialTableForm();
     }
 
-    /**
-     * метод получения соединения с базой
-     * @return соединение с базой
-     * @throws SQLException
-     */
-    public static Connection getConnection() throws SQLException
-    {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "1234");
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/demoexam1", "root", "1234");
     }
-
-    public static void changeAllFonts(Font font)
-    {
-        java.util.Enumeration keys = UIManager.getDefaults().keys();
-        while (keys.hasMoreElements()) {
-            Object key = keys.nextElement();
-            Object value = UIManager.get(key);
-            if (value instanceof javax.swing.plaf.FontUIResource)
-                UIManager.put(key, font);
-        }
-    }
-
 }
 
 
