@@ -1,12 +1,10 @@
 package ru.pa4ok.demoexam.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 @Data
 public class MaterialEntity
