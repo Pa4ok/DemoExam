@@ -3,28 +3,63 @@ package ru.pa4ok.demoexam.manager;
 import ru.pa4ok.demoexam.Application;
 import ru.pa4ok.demoexam.entity.MaterialEntity;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `Title` VARCHAR(100) CHARACTER SET 'utf8mb4' NOT NULL,
-  `CountInPack` INT NOT NULL,
-  `Unit` VARCHAR(10) CHARACTER SET 'utf8mb4' NOT NULL,
-  `CountInStock` DOUBLE NULL,
-  `MinCount` DOUBLE NOT NULL,
-  `Description` LONGTEXT CHARACTER SET 'utf8mb4' NULL,
-  `Cost` DECIMAL(10,2) NOT NULL,
-  `Image` VARCHAR(100) CHARACTER SET 'utf8mb4' NULL,
-  `MaterialType` VARCHAR(100) CHARACTER SET 'utf8mb4' NOT NULL,
-  PRIMARY KEY (`ID`)
- */
 public class MaterialEntityManager
 {
+    public static void insert(MaterialEntity material) throws SQLException
+    {
+        try(Connection c = Application.getConnection())
+        {
+            String sql = "INSERT INTO Material(Title, MaterialType, Unit, CountInPack, CountInStock, MinCount, Cost, Description, Image) VALUES(?,?,?,?,?,?,?,?,?)";
+
+            PreparedStatement ps = c.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, material.getTitle());
+            ps.setString(2, material.getType());
+            ps.setString(3, material.getUnit());
+            ps.setInt(4, material.getCountInPack());
+            ps.setInt(5, material.getCountInStock());
+            ps.setInt(6, material.getMinCount());
+            ps.setDouble(7, material.getCost());
+            ps.setString(8, material.getDesc());
+            ps.setString(9, material.getImage());
+
+            ps.executeUpdate();
+
+            ResultSet keys = ps.getGeneratedKeys();
+            if(keys.next()) {
+                material.setId(keys.getInt(1));
+                return;
+            }
+
+            throw new SQLException("entity not added");
+        }
+    }
+
+    public static void update(MaterialEntity material) throws SQLException
+    {
+        try(Connection c = Application.getConnection())
+        {
+            String sql = "UPDATE Material SET Title=?, MaterialType=?, Unit=?, CountInPack=?, CountInStock=?, MinCount=?, Cost=?, Description=?, Image=? WHERE ID=?";
+
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1, material.getTitle());
+            ps.setString(2, material.getType());
+            ps.setString(3, material.getUnit());
+            ps.setInt(4, material.getCountInPack());
+            ps.setInt(5, material.getCountInStock());
+            ps.setInt(6, material.getMinCount());
+            ps.setDouble(7, material.getCost());
+            ps.setString(8, material.getDesc());
+            ps.setString(9, material.getImage());
+            ps.setInt(10, material.getId());
+
+            ps.executeUpdate();
+        }
+    }
+
     public static List<MaterialEntity> selectAll() throws SQLException
     {
         try(Connection c = Application.getConnection())
@@ -38,18 +73,29 @@ public class MaterialEntityManager
                 list.add(new MaterialEntity(
                         resultSet.getInt("ID"),
                         resultSet.getString("Title"),
-                        resultSet.getInt("CountInPack"),
+                        resultSet.getString("MaterialType"),
                         resultSet.getString("Unit"),
-                        resultSet.getDouble("CountInStock"),
-                        resultSet.getDouble("MinCount"),
-                        resultSet.getString("Description"),
+                        resultSet.getInt("CountInPack"),
+                        resultSet.getInt("CountInStock"),
+                        resultSet.getInt("MinCount"),
                         resultSet.getDouble("Cost"),
-                        resultSet.getString("Image"),
-                        resultSet.getString("MaterialType")
+                        resultSet.getString("Description"),
+                        resultSet.getString("Image")
                 ));
             }
 
             return list;
+        }
+    }
+
+    public static void delete(MaterialEntity material) throws SQLException
+    {
+        try(Connection c = Application.getConnection())
+        {
+            String sql = "DELETE FROM Material WHERE ID=?";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1, material.getId());
+            ps.executeUpdate();
         }
     }
 }
