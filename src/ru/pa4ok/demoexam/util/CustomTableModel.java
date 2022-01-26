@@ -25,7 +25,7 @@ public class CustomTableModel<T> extends AbstractTableModel
 
     @Override
     public String getColumnName(int column) {
-        return column < columnNames.length ? columnNames[column] : "Column title";
+        return columnNames[column];
     }
 
     @Override
