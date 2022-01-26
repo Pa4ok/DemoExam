@@ -24,6 +24,16 @@ public class CustomTableModel<T> extends AbstractTableModel
     }
 
     @Override
+    public String getColumnName(int column) {
+        return columnNames[column];
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return cls.getDeclaredFields()[columnIndex].getType();
+    }
+
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
             T t = rows.get(rowIndex);
@@ -34,16 +44,6 @@ public class CustomTableModel<T> extends AbstractTableModel
             e.printStackTrace();
             return "ERROR";
         }
-    }
-
-    @Override
-    public String getColumnName(int column) {
-        return columnNames.length > column ? columnNames[column] : "Column title";
-    }
-
-    @Override
-    public Class<?> getColumnClass(int columnIndex) {
-        return cls.getDeclaredFields()[columnIndex].getType();
     }
 
     public List<T> getRows() {
