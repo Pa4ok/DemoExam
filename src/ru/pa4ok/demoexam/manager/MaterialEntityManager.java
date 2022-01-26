@@ -7,6 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * менеджер для работы с таблицей материалов
+ */
 public class MaterialEntityManager
 {
     public static void insert(MaterialEntity material) throws SQLException

@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * главный класс приложения
+ */
 public class Application
 {
     public static void main(String[] args)
