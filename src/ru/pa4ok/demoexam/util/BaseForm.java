@@ -6,12 +6,12 @@ import java.awt.*;
 
 public class BaseForm extends JFrame
 {
-    public static String APP_TITLE = "Моя перчаточка";
+    public static String APP_TITLE = "Моя Перчаточка";
     public static Image APP_ICON = null;
 
     static {
         try {
-            APP_ICON = ImageIO.read(BaseForm.class.getClassLoader().getResource("logo.png"));
+            APP_ICON = ImageIO.read(BaseForm.class.getClassLoader().getResource("icon.png"));
         } catch (Exception e) {
             e.printStackTrace();
             DialogUtil.showError(null, "Ошибка загрузки иконки");

@@ -7,16 +7,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * главный класс
- */
 public class Application
 {
-    /**
-     * главный метод
-     * точка входа в программу
-     * @param args
-     */
     public static void main(String[] args)
     {
         try {
@@ -29,6 +21,6 @@ public class Application
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/demoexam3", "root", "1234");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/demoexam4", "root", "1234");
     }
 }

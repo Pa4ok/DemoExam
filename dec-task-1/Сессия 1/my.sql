@@ -54,19 +54,20 @@ CREATE TABLE IF NOT EXISTS `Product` (
 -- Table dbo.MaterialSupplier
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MaterialSupplier` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
   `MaterialID` INT NOT NULL,
   `SupplierID` INT NOT NULL,
   `ContractComment` VARCHAR(1000) CHARACTER SET 'utf8mb4' NULL,
-  PRIMARY KEY (`MaterialID`, `SupplierID`),
+  PRIMARY KEY (`ID`),
   CONSTRAINT `FK_MaterialSupplier_Supplier`
     FOREIGN KEY (`SupplierID`)
     REFERENCES `Supplier` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `FK_MaterialSupplier_Material`
     FOREIGN KEY (`MaterialID`)
     REFERENCES `Material` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION);
 
 -- ----------------------------------------------------------------------------
@@ -91,13 +92,9 @@ CREATE TABLE IF NOT EXISTS `Material` (
   `Description` LONGTEXT CHARACTER SET 'utf8mb4' NULL,
   `Cost` DECIMAL(10,2) NOT NULL,
   `Image` VARCHAR(100) CHARACTER SET 'utf8mb4' NULL,
-  `MaterialTypeID` INT NOT NULL,
-  PRIMARY KEY (`ID`),
-  CONSTRAINT `FK_Material_MaterialType`
-    FOREIGN KEY (`MaterialTypeID`)
-    REFERENCES `MaterialType` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  `MaterialType` VARCHAR(100) CHARACTER SET 'utf8mb4' NOT NULL,
+  PRIMARY KEY (`ID`)
+);
 
 -- ----------------------------------------------------------------------------
 -- Table dbo.ProductMaterial
