@@ -9,6 +9,7 @@ import java.awt.*;
 /**
  * класс-сущность описыающая материал
  */
+
 @Data
 public class MaterialEntity
 {
