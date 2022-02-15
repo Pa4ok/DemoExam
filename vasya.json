@@ -1,0 +1,14 @@
+{
+  "name": null,
+  "age": 15,
+  "hobbies": [
+    {
+      "title": "grrw",
+      "cost": 100.0
+    },
+    {
+      "title": "regerg",
+      "cost": 200.0
+    }
+  ]
+}
