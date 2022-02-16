@@ -12,5 +12,6 @@
     <orderEntry type="library" name="mysql.connector.java" level="project" />
     <orderEntry type="library" name="projectlombok.lombok" level="project" />
     <orderEntry type="library" name="junit.jupiter" level="project" />
+    <orderEntry type="library" name="google.code.gson" level="project" />
   </component>
 </module>

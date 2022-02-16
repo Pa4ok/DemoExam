@@ -1,5 +1,9 @@
 package ru.pa4ok.demoexam.ui;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import ru.pa4ok.demoexam.entity.MaterialEntity;
 import ru.pa4ok.demoexam.manager.MaterialEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
@@ -8,14 +12,19 @@ import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
-import java.awt.event.ItemEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.*;
 
-public class MaterialTableForm extends BaseForm
-{
+public class MaterialTableForm extends BaseForm {
+    private Path configPath = Paths.get("config.json");
+    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private Config config;
+
     private JPanel mainPanel;
     private JTable table;
     private JButton addButton;
@@ -31,20 +40,31 @@ public class MaterialTableForm extends BaseForm
 
     private boolean costSort = false;
 
-    public MaterialTableForm()
-    {
+    public MaterialTableForm() {
         super(1200, 800);
         setContentPane(mainPanel);
 
         initTable();
         initBoxes();
         initButtons();
+        initConfig();
 
         setVisible(true);
     }
 
-    private void initTable()
+    private void initConfig()
     {
+        loadConfig();
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                saveConfig();
+            }
+        });
+    }
+
+    private void initTable() {
         table.getTableHeader().setReorderingAllowed(false);
         table.setRowHeight(50);
 
@@ -66,7 +86,7 @@ public class MaterialTableForm extends BaseForm
             column.setMaxWidth(0);
 
             updateRowCountLabel(model.getRowCount(), model.getRowCount());
-            if(model.getRowCount() == 0) {
+            if (model.getRowCount() == 0) {
                 DialogUtil.showInfo(this, "В бд не найдено ни 1 записи");
             }
 
@@ -78,9 +98,9 @@ public class MaterialTableForm extends BaseForm
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(e.getClickCount() == 2) {
+                if (e.getClickCount() == 2) {
                     int row = table.rowAtPoint(e.getPoint());
-                    if(row != -1) {
+                    if (row != -1) {
                         dispose();
                         new MaterialEditForm(model.getRows().get(row));
                     }
@@ -89,16 +109,15 @@ public class MaterialTableForm extends BaseForm
         });
     }
 
-    private void initBoxes()
-    {
+    private void initBoxes() {
         try {
             List<MaterialEntity> list = MaterialEntityManager.selectAll();
             Set<String> types = new HashSet<>();
-            for(MaterialEntity m : list) {
+            for (MaterialEntity m : list) {
                 types.add(m.getMaterialType());
             }
             typeFilterBox.addItem("Все типы");
-            for(String t : types) {
+            for (String t : types) {
                 typeFilterBox.addItem(t);
             }
         } catch (SQLException e) {
@@ -107,30 +126,28 @@ public class MaterialTableForm extends BaseForm
         }
 
         typeFilterBox.addItemListener(e -> {
-            if(e.getStateChange() == ItemEvent.SELECTED) {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
                 applyFilters();
             }
         });
 
         costFilterBox.addItemListener(e -> {
-            if(e.getStateChange() == ItemEvent.SELECTED) {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
                 applyFilters();
             }
         });
     }
 
-    private void applyFilters()
-    {
+    private void applyFilters() {
         try {
             List<MaterialEntity> all = MaterialEntityManager.selectAll();
             int max = all.size();
 
-            if(typeFilterBox.getSelectedIndex() != 0) {
+            if (typeFilterBox.getSelectedIndex() != 0) {
                 all.removeIf(material -> !material.getMaterialType().equals(typeFilterBox.getSelectedItem()));
             }
 
-            switch (costFilterBox.getSelectedIndex())
-            {
+            switch (costFilterBox.getSelectedIndex()) {
                 case 1:
                     all.removeIf(material -> material.getCost() >= 5000);
                     break;
@@ -154,7 +171,7 @@ public class MaterialTableForm extends BaseForm
             updateRowCountLabel(all.size(), max);
             costSort = false;
 
-            if(all.isEmpty()) {
+            if (all.isEmpty()) {
                 DialogUtil.showInfo(this, "Не найдено ни 1 запиди подходящей под фильтры");
             }
 
@@ -164,26 +181,14 @@ public class MaterialTableForm extends BaseForm
         }
     }
 
-    private void initButtons()
-    {
+    private void initButtons() {
         addButton.addActionListener(e -> {
             dispose();
             new MaterialCreateForm();
         });
 
         costSortButton.addActionListener(e -> {
-            Collections.sort(model.getRows(), new Comparator<MaterialEntity>() {
-                @Override
-                public int compare(MaterialEntity o1, MaterialEntity o2) {
-                    if(costSort) {
-                        return Double.compare(o2.getCost(), o1.getCost());
-                    } else {
-                        return Double.compare(o1.getCost(), o2.getCost());
-                    }
-                }
-            });
-            costSort = !costSort;
-            model.fireTableDataChanged();
+            applyCostSort();
         });
 
         clearButton.addActionListener(e -> {
@@ -200,8 +205,64 @@ public class MaterialTableForm extends BaseForm
         });
     }
 
-    private void updateRowCountLabel(int actual, int max)
+    private void applyCostSort()
     {
+        Collections.sort(model.getRows(), new Comparator<MaterialEntity>() {
+            @Override
+            public int compare(MaterialEntity o1, MaterialEntity o2) {
+                if (costSort) {
+                    return Double.compare(o2.getCost(), o1.getCost());
+                } else {
+                    return Double.compare(o1.getCost(), o2.getCost());
+                }
+            }
+        });
+        costSort = !costSort;
+        model.fireTableDataChanged();
+    }
+
+    private void updateRowCountLabel(int actual, int max) {
         rowCountLabel.setText("Записей: " + actual + " / " + max);
     }
+
+    private void loadConfig()
+    {
+        try {
+            if (Files.exists(configPath)) {
+                config = gson.fromJson(Files.readString(configPath), Config.class);
+                typeFilterBox.setSelectedIndex(config.getTypeFilterIndex());
+                costFilterBox.setSelectedIndex(config.getCostFilterIndex());
+                if(config.isCostSort()) {
+                    applyCostSort();
+                }
+                return;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            DialogUtil.showError(this, "Ошибка загрузки конфига");
+        }
+        config = new Config(0, 0, false);
+    }
+
+    private void saveConfig()
+    {
+        config.setTypeFilterIndex(typeFilterBox.getSelectedIndex());
+        config.setCostFilterIndex(costFilterBox.getSelectedIndex());
+        config.setCostSort(costSort);
+
+        try {
+            Files.writeString(configPath, gson.toJson(config));
+        } catch (IOException e) {
+            e.printStackTrace();
+            DialogUtil.showError(this, "Ошибка сохранения конфига");
+        }
+    }
+}
+
+@Data
+@AllArgsConstructor
+class Config {
+    private int typeFilterIndex;
+    private int costFilterIndex;
+    private boolean costSort;
 }
