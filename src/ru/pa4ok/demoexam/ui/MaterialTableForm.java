@@ -1,5 +1,9 @@
 package ru.pa4ok.demoexam.ui;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import ru.pa4ok.demoexam.entity.MaterialEntity;
 import ru.pa4ok.demoexam.manager.MaterialEntityManager;
 import ru.pa4ok.demoexam.util.BaseForm;
@@ -20,7 +24,9 @@ import java.util.*;
 
 public class MaterialTableForm extends BaseForm
 {
-    private Path config = Paths.get("config.txt");
+    private Path configPath = Paths.get("config.txt");
+    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private Config config;
 
     private JPanel mainPanel;
     private JTable table;
@@ -32,6 +38,7 @@ public class MaterialTableForm extends BaseForm
     private JLabel rowCountLabel;
     private JButton helpButton;
     private JButton dealButton;
+    private JButton exportButton;
 
     private boolean costSort;
 
@@ -112,6 +119,13 @@ public class MaterialTableForm extends BaseForm
             e.printStackTrace();
             DialogUtil.showError(this, "Ошибка получения данных");
         }
+
+        costFilterBox.addItem("Все");
+        costFilterBox.addItem("До 5к");
+        costFilterBox.addItem("От 5к до 15к");
+        costFilterBox.addItem("От 15к до 50к");
+        costFilterBox.addItem("От 50к до 100к");
+        costFilterBox.addItem("Больше 100к");
 
         typeFilterBox.addItemListener(e -> {
             if(e.getStateChange() == ItemEvent.SELECTED) {
@@ -196,6 +210,20 @@ public class MaterialTableForm extends BaseForm
         dealButton.addActionListener(e -> {
             DialogUtil.showInfo(this, "Связь с разработчиком: vasya_2008@mail.ru");
         });
+
+        exportButton.addActionListener(e -> {
+            List<String> lines = new ArrayList<>();
+            for(MaterialEntity m : model.getRows()) {
+                lines.add(m.toString());
+            }
+            try {
+                Files.write(Paths.get("content.txt"), lines);
+                DialogUtil.showInfo(this, "Данные успешно экспортированы");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                DialogUtil.showError(this, "Ошибка экспорта данных: " + ex.getMessage());
+            }
+        });
     }
 
     private void applyCostSort()
@@ -219,36 +247,51 @@ public class MaterialTableForm extends BaseForm
         rowCountLabel.setText("Записей: " + actual + " / " + max);
     }
 
+    private boolean blockSave = false;
+
     private void saveConfig()
     {
-        List<String> lines = Arrays.asList(
-                String.valueOf(typeFilterBox.getSelectedIndex()),
-                String.valueOf(costFilterBox.getSelectedIndex()),
-                String.valueOf(costSort)
-        );
+        if(!blockSave) {
+            config.setTypeFilterIndex(typeFilterBox.getSelectedIndex());
+            config.setCostFilterIndex(costFilterBox.getSelectedIndex());
+            config.setCostSort(costSort);
 
-        try {
-            Files.write(config, lines);
-        } catch (IOException e) {
-            e.printStackTrace();
-            DialogUtil.showError(this, "Ошибка сохранения конфига: " + e.getMessage());
+            try {
+                Files.writeString(configPath, gson.toJson(config));
+            } catch (IOException e) {
+                e.printStackTrace();
+                DialogUtil.showError(this, "Ошибка сохранения конфига: " + e.getMessage());
+            }
         }
     }
 
     private void loadConfig()
     {
-        if(Files.exists(config)) {
-            try {
-                List<String> lines = Files.readAllLines(config);
-                typeFilterBox.setSelectedIndex(Integer.parseInt(lines.get(0)));
-                costFilterBox.setSelectedIndex(Integer.parseInt(lines.get(1)));
-                if(Boolean.parseBoolean(lines.get(2))) {
+        try {
+            if(Files.exists(configPath)) {
+                blockSave = true;
+                config = gson.fromJson(Files.readString(configPath), Config.class);
+                typeFilterBox.setSelectedIndex(config.getTypeFilterIndex());
+                costFilterBox.setSelectedIndex(config.getCostFilterIndex());
+                if(config.isCostSort()) {
                     applyCostSort();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                DialogUtil.showError(this, "Ошибка загрузки конфига: " + e.getMessage());
+                blockSave = false;
+                return;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        config = new Config(0, 0, false);
     }
+}
+
+@Data
+@AllArgsConstructor
+class Config
+{
+    private int typeFilterIndex;
+    private int costFilterIndex;
+    private boolean costSort;
 }

@@ -1,3 +1,5 @@
-2
-0
-false
+{
+  "typeFilterIndex": 2,
+  "costFilterIndex": 2,
+  "costSort": false
+}
