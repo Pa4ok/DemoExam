@@ -1,6 +1,6 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.ui.MaterialTableForm;
+import ru.pa4ok.demoexam.ui.ProductTableForm;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -12,10 +12,8 @@ import java.sql.SQLException;
  */
 public class Application
 {
-    /**
-     * главный метод
-     * @param args
-     */
+    public static boolean ADMIN_MODE;
+
     public static void main(String[] args)
     {
         try {
@@ -24,7 +22,9 @@ public class Application
             e.printStackTrace();
         }
 
-        new MaterialTableForm();
+        ADMIN_MODE = "0000".equals(JOptionPane.showInputDialog("Введите пароль админа (если знаете)"));
+
+        new ProductTableForm();
     }
 
     public static Connection getConnection() throws SQLException {
