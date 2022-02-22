@@ -1,6 +1,6 @@
 package ru.pa4ok.demoexam;
 
-import ru.pa4ok.demoexam.ui.MaterialTableForm;
+import ru.pa4ok.demoexam.ui.ProductTableForm;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -15,8 +15,9 @@ import java.sql.SQLException;
  */
 
 /**
- * библиотека-драйвер для субд mysql: mysql:mysql-connector-java:8.0.27
- * библиотека lombok: org.projectlombok:lombok:1.18.22
+ * библиотека-драйвер для субд mysql        mysql:mysql-connector-java:8.0.27
+ * библиотека lombok                        org.projectlombok:lombok:1.18.22
+ * библиотека для тестирования              org.junit.jupiter:junit-jupiter:5.4.2
  *
  * готовая удаленная база mysql (если лень подымать свою):
  * адрес: 116.202.236.174:3306
@@ -27,6 +28,8 @@ import java.sql.SQLException;
 
 public class Application
 {
+    public static boolean ADMIN_MODE;
+
     public static void main(String[] args)
     {
         try {
@@ -35,7 +38,9 @@ public class Application
             e.printStackTrace();
         }
 
-        new MaterialTableForm();
+        ADMIN_MODE = "0000".equals(JOptionPane.showInputDialog(null, "Введите пароль админа (если знаете)"));
+
+        new ProductTableForm();
     }
 
     public static Connection getConnection() throws SQLException {
