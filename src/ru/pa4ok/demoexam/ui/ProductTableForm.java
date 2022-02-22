@@ -7,13 +7,16 @@ import ru.pa4ok.demoexam.util.BaseForm;
 import ru.pa4ok.demoexam.util.CustomTableModel;
 
 import javax.swing.*;
+import java.awt.event.ItemEvent;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ProductTableForm extends BaseForm
 {
     private JTable table;
     private JPanel mainPanel;
     private JButton addButton;
+    private JComboBox costFilterBox;
 
     private CustomTableModel<ProductEntity> model;
 
@@ -23,6 +26,7 @@ public class ProductTableForm extends BaseForm
         setContentPane(mainPanel);
 
         initTable();
+        initBoxes();
         initButtons();
 
         setVisible(true);
@@ -46,11 +50,57 @@ public class ProductTableForm extends BaseForm
         }
     }
 
+    private void initBoxes()
+    {
+        costFilterBox.addItem("Все");
+
+        try {
+            List<ProductEntity> list = ProductEntityManager.selectAll();
+            double maxCost = 0;
+            for(ProductEntity p : list) {
+                if(p.getCost() > maxCost) {
+                    maxCost = p.getCost();
+                }
+            }
+
+            for(int i=0; i < maxCost/10000; i++) {
+                costFilterBox.addItem("От " + 10000 * i + " до " + 10000 * (i+1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        costFilterBox.addItemListener(e -> {
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                applyFilters();
+            }
+        });
+    }
+
+    private void applyFilters()
+    {
+        try {
+            List<ProductEntity> all = ProductEntityManager.selectAll();
+
+            if(costFilterBox.getSelectedIndex() != 0) {
+                double min = 10000 * (costFilterBox.getSelectedIndex() - 1);
+                double max = 10000 * costFilterBox.getSelectedIndex();
+                all.removeIf(product -> product.getCost() < min || product.getCost() > max);
+            }
+
+            model.setRows(all);
+            model.fireTableDataChanged();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void initButtons()
     {
         addButton.addActionListener(e -> {
             dispose();
-            new ProductEditForm();
+            new ProductCreateForm();
         });
 
         if(!Application.ADMIN_MODE) {
