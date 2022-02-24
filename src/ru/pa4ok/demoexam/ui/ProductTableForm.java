@@ -8,13 +8,16 @@ import ru.pa4ok.demoexam.util.CustomTableModel;
 import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
+import java.awt.event.ItemEvent;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ProductTableForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTable table;
     private JButton createButton;
+    private JComboBox costFilterBox;
 
     private CustomTableModel<ProductEntity> model;
 
@@ -24,6 +27,7 @@ public class ProductTableForm extends BaseForm
         setContentPane(mainPanel);
 
         initTable();
+        initBoxes();
         initButtons();
 
         setVisible(true);
@@ -45,6 +49,50 @@ public class ProductTableForm extends BaseForm
         } catch (SQLException e) {
             e.printStackTrace();
             DialogUtil.showError(this, "Ошибка получения данных");
+        }
+    }
+
+    private void initBoxes()
+    {
+        costFilterBox.addItem("Все");
+
+        try {
+            List<ProductEntity> list = ProductEntityManager.selectAll();
+            double maxCost = 0;
+            for(ProductEntity p : list) {
+                if(p.getCost() > maxCost) {
+                    maxCost = p.getCost();
+                }
+            }
+            for(int i=0; i<maxCost / 10000D; i++) {
+                costFilterBox.addItem("От " + 10000 * i + " до " + 10000 * (i+1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        costFilterBox.addItemListener(e -> {
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                applyFilters();
+            }
+        });
+    }
+
+    private  void applyFilters()
+    {
+        try {
+            List<ProductEntity> list = ProductEntityManager.selectAll();
+
+            if(costFilterBox.getSelectedIndex() != 0) {
+                double min = (costFilterBox.getSelectedIndex()-1) * 10000;
+                double max = costFilterBox.getSelectedIndex() * 10000;
+                list.removeIf(p -> p.getCost() < min || p.getCost() > max);
+            }
+
+            model.setRows(list);
+            model.fireTableDataChanged();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
