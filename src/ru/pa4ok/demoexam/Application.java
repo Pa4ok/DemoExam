@@ -12,7 +12,7 @@ import java.sql.SQLException;
  */
 public class Application
 {
-    public static boolean ADMIN_MODE;
+    public static boolean ADMIN_MODE = true;
 
     public static void main(String[] args)
     {
@@ -22,7 +22,7 @@ public class Application
             e.printStackTrace();
         }
 
-        ADMIN_MODE = "0000".equals(JOptionPane.showInputDialog("Введите пароль админа (если знаете)"));
+        //ADMIN_MODE = "0000".equals(JOptionPane.showInputDialog("Введите пароль админа (если знаете)"));
 
         new ProductTableForm();
     }
