@@ -36,19 +36,15 @@ CREATE TABLE IF NOT EXISTS `ProductType` (
 CREATE TABLE IF NOT EXISTS `Product` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Title` VARCHAR(100) CHARACTER SET 'utf8mb4' NOT NULL,
-  `ProductTypeID` INT NULL,
+  `ProductType` VARCHAR(100) CHARACTER SET 'utf8mb4' NOT NULL,
   `ArticleNumber` VARCHAR(10) CHARACTER SET 'utf8mb4' NOT NULL,
   `Description` LONGTEXT CHARACTER SET 'utf8mb4' NULL,
   `Image` VARCHAR(100) CHARACTER SET 'utf8mb4' NULL,
   `ProductionPersonCount` INT NULL,
   `ProductionWorkshopNumber` INT NULL,
   `MinCostForAgent` DECIMAL(10,2) NOT NULL,
-  PRIMARY KEY (`ID`),
-  CONSTRAINT `FK_Product_ProductType`
-    FOREIGN KEY (`ProductTypeID`)
-    REFERENCES `ProductType` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  PRIMARY KEY (`ID`)
+);
 
 -- ----------------------------------------------------------------------------
 -- Table dbo.MaterialSupplier
@@ -90,31 +86,28 @@ CREATE TABLE IF NOT EXISTS `Material` (
   `Description` LONGTEXT CHARACTER SET 'utf8mb4' NULL,
   `Cost` DECIMAL(10,2) NOT NULL,
   `Image` VARCHAR(100) CHARACTER SET 'utf8mb4' NULL,
-  `MaterialTypeID` INT NOT NULL,
-  PRIMARY KEY (`ID`),
-  CONSTRAINT `FK_Material_MaterialType`
-    FOREIGN KEY (`MaterialTypeID`)
-    REFERENCES `MaterialType` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  `MaterialType` VARCHAR(100) CHARACTER SET 'utf8mb4' NOT NULL,
+  PRIMARY KEY (`ID`)
+ );
 
 -- ----------------------------------------------------------------------------
 -- Table dbo.ProductMaterial
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ProductMaterial` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
   `ProductID` INT NOT NULL,
   `MaterialID` INT NOT NULL,
   `Count` DOUBLE NULL,
-  PRIMARY KEY (`ProductID`, `MaterialID`),
+  PRIMARY KEY (`ID`),
   CONSTRAINT `FK_ProductMaterial_Material`
     FOREIGN KEY (`MaterialID`)
     REFERENCES `Material` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `FK_ProductMaterial_Product`
     FOREIGN KEY (`ProductID`)
     REFERENCES `Product` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION);
 
 -- ----------------------------------------------------------------------------

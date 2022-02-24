@@ -1,5 +1,7 @@
 package ru.pa4ok.demoexam.util;
 
+import ru.pa4ok.demoexam.Application;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +29,7 @@ public class BaseForm extends JFrame
                 Toolkit.getDefaultToolkit().getScreenSize().height / 2 - height / 2
         );
 
-        setTitle(APP_TITLE);
+        setTitle(APP_TITLE + (Application.ADMIN_MODE ? " [режим администратора]" : ""));
         if(APP_ICON != null) {
             setIconImage(APP_ICON);
         }
