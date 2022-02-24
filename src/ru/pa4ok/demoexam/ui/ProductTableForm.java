@@ -8,13 +8,16 @@ import ru.pa4ok.demoexam.util.CustomTableModel;
 import ru.pa4ok.demoexam.util.DialogUtil;
 
 import javax.swing.*;
+import java.awt.event.ItemEvent;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ProductTableForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTable table;
     private JButton addButton;
+    private JComboBox costFilterBox;
 
     private CustomTableModel<ProductEntity> model;
 
@@ -24,6 +27,7 @@ public class ProductTableForm extends BaseForm
         setContentPane(mainPanel);
 
         initTable();
+        initBoxes();
         initButtons();
 
         setVisible(true);
@@ -49,6 +53,49 @@ public class ProductTableForm extends BaseForm
         } catch (SQLException e) {
             e.printStackTrace();
             DialogUtil.showError(this, "Ошибка получения данных: " + e.getMessage());
+        }
+    }
+
+    private void initBoxes()
+    {
+        costFilterBox.addItem("Все");
+        try {
+            List<ProductEntity> allProducts = ProductEntityManager.selectAll();
+            double maxCost = 0;
+            for(ProductEntity p : allProducts) {
+                if(p.getCost() > maxCost) {
+                    maxCost = p.getCost();
+                }
+            }
+            for(int i=0; i<(maxCost/10000D); i++) {
+                costFilterBox.addItem("От " + i * 10000 + " до " + (i+1)*10000);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        costFilterBox.addItemListener(e -> {
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                applyFilters();
+            }
+        });
+    }
+
+    private void applyFilters()
+    {
+        try {
+            List<ProductEntity> allProducts = ProductEntityManager.selectAll();
+
+            if(costFilterBox.getSelectedIndex() != 0) {
+                double min = (costFilterBox.getSelectedIndex()-1)*10000;
+                double max = costFilterBox.getSelectedIndex()*10000;
+                allProducts.removeIf(p -> p.getCost() < min || p.getCost() > max);
+            }
+
+            model.setRows(allProducts);
+            model.fireTableDataChanged();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
