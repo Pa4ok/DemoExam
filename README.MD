@@ -26,7 +26,6 @@
 - https://www.youtube.com/playlist?list=PLAma_mKffTOSUkXp26rgdnC0PicnmnDak - видеокурс подробно мелкими видосами (проще с 0)
 - https://www.youtube.com/playlist?list=PLlb7e2G7aSpRZSRZxANkvpYC82BXUzCTY - видеокурс большими видосами (проще если есть опыт)
 
-
 ## Гайды по бд, десктопу и самому экзамену
 - https://pa4ok.ru/itmo/guide/2021/db-using-guide.mp4 - работа с базами данных из кода (+установка ПО)
 - https://pa4ok.ru/itmo/guide/2021/db-fix-guide.mp4 - починка сломанных баз данных (2 бд подробно)
@@ -35,8 +34,10 @@
 - https://pa4ok.ru/itmo/guide/2021/extended-table-model-guide.mp4 - расширенная модель для таблицы
 - https://pa4ok.ru/itmo/guide/2021/gogs-guide.mp4 - работа с системой контроля версий gogs
 - https://pa4ok.ru/itmo/guide/2021/full-task-1-guide.mp4 - полное решение варианта из test-task-1.7z
+
 ## Еще что-то полезное
 - https://disk.yandex.ru/d/uGxEf-fam3fT7w - дублирование всех видео гайдов на яндекс диск
 - https://paulradzkov.com/2014/markdown_cheatsheet/ - справочник по разметке README файла
 - git-cmd.txt - работа с консолью гита (если смотрите в 1 раз - вариант 2 для вас)
 - в папке Задания находятся различные варианты для тренировки
+- libraries.md - библиотеки и их подключение
