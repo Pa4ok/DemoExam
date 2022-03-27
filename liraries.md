@@ -9,7 +9,7 @@
 
 ### mysql-connector
 - коннектор для базы данных
-- mysql:mysql-connector-java:8.0.27
+- mysql:mysql-connector-java:8.0.28
 
 ### lombok 
 - аннотации @Data и прочие
